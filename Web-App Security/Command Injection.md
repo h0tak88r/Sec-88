@@ -1,0 +1,4 @@
+- [ ] [**Blind OS command injection with time delays**](https://portswigger.net/web-security/os-command-injection/lab-blind-time-delays)
+- [ ] [**Blind OS command injection with output redirection**](https://portswigger.net/web-security/os-command-injection/lab-blind-output-redirection)
+- [ ] [**Blind OS command injection with out-of-band interaction**](https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band)
+- [ ] [**Blind OS command injection with out-of-band data exfiltration**](https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band-data-exfiltration)

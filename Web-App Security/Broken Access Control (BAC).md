@@ -1,0 +1,12 @@
+- [ ] Unprotected admin panel [in source code or robots.txt]
+- [ ] [**User role controlled by request parameter**](https://portswigger.net/web-security/access-control/lab-user-role-controlled-by-request-parameter)
+- [ ] [**User role can be modified in user profile**](https://portswigger.net/web-security/access-control/lab-user-role-can-be-modified-in-user-profile)
+- [ ] [**User ID controlled by request parameter**](https://portswigger.net/web-security/access-control/lab-user-id-controlled-by-request-parameter)
+- [ ] [**User ID controlled by request parameter, with unpredictable user IDs**](https://portswigger.net/web-security/access-control/lab-user-id-controlled-by-request-parameter-with-unpredictable-user-ids)
+- [ ] [**User ID controlled by request parameter with data leakage in redirect**](https://portswigger.net/web-security/access-control/lab-user-id-controlled-by-request-parameter-with-data-leakage-in-redirect)
+- [ ] [**User ID controlled by request parameter with password disclosure**](https://portswigger.net/web-security/access-control/lab-user-id-controlled-by-request-parameter-with-password-disclosure)
+- [ ] [**URL-based access control can be circumvented**](https://portswigger.net/web-security/access-control/lab-url-based-access-control-can-be-circumvented) **[X-Original-URL:] or other headers that backend handle it to give access**
+- [ ] [**Method-based access control can be circumvented**](https://portswigger.net/web-security/access-control/lab-method-based-access-control-can-be-circumvented) **[ Changing the method of the request ]**
+- [ ] [**Multi-step process with no access control on one step**](https://portswigger.net/web-security/access-control/lab-multi-step-process-with-no-access-control-on-one-step) **[ Do a need-privilege action with non-privilege user even if there is confirmation step ]**
+- [ ] [**Referer-based access control**](https://portswigger.net/web-security/access-control/lab-referer-based-access-control) **[ backend depends on referrer header to access the user to do sensitive actions ]**
+- [ ] **improper Access generic**

@@ -1,0 +1,199 @@
+{
+  "main": {
+    "id": "fc667adbdd5fa29b",
+    "type": "split",
+    "children": [
+      {
+        "id": "f1b349449ffcbfcc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "60f51138a28b4a2b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Cyber Security Notes/Web Application Security/XSS.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "1c6dd7e6b306b074",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Cyber Security Notes/Targets Data/Adoreme.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0e2f35bd40f1b1f3",
+    "type": "split",
+    "children": [
+      {
+        "id": "5dc91d038f5ab198",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9ffecc0f3ac36c19",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "byCreatedTime"
+              }
+            }
+          },
+          {
+            "id": "92bed35e0b280cb2",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "XSS",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "486ec8e78b67ce13",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "93d16dfe5a20c373",
+    "type": "split",
+    "children": [
+      {
+        "id": "0e353a1f764ca6f0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e13949e4a2a38c76",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Cyber Security Notes/Web Application Security/XSS.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "5704649289016fc9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Cyber Security Notes/Web Application Security/XSS.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6de27143874ea839",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "ffd55c4fad1f83df",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Cyber Security Notes/Web Application Security/XSS.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "60f51138a28b4a2b",
+  "lastOpenFiles": [
+    "Cyber Security Notes/Web Application Security/Business Logic Vulnerabilities.md",
+    "Cyber Security Notes/Web Application Security/Logic Bugs/Broken Link Hijacking.md",
+    "Cyber Security Notes/Web Application Security/AEM [Adobe CMS].md",
+    "Cyber Security Notes/Web Application Security/Logic Bugs/2FA Feature.md",
+    "Cyber Security Notes/Hunting Methodology/Parameters Analyzing.md",
+    "Cyber Security Notes/Hunting Methodology/Registration & Takeover Bugs.md",
+    "Cyber Security Notes/Web Application Security/XML External Entity Injection (XXE).md",
+    "Cyber Security Notes/API Security/Endpoint Analysis",
+    "Cyber Security Notes/API Security/Untitled.md",
+    "Cyber Security Notes/API Security/Endpoint Analysis/Using APIs and Excessive Data Exposure.md",
+    "Cyber Security Notes/Targets Data/Adoreme.md",
+    "Cyber Security Notes/API Security/Endpoint Analysis/API Reverse Engineering.md",
+    "Cyber Security Notes/API Security/Endpoint Analysis/API Reconnaissance.md",
+    "Cyber Security Notes/API Security/Lab Setup.md",
+    "Cyber Security Notes/API Security/Business Logic Flaws.md",
+    "Cyber Security Notes/API Security/Insufficient Logging and Monitoring.md",
+    "Cyber Security Notes/API Security/Injections.md",
+    "Cyber Security Notes/API Security/Unsafe Consumption of APIs.md",
+    "Cyber Security Notes/API Security/Improper Inventory Management.md",
+    "Cyber Security Notes/API Security/Security Misconfiguration.md",
+    "Cyber Security Notes/API Security/API Server Side Request Forgery.md",
+    "Cyber Security Notes/API Security/Unrestricted Access to Sensitive Business Flows.md",
+    "Cyber Security Notes/API Security/Broken Function Level Authorization (BFLA).md",
+    "Cyber Security Notes/API Security/Broken Authentication.md",
+    "Cyber Security Notes/API Security/Broken Object Level Authorization (BOLA).md",
+    "Cyber Security Notes/API Security/Broken Object Property Level Authorization (BOPLA).md",
+    "Cyber Security Notes/API Security/Unrestricted Resource Consumption.md",
+    "Cyber Security Notes/Pasted image 20230911043940.png",
+    "Cyber Security Notes/Pasted image 20230911043906.png",
+    "Cyber Security Notes/Pasted image 20230911042848.png",
+    "Cyber Security Notes/Pasted image 20230908032425.png",
+    "Cyber Security Notes/Pasted image 20230907050630.png",
+    "Cyber Security Notes/Pasted image 20230907050609.png",
+    "Cyber Security Notes/Pasted image 20230907050242.png",
+    "Cyber Security Notes/Pasted image 20230907045606.png"
+  ]
+}

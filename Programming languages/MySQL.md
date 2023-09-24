@@ -1,0 +1,1 @@
+Startintroductionshow and create data Edit and delete data Pattern Matching -Regular Expressions Boolean Value -Logical Operators

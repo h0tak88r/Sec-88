@@ -1,0 +1,1 @@
+**WEP Cracking Explain****Wi-Fi Attacks against WEP Encryption****Fake Authentication Attack****Packet Injection Fragmentation****Capture and Crack WPA2 handshake using wordlist attack****(hostapd-mana, berate_ap, and freeradius-wpe) Installation**Capture Wi-Fi Passwords with a Half-Handshake Attack
