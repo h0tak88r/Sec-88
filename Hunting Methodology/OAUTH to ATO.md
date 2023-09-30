@@ -2,38 +2,6 @@
 tags:
   - web_hunting
 ---
-### How it is Work 
-For example, let’s say website _**https://yourtweetreader.com**_ has functionality to **display all tweets you’ve ever sent**, including private tweets. In order to do this, OAuth 2.0 is introduced. _https://yourtweetreader.com_ will ask you to **authorize their Twitter application to access all your Tweets**. A consent page will pop up on _https://twitter.com_ displaying what **permissions are being requested**, and who the developer requesting it is. Once you authorize the request, _https://yourtweetreader.com_ will be **able to access to your Tweets on behalf of you**.
-
-Elements which are important to understand in an OAuth 2.0 context:
-
-- **resource owner**: The `resource owner` is the **user/entity** granting access to their protected resource, such as their Twitter account Tweets. In this example, this would be **you**.
-
-- **resource server**: The `resource server` is the **server handling authenticated requests** after the application has obtained an `access token` on behalf of the `resource owner` . In this example, this would be **https://twitter.com**
-
-- **client application**: The `client application` is the **application requesting authorization** from the `resource owner`. In this example, this would be **https://yourtweetreader.com**
-
-- **authorization server**: The `authorization server` is the **server issuing** `**access tokens**` to the `client application` **after successfully authenticating** the `resource owner` and obtaining authorization. In the above example, this would be **https://twitter.com**
-- **client_id**: The `client_id` is the **identifier for the application**. This is a public, **non-secret** unique identifier.
-
-- **client_secret:** The `client_secret` is a **secret known only to the application and the authorization server**. This is used to generate `access_tokens`
-
-- **response_type**: The `response_type` is a value to detail **which type of token** is being requested, such as `code`
-
-- **scope**: The `scope` is the **requested level of access** the `client application` is requesting from the `resource owner 
-
-- **redirect_uri**: The `redirect_uri` is the **URL the user is redirected to after the authorization is complete**. This usually must match the redirect URL that you have previously registered with the service    
-
-- **state**: The `state` parameter can **persist data between the user being directed to the authorization server and back again**. It’s important that this is a unique value as it serves as a **CSRF protection mechanism** if it contains a unique or random value per request
-
-- **grant_type**: The `grant_type` parameter explains **what the grant type is**, and which token is going to be returned
-
-- **code**: This `code` is the authorization code received from the `authorization server` which will be in the query string parameter “code” in this request. This code is used in conjunction with the `client_id` and `client_secret` by the client application to fetch an `access_token`
-
-- **access_token**: The `access_token` is the **token that the client application uses to make API requests** on behalf of a `resource owner`
-
-- **refresh_token**: The `refresh_token` allows an application to **obtain a new** `**access_token**` **without prompting the user**
-
 ### How to differentiate between implicit and authorization code grant type
 
 In OAuth there are 2 types of flows/grant types:

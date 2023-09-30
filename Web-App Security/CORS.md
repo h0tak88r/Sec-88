@@ -1,6 +1,6 @@
 # Misconfigured CORS
 
-- [ ] Use `**[CorsMe](<https://github.com/Shivangx01b/CorsMe>)**` to Check all urls `cat http_https.txt | ./CorsMe -t 70`
+- [ ] Use **`[CorsMe](<https://github.com/Shivangx01b/CorsMe>)`** to Check all urls `cat http_https.txt | ./CorsMe -t 70`
 - [ ] `Origin:null`
 - [ ] `Origin:attacker.com`
 - [ ] `Origin:attacker.target.com`
@@ -10,20 +10,23 @@
 - [ ] `Origin:sub.attacker target.com`
 - [ ] `Origin:sub.attacker%target.com`
 - [ ] `Origin:attacker.com/target.com`
-- [ ] [`expected-host.com.attacker.com`](http://expected-host.com.attacker.com/)
+- [ ] `[expected-host.com.attacker.com](<http://expected-host.com.attacker.com/>)`
 - [ ] `expected-host.computer`
 - [ ] `foo@evil-host:80@expected-host`
 - [ ] `foo@evil-host%20@expected-host`
 - [ ] `evil-host%09expected-host`
-- [ ] `127.1.1.1:80\\@127.2.2.2:80`
-- [ ] `127.1.1.1:80:\\@@127.2.2.2:80`
-- [ ] `127.1.1.1:80#\\@127.2.2.2:80`
+- [ ] `127.1.1.1:80\\\\@127.2.2.2:80`
+- [ ] `127.1.1.1:80:\\\\@@127.2.2.2:80`
+- [ ] `127.1.1.1:80#\\\\@127.2.2.2:80`
 - [ ] `ß.evil-host`
-
 - **Method 1 ( Single_target)**
 
 ```
-Step->1. Capture the target website and spider or crawl all the website using burp.Step->2. Use burp search look for Access-ControlStep->3. Try to add Origin Header i.e,Origin:attacker.com or Origin:null or Origin:attacker.target.com or Origin:target.attacker.comStep->4  If origin is reflected in response means the target is vuln to CORS
+Step->1. Capture the target website and spider or crawl all the website using burp.
+Step->2. Use burp search look for Access-Control
+Step->3. Try to add Origin Header i.e,Origin:attacker.com or Origin:null or Origin:attacker.target.com or Origin:target.attacker.com
+Step->4  If origin is reflected in response means the target is vuln to CORS
+
 ```
 
 ---
@@ -31,7 +34,11 @@ Step->1. Capture the target website and spider or crawl all the website using bu
 - **Method 2 (Multiple)**
 
 ```
-step 1-> find domains i.e subfinder -d target.com -o domains.txtstep 2-> check alive ones : cat domains.txt | httpx | tee -a alive.txtstep 3-> send each alive domain into burp i.e, cat alive.txt | parallel -j 10 curl --proxy "<http://127.0.0.1:8080>" -sk 2>/dev/nullstep 4-> Repeat hunting method 1
+step 1-> find domains i.e subfinder -d target.com -o domains.txt
+step 2-> check alive ones : cat domains.txt | httpx | tee -a alive.txt
+step 3-> send each alive domain into burp i.e, cat alive.txt | parallel -j 10 curl --proxy "<http://127.0.0.1:8080>" -sk 2>/dev/null
+step 4-> Repeat hunting method 1
+
 ```
 
 ## Reports

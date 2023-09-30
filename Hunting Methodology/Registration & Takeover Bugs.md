@@ -76,6 +76,11 @@ cat list_of_hosts.txt | python3 smuggler.py
 	- **SQL Truncation Attack** (when ere is some kind of **length limit** in the username or email) --> Create user with name: **admin [a lot of spaces] a**
 ### OAUTH Takeovers
 [[OAUTH to ATO]]
+- [ ] Test r`edirect_uri` for  [[Open Redirect]] and [[Web-App Security/XSS|XSS]]
+- [ ] Test the existence of response_type=token
+- [ ] Missing state parameter? -> CSRF
+- [ ] Predictable state parameter?
+- [ ] Is state parameter being verified?
 ### SAML Vulnerabilities
 [SAML Attacks - HackTricks](https://book.hacktricks.xyz/pentesting-web/saml-attacks)
 ## Change email Feature
@@ -142,7 +147,7 @@ The password reset token should be randomly generated and unique every time. Try
   4. Check response if that contains any link,any token or OTP.
  ```
 ## IDOR on API Parameters
-[[Hunting Methodology/IDOR/IDOR]]
+[[HowToHunt-master/IDOR/IDOR]]
 1. Attacker have to login with their account and go to the **Change password** feature.
 2. Start the Burp Suite and Intercept the request
 3. Send it to the repeater tab and edit the parameters : User ID/email `powershell POST /api/changepass [...] ("form": {"email":"victim@email.com","password":"securepwd"})`
@@ -164,9 +169,26 @@ The password reset token should be randomly generated and unique every time. Try
 
 
 ## ATO via JWT
-
-- Edit the JWT with another User ID / Email
-- Check for weak JWT signature
+[[JWT]]
+- [ ]  Edit the JWT with another User ID / Email
+- [ ] Multiple JWT test cases  
+	`python3 jwt_tool.py -t https://api.example.com/api/working_endpoint -rh "Content-Type: application/json" -rh "Authorization: Bearer [JWT]" -M at`
+- [ ] Test JWT secret brute-forcing
+	`python3 jwt_tool.py <JWT> -C -d <Wordlist>`
+- [ ] Abusing JWT Public Keys Without knowing the Public Key
+	`https://github.com/silentsignal/rsa_sign2n`
+- [ ] Test if algorithm could be changed
+	- Change algorithm to None `python3 jwt_tool.py <JWT> -X a`
+	- Change algorithm from RS256 to HS256 
+	  `python3 jwt_tool.py <JWT> -S hs256 -k public.pem`
+- [ ] Test if signature is being validated 
+	 `python3 jwt_tool.py <JWT> -I -pc <Key> -pv <Value>`
+- [ ] Test token expiration time (TTL, RTTL)
+- [ ] Test if sensitive data is in the JWT
+- [ ] Check for Injection in "kid" element 
+	`python3 jwt_tool.py <JWT> -I -hc kid -hv "../../dev/null" -S hs256 -p ""`
+- [ ] Check for time constant verification for HMAC
+- [ ] Check that keys and secrets are different between ENV
 ## Using MFA/OTP issues
 [[2FA Feature]]
 - [ ] Response Manipulation
@@ -195,3 +217,8 @@ Check out Auth Bypass method, there is a method for OTP bypass via response mani
   {“verify”:”false”}             -> {“verify”:”true”}
 ```
 
+
+## SSRF to ATO
+https://infosecwriteups.com/hubspot-full-account-takeover-in-bug-bounty-4e2047914ab5
+## Remote session Fixation to ATO
+https://hackerone.com/reports/423136

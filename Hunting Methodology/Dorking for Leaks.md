@@ -3,8 +3,8 @@ tags:
   - "#web_hunting"
 ---
 ### **Google Dorking**
-[**Bug Bounty Helper (faisalahmed.me)](https://dorks.faisalahmed.me/) |**
-[**Google Dorks List and Updated Database in 2023 - Box Piper**](https://www.boxpiper.com/posts/google-dork-list)
+[Bug Bounty Helper (faisalahmed.me)](https://dorks.faisalahmed.me/) |**
+[Google Dorks List and Updated Database in 2023 - Box Piper](https://www.boxpiper.com/posts/google-dork-list)
 https://www.uedbox.com/shdb/type/files-containing-juicy-info/
 
 #### Vulnerable web servers

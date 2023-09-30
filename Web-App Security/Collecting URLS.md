@@ -1,8 +1,0 @@
-- [ ] [`**gau**`](https://github.com/lc/gau) **for grab urls [**`**cat targets.txt | gau >> gau-urls.txt**`**]**
-- [ ] **use**`**[katana](https://github.com/projectdiscovery/katana)**` **[](https://github.com/projectdiscovery/katana)****[**`**cat hosts.txt | katana**`**]**
-- [ ] [`**paramspider**`](https://github.com/devanshbatham/ParamSpider) **for parameters [**`python3 paramspider.py --domain bugcrowd.com --output bugcrowd.txt` ]
-- [ ] **use** [`**dirseach**`](https://github.com/maurosoria/dirsearch) **dirseach**
-- [ ] **use** [`**linkfinder**`](https://github.com/GerbenJavado/LinkFinder) **to extract urls from js files [** **`python`** **`[linkfinder.py](http://linkfinder.py/)`** **`-i <JavaScript File> -o cli`** **]**
-- [ ] **use** [`**jsearch**`](https://github.com/unp4ck/jsearch) **analyse javascript files [** **`python3.7`** **`[jsearch.py](http://jsearch.py/)`** **`-u`** **`[https://starbucks.com](https://starbucks.com/)`** **`-n Starbucks`** **]**
-- [ ] **Use** [`**FFUF**`](https://github.com/ffuf/ffuf) **[** `**ffuf -mc all -fc 404 -ac -sf -s -w wordlist.txt -u https://www.domain.com/FUZZ**` ]
-- [ ] To Extract Urls from Dom

@@ -45,31 +45,9 @@
 
 ![https://cdn.hashnode.com/res/hashnode/image/upload/v1616225393075/v2TJSq1Hb.png?auto=compress,format&format=webp](https://cdn.hashnode.com/res/hashnode/image/upload/v1616225393075/v2TJSq1Hb.png?auto=compress,format&format=webp)
 
-# Tools:
-
-[GitHub - ticarpi/jwt_tool: A toolkit for testing, tweaking and cracking JSON Web Tokens](https://github.com/ticarpi/jwt_tool)
-
-[GitHub - hahwul/jwt-hack: 🔩 jwt-hack is tool for hacking / security testing to JWT. Supported for En/decoding JWT, Generate payload for JWT attack and very fast cracking(dict/brutefoce)](https://github.com/hahwul/jwt-hack)
-
-[GitHub - mazen160/jwt-pwn: Security Testing Scripts for JWT](https://github.com/mazen160/jwt-pwn)
-
-[GitHub - brendan-rius/c-jwt-cracker: JWT brute force cracker written in C](https://github.com/brendan-rius/c-jwt-cracker)
-
-[GitHub - jmaxxz/jwtbrute: Brute forcing jwt tokens signed with HS256 since 2014](https://github.com/jmaxxz/jwtbrute)
-
-[GitHub - Sjord/jwtcrack: Crack the shared secret of a HS256-signed JWT](https://github.com/Sjord/jwtcrack)
-
-[JSON Web Tokens](https://portswigger.net/bappstore/f923cbf91698420890354c1d8958fee6)
-
-[JSON Web Token Attacker](https://portswigger.net/bappstore/82d6c60490b540369d6d5d01822bdf61)
-
-[GitHub - wallarm/jwt-heartbreaker: The Burp extension to check JWT (JSON Web Tokens) for using keys from known from public sources](https://github.com/wallarm/jwt-heartbreaker)
-
-[JWTweak](https://rishuranjanofficial.github.io/JWTweak/)
-
 # Attacking JWT:
 
-                                                              Base Methodology:
+> **Base Methodology:**
 
 ```python
 1. Find JWT tokens

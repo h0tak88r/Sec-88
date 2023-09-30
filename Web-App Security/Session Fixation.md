@@ -1,8 +1,7 @@
-- **Method 1**
+# Session Fixation Local Vector
+  ## **Steps to reproduce**
     
-    ## **Steps to reproduce**
-    
-    1. As the attacker go to `[https://wallet.sandbox.romit.io](https://wallet.sandbox.romit.io/)` (but do not login!) and check the cookies `romit.sandbox.session` and `SANDBOX-XSRF-TOKEN`, that are set. For example:
+1. As the attacker go to `[https://wallet.sandbox.romit.io](https://wallet.sandbox.romit.io/)` (but do not login!) and check the cookies `romit.sandbox.session` and `SANDBOX-XSRF-TOKEN`, that are set. For example:
     
     ```
     SANDBOX-XSRF-TOKEN=AAG02cId-yyza3k8uhQR7JKuB-4YOmhizkjM; romit.sandbox.session=s%3AEHm0kA9uwWYHayOwdRQXbuZWEIRIliQZ.ndejz36ofa52c9ENnApLuaLkMnTYCot3IiY1qdTvz0w;
@@ -12,7 +11,6 @@
     2. As the victim, login in the second browser.
     3. As the attacker, go to `https://wallet.sandbox.romit.io` (using the first browser / same cookies as in step 1).
     4. You are now logged in to the victims account.
-    
     ### Possible exploitation scenarios
     
     1. This can be exploited if there is another bug like HTTP Response Splitting on your website.
@@ -45,72 +43,41 @@
     Manage session properly.this problem is mainly faced because the session doesn't get expired or doesn't get closed when logout is pressed.each time the user logins the cookie must hold a unique different session id to proceed..
     
     facebook,google,any many more sites overtook this site....
-## Description
+# session fixation remote vector
 
-Session Fixation is an attack that permits an attacker to hijack a valid user session. The attack explores a limitation in the way the web application manages the session ID, more specifically the vulnerable web application. When authenticating a user, it doesn’t assign a new session ID, making it possible to use an existent session ID. The attack consists of obtaining a valid session ID (e.g. by connecting to the application), inducing a user to authenticate himself with that session ID, and then hijacking the user-validated session by the knowledge of the used session ID. The attacker has to provide a legitimate Web application session ID and try to make the victim’s browser use it.
+ A session fixation attack is a type of web security vulnerability that occurs when an attacker sets or "fixates" the session identifier (usually a session cookie) of a victim user to a known value. The attacker typically does this before the victim logs into a web application. Once the victim logs in, the attacker can use the known session identifier to hijack the victim's session.
 
-The session fixation attack is not a class of [Session Hijacking](https://owasp.org/www-community/attacks/Session_hijacking_attack), which steals the established session between the client and the Web Server after the user logs in. Instead, the Session Fixation attack fixes an established session on the victim’s browser, so the attack starts before the user logs in.
+The "remote" aspect in "session fixation remote vector" refers to the fact that the attacker can perform this attack from a different location or device than the victim. In other words, the attacker doesn't need to be physically present on the victim's computer or network to carry out the attack.
+
+Here's how a session fixation attack with a remote vector works:
+
+1. **Attacker's Preparation**: The attacker visits the target web application and receives a session identifier (usually in the form of a session cookie) from the server.
+
+2. **Session Identifier Fixation**: Instead of using the received session identifier for their own session, the attacker sends or provides this session identifier to the victim, often through social engineering, phishing, or by tricking the victim into clicking on a malicious link.
+
+3. **Victim's Interaction**: The victim, unaware of the attack, logs into the web application using the session identifier provided by the attacker.
+
+4. **Attacker's Access**: Since the attacker knows the session identifier, they can now access the victim's session, effectively hijacking it. This allows the attacker to perform actions on behalf of the victim, potentially compromising their account.
+
+When a victim uses a known Session ID in a request to a vulnerable application, the attacker can use this vulnerability to make their own requests using the same Session ID – acting as if they were the rightful owner of the Session. This attack differs from Session Hijacking in that the attacker already has the Session ID and forces it on the victim, as opposed to the attacker finding the token through another vulnerability.
+
+To protect against session fixation attacks, web applications should implement strong session management practices, including:
+
+- **Session Regeneration**: Change the session identifier when a user logs in, ensuring that any previously known session identifier becomes invalid.
+- **Timeouts**: Implement session timeouts to automatically log users out after a period of inactivity.
+- **Secure Session Storage**: Ensure that session identifiers are stored securely and are not exposed in URLs or easily accessible to attackers.
+- **Random Session Identifiers**: Use long and random session identifiers that are difficult for attackers to guess.
+- **Secure Transmission**: Ensure that session identifiers are transmitted securely over HTTPS to prevent eavesdropping.
+- Session IDs are not accepted as arguments in GET or POST requests.
+- Allow users to log out and expire previous sessions.
+- After logging in, update the Session ID.
 
 There are several techniques to execute the attack; it depends on how the Web application deals with session tokens. Below are some of the most common techniques:
-
 **• Session token in the URL argument:** The Session ID is sent to the victim in a hyperlink and the victim accesses the site through the malicious URL.
-
 **• Session token in a hidden form field:** In this method, the victim must be tricked to authenticate in the target Web Server, using a login form developed for the attacker. The form could be hosted in the evil web server or directly in html formatted e-mail.
-
-**• Session ID in a cookie:**
-
-o Client-side script
-
-Most browsers support the execution of client-side scripting. In this case, the aggressor could use attacks of code injection as the [XSS](https://owasp.org/www-community/attacks/Cross-site_Scripting_/(XSS/) "wikilink") (Cross-site scripting) attack to insert a malicious code in the hyperlink sent to the victim and fix a Session ID in its cookie. Using the function document.cookie, the browser which executes the command becomes capable of fixing values inside of the cookie that it will use to keep a session between the client and the Web Application.
-
-o
-
-```
-<META>
-
-tag
-
-<META>
-```
-
-tag also is considered a code injection attack, however, different from the XSS attack where undesirable scripts can be disabled, or the execution can be denied. The attack using this method becomes much more efficient because it’s impossible to disable the processing of these tags in the browsers.
-
-o HTTP header response
-
-This method explores the server response to fix the Session ID in the victim’s browser. Including the parameter Set-Cookie in the HTTP header response, the attacker is able to insert the value of Session ID in the cookie and sends it to the victim’s browser.
-
-## Examples
-
-### Example 1
-
-The example below explains a simple form, the process of the attack, and the expected results.
-
-(1)The attacker has to establish a legitimate connection with the web server which (2) issues a session ID or, the attacker can create a new session with the proposed session ID, then, (3) the attacker has to send a link with the established session ID to the victim, they have to click on the link sent from the attacker accessing the site, (4) the Web Server saw that session was already established and a new one need not to be created, (5) the victim provides their credentials to the Web Server, (6) knowing the session ID, the attacker can access the user’s account.
-
-<https://www.owasp.org/images/9/9c/Fixation.jpg> Figure 1. Simple example of Session Fixation attack.
-
-### Example 2
-
-Client-side scripting
-
-The processes for the attack using the execution of scripts in the victim’s browser are very similar to example 1, however, in this case, the Session ID does not appear as an argument of the URL, but inside of the cookie. To fix the value of the Session ID in the victim’s cookie, the attacker could insert a JavaScript code in the URL that will be executed in the victim’s browser.
-
- `http://website.kom/<script>document.cookie=”sessionid=abcd”;</script>`
-
-### Example 3
-
-```
-<META>
-
-tag
-```
-
-As well as client-side scripting, the code injection must be made in the URL that will be sent to the victim.
-
-`http://website.kon/<meta http-equiv=Set-Cookie content=”sessionid=abcd”>`
-
-### Example 4
-
-HTTP header response
-
-The insertion of the value of the SessionID into the cookie manipulating the server response can be made, intercepting the packages exchanged between the client and the Web Application inserting the Set-Cookie parameter.
+**• Session ID in a cookie**
+## Resources
+- https://owasp.org/www-community/attacks/Session_fixation
+- https://zofixer.com/what-is-session-fixation-remote-attack-vector-vulnerability/#:~:text=Session%20Fixation%20is%20a%20sort,a%20previously%20known%20Session%20ID.
+- https://www.geeksforgeeks.org/session-fixation-attack/
+- https://hackerone.com/reports/806577

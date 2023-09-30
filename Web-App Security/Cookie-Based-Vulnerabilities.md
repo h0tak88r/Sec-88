@@ -23,7 +23,7 @@ try injecting some arbitrary cookies using attack such as CRLF injection ,some t
 similar to the parameter poolution, however in this , attacker tried to inject multiple user ID in same user_id  parameter
 ```
 
-- [ ] Damial of service - cookie Bomb
+- [ ] Danail of service - cookie Bomb
 
 ```
 forcing the server to process cookies larger than the resricted cookie size defined by the server may cause danial of service attack<https://target.com/index.php?param1=xxxxxxxxxxxxxxxxxxxxxx>After input "xxxxxxxxxxxxxxxxxxxxxx" as a value of param1, check your cookies. If there is cookies the value is "xxxxxxxxxxxxxxxxxxxxxx" it means the website is vulnerableReferences: [Hackerone #105363](<https://hackerone.com/reports/105363>)
@@ -32,7 +32,7 @@ forcing the server to process cookies larger than the resricted cookie size defi
 - [ ] SQL injection
 
 ```
-How to inject the code in Cookies?There are many HTTP interceptors and HTTP editors that can intercept the HTTP request before it is sent to the server. Then the tester can introduce his malicious SQL statement in the cookie field.It’s like a get/post based SQL Injection, except that certain characters can’t be used. For example, ‘**;**‘ and ‘**,**‘ are typically treated as delimiters, so they end the injection if they aren’t URL-encoded.Cookie : sessionId=xxxbad1fdc’ order by 1# (Normal)_Cookie : sessionId=xxxbad1fdc’ order by 2# (Error)_after errorsqlmap -u "" --cookie="" -p "" --dbs
+How to inject the code in Cookies?There are many HTTP interceptors and HTTP editors that can intercept the HTTP request before it is sent to the server. Then the tester can introduce his malicious SQL statement in the cookie field.It’s like a get/post based SQL Injection, except that certain characters can’t be used. For example, ‘**;**‘ and ‘**,**‘ are typically treated as delimiters, so they end the injection if they aren’t URL-encoded.Cookie : sessionId=xxxbad1fdc’ order by 1# (Normal)_Cookie : sessionId=xxxbad1fdc’ order by 2# (Error)_after error sqlmap -u "" --cookie="" -p "" --dbs
 ```
 
 - [ ] parameter pollution
@@ -144,16 +144,16 @@ str("-"*50),__import__('os').popen('COMMAND').read()
 
 - [ ] Electronic Code Book
 
-[ ] Pickle Code Execution
+- [ ] Pickle Code Execution
 
-[ ] Cipher block chainin
+- [ ] Cipher block chaining
 
-[ ] file inclusion
+- [ ] file inclusion
 
-[ ] IDOr
+- [ ] IDOR
 
-[ ] session fixation
+- [ ] session fixation
 
-[ ] padding oracle attack
+- [ ] padding oracle attack
 
-[ ] jwt attack
+- [ ] JWT attack

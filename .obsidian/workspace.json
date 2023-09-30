@@ -8,26 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "60f51138a28b4a2b",
+            "id": "f391e4b82980a597",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "kanban",
               "state": {
-                "file": "Cyber Security Notes/Web Application Security/XSS.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "1c6dd7e6b306b074",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Cyber Security Notes/Targets Data/Adoreme.md",
-                "mode": "source",
-                "source": false
+                "file": "Home.md"
               }
             }
           }
@@ -50,7 +36,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "byCreatedTime"
+                "sortOrder": "alphabetical"
               }
             }
           },
@@ -60,7 +46,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "XSS",
+                "query": "tag:#Google-Dorking",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -97,7 +83,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Cyber Security Notes/Web Application Security/XSS.md",
+                "file": "Home.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +100,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Cyber Security Notes/Web Application Security/XSS.md",
+                "file": "Home.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,15 +123,24 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Cyber Security Notes/Web Application Security/XSS.md"
+                "file": "Home.md"
               }
             }
+          },
+          {
+            "id": "595104579337a730",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 200,
     "collapsed": true
   },
   "left-ribbon": {
@@ -158,42 +153,49 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "60f51138a28b4a2b",
+  "active": "f391e4b82980a597",
   "lastOpenFiles": [
-    "Cyber Security Notes/Web Application Security/Business Logic Vulnerabilities.md",
-    "Cyber Security Notes/Web Application Security/Logic Bugs/Broken Link Hijacking.md",
-    "Cyber Security Notes/Web Application Security/AEM [Adobe CMS].md",
-    "Cyber Security Notes/Web Application Security/Logic Bugs/2FA Feature.md",
-    "Cyber Security Notes/Hunting Methodology/Parameters Analyzing.md",
-    "Cyber Security Notes/Hunting Methodology/Registration & Takeover Bugs.md",
-    "Cyber Security Notes/Web Application Security/XML External Entity Injection (XXE).md",
-    "Cyber Security Notes/API Security/Endpoint Analysis",
-    "Cyber Security Notes/API Security/Untitled.md",
-    "Cyber Security Notes/API Security/Endpoint Analysis/Using APIs and Excessive Data Exposure.md",
-    "Cyber Security Notes/Targets Data/Adoreme.md",
-    "Cyber Security Notes/API Security/Endpoint Analysis/API Reverse Engineering.md",
-    "Cyber Security Notes/API Security/Endpoint Analysis/API Reconnaissance.md",
-    "Cyber Security Notes/API Security/Lab Setup.md",
-    "Cyber Security Notes/API Security/Business Logic Flaws.md",
-    "Cyber Security Notes/API Security/Insufficient Logging and Monitoring.md",
-    "Cyber Security Notes/API Security/Injections.md",
-    "Cyber Security Notes/API Security/Unsafe Consumption of APIs.md",
-    "Cyber Security Notes/API Security/Improper Inventory Management.md",
-    "Cyber Security Notes/API Security/Security Misconfiguration.md",
-    "Cyber Security Notes/API Security/API Server Side Request Forgery.md",
-    "Cyber Security Notes/API Security/Unrestricted Access to Sensitive Business Flows.md",
-    "Cyber Security Notes/API Security/Broken Function Level Authorization (BFLA).md",
-    "Cyber Security Notes/API Security/Broken Authentication.md",
-    "Cyber Security Notes/API Security/Broken Object Level Authorization (BOLA).md",
-    "Cyber Security Notes/API Security/Broken Object Property Level Authorization (BOPLA).md",
-    "Cyber Security Notes/API Security/Unrestricted Resource Consumption.md",
-    "Cyber Security Notes/Pasted image 20230911043940.png",
-    "Cyber Security Notes/Pasted image 20230911043906.png",
-    "Cyber Security Notes/Pasted image 20230911042848.png",
-    "Cyber Security Notes/Pasted image 20230908032425.png",
-    "Cyber Security Notes/Pasted image 20230907050630.png",
-    "Cyber Security Notes/Pasted image 20230907050609.png",
-    "Cyber Security Notes/Pasted image 20230907050242.png",
-    "Cyber Security Notes/Pasted image 20230907045606.png"
+    "Home.md",
+    "Pasted image 20230911050923.png",
+    "Pasted image 20230911050653.png",
+    "Pasted image 20230911043940.png",
+    "Pasted image 20230911043906.png",
+    "Pasted image 20230907050630.png",
+    "Pasted image 20230907050609.png",
+    "Pasted image 20230907050242.png",
+    "HowToHunt-master/SUMMARY.md",
+    "API Pentesting Mindmap ATTACK.pdf",
+    "Hunting Methodology/Registration & Takeover Bugs.md",
+    "Hunting Methodology/OAUTH to ATO.md",
+    "HowToHunt-master/JWT/JWT.md",
+    "Hunting Methodology/Authorization Bugs.md",
+    "HowToHunt-master/IDOR/IDOR.md",
+    "Hunting Methodology/Recon.md",
+    "Hunting Methodology/Subdomain Enumeration.md",
+    "Hunting Methodology/File Upload Feature.md",
+    "Web-App Security/OAUTH Misconfigurations.md",
+    "Hunting Methodology/Dorking for Leaks.md",
+    "Hunting Methodology/Burp Suite Configurations.md",
+    "Hunting Methodology/Fingerprinting.md",
+    "Hunting Methodology/Parameters Analysis.md",
+    "parameters ANALUSIS.md",
+    "HowToHunt-master/IDOR/IDOR-Old.md",
+    "Hunting Methodology/JS Files Analyzing.md",
+    "HowToHunt-master/IDOR/Automation.md",
+    "HowToHunt-master/CheckList/Web-Application-Pentesting-checklist.md",
+    "HowToHunt-master/CheckList/mindmap.png",
+    "HowToHunt-master/CheckList/Web_Application_Penetration_Testing_Checklist_by_Tushar_Verma.pdf",
+    "2023-09-26 fsdfsdf.md",
+    "2023-09-30.md",
+    "Targets Data/Adoreme.md",
+    "Targets Data/BetterHelp.md",
+    "Targets Data/IBM.md",
+    "Pasted image 20230911051844.png",
+    "mindapi.html",
+    "API Security/start",
+    "API Security/OWASP TOP 10",
+    "Untitled",
+    "Pasted image 20230908032425.png",
+    "Cyber Security Notes/API Security/Endpoint Analysis"
   ]
 }

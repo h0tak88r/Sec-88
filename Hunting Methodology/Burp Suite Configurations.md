@@ -1,7 +1,7 @@
 ### Scope 
 - use advanced Regex 
 - Enter Identifier like "ibm"
-### Extensions
+### Extensions | 
 - `JSON Web Tokensor JWT editor` → [JWT pentest]
 - `param miner` → [Web Cache Poisoning]
 - `Autorize`/`auth analyzer` - [AC/IDORS Bugs]  

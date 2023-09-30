@@ -84,7 +84,7 @@
 
 ### IDOR
 
-* [IDOR](Hunting%20Methodology/IDOR/IDOR.md)
+* [IDOR](HowToHunt-master/IDOR/IDOR.md)
 
 ### JWT ATTACK
 

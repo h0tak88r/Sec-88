@@ -2,7 +2,7 @@
 tags:
   - web_hunting
 ---
-- [[Hunting Methodology/IDOR/IDOR]] ->  Posting comments impersonating some other users.
+- [[HowToHunt-master/IDOR/IDOR]] ->  Posting comments impersonating some other users.
     
     ```python
     [] Change the email of th request to registered email in target 
@@ -44,7 +44,7 @@ tags:
     ```
     
     [](https://medium.com/@iframe_h1/a-picture-that-steals-data-ff604ba1012)[https://medium.com/@iframe_h1/a-picture-that-steals-data-ff604ba101](https://medium.com/@iframe_h1/a-picture-that-steals-data-ff604ba101)
-- I[[Hunting Methodology/IDOR/IDOR]]to Read any other's comments
+- I[[HowToHunt-master/IDOR/IDOR]]to Read any other's comments
 	1. Search for any fields/forms that you cant see others comments
 	2. Analyze the traffic 
 	3. change identifier to user B and u can see user b comments

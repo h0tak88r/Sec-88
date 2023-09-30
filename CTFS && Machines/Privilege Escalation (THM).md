@@ -1,1 +1,0 @@
-What does "privilege escalation" mean?Why is it important?PRV.ESC SCRIPTSExploit Manually ( PRV.SEC kernel exploit )sudo rights (PRV.ESC: sudo)PRV.ESC SUIDLinPrivEscCAPAPRV.ESC CRON JOBSPrivilege Escalation: PATHPRV.ESC NFSPRV.ESC CAPSTONE
