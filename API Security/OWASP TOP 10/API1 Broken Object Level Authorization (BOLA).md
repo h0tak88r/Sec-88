@@ -1,6 +1,6 @@
 ## Intro
 
-API1:2023 Broken Object Level Authorization (BOLA) is one of the most prevalent and severe vulnerabilities for APIs. BOLA vulnerabilities occur when an API provider does not have sufficient controls in place to enforce authorization. In other words, API users should only have access to sensitive resources that belong to them. When BOLA is present an attacker will be able to access the sensitive data of other users. 
+API1-Broken Object Level Authorization (BOLA) is one of the most prevalent and severe vulnerabilities for APIs. BOLA vulnerabilities occur when an API provider does not have sufficient controls in place to enforce authorization. In other words, API users should only have access to sensitive resources that belong to them. When BOLA is present an attacker will be able to access the sensitive data of other users. 
 
 ## [OWASP Attack Vector Description](https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/)
 

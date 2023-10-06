@@ -2,7 +2,7 @@
 tags:
   - hunting-methodology
 ---
-tag:#Google-DorkingTest for [[API Security/OWASP TOP 10/Broken Object Level Authorization (BOLA)|Broken Object Level Authorization (BOLA)]]
+tag:#Google-DorkingTest for [[API1 Broken Object Level Authorization (BOLA)|API1 Broken Object Level Authorization (BOLA)]]
 # Authorization Testing Strategy
 >**BOLA**
 1. Create a `UserA` account.

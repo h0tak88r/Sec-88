@@ -59,6 +59,10 @@ Testing for business logic flaws can be challenging because each business is uni
 - Regular training can help developers to understand and avoid business logic vulnerabilities. Training should cover secure coding practices, common vulnerabilities, and how to identify potential issues during the design and coding phases.
 - Implement a bug bounty program, third-party penetration testing, or a responsible disclosure policy. This allows security researchers, who are a step removed from the design and delivery of an application, to disclose vulnerabilities they discover in APIs.
     
+# How to Test
+1. Identify all of the API endpoints that allow users to perform sensitive business flows. This can be done by reviewing the API's documentation and network traffic.
+2. Attempt to perform these business flows without any restrictions. For example, try to reset your password without providing any authentication credentials. Or, try to purchase a large quantity of products without any restrictions on the quantity or value of the products.
+3. If you are able to perform the business flows without any restrictions, then this indicates that the API is vulnerable.
 
 ## Additional Resources
 

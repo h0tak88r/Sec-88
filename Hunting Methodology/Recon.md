@@ -2,7 +2,7 @@
 tags:
   - hunting-methodology
 ---
-# Subdomain Enumeration
+PUT# Subdomain Enumeration
 [[Subdomain Enumeration]]
 # API
 1. Check for documentation 

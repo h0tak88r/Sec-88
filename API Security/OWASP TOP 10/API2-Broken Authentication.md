@@ -84,3 +84,14 @@ The other authentication processes that could have their own set of vulnerabili
 - [Credential Stuffing](https://owasp.org/www-community/attacks/Credential_stuffing)
 - [Web Security Academy: Authentication](https://portswigger.net/web-security/authentication)
 - [Web Security Academy: JWT Attacks](https://portswigger.net/web-security/jwt)
+
+# How to Test
+- Weak JWT 
+- Weak Password Policy. 
+- credential stuffing. 
+- Sends sensitive authentication details, such as auth tokens and passwords in the URL. 
+- Lack of Password Confirmation. 
+- Uses weak encryption keys.
+- Captcha Attacks
+- API Keys attacks
+- Token based attacks

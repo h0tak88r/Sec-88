@@ -6,8 +6,9 @@ kanban-plugin: basic
 
 ## Hunting Methodology
 
+- [ ] [[Submitted Reports]]
 - [ ] [[Recon]]
-- [ ] [[Dorking for Leaks]]
+- [ ] [[Dorking]]
 - [ ] [[Burp Suite Configurations]]
 - [ ] [[Parameters Analysis]]
 - [ ] [[Authorization Bugs]]
@@ -19,6 +20,20 @@ kanban-plugin: basic
 
 ## Web Security
 
+- [ ] [[Ban Feature]]
+- [ ] [[Business Logic Vulnerabilities]]
+- [ ] [[CAPTCHA Feature]]
+- [ ] [[Commenting Feature]]
+- [ ] [[Contact us Feature]]
+- [ ] [[Invite Feature]]
+- [ ] [[Messaging Features]]
+- [ ] [[Money Features]]
+- [ ] [[Profile - Settings]]
+- [ ] [[Registration Feature]]
+- [ ] [[Reset Password]]
+- [ ] [[Review Functionality]]
+- [ ] [[Rich Editor Feature]]
+- [ ] [[Web-App Security/XSS]]
 - [ ] [[2FA Feature]]
 - [ ] [[403 Bypass]]
 - [ ] [[AEM [Adobe CMS]]]
@@ -53,16 +68,14 @@ kanban-plugin: basic
 - [ ] [[Web Cache Poisoning]]
 - [ ] [[WebSockets]]
 - [ ] [[XML External Entity Injection (XXE)]]
-- [ ] [[Web-App Security/XSS]]
 
 
 ## API Security
 
+- [ ] ![[API Security Testing [ @h0tak88r].pdf]]
 - [ ] [[Comparisons]]
 - [ ] [[API Reconnaissance]]
 - [ ] [[API Reverse Engineering]]
-- [ ] [[API Token Attacks]]
-- [ ] [[Additional Resources]]
 - [ ] [[API Security/API Pentestion/Broken Object Level Authorization (BOLA)]]
 - [ ] [[Classic Authentication Attacks]]
 - [ ] [[Evasive Maneuvers]]
@@ -72,6 +85,8 @@ kanban-plugin: basic
 - [ ] [[Scanning APIs with OWASP ZAP]]
 - [ ] [[Testing for Injection Vulnerabilities]]
 - [ ] [[Using APIs and Excessive Data Exposure]]
+- [ ] [[API Token Attacks]]
+- [ ] [[Additional Resources]]
 
 
 

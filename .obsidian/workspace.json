@@ -8,12 +8,14 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f391e4b82980a597",
+            "id": "22ea138bf420500a",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "Home.md"
+                "file": "Submitted Reports.md",
+                "mode": "preview",
+                "source": false
               }
             }
           }
@@ -83,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Home.md",
+                "file": "Submitted Reports.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Home.md",
+                "file": "Submitted Reports.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -123,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Home.md"
+                "file": "Submitted Reports.md"
               }
             }
           },
@@ -153,9 +155,35 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f391e4b82980a597",
+  "active": "22ea138bf420500a",
   "lastOpenFiles": [
     "Home.md",
+    "Submitted Reports.md",
+    "Bugs/Adoreme.md",
+    "Bugs/AT&T.md",
+    "Bugs/Untitled.md",
+    "Bugs/Monash University.md",
+    "Bugs/NASA.md",
+    "Bugs/Lemonade.md",
+    "Bugs/NPS.md",
+    "Bugs/Plus grade CDP.md",
+    "Bugs/Recreation BBP.md",
+    "Bugs/State of California.md",
+    "Bugs/Telstra.md",
+    "Bugs/T Mobile.md",
+    "Bugs/BetterHelp.md",
+    "Bugs/IBM.md",
+    "Bugs/Coca-Cola.md",
+    "Bugs/Click House.md",
+    "Bugs/Bug Bounty Dorks.md",
+    "Bugs/Boozt Fashion AB.md",
+    "Pasted image 20230907045606.png.md",
+    "Targets Data/Adore Me.md",
+    "Web-App Security/Logic Bugs/Business Logic Vulnerabilities.md",
+    "Web-App Security/Logic Bugs/Profile - Settings.md",
+    "Web-App Security/Logic Bugs/Contact us Feature.md",
+    "Web-App Security/Logic Bugs/Invite Feature.md",
+    "API Security/API Security Testing [ @h0tak88r].pdf",
     "Pasted image 20230911050923.png",
     "Pasted image 20230911050653.png",
     "Pasted image 20230911043940.png",
@@ -163,33 +191,9 @@
     "Pasted image 20230907050630.png",
     "Pasted image 20230907050609.png",
     "Pasted image 20230907050242.png",
-    "HowToHunt-master/SUMMARY.md",
     "API Pentesting Mindmap ATTACK.pdf",
-    "Hunting Methodology/Registration & Takeover Bugs.md",
-    "Hunting Methodology/OAUTH to ATO.md",
-    "HowToHunt-master/JWT/JWT.md",
-    "Hunting Methodology/Authorization Bugs.md",
-    "HowToHunt-master/IDOR/IDOR.md",
-    "Hunting Methodology/Recon.md",
-    "Hunting Methodology/Subdomain Enumeration.md",
-    "Hunting Methodology/File Upload Feature.md",
-    "Web-App Security/OAUTH Misconfigurations.md",
-    "Hunting Methodology/Dorking for Leaks.md",
-    "Hunting Methodology/Burp Suite Configurations.md",
-    "Hunting Methodology/Fingerprinting.md",
-    "Hunting Methodology/Parameters Analysis.md",
-    "parameters ANALUSIS.md",
-    "HowToHunt-master/IDOR/IDOR-Old.md",
-    "Hunting Methodology/JS Files Analyzing.md",
-    "HowToHunt-master/IDOR/Automation.md",
-    "HowToHunt-master/CheckList/Web-Application-Pentesting-checklist.md",
     "HowToHunt-master/CheckList/mindmap.png",
     "HowToHunt-master/CheckList/Web_Application_Penetration_Testing_Checklist_by_Tushar_Verma.pdf",
-    "2023-09-26 fsdfsdf.md",
-    "2023-09-30.md",
-    "Targets Data/Adoreme.md",
-    "Targets Data/BetterHelp.md",
-    "Targets Data/IBM.md",
     "Pasted image 20230911051844.png",
     "mindapi.html",
     "API Security/start",

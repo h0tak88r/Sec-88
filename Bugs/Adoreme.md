@@ -2,7 +2,7 @@
 tags:
   - target_data
 ---
-1. Leaked 
+-> Leaked API 
 (https://js.stripe.com/v3/ "https://js.stripe.com/v3/")apiKey:"AIzaSyCab6eIMNih34mQb3XI_QWXagmF2_rvQAg"
 
 ## Account Takeover For unsigned users

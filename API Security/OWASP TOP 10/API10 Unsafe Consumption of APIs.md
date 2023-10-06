@@ -25,6 +25,11 @@ Most of the 2023 OWASP API Security Top 10 is about APIs and the API provider. A
 - Always validate and properly sanitize data received from integrated APIs before using it.
 - Maintain an allowlist of well-known locations integrated APIs may redirect yours to: do not blindly follow redirects.
 
+# How to Test
+1. Identify all of the APIs that your target application consumes
+2. Analyze the security posture of each API
+3. Simulate attacks against the APIs [ SQLI, XSS, DOS, etc]
+
 ## Additional Resources
 
 - [Web Service Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html)

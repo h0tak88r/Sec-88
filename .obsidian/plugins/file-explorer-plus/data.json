@@ -24,6 +24,13 @@
         "type": "FILES",
         "pattern": "Untitled Kanban.md",
         "patternType": "STRICT"
+      },
+      {
+        "name": "",
+        "active": true,
+        "type": "FILES",
+        "pattern": "Home.md",
+        "patternType": "STRICT"
       }
     ]
   },

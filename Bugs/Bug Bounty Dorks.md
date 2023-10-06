@@ -1,4 +1,5 @@
 https://www.vulnerability-lab.com/list-of-bug-bounty-programs.php
+```python
 "reward" "submit vulnerability report" | "powered by bugcrowd" | "powered by hackerone"
 "submit vulnerability report" | "powered by bugcrowd" | "powered by hackerone" -inurl:news -site:*.de
 inurl /bug bounty
@@ -65,3 +66,4 @@ site:security.*.* inurl: bounty
 site:*.*.de inurl:bug inurl:bounty
 site:*.*.uk intext:security report reward
 site:*.*.cn intext:security report reward
+```

@@ -1,12 +1,17 @@
 ## Intro
 
-API3:2023 Broken Object Property Level Authorization (BOPLA) is the combination of two items from the 2019 OWASP API Security Top Ten, excessive data exposure and mass assignment.
+API3-Broken Object Property Level Authorization (BOPLA) is the combination of two items from the 2019 OWASP API Security Top Ten, excessive data exposure and mass assignment.
 
 Excessive Data Exposure takes place when an API provider responds to a request with an entire data object. Usually, an API provider will filter out the data object down to what is being requested. When the data object is shared without being filtered there is an increased risk of exposing sensitive information.
 
 Mass Assignment is a weakness that allows for user input to alter sensitive object properties. If, for example, an API uses a special property to create admin accounts only authorized users should be able to make requests that successfully alter those administrative properties. If there are no restrictions in place then an attacker would be able to elevate their privileges and perform administrative actions.
 
-Both of these vulnerabilities involved issues with object property authorization, so they were combined under the new title of Broken Object Property Level Authorization.
+When allowing a user to access an object using an API endpoint, it is important to validate that the user has access to the specific object properties they are trying to access.
+
+An API endpoint is vulnerable if:
+
+- The API endpoint exposes properties of an object that are considered sensitive and should not be read by the user. (previously named: "[Excessive Data Exposure](https://owasp.org/API-Security/editions/2019/en/0xa3-excessive-data-exposure/)")
+- The API endpoint allows a user to change, add/or delete the value of a sensitive object's property which the user should not be able to access (previously named: "[Mass Assignment](https://owasp.org/API-Security/editions/2019/en/0xa6-mass-assignment/)")
 
 ## [OWASP Attack Vector Description](https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/)
 
@@ -91,4 +96,4 @@ Mass assignment vulnerabilities can be tested by finding sensitive parameters in
 - [API6:2019 - Mass Assignment - OWASP API Security Top 10 2019](https://github.com/OWASP/API-Security/blob/master/2019/en/src/0xa6-mass-assignment.md)
 - [Mass Assignment Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html)
 - [CWE-213: Exposure of Sensitive Information Due to Incompatible Policies](https://cwe.mitre.org/data/definitions/213.html)
-- [CWE-915: Improperly Controlled Modification of Dynamically-Determined Object Attributes](https://cwe.mitre.org/data/definitions/915.html)
+- [CWE-915: Improperly Controlled Modification of Dynamically-Determined Object Attributes](https://cwe.mitre.org/data/definitions/915.html

@@ -1,6 +1,6 @@
 ## Intro
 
-API5:2023 Broken Function Level Authorization (BFLA) is a vulnerability where API functions have insufficient access controls. Where BOLA is about access to data, BFLA is about altering or deleting data. In addition, a vulnerable API would allow an attacker to perform actions of other roles including administrative actions.
+API5-Broken Function Level Authorization (BFLA) is a vulnerability where API functions have insufficient access controls. Where BOLA is about access to data, BFLA is about altering or deleting data. In addition, a vulnerable API would allow an attacker to perform actions of other roles including administrative actions.
 
 To drive the point home, a fintech API susceptible to BOLA would allow an attacker the ability to see what is in the bank account of another user, while the same API vulnerable to BFLA would allow an attacker to transfer funds from other users' accounts to their own.
 
@@ -47,6 +47,11 @@ _Your application should have a consistent and easy-to-analyze authorization mod
 - _Make sure that all of your administrative controllers inherit from an administrative abstract controller that implements authorization checks based on the user's group/role._
 - _Make sure that administrative functions inside a regular controller implement authorization checks based on the user's group and role._
 
+# How to Test
+-  Fuzzing for administrative Functions. [/api/v1/admin/delete?resource_id=]
+- Changing Request Method (GET/POST/PUT/DELETE/PATCH) for sensitive API calls. 
+- Anonymous user access to functions requires authenticated users
+- Look for Disallowed Actions and try to find away to do it
 ## Additional Resources
 
 - [CWE-285: Improper Authorization](https://cwe.mitre.org/data/definitions/285.html)
