@@ -1,2 +1,0 @@
-- [ ] [Mobile Security Framework - MobSF](https://mobsf.live/)
-- [ ] [https://hackerone.com/reports/1890719](https://hackerone.com/reports/1890719)

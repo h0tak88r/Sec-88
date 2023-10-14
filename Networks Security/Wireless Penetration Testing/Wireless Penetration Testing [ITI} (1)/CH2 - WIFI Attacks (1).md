@@ -1,1 +1,0 @@
-type of attacksWIFI ScannersDos / Death**802.11 manages RF traffic using DCF**Jamming attacks**Handshake Attacks (Dictionary Attack)****Handshake Attacks (KRACK Attack)****Handshake Attacks (Downgrad Attack)**
