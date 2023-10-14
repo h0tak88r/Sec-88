@@ -1,0 +1,10 @@
+{
+	"id": "colored-text",
+	"name": "Colored Text",
+	"version": "0.6.0",
+	"minAppVersion": "0.15.0",
+	"description": "Color the selected texts.",
+	"author": "Erinc Ayaz",
+	"authorUrl": "https://github.com/erincayaz",
+	"isDesktopOnly": true
+}

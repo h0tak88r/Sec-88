@@ -8,18 +8,25 @@
         "type": "tabs",
         "children": [
           {
-            "id": "22ea138bf420500a",
+            "id": "81c64f00b0394560",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "graph",
+              "state": {}
+            }
+          },
+          {
+            "id": "ff172682f705943f",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
               "state": {
-                "file": "Submitted Reports.md",
-                "mode": "preview",
-                "source": false
+                "file": "API Security Testing [ @h0tak88r].pdf"
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +92,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Submitted Reports.md",
+                "file": "API Security Testing [ @h0tak88r].pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +109,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Submitted Reports.md",
+                "file": "API Security Testing [ @h0tak88r].pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +132,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Submitted Reports.md"
+                "file": "API Security Testing [ @h0tak88r].pdf"
               }
             }
           },
@@ -155,51 +162,52 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "22ea138bf420500a",
+  "active": "9ffecc0f3ac36c19",
   "lastOpenFiles": [
-    "Home.md",
-    "Submitted Reports.md",
-    "Bugs/Adoreme.md",
-    "Bugs/AT&T.md",
-    "Bugs/Untitled.md",
-    "Bugs/Monash University.md",
-    "Bugs/NASA.md",
-    "Bugs/Lemonade.md",
-    "Bugs/NPS.md",
-    "Bugs/Plus grade CDP.md",
-    "Bugs/Recreation BBP.md",
-    "Bugs/State of California.md",
-    "Bugs/Telstra.md",
-    "Bugs/T Mobile.md",
-    "Bugs/BetterHelp.md",
-    "Bugs/IBM.md",
-    "Bugs/Coca-Cola.md",
-    "Bugs/Click House.md",
-    "Bugs/Bug Bounty Dorks.md",
-    "Bugs/Boozt Fashion AB.md",
-    "Pasted image 20230907045606.png.md",
-    "Targets Data/Adore Me.md",
-    "Web-App Security/Logic Bugs/Business Logic Vulnerabilities.md",
-    "Web-App Security/Logic Bugs/Profile - Settings.md",
-    "Web-App Security/Logic Bugs/Contact us Feature.md",
-    "Web-App Security/Logic Bugs/Invite Feature.md",
-    "API Security/API Security Testing [ @h0tak88r].pdf",
+    "OSINT Tips.md",
+    "API Security Testing [ @h0tak88r].pdf",
+    "JSON Tests Cheat Sheet.md",
+    "Operating Systems/git commands.md",
+    "Web-App-Security/XSS.md",
+    "Web-App-Security/XML External Entity Injection (XXE).md",
+    "Web-App-Security/WebSockets.md",
+    "Web-App-Security/Web Cache Poisoning.md",
+    "Web-App-Security/WAF Bypass.md",
+    "Web-App-Security/Twitter Tips.md",
+    "Web-App-Security/Subdomains-Enumeration.md",
+    "Web-App-Security/Subdomain TakeOver.md",
+    "Web-App-Security/Session Fixation.md",
+    "Web-App-Security/SSTI.md",
+    "Web-App-Security/SSRF.md",
+    "Web-App-Security/SQLI.md",
+    "Web-App-Security/Remote Code Execution (RCE).md",
+    "Web-App-Security/Open Redirect.md",
+    "Web-App-Security/OAUTH Misconfigurations.md",
+    "Web-App-Security/No-Rate-Limit.md",
+    "Web-App-Security/Logic Bugs/Tabnabbing.md",
+    "Web-App-Security/Logic Bugs/Social Sharing Feature.md",
+    "Web-App-Security/Logic Bugs/Rich Editor Feature.md",
+    "Web-App-Security/Logic Bugs/Review Feature.md",
+    "Web-App-Security/Logic Bugs/Reset Password.md",
+    "Web-App-Security/Logic Bugs/Registration Feature.md",
+    "Web-App-Security/Logic Bugs",
+    "Web-App Security/Logic Bugs",
+    "Web-App Security/File-Upload",
+    "Web-App Security",
+    "Methodologies",
+    "HowToHunt-master/Subdomain_Takeover/subdomain_takeover.png",
+    "HowToHunt-master/Subdomain_Takeover/sub or top_level_domain takeover",
+    "HowToHunt-master/Subdomain_Takeover/dns.png",
+    "HowToHunt-master/Subdomain_Takeover/cname_buy.png",
+    "HowToHunt-master/Subdomain_Takeover/cname.png",
+    "HowToHunt-master/Subdomain_Takeover/Methods",
+    "HowToHunt-master/Sensitive_Info_Leaks/Version Leak",
+    "HowToHunt-master/Sign_Up_Functionality/Signup_Mindmap.png",
+    "HowToHunt-master/Password_Reset_Functionality/Top_5_Password_Reset_Bugs",
+    "HowToHunt-master/CheckList/mindmap.png",
+    "HowToHunt-master/CheckList/Web_Penetration_Testing_Methodology@2x.png",
     "Pasted image 20230911050923.png",
     "Pasted image 20230911050653.png",
-    "Pasted image 20230911043940.png",
-    "Pasted image 20230911043906.png",
-    "Pasted image 20230907050630.png",
-    "Pasted image 20230907050609.png",
-    "Pasted image 20230907050242.png",
-    "API Pentesting Mindmap ATTACK.pdf",
-    "HowToHunt-master/CheckList/mindmap.png",
-    "HowToHunt-master/CheckList/Web_Application_Penetration_Testing_Checklist_by_Tushar_Verma.pdf",
-    "Pasted image 20230911051844.png",
-    "mindapi.html",
-    "API Security/start",
-    "API Security/OWASP TOP 10",
-    "Untitled",
-    "Pasted image 20230908032425.png",
-    "Cyber Security Notes/API Security/Endpoint Analysis"
+    "Pasted image 20230911043940.png"
   ]
 }
