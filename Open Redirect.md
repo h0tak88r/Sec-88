@@ -2,7 +2,7 @@
 tags:
   - web-app-security
 ---
-- ****Open Redirection in the POST method****
+- **Open Redirection in the POST method**
     
     - **Summary**
         
@@ -27,14 +27,16 @@ tags:
     
     ```bash
     https://allow_domain.hahwul.com
-    <https://allow_domain@hahwul.com>
-    <https://www.hahwul.com#allow_domain>
-    <https://www.hahwul.com?allow_domain>
-    <https://www.hahwul.com>\\allow_domain
-    <https://www.hahwul.com>&allow_domain
+    https://allow_domain@hahwul.com
+    https://www.hahwul.com#allow_domain
+    https://www.hahwul.com?allow_domain
+    https://www.hahwul.com\\allow_domain
+    https://www.hahwul.com&allow_domain
     http:///////////www.hahwul.com
     http:\\\\www.hahwul.com
     http:\\/\\/www.hahwul.com
+    # if target accept only google.com
+    https://google.com/amp/s/poc.attacker.com
     ```
     
 - **Open Redirect to XSS**
