@@ -148,5 +148,5 @@ and forward the request.
 - [ ] Token is Not Invalidated After Login
 - [ ] CRLF in URL
 	```
-	with CRLF: /resetPassword?0a%0dHost:atracker.tld (x-host, true-client-ip, x-forwarded...)
+	with CLRF: /resetPassword?0a%0dHost:atracker.tld (x-host, true-client-ip, x-forwarded...)
 	```

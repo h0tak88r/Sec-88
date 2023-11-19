@@ -3,8 +3,7 @@
 	  say https://target.com
 	2. Find a article or blog present on target website which must have a link to share that blog on different social networks such as Facebook,Twitter etc.
 	3. Let's say we got and article with url:
-	  https://taget.com/how-to-hunt then just appened it with payload 
-	  ?&u=https://attacker.com/vaya&text=another_site:https://attacker.com/vaya
+	  https://taget.com/how-to-hunt then just appened it with payload ?&u=https://attacker.com/vaya&text=another_site:https://attacker.com/vaya
 	  so our url will become 
 	  https://taget.com/how-to-hunt?&u=https://attacker.com/vaya&text=another_site:https://attacker.com/vaya
 	4. Now hit enter with the abover url and just click on share with social media.

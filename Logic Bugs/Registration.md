@@ -8,7 +8,7 @@ tags:
 
 Use throwaway email to create a temporary email: ○ [](https://mail.protonmail.com/)[https://mail.protonmail.com](https://mail.protonmail.com) ○ [](http://en.getairmail.com/)[http://en.getairmail.com](http://en.getairmail.com) ○ [https://temp-mail.org/en](https://temp-mail.org/en) ○ [](https://www.mailinator.com/)[https://www.mailinator.com](https://www.mailinator.com)
 
- - [ ] Username/Email Enumeration Non-Brute Force
+ - [ ] Username/Email Enumeration > Non-Brute Force
 ```python
 Check the Registration Process and try to find Idor or endpoint that leaks usernames/emails
 ```
@@ -30,7 +30,26 @@ Check the Registration Process and try to find Idor or endpoint that leaks usern
 
  > **Email Verification Feature**
 
- - [ ] **[Email Verification Bypass Leads to PrivEsc](https://hackerone.com/reports/791775)a**
+
+ - [ ] [Unlocking Important Resources with Email Verification Bypass](https://twitter.com/Jayesh25_/status/1725429962931335599)
+
+```
+Identify critical features linked to a user's email domain. For instance, consider a target app that grants access to resources based on your email domain. Some apps let you join a team or workspace directly if your email matches the team's domain (e.g., join Victim SITE XYZ only with sample@victimsitexyz[.]com). Others restrict access to documents or videos based on email domain whitelisting. Numerous such opportunities exist where email plays a crucial role.
+
+1️. Log in to your attacker account and change your email address to an attacker-controlled email (e.g., attackeremail@attackerdomain.com). 
+
+2️. You'll likely receive an email confirmation link on your attacker-controlled email (Do not verify it yet). 
+
+3️. Now, change your email to the unregistered email or domain you wish to HIJACK (e.g., victimemail@victimdomain.com). 
+
+4️. This action will send an email verification link to victimemail@victimdomain.com, which you don't have access to. 
+
+5️. Try clicking on the "Email" verification link sent earlier to attackeremail@attackerdomain.com. If the system fails to revoke the previous email verification link, the link for attackeremail@attackerdomain.com could end up verifying the email for victimemail@victimdomain.com, allowing you to claim it as verified.
+
+Once you've claimed an email associated with another organization's domain, identify the associated functions to prove impact and report it to earn some generous bounties
+```
+
+ - [ ] **[Email Verification Bypass Leads to PrivEsc](https://hackerone.com/reports/791775)**
     ```python
     Visit <https://www.shopify.com/pricing> and signup a free trial with an email address, say attacker@gmail.com that you can receive emails
     after entering the fields to enter the store, on top right corner, click your name and go to Your Profile
@@ -97,14 +116,6 @@ Check the Registration Process and try to find Idor or endpoint that leaks usern
     ```
     
 - [ ] **[Ability to bypass partner email confirmation to take over any store given an employee email](https://hackerone.com/reports/300305)**
-- [ ] Binding an email using a confirmation link
-	Try to follow a confirmation link for account `A` within the session of account `B` within an email confirmation flow. If an application is vulnerable, it will link the verified email to account `B`. In this case, the attack flow may look like:
-	1. An attacker links `attacker@website.com` to their account.
-	2. An attacker sends a confirmation link to a victim.
-	3. A victim follows the link from an email while logged into an application.
-	4. An application links `attacker@website.com` to a victim.
-	References:
-	- [Writeup: Watch out the links : Account takeover!](https://akashhamal0x01.medium.com/watch-out-the-links-account-takeover-32b9315390a7)
     
 - [ ] **No Rate Limit when resend Email Confirmation**
     

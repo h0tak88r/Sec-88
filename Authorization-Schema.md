@@ -8,6 +8,7 @@ tags:
 - [ ] Use The non-confirmed email session to access any of resources that demands Confirmed user
  
 >**Play with Request / Response**
+
 - [ ]  Understand the pattern [ Sequential | Encoded |  UUID (aka GUID) | Other ]
 - [ ] Change -> Next/Previous value -> Compute/Predict -> Data Type [string->number] -> Method [GET/POST]
 - [ ] Duplicate -> `?id=1&id=2`

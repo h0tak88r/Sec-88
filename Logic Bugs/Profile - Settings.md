@@ -76,15 +76,24 @@ tags:
 
 > **Change Email Feature**
 
+- [ ] Binding an email using a confirmation link
+	Try to follow a confirmation link for account `A` within the session of account `B` within an email confirmation flow. If an application is vulnerable, it will link the verified email to account `B`. In this case, the attack flow may look like:
+	1. An attacker links `attacker@website.com` to their account.
+	2. An attacker sends a confirmation link to a victim.
+	3. A victim follows the link from an email while logged into an application.
+	4. An application links `attacker@website.com` to a victim.
+	References:
+	- [Writeup: Watch out the links : Account takeover!](https://akashhamal0x01.medium.com/watch-out-the-links-account-takeover-32b9315390a7)
 - [ ] Lack of password confirmation when email change
 	[No Password Verification on Changing Email Address Cause ATO](https://hackerone.com/reports/292673)
-- [ ] [Insufficient Session Expiration - Previously issued email change tokens do not expire upon issuing a new email change token](https://hackerone.com/reports/1006677 "b'[www.drive2.ru] Insufficient Session Expiration - Previously issued email change tokens do not expire upon issuing a new email change token'")
+- [ ] [Insufficient Session Expiration - Previously issued email change tokens do not expire upon issuing a new email change token'](https://hackerone.com/reports/1006677 "b'[www.drive2.ru] Insufficient Session Expiration - Previously issued email change tokens do not expire upon issuing a new email change token'")
 	- The email verification code was not expired when a new one was generated. 
 	1. So suppose we are [victim@gmail.com](mailto:victim@gmail.com) , now login into the website then
 	2. go to account settings and change mail address to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com)
 	3. a link will be sent to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com), now the user realizes that he have lost access to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com) due to some reasons
 	4. so he will probably change mail to the another mail address for e.g [victim3@gmail.com](mailto:victim999@gmail.com) which he owns and has access to
 	5. but it is found that even after verifying victim3@gmail.com, the old link which was sent to victim2@gmail.com is active, so user/attacker having access to that mail can verify it and Observe the OAuth misconfiguration that leads to account takeover
+	>[Full Account takeover due to OAuth misconfiguration | by Cysky0x1 | Sep, 2023 | Medium](https://medium.com/@cysky9/full-account-takeover-due-to-oauth-misconfiguration-50d8747b268e)
 - [ ] email confirmation misconfiguration 
 	1. request to change the email to `test@x.y`
 	2. you will receive a confirmation link 
@@ -97,7 +106,7 @@ tags:
 	2. sends link to victim, victim opens and victims account email is updated
 	3. when someone says its phishing! u know u can convert it to csrf ;), auto submit GET request lol! that makes more sense!
 	- [Watch out the links : Account takeover! | by Akash Hamal | Medium](https://akashhamal0x01.medium.com/watch-out-the-links-account-takeover-32b9315390a7)
-- [ ] **Change email Confirmation link not expired + OAUTH misconfiguration = ATO**
+- [ ] **Confirmation link not expired + OAUTH misconfiguration = ATO**
 	1. go to account settings and change mail address to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com)
 	2. a link will be sent to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com), now the user realizes that he have lost access to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com) due to some reasons
 	3. so he will probably change mail to the another mail address for e.g [victim3@gmail.com](mailto:victim999@gmail.com) which he owns and has access to

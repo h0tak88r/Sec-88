@@ -45,7 +45,7 @@
 - [ ] Check for <span style="color:#06ea6c">Email HTML Injection</span> -> by Injecting in all Fields -> `<a href="https://evil.com">Click me to Win 100$</a>` -> Email Triggering Action -> Input Field Rendered as HTML content in email
 
 >****Server-Side Injection > Server-Side Template Injection (SSTI) > Basic***
-- [ ] Basic SSTI That u couldn't exploit Further [[SSTI]] ->  [[Parameters Reflection Analysis]]
+- [ ] Basic SSTI That u couldn't exploit Further [[SSTI]] ->  [[Parameters Analysis]]
 
 >***Server-Side Injection > Content Spoofing > External Authentication Injection***
 - [ ] Try Using HTML Injection to Inject a External Authentication Form to Still Credentials from the user

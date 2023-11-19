@@ -17,5 +17,3 @@ tags:
 - [ ] If the captcha consists of **read characters from an image**, check manually or with code **how many images** are being used and if only a **few images are being used, detect them by MD5.**
 - [ ] <span style="color:#0070c0">Use an OCR https://github.com/tesseract-ocr/tesseract </span>
 - [ ] <span style="color:#0070c0">Online Services to bypass captchas</span> [Capsolver](https://www.capsolver.com)
-- [ ] <span style="color:#0070c0">CAPTCHA > Brute Force</span>
-- [ ] <span style="color:#0070c0">CAPTCHA > Missing</span>

