@@ -75,3 +75,28 @@
 * [Cookie Based Attacks](web-app-security/cookie-based-attacks.md)
 * [CMS](web-app-security/cms/README.md)
   * [AEM \[Adobe CMS\]](web-app-security/cms/aem-adobe-cms.md)
+
+## Operating Systems (OS)
+
+* [Linux](operating-systems-os/linux/README.md)
+  * [Bash Scripting guide](operating-systems-os/linux/bash-scripting-guide.md)
+* [VPS](operating-systems-os/vps.md)
+* [Tools](operating-systems-os/tools/README.md)
+  * [tmux](operating-systems-os/tools/tmux.md)
+  * [Git](operating-systems-os/tools/git.md)
+  * [GitHub Actions](operating-systems-os/tools/github-actions.md)
+
+## Programming
+
+* [HTML](programming/html.md)
+* [JavaScript (JS)](programming/javascript-js.md)
+* [Python](programming/python/README.md)
+  * [Python Tips](programming/python/python-tips.md)
+
+## BugBounty
+
+* [Methodologies](bugbounty/methodologies/README.md)
+  * [Hunting Methodology](bugbounty/methodologies/hunting-methodology.md)
+* [WriteUps](bugbounty/writeups/README.md)
+  * [API BAC leads to PII Data Disclosure](bugbounty/writeups/api-bac-leads-to-pii-data-disclosure.md)
+  * [Misconfigured OATUH leads to Pre-Account Takeover](bugbounty/writeups/misconfigured-oatuh-leads-to-pre-account-takeover.md)
