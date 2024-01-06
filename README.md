@@ -1,5 +1,7 @@
 ---
-description: My note and resources in cyber security
+description: >-
+  Mosaad Sallam (h0tak88r) | Cyber Security | Bug Hunting  | Python Coding |
+  Computer Engineering | Otaku | GitHub @h0tak88r
 ---
 
 # README
@@ -15,5 +17,3 @@ Balancing technical prowess with soft skills, I bring effective time management 
 Currently pursuing a Bachelor’s in Computer and Control Engineering Systems, I aim to push the boundaries of cybersecurity, armed with certifications from APIsec University, TCM Security, The SecOps Group, MaharaTech ITI Learning Platform, and expertise in OWASP Top 10 for both web and API security.
 
 Join me on this exciting journey as I navigate the ever-evolving landscape of cybersecurity, sharing insights, tools, and discoveries on my blog. Let’s fortify the digital world together! 🚀
-
-\

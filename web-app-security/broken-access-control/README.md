@@ -120,27 +120,25 @@ GET /v3/users_data/1234 ->401GET /v1/users_data/1234 ->200
 * [ ] If the website using graphql, try to find IDOR using graphql!
 *   [ ] `exif_geo`
 
-    #### Summary
+    **Summary**
 
     When a user uploads an image in [example.com](http://example.com/), the uploaded image’s EXIF Geolocation Data does not gets stripped. As a result, anyone can get sensitive information of [example.com](http://example.com/) users like their Geolocation, their Device information like Device Name, Version, Software & Software version used etc.
 
-    #### Steps to reproduce:
+    **Steps to reproduce:**
 
-    1. Got to Github ( [https://github.com/ianare/exif-samples/tree/master/jpg](https://github.com/ianare/exif-samples/tree/master/jpg))\
-
+    1. Got to Github ( [https://github.com/ianare/exif-samples/tree/master/jpg](https://github.com/ianare/exif-samples/tree/master/jpg))\\
     2. There are lot of images having resolutions (i.e 1280 \* 720 ) , and also whith different MB’s
     3. Go to Upload option on the website
     4. Upload the image
-    5. see the path of uploaded image ( Either by right click on image then copy image address OR right click, inspect the image, the URL will come in the inspect , edit it as html )\
-
+    5. see the path of uploaded image ( Either by right click on image then copy image address OR right click, inspect the image, the URL will come in the inspect , edit it as html )\\
     6. open it ([http://exif.regex.info/exif.cgi](http://exif.regex.info/exif.cgi))
     7. See `wheather` is that still showing `exif` data , if it is then Report it.
 
-    ## Reports (Hackerone)
+    ### Reports (Hackerone)
 
     * [IDOR with Geolocation data not stripped from images](https://hackerone.com/reports/906907)
 
-    ### Insecure Direct Object Reference (IDOR)
+    #### Insecure Direct Object Reference (IDOR)
 
     * [Disclose Private Dashboard Chart's name and data in Facebook Analytics](https://bugreader.com/jubabaghdad@disclose-private-dashboard-charts-name-and-data-in-facebook-analytics-184)
     * [Disclosing privately shared gaming clips of any user](https://bugreader.com/rony@disclosing-privately-shared-gaming-clips-of-any-user-128)
@@ -340,7 +338,7 @@ Authorization Bypass reports from HackerOne:
 29. [Stealing Users OAuth authorization code via redirect\_uri](https://hackerone.com/reports/1861974) to pixiv - 183 upvotes, $2000
 30. [Unauthorized access to metadata of undisclosed reports that were retested](https://hackerone.com/reports/871749) to HackerOne - 180 upvotes, $0
 
-    ## [Top IDOR Reports](https://github.com/reddelexc/hackerone-reports/blob/master/tops\_by\_bug\_type/TOPIDOR.md)
+    ### [Top IDOR Reports](https://github.com/reddelexc/hackerone-reports/blob/master/tops\_by\_bug\_type/TOPIDOR.md)
 
     1. [IDOR to add secondary users in www.paypal.com/businessmanage/users/api/v1/users](https://hackerone.com/reports/415081) to PayPal - 694 upvotes, $10500
     2. [IDOR allow access to payments data of any user](https://hackerone.com/reports/751577) to Nord Security - 337 upvotes, $0
