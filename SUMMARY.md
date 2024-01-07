@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Whoami](README.md)
+* [🧑 Whoami](README.md)
 
 ## API Security
 
@@ -18,7 +18,7 @@
 * [Excessive Data Exposure](api-security/excessive-data-exposure.md)
 * [OWASP API TOP 10 MindMap](api-security/owasp-api-top-10-mindmap.md)
 
-## WEB-APP Security
+## 🕸 WEB-APP Security
 
 * [Features Abuse](web-app-security/features-abuse/README.md)
   * [2FA](web-app-security/features-abuse/2fa.md)
@@ -86,7 +86,7 @@
   * [Git](operating-systems-os/tools/git.md)
   * [GitHub Actions](operating-systems-os/tools/github-actions.md)
 
-## Programming
+## 💻 Programming
 
 * [HTML](programming/html.md)
 * [JavaScript (JS)](programming/javascript-js.md)
@@ -95,7 +95,7 @@
   * [Set](programming/python/set/README.md)
     * [SetMethods](programming/python/set/setmethods.md)
 
-## BugBounty
+## 🐞 BugBounty
 
 * [Methodologies](bugbounty/methodologies/README.md)
   * [Hunting Methodology](bugbounty/methodologies/hunting-methodology.md)
@@ -103,6 +103,7 @@
   * [API BAC leads to PII Data Disclosure](bugbounty/writeups/api-bac-leads-to-pii-data-disclosure.md)
   * [Misconfigured OATUH leads to Pre-Account Takeover](bugbounty/writeups/misconfigured-oatuh-leads-to-pre-account-takeover.md)
 
-***
+## 📶 Network Security
 
-* [Test](test.md)
+* [Networking Fundamentals](network-security/networking-fundamentals.md)
+* [Open Ports Security Testing](network-security/open-ports-security-testing.md)
