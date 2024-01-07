@@ -1,6 +1,6 @@
 # Table of contents
 
-* [README](README.md)
+* [Whoami](README.md)
 
 ## API Security
 
