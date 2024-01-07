@@ -4,7 +4,7 @@ _**In the name of Allah, the most gracious and merciful,**_
 
 Dear Security Researchers,
 
-Today, I would like to share a fascinating discovery I made while examining the security of trget.com.
+Today, I would like to share a fascinating discovery I made while examining the security of target.com.
 
 During my Testing of the target.com platform, I noticed unusual change email feature that allows users to freely modify their registered email addresses to any email without confirmation from the other side (New email side).
 

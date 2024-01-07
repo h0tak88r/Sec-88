@@ -1,5 +1,5 @@
 ---
-description: Mosaad Sallam (h0tak88r) | Cyber Security | Bug Hunting  | Python Coding
+description: Mosaad Sallam (h0tak88r)
 ---
 
 # Whoami

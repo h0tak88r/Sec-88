@@ -92,6 +92,8 @@
 * [JavaScript (JS)](programming/javascript-js.md)
 * [Python](programming/python/README.md)
   * [Python Tips](programming/python/python-tips.md)
+  * [Set](programming/python/set/README.md)
+    * [SetMethods](programming/python/set/setmethods.md)
 
 ## BugBounty
 
@@ -100,3 +102,7 @@
 * [WriteUps](bugbounty/writeups/README.md)
   * [API BAC leads to PII Data Disclosure](bugbounty/writeups/api-bac-leads-to-pii-data-disclosure.md)
   * [Misconfigured OATUH leads to Pre-Account Takeover](bugbounty/writeups/misconfigured-oatuh-leads-to-pre-account-takeover.md)
+
+***
+
+* [Test](test.md)
