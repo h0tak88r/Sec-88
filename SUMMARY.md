@@ -95,9 +95,8 @@
   * [Set](programming/python/set/README.md)
     * [SetMethods](programming/python/set/setmethods.md)
 * [JAVA](programming/java/README.md)
-  * [Java Introduction](programming/java/java-introduction.md)
-  * [Java Flow Control](programming/java/java-flow-control.md)
-  * [Java Arrays](programming/java/java-arrays.md)
+  * [Java Essentials](programming/java/java-essentials.md)
+  * [Java Essentials Code Notes](programming/java/java-essentials-code-notes.md)
 
 ## 🐞 BugBounty
 
