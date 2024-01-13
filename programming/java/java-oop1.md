@@ -1,5 +1,7 @@
 ---
-description: (Class, Object, Constructor, Overloading, Java Access Modifiers)
+description: >-
+  (Class, Object, Constructor, Overloading, Java Access Modifiers, Recursion,
+  Instanceof Operator)
 ---
 
 # Java OOP1
@@ -321,3 +323,108 @@ These access modifiers help in <mark style="color:blue;">**encapsulation**</mark
 ### Access Modifiers Summarized in one figure <a href="#figure" id="figure"></a>
 
 <figure><img src="https://cdn.programiz.com/sites/tutorial2program/files/java-access-modifiers-public-private-protected-default_0.jpg" alt="Accessibility of all Access Modifiers in Java" height="512" width="512"><figcaption><p>Accessibility of all Access Modifiers in Java</p></figcaption></figure>
+
+## Java Recursion
+
+* **Definition:**
+  * A method calling itself is termed a recursive method, and the overall process is known as recursion.
+
+#### How Recursion works? <a href="#how-works" id="how-works"></a>
+
+<figure><img src="https://cdn.programiz.com/sites/tutorial2program/files/java-recursive-call.jpg" alt="A function is calling itself" height="247" width="416"><figcaption><p>Working of Java Recursion</p></figcaption></figure>
+
+*   **Example:**
+
+    ```java
+    javaCopy codeclass Factorial {
+        static int factorial(int n) {
+            if (n != 0)
+                return n * factorial(n-1);
+            else
+                return 1;
+        }
+
+        public static void main(String[] args) {
+            int number = 4, result;
+            result = factorial(number);
+            System.out.println(number + " factorial = " + result);
+        }
+    }
+    ```
+* **How it Works:**
+  * A function calls itself (recursive call).
+  * Termination condition is crucial to avoid infinite recursion.
+* **Advantages:**
+  * Simplicity: Recursive solutions are often simpler and easier to understand.
+  * Quick Implementation: Less time-consuming to write, debug, and maintain.
+* **Disadvantages:**
+  * Memory Usage: Recursion uses more memory as each call allocates new storage on the stack.
+  * Speed: Generally slower compared to iterative solutions.
+* **Recommendation:**
+  * Choose recursion for simplicity and ease of understanding.
+  * Consider alternatives for performance-critical applications
+
+### Java `instanceof` Operator:
+
+* **Definition:**
+  * Checks whether an object is an instance of a particular class or interface.
+*   **Syntax:**
+
+    ```java
+    objectName instanceof className;
+    ```
+*   **Example:**
+
+    ```java
+    class Main {
+        public static void main(String[] args) {
+            String name = "Programiz";
+            boolean result1 = name instanceof String;
+            System.out.println("name is an instance of String: " + result1);
+
+            Main obj = new Main();
+            boolean result2 = obj instanceof Main;
+            System.out.println("obj is an instance of Main: " + result2);
+        }
+    }
+    ```
+*   **Output:**
+
+    ```
+    name is an instance of String: true
+    obj is an instance of Main: true
+    ```
+*   **Inheritance Example:**
+
+    ```java
+    class Animal {}
+
+    class Dog extends Animal {}
+
+    class Main {
+        public static void main(String[] args) {
+            Dog d1 = new Dog();
+            System.out.println(d1 instanceof Dog);      // true
+            System.out.println(d1 instanceof Animal);   // true
+        }
+    }
+    ```
+*   **Interface Example:**
+
+    ```java
+    interface Animal {}
+
+    class Dog implements Animal {}
+
+    class Main {
+        public static void main(String[] args) {
+            Dog d1 = new Dog();
+            System.out.println(d1 instanceof Animal);  // true
+        }
+    }
+    ```
+* **Note:**
+  * Used to check if an object is an instance of a specific class or interface.
+  * Can be used in inheritance scenarios to check superclass or interface instances.
+  * Returns `true` if the object is an instance; otherwise, returns `false`.
+  * All classes in Java are inherited from the `Object` class.\
