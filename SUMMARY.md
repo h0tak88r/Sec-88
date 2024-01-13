@@ -97,6 +97,9 @@
 * [JAVA](programming/java/README.md)
   * [Java Essentials](programming/java/java-essentials.md)
   * [Java Essentials Code Notes](programming/java/java-essentials-code-notes.md)
+  * [Java OOP1](programming/java/java-oop1.md)
+  * [Java OOP](programming/java/java-oop.md)
+  * [Built in Methods](programming/java/built-in-methods.md)
 
 ## 🐞 BugBounty
 
