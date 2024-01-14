@@ -104,8 +104,9 @@
     * [Method Overriding](programming/java/java-oop-principles/method-overriding.md)
     * [Abstract Class](programming/java/java-oop-principles/abstract-class.md)
     * [Interface](programming/java/java-oop-principles/interface.md)
-    * [Java Polymorphism](programming/java/java-oop-principles/java-polymorphism.md)
+    * [polymorphism](programming/java/java-oop-principles/polymorphism.md)
     * [Encapsulation](programming/java/java-oop-principles/encapsulation.md)
+    * [Exception Handling](programming/java/java-oop-principles/exception-handling.md)
 
 ## 🐞 BugBounty
 
