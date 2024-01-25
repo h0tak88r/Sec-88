@@ -98,7 +98,6 @@
   * [Java Essentials](programming/java/java-essentials.md)
   * [Java Essentials Code Notes](programming/java/java-essentials-code-notes.md)
   * [Java OOP1](programming/java/java-oop1.md)
-  * [Built in Methods](programming/java/built-in-methods.md)
   * [JAVA OOP Principles](programming/java/java-oop-principles/README.md)
     * [Inheritance](programming/java/java-oop-principles/inheritance.md)
     * [Method Overriding](programming/java/java-oop-principles/method-overriding.md)
@@ -106,7 +105,9 @@
     * [Interface](programming/java/java-oop-principles/interface.md)
     * [polymorphism](programming/java/java-oop-principles/polymorphism.md)
     * [Encapsulation](programming/java/java-oop-principles/encapsulation.md)
-    * [Exception Handling](programming/java/java-oop-principles/exception-handling.md)
+    * [Composition](programming/java/java-oop-principles/composition.md)
+  * [Java OOP Challenges](programming/java/java-oop-challenges.md)
+  * [Exception Handling](programming/java/exception-handling.md)
 
 ## 🐞 BugBounty
 
