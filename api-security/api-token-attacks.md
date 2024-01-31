@@ -32,7 +32,7 @@
 
 ## JWT Attacks
 
-#### [jwt-security.md](../web-app-security/improper-authentication/jwt-security.md "mention")
+#### [jwt-security.md](../web-appsec/improper-authentication/jwt-security.md "mention")
 
 #### JWT Tool
 

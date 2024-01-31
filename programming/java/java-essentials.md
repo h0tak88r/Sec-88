@@ -4,7 +4,7 @@
 
 * **JVM (Java Virtual Machine)** is an abstract machine that enables your computer to run a Java program.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **JRE (Java Runtime Environment)** is a software package that provides Java class libraries, Java Virtual Machine (JVM), and other components that are required to run Java applications.
 * **JDK (Java Development Kit)** is a software development kit required to develop applications in Java. When you download JDK, JRE is also downloaded with it.
@@ -288,17 +288,17 @@ if (number < 0.0) {
 
 **Java continue with Nested Loop**.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
 ### Java continue with Nested Loop <a href="#continue-nested-loops" id="continue-nested-loops"></a>
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Labeled continue Statement <a href="#labeled-continue" id="labeled-continue"></a>
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Java Arrays
 
@@ -330,4 +330,3 @@ int[][] a = new int[3][4];
 Here, we have created a multidimensional array named a. It is a 2-dimensional array, that can hold a maximum of 12 elements,
 
 <figure><img src="https://cdn.programiz.com/sites/tutorial2program/files/java-2d-array.jpg" alt="2-dimensional array in Java" height="275" width="399"><figcaption><p>2-dimensional Array</p></figcaption></figure>
-
