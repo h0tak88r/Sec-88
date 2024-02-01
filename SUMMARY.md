@@ -124,6 +124,8 @@
 
 ## 📱 Android AppSec
 
-* [Android Architecture](android-appsec/android-architecture.md)
-* [Android Security Model](android-appsec/android-security-model.md)
-* [Page](android-appsec/page.md)
+* [Android App Fundamentals](android-appsec/android-app-fundamentals/README.md)
+  * [Android Architecture](android-appsec/android-app-fundamentals/android-architecture.md)
+  * [Android Security Model](android-appsec/android-app-fundamentals/android-security-model.md)
+  * [Android App Components](android-appsec/android-app-fundamentals/android-app-components/README.md)
+    * [Intents](android-appsec/android-app-fundamentals/android-app-components/intents.md)
