@@ -130,4 +130,4 @@
   * [Android App Components](android-appsec/android-app-fundamentals/android-app-components/README.md)
     * [Intents](android-appsec/android-app-fundamentals/android-app-components/intents.md)
     * [Pending Intents](android-appsec/android-app-fundamentals/android-app-components/pending-intents.md)
-* [Page](android-appsec/page.md)
+* [How To Get APK file for application](android-appsec/how-to-get-apk-file-for-application.md)
