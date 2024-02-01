@@ -1,6 +1,8 @@
 # Pending Intents
 
-<figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+#### Pending Intents from Pentester pov: [https://valsamaras.medium.com/pending-intents-a-pentesters-view-92f305960f03](https://valsamaras.medium.com/pending-intents-a-pentesters-view-92f305960f03)
+
+<figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption><p><a href="https://valsamaras.medium.com/pending-intents-a-pentesters-view-92f305960f03">https://valsamaras.medium.com/pending-intents-a-pentesters-view-92f305960f03</a></p></figcaption></figure>
 
 **Using a PendingIntent**
 
