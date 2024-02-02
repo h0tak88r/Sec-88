@@ -323,7 +323,9 @@ Create several sessions and try to download heavy files exploiting the SSRF from
 # SSRf PHP Functions
 ```
 
-## Host PHP code in your server to get notified whenever there is SSRF HIT
+## [Make you own SSRF tool](https://medium.com/@a1bi/ssrf-get-notified-on-discord-whenever-you-have-an-ssrf-5162a6daf8a3)
+
+Host this PHP code after editing discord webhook in your server to get notified whenever there is SSRF&#x20;
 
 ````php
 <?php
