@@ -75,6 +75,7 @@
 * [Cookie Based Attacks](web-appsec/cookie-based-attacks.md)
 * [CMS](web-appsec/cms/README.md)
   * [AEM \[Adobe CMS\]](web-appsec/cms/aem-adobe-cms.md)
+* [XSSI (Cross Site Script Inclusion)](web-appsec/xssi-cross-site-script-inclusion.md)
 
 ## 🖥 Operating Systems (OS)
 
