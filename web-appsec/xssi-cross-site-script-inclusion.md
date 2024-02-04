@@ -66,6 +66,8 @@ XSSI, or Cross Site Script Inclusion, is a security vulnerability that facilitat
 
 ## Writeups
 
+{% embed url="https://book.hacktricks.xyz/pentesting-web/xssi-cross-site-script-inclusion" %}
+
 {% embed url="https://medium.com/@vflexo/hunting-for-vulnerabilities-that-are-ignored-by-most-of-the-bug-bounty-hunters-part-1-187b35508e56" %}
 
 {% embed url="https://medium.com/@alex.birsan/the-bug-that-exposed-your-paypal-password-539fc2896da9" %}

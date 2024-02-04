@@ -125,6 +125,7 @@
 
 ## 📱 Android AppSec
 
+* [My Road Map for Android App Pentesting](android-appsec/my-road-map-for-android-app-pentesting.md)
 * [Android App Fundamentals](android-appsec/android-app-fundamentals/README.md)
   * [Android Architecture](android-appsec/android-app-fundamentals/android-architecture.md)
   * [Android Security Model](android-appsec/android-app-fundamentals/android-security-model.md)
