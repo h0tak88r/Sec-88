@@ -1,5 +1,13 @@
 # OAUTH Misconfigurations
 
+## Resources
+
+1. [https://datatracker.ietf.org/doc/html/rfc6749](https://datatracker.ietf.org/doc/html/rfc6749#page-12)
+2. [https://oauth.net/2/](https://oauth.net/2/)
+3. [https://www.oauth.com/](https://www.oauth.com/)
+4. [https://www.youtube.com/watch?v=996OiexHze0](https://www.youtube.com/watch?v=996OiexHze0)
+5. [https://www.amazon.com/OAuth-2-Action-Justin-Richer/dp/161729327X](https://www.amazon.com/OAuth-2-Action-Justin-Richer/dp/161729327X)
+
 #### How it is Work
 
 For example, let’s say website _**https://yourtweetreader.com**_ has functionality to **display all tweets you’ve ever sent**, including private tweets. In order to do this, OAuth 2.0 is introduced. _https://yourtweetreader.com_ will ask you to **authorize their Twitter application to access all your Tweets**. A consent page will pop up on _https://twitter.com_ displaying what **permissions are being requested**, and who the developer requesting it is. Once you authorize the request, _https://yourtweetreader.com_ will be **able to access to your Tweets on behalf of you**.
