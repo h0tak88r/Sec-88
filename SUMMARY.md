@@ -110,6 +110,8 @@
     * [Composition](programming/java/java-oop-principles/composition.md)
   * [Java OOP Challenges](programming/java/java-oop-challenges.md)
   * [Exception Handling](programming/java/exception-handling.md)
+* [Go](programming/go/README.md)
+  * [Go Syntax Tutorial in one file](programming/go/go-syntax-tutorial-in-one-file.md)
 
 ## 🐞 BugBounty
 
