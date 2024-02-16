@@ -20,6 +20,7 @@
 
 ## 🕸 WEB AppSec
 
+* [Resources](web-appsec/resources.md)
 * [Features Abuse](web-appsec/features-abuse/README.md)
   * [2FA](web-appsec/features-abuse/2fa.md)
   * [Ban Feature](web-appsec/features-abuse/ban-feature.md)
@@ -81,6 +82,9 @@
 ## 🖥 Operating Systems (OS)
 
 * [Linux](operating-systems-os/linux/README.md)
+  * [Linux Commands](operating-systems-os/linux/linux-commands.md)
+  * [Tools](operating-systems-os/linux/tools.md)
+  * [Linux File System](operating-systems-os/linux/linux-file-system.md)
   * [Bash Scripting guide](operating-systems-os/linux/bash-scripting-guide.md)
 * [VPS](operating-systems-os/vps.md)
 * [Tools](operating-systems-os/tools/README.md)
@@ -125,6 +129,9 @@
 
 * [Networking Fundamentals](network-security/networking-fundamentals.md)
 * [Open Ports Security Testing](network-security/open-ports-security-testing.md)
+* [Vulnerability Scanning](network-security/vulnerability-scanning.md)
+* [Client Side Attacks](network-security/client-side-attacks.md)
+* [Linux Privilege Escalation](network-security/linux-privilege-escalation.md)
 
 ## 📱 Android AppSec
 
