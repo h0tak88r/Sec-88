@@ -31,7 +31,24 @@ func main() {
 	for i := 0; i < 5; i++ {
 		fmt.Println(i)
 	}
-
+	
+	// The init and post statements are optional.
+	sum := 1
+	for ; sum < 1000; {
+		sum += sum
+	}
+	fmt.Println(sum)
+	
+	// while loop in Go
+	for sum < 1000 {
+		sum += sum
+	}
+	fmt.Println(sum)
+	
+	// Infinite Loop
+	for {
+	}
+	
 	// If/Else
 	fmt.Println("\nIf/Else:")
 	x := 10
