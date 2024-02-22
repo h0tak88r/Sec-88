@@ -15,7 +15,11 @@ func main() {
 	fmt.Println("Hello, World!")
 
 	// Values and Variables
+	var im, jm int = 1, 2
+	km := 3
+	cm, python, java := true, false, "no!"
 	var num int = 42
+	fmt.Println(im, jm, km, cm, python, java)
 	fmt.Println("Value of num:", num)
 
 	// Constants
