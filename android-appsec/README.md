@@ -1,4 +1,4 @@
-# My Road Map for Android App Pentesting
+# 📱 Android-AppSec
 
 1. Learned Web Pentesting&#x20;
 2. Learned JAVA basics and OOP
@@ -14,6 +14,4 @@
    1. [Android App Hacking - Black Belt Edition](https://www.udemy.com/course/android-app-hacking-black-belt-edition/) -> English Udemy Course
    2. [Hack-Tricks](https://book.hacktricks.xyz/mobile-pentesting/android-app-pentesting)&#x20;
    3. [Frida for Beginners](https://www.udemy.com/course/frida-for-beginners)
-   4.  [overSecuredBlog](https://blog.oversecured.com/)
-
-       \
+   4. [overSecuredBlog](https://blog.oversecured.com/)
