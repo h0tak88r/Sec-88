@@ -1,4 +1,4 @@
-# Resources
+# 🕸️ WebAppSec
 
 ## Escalating Bugs to RCS&#x20;
 

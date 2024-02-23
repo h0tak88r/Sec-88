@@ -1,4 +1,4 @@
-# Resources
+# ✉️ APISec
 
 ## Resources:
 
@@ -13,7 +13,7 @@
 * [https://apihacker.blog/](https://apihacker.blog/)
 * **OWASP API TOP 10** [https://xmind.works/gJnF6CP1](https://xmind.works/gJnF6CP1)
   * [The Web Security Academy](https://portswigger.net/web-security): One of the best free online web security training courses on the Internet.
-  * [APIsecurity.io](https://apisecurity.io/): A weekly newsletter that is a great resource for the latest and greatest API security news.&#x20;
+  * [APIsecurity.io](https://apisecurity.io/): A weekly newsletter that is a great resource for the latest and greatest API security news.
   * [API Hacking Mind Map](https://dsopas.github.io/MindAPI/) by David Sopas.
   * Get involved in the Bug Bounty communities:
     * [Synack](https://www.synack.com/)
