@@ -138,3 +138,6 @@
     * [Exception Handling](programming/java/exception-handling.md)
   * [Go](programming/go/README.md)
     * [Go Syntax Tutorial in one file](programming/go/go-syntax-tutorial-in-one-file.md)
+    * [Go Slices](programming/go/go-slices.md)
+    * [Go Maps](programming/go/go-maps.md)
+    * [Go Functions](programming/go/go-functions.md)
