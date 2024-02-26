@@ -12,3 +12,4 @@
 * [https://github.com/blackhat-go/bhg](https://github.com/blackhat-go/bhg) -> BlacHatGo Notes
 * [https://www.youtube.com/@anthonygg\_](https://www.youtube.com/@anthonygg\_) -> Antony GG Chanel
 * [https://www.programiz.com/golang/getting-started](https://www.programiz.com/golang/getting-started) -> Toturials from programiz&#x20;
+* [https://devhints.io/go](https://devhints.io/go) -> Go _cheatsheet_
