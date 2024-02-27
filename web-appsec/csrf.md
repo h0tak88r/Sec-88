@@ -6,9 +6,9 @@ description: 'CWE-352: Cross-Site Request Forgery (CSRF)'
 
 ### What it is ??
 
-**Cross-Site Request Forgery (CSRF/XSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they're currently authenticated.**
+Cross-Site Request Forgery (CSRF/XSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they're currently authenticated.
 
-**CSRF attacks specifically target state-changing requests, not theft of data, since the attacker has no way to see the response to the forged request. - OWASP**
+CSRF attacks specifically target state-changing requests, not theft of data, since the attacker has no way to see the response to the forged request. - OWASP
 
 ## Methodology
 
@@ -32,13 +32,16 @@ description: 'CWE-352: Cross-Site Request Forgery (CSRF)'
       ```
   *   **Change Request Method**
 
-      ```html
+      ```http
+      # Request
       POST /password_change
       Host: email.example.com
       Cookie: session_cookie=YOUR_SESSION_COOKIE
       (POST request body)
       new_password=abc123&csrf_token=871caef0757a4ac9691aceb9aad8b65b
       --------------------------------------------
+
+      # Bypass
       GET /password_change?new_password=abc123
       Host: email.example.com
       Cookie: session_cookie=YOUR_SESSION_COOKIE
@@ -116,8 +119,12 @@ description: 'CWE-352: Cross-Site Request Forgery (CSRF)'
       		 throw_error("CSRF token incorrect. Request rejected.")
       [...]
       def process_state_changing_action():
-      	 validate_token()
+       	 validate_token()
       	 execute_action()
+      ------------------------------------------------------------------------
+      # Exploit 
+      If the token is fixed value for the account then change the email to victim's email and make CSRF poc
+      with the old CSRF token from old requests
       ```
   *   **Bypass Double submit CSRF tokens**
 
@@ -191,6 +198,14 @@ description: 'CWE-352: Cross-Site Request Forgery (CSRF)'
   *   **Bypass CSRF Protection by Using XSS**
 
       Steal victim CSRF Token Via XSS Vulnerability
+  * **Replace the token with unreal token but with the same length**
+  * **Bypass using subdomain takeover + CORS ==** [**CSRF**](https://monish-basaniwal.medium.com/how-i-found-my-first-subdomain-takeover-vulnerability-b7d5c17b61fd)&#x20;
+  * **Crsf protection by Referrer Header? Remove the header \[ADD in form ]**
+  * **Try to decrypt the hash (maybe CSRF is a hash)**
+  * **Analyze Token(use burp)**
+    * Sometimes Anti-CSRF token is composed of two parts, one of them remains static while the other one is dynamic."`837456mzy29jkd911139`" for one request the other time "`837456mzy29jkd337221`" if you notice, "`837456mzy29jkd`" part of the token remains same, send the request with only the static part
+  * **Sometimes the anti-csrf check is dependent on User-Agent as well.**
+    * If you try to use a mobile/tablet user agent, the application may not even check for an anti-csrf token.
 * [ ] Where To Find
   1. **Authentication-Required Actions**: Look for actions that require authentication, such as changing account settings, updating passwords, or making transactions. These are common areas where CSRF vulnerabilities can have significant impact.
   2. **User Profile Changes**: Check for actions related to user profile changes, such as updating email addresses, changing personal information, or modifying profile pictures.
@@ -203,27 +218,7 @@ description: 'CWE-352: Cross-Site Request Forgery (CSRF)'
   9. **Privilege Escalation**: Actions that involve escalating user privileges, such as changing a user's role or permissions, should be thoroughly tested for CSRF vulnerabilities.
   10. **Logging Out**: Even the logout functionality can be exploited through CSRF attacks, forcing a victim to unknowingly log out.
   11. **Password Reset**: If the password reset process doesn't include proper CSRF protections, an attacker could potentially change a user's password without their consent.
-* [ ] **test login, logout, reset pass, change password, add-cart, like, comment, profile change, user details change, balance transfer, subscription, etc**
-* [ ] **Use Burp-suite Generated poc**
-* [ ] **Change single char**
-* [ ] **Sending an empty value of token Replace with the same length**
-* [ ] **Clickjacking**
-* [ ] **Changing post/get method**
-* [ ] **Remove it from the request**
-* [ ] **Use another user's valid token**
-* [ ] **Crsf protection by Referrer Header? Remove the header \[ADD in form ]**
-* [ ] **Bypass using subdomain \[**[**victim.com.attacker.com**](http://victim.com.attacker.com/)**]**
-* [ ] **Try to decrypt the hash (maybe CSRF is a hash)**
-* [ ] **Analyze Token(use burp)**
-* [ ] **Gmail -> Mail sent to** [**email+2=@gmail.com**](mailto:email+2=@gmail.com) **will send to** [**email@gmail.com**](mailto:email@gmail.com)
-* [ ] **CSRF tokens leveraging XSS vulnerabilities**
-* [ ] **Sometimes Anti-CSRF token is composed of two parts, one of them remains static while the other one is dynamic."837456mzy29jkd911139" for one request the other time "837456mzy29jkd337221" if you notice, "837456mzy29jkd" part of the token remains same, send the request with only the static part**
-* [ ] **Sometimes the anti-csrf check is dependent on User-Agent as well.**
-* [ ] **If you try to use a mobile/tablet user agent, the application may not even check for an anti-csrf token.**
-
-#### 6 CSRF Bypass by Hack3rSr0lls
-
-[![](https://pbs.twimg.com/media/EY70bxkWkAAFzGb?format=jpg\&name=900x900)](https://pbs.twimg.com/media/EY70bxkWkAAFzGb?format=jpg\&name=900x900)
+  12. **test login, logout, reset pass, change password, add-cart, like, comment, profile change, user details change, balance transfer, subscription, etc**
 
 ### Write-ups
 
