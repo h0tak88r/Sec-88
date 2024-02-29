@@ -76,6 +76,7 @@
   * [API BAC leads to PII Data Disclosure](bug-bounty/api-bac-leads-to-pii-data-disclosure.md)
   * [Misconfigured OATUH leads to Pre-Account Takeover](bug-bounty/misconfigured-oatuh-leads-to-pre-account-takeover.md)
   * [Automating Bug Bounty with GitHub Actions](bug-bounty/github-actions.md)
+  * [My Methodlogy with Public BBP](bug-bounty/my-methodlogy-with-public-bbp.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)

@@ -4,13 +4,13 @@
 
 **DAC (Discretionary Access Control)** is a security model where each system object (files, processes, etc.) has an owner, and the owner has discretion over who is granted access to the object. The access control decisions are at the discretion of the object's owner. In the context of Android, this model is implemented in the Linux kernel, forming the foundation of Android's security.
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p>DAC Linex Security</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption><p>DAC Linex Security</p></figcaption></figure>
 
 ### 2. SELinux Security Model (MAC - Mandatory Access Control)
 
 **MAC (Mandatory Access Control)** is a security model where access permissions are set by a central authority, typically the operating system or a security policy. **SELinux (Security-Enhanced Linux)** is an implementation of MAC on the Linux kernel, providing an additional layer of security on top of DAC.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption><p>SELinux for every file</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption><p>SELinux for every file</p></figcaption></figure>
 
 * **Principle: Default Denied:**
   * In SELinux, the default principle is to deny access unless explicitly allowed. This ensures a more secure environment by minimizing the potential for unintended access.
