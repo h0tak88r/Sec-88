@@ -112,8 +112,9 @@ Another scenario led me to discover that if you receive an invitation, attemptin
 <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 When they use the link, now they are stuck on a blank page.\
-![](<../.gitbook/assets/image (1).png>)
+![](<../.gitbook/assets/image (1) (1).png>)
 
 ### End
 
 While this narrative doesn't encompass all my findings, it provides a glimpse into my bug hunting methodology and mindset on public bug bounty programs. I hope this insight proves helpful to fellow hunters in their endeavors.\
+![](<../.gitbook/assets/image (12).png>)![](<../.gitbook/assets/image (13).png>)![](<../.gitbook/assets/image (14).png>)![](<../.gitbook/assets/image (15).png>)![](<../.gitbook/assets/image (16).png>)![](../.gitbook/assets/image.png)
