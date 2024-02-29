@@ -2,7 +2,7 @@
 
 ## Target Selection
 
-In the initial phase of my bug hunting journey on a renowned bug bounty platform, I navigated to the HackerOne platform to find a target with a substantial business presence and rich features. My focus landed on a business providing an Over-The-Top (OTT) platform, enabling users to effortlessly launch subscription services. For privacy reasons, let's refer to this business as `target.com`.
+In the initial phase of my bug hunting journey on a renowned bug bounty platform, I navigated to the HackerOne platform to find a target with a substantial business presence and rich features. My focus landed on a business providing an Over-The-Top (OTT) platform, enabling users to effortlessly launch subscription services and creating websites sharing content like videos and other staff. For privacy reasons, let's refer to this business as `target.com`.
 
 ### Part 1: Reconnaissance
 
