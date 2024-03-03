@@ -2,7 +2,7 @@
 
 A map maps keys to values.
 
-```Go
+```go
 package main
 
 import "fmt"
