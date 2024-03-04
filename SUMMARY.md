@@ -77,6 +77,7 @@
   * [Misconfigured OATUH leads to Pre-Account Takeover](bug-bounty/misconfigured-oatuh-leads-to-pre-account-takeover.md)
   * [Automating Bug Bounty with GitHub Actions](bug-bounty/github-actions.md)
   * [My Methodlogy with Public BBP](bug-bounty/my-methodlogy-with-public-bbp.md)
+  * [Exploring Subdomains: From Enumeration to Takeover Victory](bug-bounty/exploring-subdomains-from-enumeration-to-takeover-victory.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)
