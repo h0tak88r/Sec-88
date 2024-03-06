@@ -37,9 +37,7 @@ It's worth mentioning that we found some stored XSSs and stored HTML Injections 
 
 <figure><img src="../.gitbook/assets/image (32).png" alt=""><figcaption><p>Stored XSSs</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (34).png" alt=""><figcaption><p>Pending program review Stored XSS</p></figcaption></figure>
-
-<figure><img src="../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
 
 Returning to the organizer tab, I explored more API calls, uncovering Blind Server-Side Request Forgery (SSRF) in the endpoint `PUT /subscriptions/{ID}` and other SSRFs with the same simplicity, as you found an API call that takes a URL as user input. Subsequently, I found other issues that didn't warrant reporting and continued experimenting with API calls.
 
