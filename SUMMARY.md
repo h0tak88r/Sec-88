@@ -144,3 +144,4 @@
     * [Go Slices](programming/go/go-slices.md)
     * [Go Maps](programming/go/go-maps.md)
     * [Go Functions](programming/go/go-functions.md)
+    * [Concurrency](programming/go/concurrency.md)

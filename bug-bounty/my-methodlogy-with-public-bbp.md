@@ -25,17 +25,29 @@ The subdomain enumeration proved unfruitful, prompting me to concentrate on Inse
 * `DELETE /admin/members/{ID}` → CSRF, IDOR
 * `PUT /subscriptions/{ID}`
 
+<figure><img src="../.gitbook/assets/image (28).png" alt=""><figcaption><p>My Organizer tab notes</p></figcaption></figure>
+
 ### Part 2: Classic Bugs
 
 > F.T @karemsaqary @0d.samy @moraa
 
 The following day, I adopted a fresh perspective to manually test for classic bugs like Cross-Site Scripting (XSS). In the team management section, I discovered an XSS vulnerability where an email address was rendered in an HTML context. Utilizing a payload like `"</p>"><img src=x onerror=confirm(88)"@gmail.com`, I successfully triggered an alert.&#x20;
 
-It's worth mentioning that we found some stored XSSs and stored HTML Injections in the title of the website and description and collection descriptions. The WAF was blocking all tags, but a simple bypass with the TAG-in-TAG technique allowed us to trigger the alert with the payload `PAYLOAD:sallam"><img src=x onerror=confirm(88)>`.&#x20;
+It's worth mentioning that we found some stored XSSs and stored HTML Injections in the title of the website and description and collection descriptions. The WAF was blocking all tags, but a simple bypass with the TAG-in-TAG technique allowed us to trigger the alert with the payload `PAYLOAD:sallam"><<h1>img src=x onerror=confirm(88)>`.&#x20;
+
+<figure><img src="../.gitbook/assets/image (32).png" alt=""><figcaption><p>Stored XSSs</p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (34).png" alt=""><figcaption><p>Pending program review Stored XSS</p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
 
 Returning to the organizer tab, I explored more API calls, uncovering Blind Server-Side Request Forgery (SSRF) in the endpoint `PUT /subscriptions/{ID}` and other SSRFs with the same simplicity, as you found an API call that takes a URL as user input. Subsequently, I found other issues that didn't warrant reporting and continued experimenting with API calls.
 
-### Part 3: Authorization Testing Time
+<figure><img src="../.gitbook/assets/image (29).png" alt=""><figcaption><p>Api request vulnerable to SSRF</p></figcaption></figure>
+
+###
+
+Part 3: Authorization Testing Time
 
 Started playing with API calls, specifically the endpoint `DELETE /admin/members/{ID}` – interesting, huh? As you think, I started looking for IDOR and access control bugs and response manipulation, but unfortunately, nothing worked. So, anyway, back to our organizer tab, I started looking for another endpoint, and here it is – the API call for adding a new member to the team&#x20;
 
@@ -81,7 +93,7 @@ So, this is our hero; I simply took the IDs of the owner and put them on the req
 }
 ```
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption><p>Successful IDOR exploitation</p></figcaption></figure>
 
 And voila, the response was 200 OK!!! Here we go! But wait!, why the hell does the GUI show that the owner is still there? Is it a false positive? But no, the owner, whenever he tries to send a request or do anything, he gets the response 403 forbidden!! And 401 not authorized, and on his side, even the GUI tells him that he is a contributor; he only can access and add content to the site :() Haha!&#x20;
 
@@ -97,9 +109,14 @@ And the other API call `POST /admin/members`
 
 Okay, this should be for adding new members to our org, but what if… what will happen if we attempt to add a new owner? By changing the role or what if we attempted to add someone who is already a member and changing his role!!!! And fortunately, it does work! I can downgrade any other admin role to a member, but I want to affect the owner itself.&#x20;
 
-So, I attempted to add the owner to his organization but now with permission as a contributor. Funny, huh? Now I have the highest permission in the site/org, and the owner is just a contributor that you can `DELETE /admin/members/{ID}` from the org, and using match and replace simple tip false → true, I found this endpoint&#x20;
+So, I attempted to add the owner to his organization but now with permission as a contributor. Funny, huh? Now I have the highest permission in the site/org, and the owner is just a contributor that you can `DELETE /admin/members/{ID}` from the org but unfortunately attemping to delete him resulting in an error, and using match and replace simple tip false → true, I found this endpoint&#x20;
 
-`PUT /admin/members/295019/update_site_creator` to add a new owner. So that's how I took over the org.
+`PUT /admin/members/295019/update_site_creator` to add a new owner it worth mentioning that the UI was still saying that the owner still owner and i am still admin but the api requests and the backend showed that i can send and retreive data and do actions that the owner only has the permition to do it.
+
+**Update**
+
+Reports status \
+
 
 ### Part 4: Logic is the Best
 
@@ -112,7 +129,9 @@ Another scenario led me to discover that if you receive an invitation, attemptin
 <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 When they use the link, now they are stuck on a blank page.\
-![](<../.gitbook/assets/image (1) (1).png>)
+
+
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>User Stuck on Blank page</p></figcaption></figure>
 
 ### End
 
