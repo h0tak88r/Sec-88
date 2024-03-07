@@ -143,4 +143,4 @@ When they use the link, now they are stuck on a blank page.
 
 ### End
 
-While this narrative doesn't encompass all my findings, it provides a glimpse into my bug hunting methodology and mindset on public bug bounty programs. I hope this insight proves helpful to fellow hunters in their endeavors.\
+In conclusion, let's acknowledge that participating in public bug bounty programs has its downsides, such as encountering duplicates and encountering teams that devalue bugs just to pay less (although this isn't always the case). However, there are instances where you come across feature-rich programs that are worth exploring and present a good challenge for personal growth.\
