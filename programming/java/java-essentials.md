@@ -4,7 +4,7 @@
 
 * **JVM (Java Virtual Machine)** is an abstract machine that enables your computer to run a Java program.
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **JRE (Java Runtime Environment)** is a software package that provides Java class libraries, Java Virtual Machine (JVM), and other components that are required to run Java applications.
 * **JDK (Java Development Kit)** is a software development kit required to develop applications in Java. When you download JDK, JRE is also downloaded with it.
@@ -288,17 +288,17 @@ if (number < 0.0) {
 
 **Java continue with Nested Loop**.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
 ### Java continue with Nested Loop <a href="#continue-nested-loops" id="continue-nested-loops"></a>
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Labeled continue Statement <a href="#labeled-continue" id="labeled-continue"></a>
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Java Arrays
 
