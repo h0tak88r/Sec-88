@@ -35,15 +35,29 @@ The following day, I adopted a fresh perspective to manually test for classic bu
 
 It's worth mentioning that we found some stored XSSs and stored HTML Injections in the title of the website and description and collection descriptions. The WAF was blocking all tags, but a simple bypass with the TAG-in-TAG technique allowed us to trigger the alert with the payload `PAYLOAD:sallam"><<h1>img src=x onerror=confirm(88)>`.&#x20;
 
+<div align="center" data-full-width="true">
+
 <figure><img src="../.gitbook/assets/image (32).png" alt=""><figcaption><p>Stored XSSs</p></figcaption></figure>
 
+</div>
+
+<div align="center">
+
 <figure><img src="../.gitbook/assets/image (37).png" alt=""><figcaption></figcaption></figure>
+
+</div>
+
+<div align="center">
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+</div>
 
 Returning to the organizer tab, I explored more API calls, uncovering Blind Server-Side Request Forgery (SSRF) in the endpoint `PUT /subscriptions/{ID}` and other SSRFs with the same simplicity, as you found an API call that takes a URL as user input. Subsequently, I found other issues that didn't warrant reporting and continued experimenting with API calls.
 
 <figure><img src="../.gitbook/assets/image (29).png" alt=""><figcaption><p>Api request vulnerable to SSRF</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>one of the SSRFs we submitted but it's duplicated</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>one of the SSRFs we submitted but it's duplicated</p></figcaption></figure>
 
 ### Part 3: Authorization Testing Time
 
@@ -95,7 +109,7 @@ So, this is our hero; I simply took the IDs of the owner and put them on the req
 
 And voila, the response was 200 OK!!! Here we go! But wait!, why the hell does the GUI show that the owner is still there? Is it a false positive? But no, the owner, whenever he tries to send a request or do anything, he gets the response 403 forbidden!! And 401 not authorized, and on his side, even the GUI tells him that he is a contributor; he only can access and add content to the site :() Haha!&#x20;
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption><p>Unfortunately it is sad to say it is another duplicate</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Unfortunately it is sad to say it is another duplicate</p></figcaption></figure>
 
 And the other API call `POST /admin/members`
 
@@ -137,7 +151,7 @@ Another scenario led me to discover that if you receive an invitation, attemptin
 
 When they use the link, now they are stuck on a blank page.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>User Stuck on Blank page</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption><p>User Stuck on Blank page</p></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
