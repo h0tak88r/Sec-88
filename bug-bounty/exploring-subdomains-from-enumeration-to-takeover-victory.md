@@ -48,7 +48,7 @@ the result that talk my attention was like&#x20;
 Subdomain: www.<subdomain>.ford.com ,  CNAME: <subdomain>.trafficmanager.com, Status: NXDOMAIN
 ```
 
-So i quickly started to look into this subdomain but the `httpx` tool didn't recognize this subdomain aas a valid domain&#x20;
+So i quickly started to look into this subdomain but the `httpx` tool didn't recognize this subdomain as a valid domain&#x20;
 
 Then i decided to see this subdomain in the browser and as i expected\
 
@@ -68,7 +68,7 @@ Undeterred, I decided to manually investigate, and voila! Success – I managed 
 
 <figure><img src="../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
 
-Then reported the issue woth HIGHT severity and the Team changed the severity to Critical and triaged my report \
+Then reported the issue with HIGHT severity and the Team changed the severity to Critical and triaged my report \
 
 
 <figure><img src="../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
