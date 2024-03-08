@@ -48,6 +48,13 @@ the result that talk my attention was like&#x20;
 Subdomain: www.<subdomain>.ford.com ,  CNAME: <subdomain>.trafficmanager.com, Status: NXDOMAIN
 ```
 
+So i quickly started to look into this subdomain but the `httpx` tool didn't recognize this subdomain aas a valid domain&#x20;
+
+Then i decided to see this subdomain in the browser and as i expected\
+
+
+<figure><img src="../.gitbook/assets/image (38).png" alt=""><figcaption><p>Message that the subdomain may not be valid</p></figcaption></figure>
+
 Ok let's check can i take over xyz project&#x20;
 
 [https://github.com/EdOverflow/can-i-take-over-xyz/issues/35](https://github.com/EdOverflow/can-i-take-over-xyz/issues/35)\
