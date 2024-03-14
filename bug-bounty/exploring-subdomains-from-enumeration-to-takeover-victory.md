@@ -45,7 +45,7 @@ The results was something like&#x20;
 the result that talk my attention was like&#x20;
 
 ```bash
-Subdomain: www.<subdomain>.ford.com ,  CNAME: <subdomain>.trafficmanager.com, Status: NXDOMAIN
+[ www.<subdomain>.ford.com, <subdomain>.trafficmanager.com, NXDOMAIN] Possiply Vulnerable to subdomain takeover vulnerability
 ```
 
 So i quickly started to look into this subdomain but the `httpx` tool didn't recognize this subdomain as a valid domain&#x20;
