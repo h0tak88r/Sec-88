@@ -132,44 +132,9 @@ func main() {
 }
 ```
 
-### mutexes
+### mutex
 
-```go
-// Visited tracks whether web pages have been visited.
-// Its methods may be used concurrently from multiple goroutines.
-type Visited struct {
-    // Declare a mutex
-    mu      sync.Mutex
-    
-    // Declare a map from URL (string) keys to integer values
-    visited map[string]int
-}
-
-// VisitLink tracks that the page with the given URL has
-// been visited, and returns the updated link count.
-func (v *Visited) VisitLink(url string) int {
-    // Locks the mutex
-    v.mu.Lock()              
-    
-    // Ensures that the mutex is unlocked
-    defer v.mu.Unlock()
-    
-    count := v.visited[url]
-    count++
-    
-    // Updates the map
-    v.visited[url] = count
-    return count
-}
-```
-
-> What are two potential problems with locking a mutex?
-
-> It might block other goroutines that are also trying to lock the mutex; it could lead to deadlock.
-
-### Event loops and goroutines
-
-Wait Groupes
+To prevent data races, we'll use a mutex to synchronize access to this shared resource.
 
 ```go
 package main
@@ -177,64 +142,73 @@ package main
 import (
 	"fmt"
 	"sync"
-	"time"
 )
 
+var (
+	sharedResource int // Shared resource accessed by workers
+	mutex          sync.Mutex // Mutex to synchronize access to sharedResource
+)
+
+// worker is a function that performs some work.
+// It takes a waitgroup as a parameter to signal when it's done.
+func worker(id int, wg *sync.WaitGroup) {
+	defer wg.Done() // Signal that this worker is done when the function exits
+	for i := 0; i < 10; i++ {
+		fmt.Printf("Worker %d starting\n", id)
+		
+		// Lock the mutex before accessing the shared resource
+		mutex.Lock()
+		sharedResource++
+		// Perform the work here, using the shared resource
+		// This is just a placeholder, you can replace it with the actual work
+		fmt.Printf("Worker %d incremented shared resource to: %d\n", id, sharedResource)
+		mutex.Unlock() // Unlock the mutex after accessing the shared resource
+
+		fmt.Printf("Worker %d done\n", id)
+	}
+}
+
 func main() {
-	// Create a wait group to wait for all goroutines to finish
-	var wg sync.WaitGroup
+	var wg sync.WaitGroup // Create a new waitgroup
+	wg.Add(1)             // Add 1 to the waitgroup to indicate that we're waiting for 1 worker
+	go worker(1, &wg)        // Start the worker goroutine
 
-	// Channel to communicate between the main goroutine and the event loop goroutine
-	eventChannel := make(chan string)
-
-	// Start the event loop in a separate goroutine
-	go eventLoop(eventChannel, &wg)
-
-	// Simulate some events by sending messages to the event loop
-	for i := 1; i <= 5; i++ {
-		wg.Add(1)
-		go sendEvent(eventChannel, fmt.Sprintf("Event %d", i), &wg)
-	}
-
-	// Wait for all goroutines to finish before exiting the program
-	wg.Wait()
-
-	fmt.Println("All events processed. Exiting.")
+	wg.Wait() // Wait until all workers are done
 }
+```
 
-// eventLoop is a goroutine that listens for events on the channel and processes them
-func eventLoop(channel <-chan string, wg *sync.WaitGroup) {
-	defer wg.Done() // Decrement the wait group when the goroutine is done
+> What are two potential problems with locking a mutex?
 
-	for {
-		// Receive events from the channel
-		event, ok := <-channel
+> It might block other goroutines that are also trying to lock the mutex; it could lead to deadlock.
 
-		// Check if the channel is closed
-		if !ok {
-			fmt.Println("Event loop closed. Exiting.")
-			return
-		}
+### Event loops and go-routines
 
-		// Process the event
-		fmt.Println("Processing event:", event)
+### Wait Groups
 
-		// Simulate some processing time
-		time.Sleep(time.Second)
+```go
+package main
 
+import (
+	"fmt"
+	"sync"
+)
+
+// worker is a function that performs some work.
+// It takes a waitgroup as a parameter to signal when it's done.
+func worker(wg *sync.WaitGroup) {
+	defer wg.Done() // Signal that this worker is done when the function exits
+	for i := 0; i < 10; i++ {
+		fmt.Printf("Worker %d starting\n", i)
+		// Perform the work here
+		fmt.Printf("Worker %d done\n", i)
 	}
 }
 
-// sendEvent simulates an external event by sending a message to the event loop
-func sendEvent(channel chan<- string, event string, wg *sync.WaitGroup) {
-	defer wg.Done() // Decrement the wait group when the goroutine is done
+func main() {
+	var wg sync.WaitGroup // Create a new waitgroup
+	wg.Add(1)             // Add 1 to the waitgroup to indicate that we're waiting for 1 worker
+	go worker(&wg)        // Start the worker goroutine
 
-	// Send the event to the channel
-	channel <- event
-
-	// Simulate some processing time before sending the next event
-	time.Sleep(time.Millisecond * 500)
+	wg.Wait() // Wait until all workers are done
 }
-
-
 ```
