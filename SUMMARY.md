@@ -146,6 +146,6 @@
     * [Go Functions](programming/go/go-functions.md)
     * [Concurrency](programming/go/concurrency.md)
     * [Packages](programming/go/packages/README.md)
+      * [How to make personal Package](programming/go/packages/how-to-make-personal-package.md)
       * [regexp Packages](programming/go/packages/regexp-packages.md)
       * [Json](programming/go/packages/json.md)
-    * [How to make personal Package](programming/go/how-to-make-personal-package.md)
