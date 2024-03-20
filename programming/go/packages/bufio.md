@@ -41,6 +41,31 @@ func main() {
 }
 ```
 
+2. **Read a file and scan lines using bufio.Newscanner()**
+
+```go
+func readDomainsFromFile(filename string) ([]string, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	data := []string{}
+
+	for scanner.Scan() {
+		data = append(data, scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		return nil, err
+	}
+
+	return data, nil
+}
+```
+
 2. **Writing to a file using bufio.Writer**:
 
 ```go
