@@ -149,3 +149,4 @@
       * [How to make personal Package](programming/go/packages/how-to-make-personal-package.md)
       * [regexp Packages](programming/go/packages/regexp-packages.md)
       * [Json](programming/go/packages/json.md)
+      * [bufio](programming/go/packages/bufio.md)
