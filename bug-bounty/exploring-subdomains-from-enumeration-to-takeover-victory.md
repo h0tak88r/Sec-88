@@ -69,6 +69,6 @@ Undeterred, I decided to manually investigate, and voila! Success – I managed 
 <figure><img src="../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
 
 Then reported the issue with HIGHT severity and the Team changed the severity to Critical and triaged my report \
+Update: Issue Resolved !!
 
-
-<figure><img src="../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot from 2024-03-21 04-52-06.png" alt=""><figcaption></figcaption></figure>
