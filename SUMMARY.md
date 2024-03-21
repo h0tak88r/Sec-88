@@ -145,6 +145,8 @@
     * [Go Maps](programming/go/go-maps.md)
     * [Go Functions](programming/go/go-functions.md)
     * [Concurrency](programming/go/concurrency.md)
+    * [Read Files](programming/go/read-files.md)
+    * [Write Files](programming/go/write-files.md)
     * [Packages](programming/go/packages/README.md)
       * [How to make personal Package](programming/go/packages/how-to-make-personal-package.md)
       * [regexp Packages](programming/go/packages/regexp-packages.md)
