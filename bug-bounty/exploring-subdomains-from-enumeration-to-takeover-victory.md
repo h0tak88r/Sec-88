@@ -12,18 +12,18 @@ So today i will talk about how i got my critical subdomain takeover on ford moto
 
 ### Subdomain enumeration
 
-First i collected subdomains using subMonit88r
+First i collected subdomains using subfalcon
 
 ```bash
-# Tool link: https://github.com/h0tak88r/submonit88r
-go install github.com/h0tak88r/subMonit88r@latest
+# Tool link: https://github.com/h0tak88r/go install github.com/h0tak88r/subfalcon@latest
+go install github.com/h0tak88r/subfalcon@latest
 
 # Usage
-subMonit88r -l domains.txt
-# Results saved to subMonit88rResults.txt
+subfalcon -l domains.txt
+# Results saved to subfalconResults.txt
 ```
 
-<figure><img src="../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot from 2024-03-21 04-35-10.png" alt=""><figcaption></figcaption></figure>
 
 ### Subdomain Takeover checking
 
@@ -34,8 +34,8 @@ So here i used my another go tool subov88r&#x20;
 https://github.com/h0tak88r/subov88r
 # Install
 go install github.com/h0tak88r/subov88r@latest
-# passing submonit88r results to subov88r
-subov88r -f subMonit88rResults.txt
+# passing subfalcon results to subov88r
+subov88r -f subfalconResults.txt
 ```
 
 The results was something like&#x20;
