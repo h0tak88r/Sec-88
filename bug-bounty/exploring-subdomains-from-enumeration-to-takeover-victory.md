@@ -15,8 +15,8 @@ So today i will talk about how i got my critical subdomain takeover on ford moto
 First i collected subdomains using subfalcon
 
 ```bash
-# Tool link: https://github.com/h0tak88r/go install github.com/h0tak88r/subfalcon@latest
-go install github.com/h0tak88r/subfalcon@latest
+# Tool link: https://github.com/h0tak88r/subfalcon
+go install github.com/h0tak88r/subfalcon/cmd/subfalcon@latest
 
 # Usage
 subfalcon -l domains.txt
