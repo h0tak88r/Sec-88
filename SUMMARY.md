@@ -152,3 +152,4 @@
       * [regexp Packages](programming/go/packages/regexp-packages.md)
       * [Json](programming/go/packages/json.md)
       * [bufio](programming/go/packages/bufio.md)
+      * [Time](programming/go/packages/time.md)
