@@ -4,7 +4,7 @@ description: 'CWE-23: Relative Path Traversal'
 
 # LFI
 
-* **manually using Burp and word list** [**lfi.txt**](https://github.com/M8SZT8/Security-Hub/blob/main/Fuzzing%20Lists/lfi.txt)
+* **Fuzzing with wordlist list** [**Wordlists/vulns/lfi.txt**](https://github.com/h0tak88r/Wordlists/blob/master/vulns/lfi.txt)
 
 ```xml
 filename=....//....//....//etc/passwd
