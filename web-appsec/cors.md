@@ -4,6 +4,10 @@ description: 'CWE-346: Origin Validation Error'
 
 # CORS
 
+### What is CORS (cross-origin resource sharing)? <a href="#what-is-cors-cross-origin-resource-sharing" id="what-is-cors-cross-origin-resource-sharing"></a>
+
+Cross-origin resource sharing (CORS) is a browser mechanism which enables controlled access to resources located outside of a given domain.
+
 ## Misconfigured CORS
 
 * [ ] Use **`[CorsMe](<https://github.com/Shivangx01b/CorsMe>)`** to Check all urls `cat http_https.txt | ./CorsMe -t 70`
@@ -16,7 +20,7 @@ description: 'CWE-346: Origin Validation Error'
 * [ ] `Origin:sub.attacker target.com`
 * [ ] `Origin:sub.attacker%target.com`
 * [ ] `Origin:attacker.com/target.com`
-* [ ] `[expected-host.com.attacker.com](<http://expected-host.com.attacker.com/>)`
+* [ ] `Origin:expected-host.com.attacker.com`
 * [ ] `expected-host.computer`
 * [ ] `foo@evil-host:80@expected-host`
 * [ ] `foo@evil-host%20@expected-host`
