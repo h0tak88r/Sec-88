@@ -1,3 +1,7 @@
+---
+description: https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions
+---
+
 # Bypassing SameSite Cookie Restrictions
 
 1. **Introduction to SameSite Cookies**:
