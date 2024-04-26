@@ -114,18 +114,9 @@ Remainder:
 * %E5%98%BE = %3E = \u563e (>)
 * %E5%98%BC = %3C = \u563c (<)
 
-### Labs
-
-* [https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-request-splitting-via-crlf-injection](https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-request-splitting-via-crlf-injection)
-
-### References
-
-* https://www.owasp.org/index.php/CRLF\_Injection
-* https://vulners.com/hackerone/H1:192749
-
 ## #**What is log poisoning?**
 
-In a log poisoning attack based on CRLF injection, a malicious hacker injects CRLF characters into web server log files to confuse both automatic log analysis systems and system administrators browsing the logs manually.
+In a log poisoning attack based on CRLF injection, a malicious hacker injects CRLF chara​cters into web server log files to confuse both automatic log analysis systems and system administrators browsing the logs manually.
 
 ## CRLF\_Injection Example
 
@@ -136,6 +127,12 @@ In a log poisoning attack based on CRLF injection, a malicious hacker injects CR
 * [ ] `%0d%0aContent-Length:%2025` – yet another fake HTTP response header: `Content-Length: 25`. This instructs the browser to parse only the next 25 bytes and discard any remaining data as junk, causing it to ignore the legitimate HTTP content sent by the web server.
 * [ ] `%0d%0a%0d%0a%3Cscript%3Ealert(1)%3C/script%3E` – a double CRLF sequence signals that the headers are over and the response body starts. The injected page content is `<script>alert(1)</script>`, which causes the user’s browser to display an alert instead of the actual _example.php_ page.
 
-### Reference
+### Labs
+
+* [https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-request-splitting-via-crlf-injection](https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-request-splitting-via-crlf-injection)
+
+### References
 
 * [https://salmonsec.com/cheatsheets/exploitation/crlf\_injection](https://salmonsec.com/cheatsheets/exploitation/crlf\_injection)&#x20;
+* https://www.owasp.org/index.php/CRLF\_Injection
+* https://vulners.com/hackerone/H1:192749
