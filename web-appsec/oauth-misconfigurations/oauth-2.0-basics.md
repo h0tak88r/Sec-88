@@ -65,10 +65,3 @@
 
 * Although not originally intended for this purpose, OAuth has evolved into a means of authenticating users as well.
 * The "Authorization Code" grant type is commonly used for authentication in websites when implementing features like "Sign in with Google" or similar social login functionalities.&#x20;
-
-**OAuth Authentication Process:**
-
-* User chooses to log in with a social media account.
-* Client app uses social media OAuth service to request user-identifying data.
-* Access token received; client app requests user data from the resource server.
-* User is logged in using the received data, and the access token is often used as a substitute for a password.
