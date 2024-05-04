@@ -64,7 +64,7 @@
 **OAuth Authentication:**
 
 * Although not originally intended for this purpose, OAuth has evolved into a means of authenticating users as well.
-* Many websites offer logins through social media accounts using OAuth.
+* The "Authorization Code" grant type is commonly used for authentication in websites when implementing features like "Sign in with Google" or similar social login functionalities.&#x20;
 
 **OAuth Authentication Process:**
 
