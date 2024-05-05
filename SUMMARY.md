@@ -73,6 +73,7 @@
   * [CMS](web-appsec/cms/README.md)
     * [AEM \[Adobe CMS\]](web-appsec/cms/aem-adobe-cms.md)
   * [XSSI (Cross Site Script Inclusion)](web-appsec/xssi-cross-site-script-inclusion.md)
+  * [NoSQL injection](web-appsec/nosql-injection.md)
 * [🐞 Bug Bounty](bug-bounty/README.md)
   * [Hunting Methodology](bug-bounty/hunting-methodology.md)
   * [API BAC leads to PII Data Disclosure](bug-bounty/api-bac-leads-to-pii-data-disclosure.md)
