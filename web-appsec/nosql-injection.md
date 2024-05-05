@@ -1,6 +1,30 @@
 # NoSQL injection
 
-#### Syntax Injection Test Cases:
+### Whats NoSQL Injection
+
+NoSQL Injection diverges from SQL Injection primarily due to differences in query syntax and execution. Unlike SQL databases, NoSQL databases utilize varied query formats, such as JSON or XML, leading to distinct attack vectors.
+
+In SQL Injection, attackers exploit vulnerabilities by injecting SQL commands into input fields. In contrast, NoSQL Injection manipulates input data to disrupt query execution within NoSQL databases, often bypassing traditional sanitization checks.
+
+SQL Injection typically targets the database engine, while NoSQL Injection may occur at different layers of the application stack, depending on the database API and data model.
+
+For instance, consider login queries. In SQL, a query might be:
+
+```sql
+SELECT * FROM users WHERE user = '$username' AND pass = '$password'
+```
+
+In MongoDB, using JSON-like syntax, the equivalent query would be:
+
+```javascript
+db.users.find({user: username, pass: password});
+```
+
+In MongoDB, parameters are passed within a `find()` function, without quotation marks, reflecting the database's distinct syntax.
+
+To defend against NoSQL Injection, implement robust input validation, parameterized queries, and context-aware sanitization techniques tailored to the database's query format. Understanding these nuances is crucial to fortify applications against evolving security threats.
+
+### Syntax Injection Test Cases:
 
 1. **Testing Query Syntax**:
    * Submit fuzz strings and special characters to test query syntax.
