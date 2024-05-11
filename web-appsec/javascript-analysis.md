@@ -61,7 +61,6 @@ JSMiner
 4. Detect Outdated Liberaries with `retire JS`\
    [`https://chromewebstore.google.com/detail/retirejs/moibopkbhjceeedibkbkbchbjnkadmom?hl=en`](https://chromewebstore.google.com/detail/retirejs/moibopkbhjceeedibkbkbchbjnkadmom?hl=en)
 5. Search for their exploit in [https://security.snyk.io/ ](https://security.snyk.io/)
-6.
 
 ### Dynamic Analysis
 
