@@ -75,6 +75,7 @@
   * [XSSI (Cross Site Script Inclusion)](web-appsec/xssi-cross-site-script-inclusion.md)
   * [NoSQL injection](web-appsec/nosql-injection.md)
   * [Local VS Remote Session Fixation](web-appsec/local-vs-remote-session-fixation.md)
+  * [JavaScript Analysis](web-appsec/javascript-analysis.md)
   * [Protection](web-appsec/protection/README.md)
     * [Security Mechanisms for Websites](web-appsec/protection/security-mechanisms-for-websites.md)
     * [Cookie Flags](web-appsec/protection/cookie-flags.md)
