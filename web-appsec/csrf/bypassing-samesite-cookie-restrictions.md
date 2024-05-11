@@ -11,7 +11,7 @@ description: https://portswigger.net/web-security/csrf/bypassing-samesite-restri
    * A "site" refers to the top-level domain (TLD) plus one additional level of the domain name.
    * An "origin" includes one domain name, determined by scheme, domain name, and port.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>Difference between origin and site</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Difference between origin and site</p></figcaption></figure>
 
 | **Request from**          | **Request to**                 | **Same-site?**        | **Same-origin?**           |
 | ------------------------- | ------------------------------ | --------------------- | -------------------------- |
