@@ -118,6 +118,7 @@
   * [How To Get APK file for application](android-appsec/how-to-get-apk-file-for-application.md)
   * [ADB Commands](android-appsec/adb-commands.md)
   * [APK structure](android-appsec/apk-structure.md)
+  * [Android Permissions](android-appsec/android-permissions.md)
 * [🖥️ Operating Systems](operating-systems/README.md)
   * [Linux](operating-systems/linux/README.md)
     * [Linux Commands](operating-systems/linux/linux-commands.md)
