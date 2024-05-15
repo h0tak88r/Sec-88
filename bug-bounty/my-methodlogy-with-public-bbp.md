@@ -49,7 +49,7 @@ It's worth mentioning that we found some stored XSSs and stored HTML Injections 
 
 <div align="center">
 
-<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 </div>
 
@@ -57,7 +57,7 @@ Returning to the organizer tab, I explored more API calls, uncovering Blind Serv
 
 <figure><img src="../.gitbook/assets/image (29).png" alt=""><figcaption><p>Api request vulnerable to SSRF</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>one of the SSRFs we submitted but it's duplicated</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption><p>one of the SSRFs we submitted but it's duplicated</p></figcaption></figure>
 
 ### Part 3: Authorization Testing Time
 
@@ -91,7 +91,7 @@ When I was thinking about how to get his ID, I switched to the Burp organizer ta
 
 `GET /admin/members?field=name&sortOrder=asc&page=1&per_page=25&query=&site_id=219531` .&#x20;
 
-<figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 So, this is our hero; I simply took the IDs of the owner and put them on the request&#x20;
 
@@ -105,11 +105,11 @@ So, this is our hero; I simply took the IDs of the owner and put them on the req
 }
 ```
 
-<figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption><p>Successful IDOR exploitation</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption><p>Successful IDOR exploitation</p></figcaption></figure>
 
 And voila, the response was 200 OK!!! Here we go! But wait!, why the hell does the GUI show that the owner is still there? Is it a false positive? But no, the owner, whenever he tries to send a request or do anything, he gets the response 403 forbidden!! And 401 not authorized, and on his side, even the GUI tells him that he is a contributor; he only can access and add content to the site :() Haha!&#x20;
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption><p>Unfortunately it is sad to say it is another duplicate</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Unfortunately it is sad to say it is another duplicate</p></figcaption></figure>
 
 And the other API call `POST /admin/members`
 
@@ -131,7 +131,7 @@ So, I attempted to add the owner to his organization but now with permission as 
 
 the report in the first closed as duplicate but after reaching for mediation the report reopened but the triager out of nowhere downgraded the severity to low and now it is in the program side&#x20;
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption><p>the triager downgradedc the severity to low</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption><p>the triager downgradedc the severity to low</p></figcaption></figure>
 
 ### Part 4: Logic is the Best
 
@@ -143,17 +143,17 @@ It is out of scope so the reported marked as informative&#x20;
 \
 
 
-<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption><p>OOS result in being info report</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1).png" alt=""><figcaption><p>OOS result in being info report</p></figcaption></figure>
 
 Another scenario led me to discover that if you receive an invitation, attempting to sign up or login won't work. Instead, you must use the invitation link and set your password to create an account in the organization. I experimented with scenarios where I deleted the user from the organization before they used the invitation login link, resulting in the user being forwarded to a blank page, unable to use any core features. This prevention method also extended to users attempting to sign up with the email; they will face a message guiding them to log in with the link they received.&#x20;
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 When they use the link, now they are stuck on a blank page.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>User Stuck on Blank page</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>User Stuck on Blank page</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### End
 

@@ -119,6 +119,7 @@
   * [ADB Commands](android-appsec/adb-commands.md)
   * [APK structure](android-appsec/apk-structure.md)
   * [Android Permissions](android-appsec/android-permissions.md)
+  * [Authentication Bypass (Exported Activity Hacking )](android-appsec/authentication-bypass-exported-activity-hacking.md)
 * [🖥️ Operating Systems](operating-systems/README.md)
   * [Linux](operating-systems/linux/README.md)
     * [Linux Commands](operating-systems/linux/linux-commands.md)
