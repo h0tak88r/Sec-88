@@ -120,6 +120,8 @@
   * [APK structure](android-appsec/apk-structure.md)
   * [Android Permissions](android-appsec/android-permissions.md)
   * [Authentication Bypass (Exported Activity Hacking )](android-appsec/authentication-bypass-exported-activity-hacking.md)
+  * [Hacking InsecureBankv2 App](android-appsec/hacking-insecurebankv2-app/README.md)
+    * [Information Gathering](android-appsec/hacking-insecurebankv2-app/information-gathering.md)
 * [🖥️ Operating Systems](operating-systems/README.md)
   * [Linux](operating-systems/linux/README.md)
     * [Linux Commands](operating-systems/linux/linux-commands.md)
