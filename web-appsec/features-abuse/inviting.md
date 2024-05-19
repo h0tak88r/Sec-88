@@ -1,5 +1,9 @@
 # Inviting
 
+```
+- Methodology just pass the jwt and cookie of the low leverage user to auth analyzer and it will repeat all admin requests with the lower privilege user
+```
+
 * [ ] Failure to invalidate token
   1. Generate an invitation link and send it to your secondary account to join the team.
   2. Accept the invitation.
@@ -35,3 +39,18 @@
   1. User invite attacker to the project as member
   2. Attacker changes his name with bad chracters like html tags and %00 and other latina chars
   3. Victim tries to remove attacker from the team but he faces errors and the request doesn't occure
+* [ ] XSS in first-name through invitaiton link
+* [ ] Token Leaked in the `Resend-Token` endpoint
+* [ ] Member invite admin
+* [ ] Viewer edit content
+* [ ] Member invite member
+* [ ] Member edit org settings
+* [ ] Member can remove members
+* [ ] Viewer can edit
+* [ ] Member edit permissions
+* [ ] Invitation link doesn't expire
+* [ ] IDOR in email parameter when sign up using invitation feature
+* [ ] Sign\_up without accepting the invitation the attacker join organization anonymously
+* [ ] ATO invite user, token leaked in response , Claim victim account
+* [ ] Race Condition in invite user
+* [ ] Race Condition in accepting invitation
