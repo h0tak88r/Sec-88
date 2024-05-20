@@ -11,7 +11,8 @@
 4. Learned Android App Pentesting basics
    1. [Android Application Pen-testing Course](https://youtube.com/playlist?list=PL4S940IsHJYWhhYOpBk6Y-U9nTQq2omae\&si=VX69LE\_9awscH2il) -> Arabic Course
 5. Dive in Android App Hacking World
-   1. [Android App Hacking - Black Belt Edition](https://www.udemy.com/course/android-app-hacking-black-belt-edition/) -> English Udemy Course
-   2. [Hack-Tricks](https://book.hacktricks.xyz/mobile-pentesting/android-app-pentesting)&#x20;
-   3. [Frida for Beginners](https://www.udemy.com/course/frida-for-beginners)
-   4. [overSecuredBlog](https://blog.oversecured.com/)
+   1. [Guide to Android Application Bug Bounty](https://www.udemy.com/course/the-complete-guide-to-android-bug-bounty-penetration-tests/)
+   2. [Android App Hacking - Black Belt Edition](https://www.udemy.com/course/android-app-hacking-black-belt-edition/)&#x20;
+   3. [Hack-Tricks](https://book.hacktricks.xyz/mobile-pentesting/android-app-pentesting)&#x20;
+   4. [Frida for Beginners](https://www.udemy.com/course/frida-for-beginners)
+   5. [overSecuredBlog](https://blog.oversecured.com/)
