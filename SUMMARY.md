@@ -128,6 +128,7 @@
     * [Analyzing SQLite Storage](android-appsec/hacking-insecurebankv2-app/analyzing-sqlite-storage.md)
     * [LogCat Information Disclosure](android-appsec/hacking-insecurebankv2-app/logcat-information-disclosure.md)
     * [Exploit Broadcast Receivers](android-appsec/hacking-insecurebankv2-app/exploit-broadcast-receivers.md)
+    * [Content Provider Exploit](android-appsec/hacking-insecurebankv2-app/content-provider-exploit.md)
 * [🖥️ Operating Systems](operating-systems/README.md)
   * [Linux](operating-systems/linux/README.md)
     * [Linux Commands](operating-systems/linux/linux-commands.md)
