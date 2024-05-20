@@ -4,7 +4,7 @@
 
 An **Intent** is a messaging object used for communication between different components of an Android application. It serves three fundamental use cases:
 
-<figure><img src="../../../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption><p>Hpw Intents Works</p></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5) (1) (1) (1) (1).png" alt=""><figcaption><p>Hpw Intents Works</p></figcaption></figure>
 
 1. **Starting an Activity:**
    * Represents a single screen in an app.
