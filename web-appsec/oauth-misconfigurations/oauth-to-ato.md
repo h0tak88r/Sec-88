@@ -45,6 +45,32 @@
 1. Register a client using a POST request.
 2. Test `logo_uri` for SSRF to read metadata files.
 
+### OAuth Account without email Address
+
+1. Register account with phone number in 3rd party&#x20;
+2. use this account to register on target&#x20;
+3. in settings add victim email
+
+### Microsoft nOAuth Misconfiguration
+
+{% embed url="https://bibek-shah.medium.com/noauth-account-takeover-via-microsoft-oauth-cc653410b886" %}
+
+### Facebook OAuth Misconfiguration
+
+{% embed url="https://sl4x0.medium.com/fb-oauth-misconfiguration-leads-to-takeover-any-account-061316a5b31b" %}
+
+1. Click Sign in with Facbook
+2. Click "Edit Access"
+3. Uncheck Email address
+4. You loged in without email address
+
+### Discord OAuth Misconfiguration
+
+1. victim register email+pass on target
+2. attacker make discord email with victim's email
+3. there is no email confirmation in discord sign up
+4. attacker sign with discord to target
+
 ### OAuth Code Flaws
 
 1. Reuse of authorization codes.
@@ -83,8 +109,6 @@
 * Verify if the code and state are reflected in the Referrer header when the user navigates to another page.
 
 ### Access Token Stored in Browser History
-
-#### Check:
 
 * Ensure access tokens are not stored in browser history.
 
