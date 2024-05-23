@@ -70,3 +70,7 @@ The vulnerability I found resides in the password reset mechanism. This flaw all
 
 
 <figure><img src="../.gitbook/assets/image (58).png" alt=""><figcaption></figcaption></figure>
+
+* The Max. Severity for this domain was High So the Bug was reported with high severity
+
+<figure><img src="../.gitbook/assets/image (59).png" alt=""><figcaption></figcaption></figure>
