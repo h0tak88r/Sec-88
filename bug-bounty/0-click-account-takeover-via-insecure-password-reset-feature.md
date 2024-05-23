@@ -10,8 +10,7 @@ The vulnerability I found resides in the password reset mechanism. This flaw all
     subfalcon -l domains.txt -w "YOUR_DISCORD_WEBHOOK_URL" -m
     ```
 
-    During this process, I found an employee portal at `https://brandcentral.target.com/`.\
-
+    During this process, I found an employee portal at `https://brandcentral.target.com/`.
 
     <figure><img src="../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
 2.  **Exploring JavaScript Files**: I examined the JavaScript files for unauthenticated paths using this script:
@@ -37,12 +36,12 @@ The vulnerability I found resides in the password reset mechanism. This flaw all
    *   Intercept the password reset email sent to the victim. This email contains the password reset token URL, which looks like this:
 
        ```perl
-       https://brandcentral.ecobee.com/mars/reset.hash_reset?p_hash=B367AD4F&p_sign=4ixUHUGmhW6YZ6VyKCdzxoqAaaU%3D
+       https://brandcentral.target.com/mars/reset.hash_reset?p_hash=B367AD4F&p_sign=4ixUHUGmhW6YZ6VyKCdzxoqAaaU%3D
        ```
    *   Manipulate the reset URL by fuzzing the `p_hash` parameter while leaving the `p_sign` parameter empty:
 
        ```arduino
-       https://brandcentral.ecobee.com/mars/reset.hash_reset?p_hash={FUZZ}&p_sign=
+       https://brandcentral.target.com/mars/reset.hash_reset?p_hash={FUZZ}&p_sign=
        ```
    *   Through fuzzing, identify that the specific reset token `B367AD4F` is valid and leads to the password reset page.\
 
@@ -52,7 +51,7 @@ The vulnerability I found resides in the password reset mechanism. This flaw all
 *   Click on the manipulated URL containing the valid reset token:
 
     ```arduino
-    https://brandcentral.ecobee.com/mars/reset.hash_reset?p_hash=B367AD4F&p_sign=
+    https://brandcentral.target.com/mars/reset.hash_reset?p_hash=B367AD4F&p_sign=
     ```
 * This URL grants access to the password reset page without requiring further authentication.
 * On the password reset page, set a new password for the victim's account.
