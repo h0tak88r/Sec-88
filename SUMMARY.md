@@ -86,7 +86,6 @@
   * [Automating Bug Bounty with GitHub Actions](bug-bounty/github-actions.md)
   * [My Methodlogy with Public BBP](bug-bounty/my-methodlogy-with-public-bbp.md)
   * [Exploring Subdomains: From Enumeration to Takeover Victory](bug-bounty/exploring-subdomains-from-enumeration-to-takeover-victory.md)
-  * [0-Click ATO via Insecure forgot password feature](bug-bounty/0-click-ato-via-insecure-forgot-password-feature.md)
   * [0-Click Account Takeover via Insecure Password Reset Feature](bug-bounty/0-click-account-takeover-via-insecure-password-reset-feature.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
