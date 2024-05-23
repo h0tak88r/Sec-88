@@ -27,11 +27,18 @@ The vulnerability I found resides in the password reset mechanism. This flaw all
 4.  Initially, I thought of testing HTML injection in the email and found it was vulnerable. The portal was sending credentials via email, so an attacker could potentially steal the user's credentials using HTML injection. For instance, the attacker could use payloads like those found in [HackTricks' guide on Dangling Markup](https://book.hacktricks.xyz/pentesting-web/dangling-markup-html-scriptless-injection). However, I didn’t fully explore this avenue because I received a quick response indicating the issue was a duplicate.
 
     <figure><img src="../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
-5.  **Exploring the Forgot Password Feature**: I tried to log in with the credentials but couldn’t because my user was not activated and needed approval from someone on the portal. So, I turned my attention to the "Forgot Password" feature.\
+5.  I tried to log in with the credentials but couldn’t because my user was not activated and needed approval from someone on the portal.\
 
 
     <figure><img src="../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
-6. **Password Reset Process**:
+6. So, I turned my attention to the "Forgot Password" feature
+7. And whenever i see captcha i try captcha bypass techniques
+   1. Intercept the password reset request using a web proxy tool (e.g., Burp Suite).
+   2. Locate the `g_recaptcha_response` parameter in the request.
+   3. Modify the value of the `g_recaptcha_response` parameter to any random string (e.g., `randomString123`).
+   4. Send the modified request.
+   5. Observe that the password reset link is sent successfully to the entered email address without proper CAPTCHA verification.
+8. **Password Reset Process**:
    * Enter the victim's email address (e.g., 0x88@wearehackerone.com) in the provided field and submit the password reset request.
    *   Intercept the password reset email sent to the victim. This email contains the password reset token URL, which looks like this:
 
@@ -46,7 +53,7 @@ The vulnerability I found resides in the password reset mechanism. This flaw all
    *   Through fuzzing, identify that the specific reset token `B367AD4F` is valid and leads to the password reset page.\
 
 
-       <figure><img src="../.gitbook/assets/image (55).png" alt=""><figcaption></figcaption></figure>
+       <figure><img src="../.gitbook/assets/image (61).png" alt=""><figcaption></figcaption></figure>
 
 *   Click on the manipulated URL containing the valid reset token:
 
@@ -54,10 +61,10 @@ The vulnerability I found resides in the password reset mechanism. This flaw all
     https://brandcentral.target.com/mars/reset.hash_reset?p_hash=B367AD4F&p_sign=
     ```
 * This URL grants access to the password reset page without requiring further authentication.
-* On the password reset page, set a new password for the victim's account.
+*   On the password reset page, set a new password for the victim's account.\
 
-<figure><img src="../.gitbook/assets/image (56).png" alt=""><figcaption></figcaption></figure>
 
+    <figure><img src="../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
 * Use the newly set password to log in to the victim's account.\
 
 * If credentials true you will receive this response \
