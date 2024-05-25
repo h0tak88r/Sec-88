@@ -1,8 +1,8 @@
 # 0-Click Account Takeover via Insecure Password Reset Feature
 
-Hello Hackers! Today, I am excited to share my recent discovery of a 0-Click Account Takeover vulnerability on a public program on the HackerOne platform.
+Hello Hackers! Today, I am excited to share my recent discovery of a 0-Click Account Takeover vulnerability on a public program on the HackerOne platform, During Collaboration with my friend @0x3adly.
 
-The vulnerability I found resides in the password reset mechanism. This flaw allows an attacker to manipulate the password reset URL parameters, specifically the `p_hash` and `p_sign` parameters, to access the password reset page without any further authentication. Here’s a step-by-step explanation of how this vulnerability can be exploited
+The vulnerability We found resides in the password reset mechanism. This flaw allows an attacker to manipulate the password reset URL parameters, specifically the `p_hash` and `p_sign` parameters, to access the password reset page without any further authentication. Here’s a step-by-step explanation of how this vulnerability can be exploited
 
 1.  **Subdomain Monitoring**: I started by monitoring subdomains using my tool [subfalcon](https://github.com/h0tak88r/subfalcon) with the following command:
 
