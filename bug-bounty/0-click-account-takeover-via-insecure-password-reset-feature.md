@@ -37,15 +37,19 @@ The vulnerability We found resides in the password reset mechanism. This flaw al
    2. Locate the `g_recaptcha_response` parameter in the request.
    3. Modify the value of the `g_recaptcha_response` parameter to any random string (e.g., `randomString123`).
    4. Send the modified request.
-   5. Observe that the password reset link is sent successfully to the entered email address without proper CAPTCHA verification.
-8. **Password Reset Process**:
-   * Enter the victim's email address (e.g., 0x88@wearehackerone.com) in the provided field and submit the password reset request.
-   *   Intercept the password reset email sent to the victim. This email contains the password reset token URL, which looks like this:
+   5.  Observe that the password reset link is sent successfully to the entered email address without proper CAPTCHA verification.\
+
+
+       <figure><img src="../.gitbook/assets/image (63).png" alt=""><figcaption></figcaption></figure>
+8. **Password Reset Vulnerable Logic**:
+   * Enter the victim's email address (e.g., `0x88@wearehackerone.com`) in the provided field and submit the password reset request.
+   *   Check the password reset email sent. This email contains the password reset token URL, which looks like this:
 
        ```perl
        https://brandcentral.target.com/mars/reset.hash_reset?p_hash=B367AD4F&p_sign=4ixUHUGmhW6YZ6VyKCdzxoqAaaU%3D
        ```
-   *   Manipulate the reset URL by fuzzing the `p_hash` parameter while leaving the `p_sign` parameter empty:
+   * The reset link contains a hash (**p\_hash**) and a signature (**p\_sign**). I was inspired by common JWT bugs, like tokens being accepted without signatures or with arbitrary signatures, and decided to test the reset link similarly. I removed the value of the **p\_sign** parameter, leaving it **empty**, while keeping the **p\_hash** **value correct**. Surprisingly, the server accepted the request normally.
+   *   So i started Manipulate the reset URL by fuzzing the `p_hash` parameter while leaving the `p_sign` parameter empty:
 
        ```arduino
        https://brandcentral.target.com/mars/reset.hash_reset?p_hash={FUZZ}&p_sign=
