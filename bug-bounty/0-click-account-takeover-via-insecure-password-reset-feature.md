@@ -40,7 +40,7 @@ The vulnerability We found resides in the password reset mechanism. This flaw al
    5.  Observe that the password reset link is sent successfully to the entered email address without proper CAPTCHA verification.\
 
 
-       <figure><img src="../.gitbook/assets/image (63).png" alt=""><figcaption></figcaption></figure>
+       <figure><img src="../.gitbook/assets/image (64).png" alt=""><figcaption></figcaption></figure>
 8. **Password Reset Vulnerable Logic**:
    * Enter the victim's email address (e.g., `0x88@wearehackerone.com`) in the provided field and submit the password reset request.
    *   Check the password reset email sent. This email contains the password reset token URL, which looks like this:
@@ -68,7 +68,7 @@ The vulnerability We found resides in the password reset mechanism. This flaw al
 *   On the password reset page, set a new password for the victim's account.\
 
 
-    <figure><img src="../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (65).png" alt=""><figcaption></figcaption></figure>
 * Use the newly set password to log in to the victim's account.\
 
 * If credentials true you will receive this response \
