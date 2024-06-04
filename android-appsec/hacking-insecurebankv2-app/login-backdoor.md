@@ -2,7 +2,7 @@
 
 * Back to jadx in the DoLogin Activity i found this weird Code
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 The "devadmin" part in the `postData` method handles a specific case where the username is "devadmin." When the username is "devadmin," the method sends the login data to a different endpoint (`/devlogin`) rather than the standard login endpoint (`/login`). This could be used for developers or administrators who might need to authenticate through a different process or endpoint. Here’s a more detailed explanation focusing on this aspect:
 

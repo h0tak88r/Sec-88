@@ -1,4 +1,4 @@
-# LogCat Information Disclosure
+# Insecure Logging
 
 * Android Logs Accessible by all applications so when app expose secrets or private information it is a bug !
 * I Entered command `adb logcat`
@@ -7,5 +7,5 @@
 
 &#x20; &#x20;
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
 

@@ -64,4 +64,4 @@ base                      base-dex2jar.jar  sieve_patched_no_crypto.apk
     `run app.package.info -a com.android.insecurebankv2`\
     `run app.package.attacksurface com.android.insecurebannkv2`
 
-    <figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>

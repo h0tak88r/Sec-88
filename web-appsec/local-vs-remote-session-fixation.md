@@ -21,7 +21,7 @@
   * &#x20;Attacker use the Known session ID value to access victim's account
 * **Impact:** By successfully tricking the victim into using the compromised session ID, the attacker gains unauthorized access to the victim's account, allowing them to manipulate posts, access personal information, or carry out further attacks.
 
-<figure><img src="../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (13) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Mitigation Strategies:**
 
