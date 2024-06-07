@@ -64,13 +64,6 @@
 3. Uncheck Email address
 4. You loged in without email address
 
-### Discord OAuth Misconfiguration
-
-1. victim register email+pass on target
-2. attacker make discord email with victim's email
-3. there is no email confirmation in discord sign up
-4. attacker sign with discord to target
-
 ### OAuth Code Flaws
 
 1. Reuse of authorization codes.
