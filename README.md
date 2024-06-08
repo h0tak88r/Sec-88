@@ -4,6 +4,9 @@ description: Mosaad Sallam (h0tak88r)
 
 # 🧑 Whoami
 
+> If you enjoy what I do, please support me\
+> &#x20;Buy Me Ko-fi! [https://ko-fi.com/sallam](https://ko-fi.com/sallam)
+
 ## Welcome to My Cybersecurity Corner!
 
 Hello there! I'm Mosad Sallam, an avid cybersecurity enthusiast, embarking on a journey to explore and share insights into the dynamic world of digital security.
