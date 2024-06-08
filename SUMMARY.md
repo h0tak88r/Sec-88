@@ -87,6 +87,7 @@
   * [My Methodlogy with Public BBP](bug-bounty/my-methodlogy-with-public-bbp.md)
   * [Exploring Subdomains: From Enumeration to Takeover Victory](bug-bounty/exploring-subdomains-from-enumeration-to-takeover-victory.md)
   * [0-Click Account Takeover via Insecure Password Reset Feature](bug-bounty/0-click-account-takeover-via-insecure-password-reset-feature.md)
+  * [How a Simple Click Can Lead to Account Takeover: An OAuth Insecure Implementation Vulnerability](bug-bounty/how-a-simple-click-can-lead-to-account-takeover-an-oauth-insecure-implementation-vulnerability.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)
