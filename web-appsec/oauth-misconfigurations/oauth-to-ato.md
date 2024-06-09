@@ -1,4 +1,4 @@
-# OAUTH Bugs
+# OAUTH Security Testing
 
 ### Authentication Bypass via OAuth Implicit Flow
 
@@ -17,12 +17,35 @@
 5. Log out, send the link to the victim, or use an iframe on your website.
 6. Victim's browser completes the OAuth flow, linking your profile to their account.
 
+### CSRF
+
+```
+-  Integration Linking
+-  no state parameter or 
+-  state parameter static value 
+-  Remove static parameter 
+```
+
+<figure><img src="../../.gitbook/assets/image (68).png" alt=""><figcaption><p>Login CSRF</p></figcaption></figure>
+
 ### Insufficient Redirect URI Validation
+
+<figure><img src="../../.gitbook/assets/image (69).png" alt=""><figcaption><p>Open Redirec in redirec_uri Leads to 1-Click ATO</p></figcaption></figure>
 
 #### Exploits:
 
 1. **Open Redirect**: Redirect sensitive data to an attacker-controlled server.
-   * Example: `https://yourtweetreader.com/callback?redirectUrl=https://evil.com`
+   * &#x20;`https://yourtweetreader.com/callback?redirectUrl=https://evil.com`
+   *   `Redirec_uri` Bypasses
+
+       ```
+       - target.com.evil.com
+       - //attacker.com
+       - https://attacker.com\@target.com
+       - https://attacker.com?@target.com
+       - attacker.com%0d%0atarget.com
+       - Open-Redirect/SSRF -> Bypass redirect_uri
+       ```
 2. **Path Traversal**: `https://yourtweetreader.com/callback/../redirect?url=https://evil.com`
 3. **Weak Regexes**: `https://yourtweetreader.com.evil.com`
 4. **HTML Injection**: `https://app.victim.com/login?redirectUrl=https://app.victim.com/dashboard</script><h1>test</h1>`
@@ -78,6 +101,50 @@
 
 1. Register an account with the victim's email and attacker’s password.
 2. Victim uses OAuth to register, linking their account to the attacker’s credentials.
+
+#### ALL ATTACKS WITH `PROMPT=NONE` TO MINIMISE INTERACTION
+
+<figure><img src="../../.gitbook/assets/image (70).png" alt=""><figcaption><p>With Interaction</p></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (71).png" alt=""><figcaption><p>With no Interaction</p></figcaption></figure>
+
+### Play With `response_mode`  &#x20;
+
+1.  The normal value to it is `&response_mode=query`
+
+    <figure><img src="../../.gitbook/assets/image (72).png" alt=""><figcaption></figcaption></figure>
+2.  By Changing it's value to fragment the code is leaked in the url after `#` character
+
+    <figure><img src="../../.gitbook/assets/image (75).png" alt=""><figcaption></figcaption></figure>
+
+### Exploit XSS in the Authorization Server to steal Victim's code&#x20;
+
+1. Make  `&response_mode=form_post`   and the response will be for that send's post request with code and state parameter
+
+```http
+HTTP 200 OK
+
+<form method="post" 
+  action="https://target.com/cb">
+<input name="code" value="A9bc5D2e"/>
+</form>
+```
+
+1.  Attacker can steal the code and state parameter using this code \
+
+
+    <figure><img src="https://lh7-us.googleusercontent.com/slidesz/AGV_vUdicEhcU-xYnDfTydv3QLyzy9fD-9Gvh6htoLvN6gPWYBxkFeMr9GLBGF2_fioQQDt4l1FFbAiZBKSstMD9_yu02gs-e53ldL4QPty73FGtR8aZbU7p3T89dTPj85IHZPaY7DSA3Zt7TvbqL5fNMiHME9UoRCwN=s2048?key=wpvX88q0Z4uLzcitI4vWuQ" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (76).png" alt=""><figcaption></figcaption></figure>
+
+### POST-AUTH REDIRECT + LOGIN CSRF
+
+1.  There is endpoint vulnerable to open redirect using it to bypass `redirect_uri` Restrictions and using `&response_mode=fragment` to send code in url&#x20;
+
+    <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+2. The website is vulnerable to an open redirect. After a user logs in, we can exploit the `state` parameter to perform a CSRF attack, causing the user to log into our account after completing the OAuth process. However, to steal the user's session/code when they log into the attacker-owned account, we can use `&response_mode=fragment`. This will send the user's code to an attacker-controlled site in the URL after the `#` sign, along with the attacker's code in the query.
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Disclosure of Secrets
 
