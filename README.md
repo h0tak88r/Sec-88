@@ -15,11 +15,7 @@ Hello there! I'm Mosad Sallam, an avid cybersecurity enthusiast, embarking on a 
 
 Dive into various cybersecurity fields with me, including:
 
-* **WEB AppSec**: Unraveling the intricacies of web application security to fortify digital landscapes.
-* **Bug Bounty Hunting**: Explore write-ups, methodologies, and more.
-* **Mobile AppSec**: Safeguarding mobile applications in an era of ubiquitous connectivity and data exchange.
-* **API Security**: Delving into the protection of Application Programming Interfaces (APIs) to ensure secure communication between software components.
-* **Network Security**: Navigating the complexities of securing data and applications in the cloud.
+* Web AppSec, Android AppSec, Network Sec, Bug Bouty, API Sec, Operating Systems, Programming, Desktop Apps Sec
 
 ... and many more security-related domains.
 
