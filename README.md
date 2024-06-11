@@ -1,5 +1,5 @@
 ---
-description: Mosaad Sallam(h0rak88r) | Pentester | BugHunter | Coder
+description: Mosaad Sallam(h0tak88r) | Pentester | BugHunter | Coder
 ---
 
 # 🧑 Whoami
