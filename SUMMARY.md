@@ -135,6 +135,7 @@
   * [Android Permissions](android-appsec/android-permissions.md)
   * [Exported Activity Hacking](android-appsec/exported-activity-hacking.md)
   * [BroadcastReceiver Hacking](android-appsec/broadcastreceiver-hacking.md)
+  * [Content Provider Hacking](android-appsec/content-provider-hacking.md)
 * [🖥️ Operating Systems](operating-systems/README.md)
   * [Linux](operating-systems/linux/README.md)
     * [Linux Commands](operating-systems/linux/linux-commands.md)
