@@ -198,6 +198,10 @@ https://h0tak88r.github.io/posts/Multi-Factor-Authentication-(2FA)-Security-Test
     ```
 * [ ] Remove the part of the cookie that is responsible for 2FA authentication
 
+```http
+https://hackerone.com/reports/2315420
+```
+
 ## 3. Disable 2FA
 
 *   [ ] **Lack of Brute-Force Protection Disable 2FA** \[ P4 ]
