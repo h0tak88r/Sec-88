@@ -112,6 +112,7 @@
   * [Active Directory](network-sec/active-directory/README.md)
     * [Basic AD Pentesting](network-sec/active-directory/basic-ad-pentesting.md)
 * [📱 Android-AppSec](android-appsec/README.md)
+  * [APK Pentesting Checklist](android-appsec/apk-pentesting-checklist.md)
   * [Hacking InsecureBankv2 App](android-appsec/hacking-insecurebankv2-app/README.md)
     * [Information Gathering](android-appsec/hacking-insecurebankv2-app/information-gathering.md)
     * [Drozer Cheat Sheet](android-appsec/hacking-insecurebankv2-app/drozer-cheat-sheet.md)
