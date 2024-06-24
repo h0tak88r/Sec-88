@@ -80,6 +80,7 @@
   * [Protection](web-appsec/protection/README.md)
     * [Security Mechanisms for Websites](web-appsec/protection/security-mechanisms-for-websites.md)
     * [Cookie Flags](web-appsec/protection/cookie-flags.md)
+  * [Hacking IIS](web-appsec/hacking-iis.md)
 * [🐞 Bug Bounty](bug-bounty/README.md)
   * [Hunting Methodology](bug-bounty/hunting-methodology.md)
   * [API BAC leads to PII Data Disclosure](bug-bounty/api-bac-leads-to-pii-data-disclosure.md)
