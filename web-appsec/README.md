@@ -1,6 +1,12 @@
-# 🕸️ WebAppSec
+---
+description: >-
+  If you enjoy what I do, please support me  Buy Me Ko-fi!
+  https://ko-fi.com/h0tak88r
+---
 
-## Escalating Bugs to RCS&#x20;
+# 🕸️ Web-AppSec
+
+## Escalating Bugs to RCEs&#x20;
 
 * [XSS to RCE](https://swarm.ptsecurity.com/researching-open-source-apps-for-xss-to-rce-flaws/)
 * [SSRF to RCE](https://medium.com/@Land2Cyber/ssrf-to-rce-a-case-study-in-exploiting-chained-vulnerabilities-78f290ae9011)
