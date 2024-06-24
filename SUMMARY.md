@@ -138,6 +138,7 @@
   * [BroadcastReceiver Hacking](android-appsec/broadcastreceiver-hacking.md)
   * [Content Provider Hacking](android-appsec/content-provider-hacking.md)
   * [Signing the APK](android-appsec/signing-the-apk.md)
+  * [Reverse Engineering APK](android-appsec/reverse-engineering-apk.md)
 * [🖥️ Operating Systems](operating-systems/README.md)
   * [Linux](operating-systems/linux/README.md)
     * [Linux Commands](operating-systems/linux/linux-commands.md)
