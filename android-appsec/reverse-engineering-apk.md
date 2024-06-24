@@ -6,6 +6,7 @@ When decompiling APKs, various tools can be used depending on the complexity and
 
 * **APKTool**
 * **JADX**
+* Dex2Jar -> JD-GUI
 * **Androguard**
 
 ### **JADX**
