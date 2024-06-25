@@ -1,14 +1,78 @@
 # Hacking IIS
 
-#### Resources
+### Resources
 
-&#x20;https://youtu.be/XlmeSFm3RT4?si=hfhzGF9ymG6Igt5j&#x20;
+https://youtu.be/XlmeSFm3RT4?si=hfhzGF9ymG6Igt5j&#x20;
 
 https://www.youtube.com/watch?v=cqM-MdPkaWo&#x20;
 
 https://www.youtube.com/watch?v=yyD8Z5Qar5I&#x20;
 
-https://www.youtube.com/watch?v=02FrOIT8xPU&#x20;
+https://www.youtube.com/watch?v=02FrOIT8xPU \
+
+
+[https://www.youtube.com/watch?v=\_4W0WXUatiw](https://www.youtube.com/watch?v=\_4W0WXUatiw)\
+
+
+{% embed url="https://x.com/infosec_au/status/1340785029899698181" %}
+
+{% embed url="https://soroush.me/blog/" %}
+
+{% embed url="https://soroush.me/blog/2019/04/exploiting-deserialisation-in-asp-net-via-viewstate/" %}
+
+{% embed url="https://retkoussa.medium.com/microsoft-iis-server-shortnames-tilde-magic-64df65d26450" %}
+
+## HTTPAPI 2.0 Assets <a href="#id-7ce1" id="id-7ce1"></a>
+
+* Got HTTPAPI ERROR 404&#x20;
+* It is IP but you can get the subdomain from the certificate common name
+*   Edit the Host Header&#x20;
+
+    <figure><img src="../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
+
+### VHost Hopping <a href="#id-7ce1" id="id-7ce1"></a>
+
+* Came across subdomain that running IIS Server apply.company.com
+* VHost Enumeration using ffuf or burp intruder
+* Found mssql.company.com
+* Running MSSQL Explorer/Manager
+
+### Local FIle Disclosure to DLLs
+
+* DownloadCategoryExcel?fileName=../../web.config
+* DownloadCategoryExcel?fileName=../../glopal.asax
+* \<add namespace="Company.Web.Api.dell/>
+* DownloadCategoryExcel?fileName=../../bin/Company.Web.Api.dll
+
+### LFD -> RCE
+
+* [https://bit.ly/2MzJ1qI](https://bit.ly/2MzJ1qI)
+* Optain machinekey from web.config file (validation key and decryption keyy)
+* VIEWSTATE -> Insecure Deserialization -> RCE&#x20;
+* [https://github.com/0xacb/viewgen](https://github.com/0xacb/viewgen)
+
+### RCE with Local&#x20;
+
+* [https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/](https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/)
+
+### DNSpy
+
+* Found Leaked zip files contains DLL Files?
+* [https://github.com/dnSpy/dnSpy](https://github.com/dnSpy/dnSpy)
+* Use DNSpy to reverse them to source code
+* or [https://www.jetbrains.com/decompiler/](https://www.jetbrains.com/decompiler/)
+
+### Partial Fuzzing&#x20;
+
+* `shortscan https://apply.company.com/`&#x20;
+* Got a part of file names not the full name ? let's fuzz the rest
+* LIDSDI -> LIDFUZZ | EASYFI -> EASYFUZZ
+* `ffuf -w wordlist.txt -D -e asp,aspx,ashx,asmx -t 100 -c -u https://apply.company.com/lidsFUZZ`
+* You can make your own wro=dlist using wordlist generator\
+  [https://sourceforge.net/projects/crunch-wordlist/](https://sourceforge.net/projects/crunch-wordlist/)\
+  [https://github.com/jim3ma/crunch](https://github.com/jim3ma/crunch)
+* `./crunch 0 3 abcdefghijklmnopqrstuvwxyz0123456789 -o 3char.txt`
+* Fuzzing doesn't work? try search in Github or use [https://github.com/retkoussa/gsnw](https://github.com/retkoussa/gsnw/tree/main)
 
 ## Nuclei <a href="#id-7ce1" id="id-7ce1"></a>
 
