@@ -8,8 +8,6 @@ https://www.youtube.com/watch?v=cqM-MdPkaWo&#x20;
 
 https://www.youtube.com/watch?v=yyD8Z5Qar5I&#x20;
 
-https://www.youtube.com/watch?v=02FrOIT8xPU&#x20;
-
 [https://www.youtube.com/watch?v=\_4W0WXUatiw](https://www.youtube.com/watch?v=\_4W0WXUatiw)\
 
 
@@ -22,6 +20,8 @@ https://www.youtube.com/watch?v=02FrOIT8xPU&#x20;
 {% embed url="https://retkoussa.medium.com/microsoft-iis-server-shortnames-tilde-magic-64df65d26450" %}
 
 {% embed url="https://medium.com/@far00t01/asp-net-microsoft-iis-pentesting-04571fb071a4" %}
+
+{% embed url="https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/iis-internet-information-" %}
 
 ## HTTPAPI 2.0 Assets <a href="#id-7ce1" id="id-7ce1"></a>
 
