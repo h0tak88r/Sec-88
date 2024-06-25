@@ -141,10 +141,10 @@ HTTP 200 OK
 
 1.  There is endpoint vulnerable to open redirect using it to bypass `redirect_uri` Restrictions and using `&response_mode=fragment` to send code in url&#x20;
 
-    <figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 2. The website is vulnerable to an open redirect. After a user logs in, we can exploit the `state` parameter to perform a CSRF attack, causing the user to log into our account after completing the OAuth process. However, to steal the user's session/code when they log into the attacker-owned account, we can use `&response_mode=fragment`. This will send the user's code to an attacker-controlled site in the URL after the `#` sign, along with the attacker's code in the query.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Disclosure of Secrets
 
