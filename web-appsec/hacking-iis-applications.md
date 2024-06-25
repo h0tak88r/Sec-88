@@ -1,4 +1,4 @@
-# Hacking IIS
+# Hacking IIS Applications
 
 ### Resources
 
@@ -53,7 +53,13 @@ https://www.youtube.com/watch?v=02FrOIT8xPU \
 
 ### RCE with Local&#x20;
 
-* [https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/](https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/)
+{% embed url="https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/" %}
+
+### ASP.NET XSS
+
+* Try in login pages, redirects, forms & dynamic URL construction (\~/images/). Payload: `/(A(%22onerror='alert%60123%60'test))/`
+
+{% embed url="https://x.com/nav1n0x/status/1799384973407031565" %}
 
 ### DNSpy
 
