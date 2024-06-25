@@ -8,8 +8,7 @@ https://www.youtube.com/watch?v=cqM-MdPkaWo&#x20;
 
 https://www.youtube.com/watch?v=yyD8Z5Qar5I&#x20;
 
-https://www.youtube.com/watch?v=02FrOIT8xPU \
-
+https://www.youtube.com/watch?v=02FrOIT8xPU&#x20;
 
 [https://www.youtube.com/watch?v=\_4W0WXUatiw](https://www.youtube.com/watch?v=\_4W0WXUatiw)\
 
@@ -21,6 +20,8 @@ https://www.youtube.com/watch?v=02FrOIT8xPU \
 {% embed url="https://soroush.me/blog/2019/04/exploiting-deserialisation-in-asp-net-via-viewstate/" %}
 
 {% embed url="https://retkoussa.medium.com/microsoft-iis-server-shortnames-tilde-magic-64df65d26450" %}
+
+{% embed url="https://medium.com/@far00t01/asp-net-microsoft-iis-pentesting-04571fb071a4" %}
 
 ## HTTPAPI 2.0 Assets <a href="#id-7ce1" id="id-7ce1"></a>
 
@@ -56,6 +57,8 @@ https://www.youtube.com/watch?v=02FrOIT8xPU \
 {% embed url="https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/" %}
 
 ### ASP.NET XSS
+
+{% embed url="https://blog.isec.pl/all-is-xss-that-comes-to-the-net/" %}
 
 * Try in login pages, redirects, forms & dynamic URL construction (\~/images/). Payload: `/(A(%22onerror='alert%60123%60'test))/`
 
