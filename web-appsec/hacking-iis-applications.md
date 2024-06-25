@@ -73,15 +73,14 @@ https://www.youtube.com/watch?v=02FrOIT8xPU&#x20;
 
 ### IIS Discovery Bruteforce <a href="#iis-discovery-bruteforce" id="iis-discovery-bruteforce"></a>
 
-Download the list that I have created:
-
 * [iisfinal.txt](https://129538173-files.gitbook.io/\~/files/v0/b/gitbook-legacy-files/o/assets%2F-L\_2uGJGU7AVNRcqRvEi%2F-L\_YlVBGlH\_l7w9zCtQO%2F-L\_YlWYOMUA7fr799GvH%2Fiisfinal.txt?alt=media\&token=de499b23-3599-45ce-ad7e-7800858b3dac)
-
-It was created merging the contents of the following lists:
-
-[https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/IIS.fuzz.txt](https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/IIS.fuzz.txt) [http://itdrafts.blogspot.com/2013/02/aspnetclient-folder-enumeration-and.html](http://itdrafts.blogspot.com/2013/02/aspnetclient-folder-enumeration-and.html) [https://github.com/digination/dirbuster-ng/blob/master/wordlists/vulns/iis.txt](https://github.com/digination/dirbuster-ng/blob/master/wordlists/vulns/iis.txt) [https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/aspx.txt](https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/aspx.txt) [https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/asp.txt](https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/asp.txt) [https://raw.githubusercontent.com/xmendez/wfuzz/master/wordlist/vulns/iis.txt](https://raw.githubusercontent.com/xmendez/wfuzz/master/wordlist/vulns/iis.txt)
-
-Use it without adding any extension, the files that need it have it already.
+* [https://github.com/orwagodfather/WordList/blob/main/iis.txt](https://github.com/orwagodfather/WordList/blob/main/iis.txt)
+* [https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/IIS.fuzz.txt](https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/IIS.fuzz.txt)&#x20;
+* [http://itdrafts.blogspot.com/2013/02/aspnetclient-folder-enumeration-and.html](http://itdrafts.blogspot.com/2013/02/aspnetclient-folder-enumeration-and.html)&#x20;
+* [https://github.com/digination/dirbuster-ng/blob/master/wordlists/vulns/iis.txt](https://github.com/digination/dirbuster-ng/blob/master/wordlists/vulns/iis.txt)&#x20;
+* [https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/aspx.txt](https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/aspx.txt)&#x20;
+* [https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/asp.txt](https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/asp.txt)&#x20;
+* [https://raw.githubusercontent.com/xmendez/wfuzz/master/wordlist/vulns/iis.txt](https://raw.githubusercontent.com/xmendez/wfuzz/master/wordlist/vulns/iis.txt)
 
 ### Partial Fuzzing&#x20;
 
