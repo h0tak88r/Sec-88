@@ -81,10 +81,14 @@ https://www.youtube.com/watch?v=yyD8Z5Qar5I&#x20;
 * [https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/aspx.txt](https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/aspx.txt)&#x20;
 * [https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/asp.txt](https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/SVNDigger/cat/Language/asp.txt)&#x20;
 * [https://raw.githubusercontent.com/xmendez/wfuzz/master/wordlist/vulns/iis.txt](https://raw.githubusercontent.com/xmendez/wfuzz/master/wordlist/vulns/iis.txt)
+* `ffuf -w iis.txt -u` [`https://example.com/FUZZ`](https://example.com/FUZZ)
+* `ffuf -w iis.txt -u` [`https://example.com/shortnameFUZZ`](https://example.com/shortnameFUZZ)
 
 ### Partial Fuzzing&#x20;
 
 * `shortscan https://apply.company.com/`&#x20;
+* **IIS Short Name Scanner**
+  * Explore the latest version on [GitHub](https://github.com/irsdl/IIS-ShortName-Scanner).
 * Got a part of file names not the full name ? let's fuzz the rest
 * LIDSDI -> LIDFUZZ | EASYFI -> EASYFUZZ
 * `ffuf -w wordlist.txt -D -e asp,aspx,ashx,asmx -t 100 -c -u https://apply.company.com/lidsFUZZ`
@@ -153,29 +157,6 @@ Bruteforce file extensions to uncover vulnerabilities:
 * `.zip`
 * `.txt`
 
-## Tools for Investigation <a href="#b935" id="b935"></a>
+### **Port Scanning**
 
-**Burp Extension:** [IIS Tilde Enumeration Scanner](https://portswigger.net/bappstore/523ae48da61745aaa520ef689e75033b)
-
-**Shortscan Tool**
-
-* `shortscan` [`https://example.com/`](https://example.com/)
-* `shortscan` [`https://example.com/admin/`](https://example.com/admin/)
-* `shortscan` [`https://example.com/test`](https://example.com/test)
-
-**ffuf**
-
-* `ffuf -w iis.txt -u` [`https://example.com/FUZZ`](https://example.com/FUZZ)
-* `ffuf -w iis.txt -u` [`https://example.com/shortnameFUZZ`](https://example.com/shortnameFUZZ)
-
-**IIS Short Name Scanner**
-
-* Explore the latest version on [GitHub](https://github.com/irsdl/IIS-ShortName-Scanner).
-
-**nmap**
-
-* `nmap -p80 --script http-iis-short-name-brute 71.167.30.116`
-
-**sns**
-
-* Discover the tool at [https://github.com/se33tLie/sns](https://github.com/se33tLie/sns).
+* `naabu -host iis.target.com`
