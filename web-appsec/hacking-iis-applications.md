@@ -1,3 +1,8 @@
+---
+cover: ../.gitbook/assets/2012iis.png
+coverY: 0
+---
+
 # Hacking IIS Applications
 
 ### Resources
