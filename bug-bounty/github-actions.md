@@ -1,8 +1,12 @@
 ---
-description: Automating Bug Bounty with GitHub Actions
+description: >-
+  If you enjoy what I do, please support me  Buy Me Ko-fi!
+  https://ko-fi.com/h0tak88r
 ---
 
-# GitHub Actions
+# Automating Bug Bounty with GitHub Actions
+
+> _**In the name of Allah, the Most Beneficent, the Most Merciful**_
 
 ### Understanding GitHub Actions
 

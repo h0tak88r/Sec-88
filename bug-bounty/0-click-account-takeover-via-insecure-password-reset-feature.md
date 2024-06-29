@@ -1,4 +1,12 @@
+---
+description: >-
+  If you enjoy what I do, please support me  Buy Me Ko-fi!
+  https://ko-fi.com/h0tak88r
+---
+
 # 0-Click Account Takeover via Insecure Password Reset Feature
+
+> _**In the name of Allah, the Most Beneficent, the Most Merciful**_
 
 Hello Hackers! Today, I am excited to share my recent discovery of a 0-Click Account Takeover vulnerability on a public program on the HackerOne platform, During Collaboration with my friend `@`**`0x3adly`**.
 

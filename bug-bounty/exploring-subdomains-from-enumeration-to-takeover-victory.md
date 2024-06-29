@@ -1,6 +1,12 @@
+---
+description: >-
+  If you enjoy what I do, please support me  Buy Me Ko-fi!
+  https://ko-fi.com/h0tak88r
+---
+
 # Exploring Subdomains: From Enumeration to Takeover Victory
 
-In the name of ALLAH the most gracious the most merciful
+> **In the name of ALLAH the most gracious the most merciful**
 
 So today i will talk about how i got my critical subdomain takeover on ford motors&#x20;
 
