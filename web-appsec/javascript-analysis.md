@@ -70,9 +70,10 @@ JSMiner
 monitor(FUNCTION);
 
 // If Function Sends Json Objects function hook
-monitor(FUNCTION);
+var old = FUNCTION;
 FUNCTION = function (ar ) {
     console.log("FUCNCTION called with arguments: " + JSON.stringify(ar));
+    return old(ar);
 }
 
 // monitor Getter and Setter
