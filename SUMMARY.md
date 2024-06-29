@@ -149,6 +149,7 @@
     * [Bash Scripting guide](operating-systems/linux/bash-scripting-guide.md)
     * [tmux](operating-systems/linux/tmux.md)
     * [Git](operating-systems/linux/git.md)
+    * [Install Go tools from private repositories using GitHub PAT](operating-systems/linux/install-go-tools-from-private-repositories-using-github-pat.md)
   * [VPS](operating-systems/vps.md)
 * [👨‍💻 Programming](programming/README.md)
   * [HTML](programming/html.md)
