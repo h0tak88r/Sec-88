@@ -28,7 +28,7 @@
 5. The application exchanges the code for an access token.
 6. The application uses the token to access the user's data on the resource server.
 
-#### SSO (Single Sign-On)
+### SSO (Single Sign-On)
 
 **Definition**:
 
@@ -53,7 +53,7 @@
 4. The identity provider returns a token/assertion to the service provider.
 5. The service provider grants access to the user based on the token/assertion.
 
-#### Auth0
+### Auth0
 
 **Definition**:
 
