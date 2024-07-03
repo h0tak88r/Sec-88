@@ -1,4 +1,16 @@
+---
+description: https://ko-fi.com/h0tak88r
+---
+
 # Thin Client vs. Thick Client
+
+### Resources
+
+{% embed url="https://www.geeksforgeeks.org/difference-between-thin-clients-and-thick-clients/" %}
+
+{% embed url="https://itjunction.org/2019/10/05/what-is-the-difference-between-thick-client-and-thin-client/" %}
+
+{% embed url="https://clearcube.com/posts/thin-clients-vs-thick-clients/" %}
 
 **Client Overview**
 
@@ -41,25 +53,44 @@
 | Local Resources | Consumes less               | Consumes more                            |
 | Security        | More secure                 | Less secure                              |
 
-#### Thick Client Additional Details
+#### Clarification: Application Types
 
-* **Advantages**: Improved performance, richer user experience, offline functionality.
-* **Architecture**: More application logic on client.
-* **Languages**: Java, C#, Python, JavaScript.
-* **Cross-Platform**: Use frameworks like Electron, Xamarin.
-* **Security**: Requires secure coding, encryption, updates.
-* **Maintenance**: Individual updates needed.
-* **Networked**: Can interact with servers and network devices.
-* **Resource Intensive**: More disk space, memory, processing power.
-* **Cloud Integration**: Can connect to cloud services.
-* **Deployment**: Direct installation on client.
-* **Automatic Updates**: Possible.
-* **Development Challenges**: Cross-platform, performance optimization, data sync.
-* **Web Services/APIs**: Can interact using networking libraries.
-* **Bugs**: Prone to crashes from hardware/software issues.
-* **Conversion**: Possible but complex to convert to thin client.
+**Thin Client**
 
-#### Key Takeaways
+* **Thin Client**: Relies heavily on server-side processing.
+  * **Examples**:
+    * Web applications accessed via browsers (e.g., Google Docs, Gmail)
+    * Remote desktop services (e.g., Citrix, Microsoft Remote Desktop)
+  * **Key Characteristics**:
+    * Minimal local processing
+    * Data and application logic reside on the server
+    * Requires a constant network connection
 
-* **Thin Clients**: Secure, low-cost, easy maintenance but require constant server connection.
-* **Thick Clients**: High performance, rich experience, offline use but higher costs and resource needs.
+**Thick Client**
+
+* **Thick Client**: Performs significant processing locally on the client device.
+  * **Examples**:
+    * Desktop applications (e.g., Microsoft Word, Adobe Photoshop)
+    * Mobile applications (e.g., mobile games, native apps like Instagram)
+  * **Key Characteristics**:
+    * Extensive local processing and storage
+    * Can function offline
+    * Richer user interface and performance
+
+#### Comparison: Web vs. Desktop/Mobile
+
+* **Web Applications**:
+  * Generally act as thin clients
+  * Depend on server for most processing tasks
+  * Accessible through browsers
+  * Require an internet connection for full functionality
+* **Desktop/Mobile Applications**:
+  * Typically thick clients
+  * Perform most processing locally
+  * Can store data on the device
+  * Can operate offline with full functionality
+
+#### Summary
+
+* **Desktop and Mobile Applications**: Generally **thick clients** due to local processing and offline capabilities.
+* **Web Applications**: Typically **thin clients** as they rely on server-side processing and need constant connectivity.
