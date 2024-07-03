@@ -1,4 +1,12 @@
-# Inviting
+# Inviting Feature
+
+### Links
+
+* [https://x.com/0x\_rood/status/1749057124817100862](https://x.com/0x\_rood/status/1749057124817100862)
+* [https://medium.com/@mrxdevil404/some-cases-bugs-on-invitation-bug-to-higher-impact-fd3f7268d469](https://medium.com/@mrxdevil404/some-cases-bugs-on-invitation-bug-to-higher-impact-fd3f7268d469)
+* [https://x.com/0x\_rood/status/1727329838149644473](https://x.com/0x\_rood/status/1727329838149644473)
+* [https://x.com/0x\_rood/status/1749501798593798578](https://x.com/0x\_rood/status/1749501798593798578)
+* [https://x.com/0x\_rood/status/1727322288163258694](https://x.com/0x\_rood/status/1727322288163258694)
 
 ```
 - Methodology just pass the jwt and cookie of the low leverage user to auth analyzer and it will repeat all admin requests with the lower privilege user

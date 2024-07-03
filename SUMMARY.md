@@ -22,7 +22,7 @@
     * [Commenting](web-appsec/features-abuse/commenting.md)
     * [Contact us](web-appsec/features-abuse/contact-us.md)
     * [File-Upload](web-appsec/features-abuse/file-upload.md)
-    * [Inviting](web-appsec/features-abuse/inviting.md)
+    * [Inviting Feature](web-appsec/features-abuse/inviting.md)
     * [Messaging Features](web-appsec/features-abuse/messaging-features.md)
     * [Money-Related Features](web-appsec/features-abuse/money-related-features.md)
     * [Newsletter](web-appsec/features-abuse/newsletter.md)
