@@ -70,7 +70,7 @@ textView.setText("cursor " + DatabaseUtils.dumpCursorToString(queryCursor));
 * **Check Query Methods**: Look at the `query` method to see if user inputs are properly sanitized.
 * **Identify Tables**: Locate the tables used within the Content Provider by searching for `content://` URIs in the code.
 
-<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Example Code to Identify SQL Injection Points:**
 

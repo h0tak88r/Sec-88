@@ -96,7 +96,7 @@ http://myownpersonaldomain.com/path/to/resource
 
 ### 3. Android App Links
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **Definition:** Web links that use the `HTTP` and `HTTPS` schemes and contain the `autoVerify` attribute.
 *   **Implementation:**
