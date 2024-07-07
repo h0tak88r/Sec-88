@@ -12,7 +12,7 @@
 2. Download the Drozer agent apk file from [https://github.com/WithSecureLabs/drozer-agent/releases/tag/3.0.0](https://github.com/WithSecureLabs/drozer-agent/releases/tag/3.0.0)
 3.  Install Drozer via command`sudo pip3 install drozer-3.0.2-py3-none-any.whl`
 
-    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 4. Install apk file in the emulator via command: `adb install drozer-agent.apk`
 5.  Initialize drozer server and get the port&#x20;
 

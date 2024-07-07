@@ -77,7 +77,7 @@ A crafted request to the vulnerable endpoint returned the following sensitive da
 
 While investigating, we discovered that some of the invite IDs were still valid and could be used by attackers to gain unauthorized access to organizations. **`These invite IDs were found on public archives, such as the Wayback Machine`**, making them easily accessible to malicious actors.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 **Impact**
 
