@@ -195,4 +195,7 @@
     * [Unit Testing](programming/go/unit-testing.md)
 * [💻 Desktop AppSec](desktop-appsec/README.md)
   * [Thin Client vs. Thick Client](desktop-appsec/thin-client-vs.-thick-client.md)
-* [Cloud Sec](cloud-sec.md)
+* [☁️ Cloud Sec](cloud-sec/README.md)
+  * [Salesforce Hacking](cloud-sec/salesforce-hacking/README.md)
+    * [Basics](cloud-sec/salesforce-hacking/basics.md)
+    * [Salesforce SAAS Apps Hacking](cloud-sec/salesforce-hacking/salesforce-saas-apps-hacking.md)
