@@ -195,3 +195,4 @@
     * [Unit Testing](programming/go/unit-testing.md)
 * [💻 Desktop AppSec](desktop-appsec/README.md)
   * [Thin Client vs. Thick Client](desktop-appsec/thin-client-vs.-thick-client.md)
+* [Cloud Sec](cloud-sec.md)
