@@ -1,14 +1,18 @@
 ---
-description: >-
-  CWE-200: Exposure of Sensitive Information to an Unauthorized Actor
-  Dorking.....Fuzzing
+description: 'CWE-200: Exposure of Sensitive Information to an Unauthorized Actor'
 ---
 
 # Information Disclosure
 
 ## **Google Dorking**
 
-[Bug Bounty Helper (faisalahmed.me)](https://dorks.faisalahmed.me/) |\*\* [Google Dorks List and Updated Database in 2023 - Box Piper](https://www.boxpiper.com/posts/google-dork-list) https://www.uedbox.com/shdb/type/files-containing-juicy-info/
+{% embed url="https://www.boxpiper.com/posts/google-dork-list" %}
+
+{% embed url="https://www.uedbox.com/shdb/type/files-containing-juicy-info/" %}
+
+{% embed url="https://www.lopseg.com.br/google-dork" %}
+
+{% embed url="https://dorks.faisalahmed.me/" %}
 
 **Vulnerable web servers**
 
@@ -447,7 +451,11 @@ site:*.be responsible disclosure
 site:*.au responsible disclosure
 ```
 
-## **GitHub Dorking** [**gitdork-Helper**](https://vsec7.github.io/)
+## **GitHub Dorking**&#x20;
+
+{% embed url="https://vsec7.github.io/" %}
+
+{% embed url="https://www.lopseg.com.br/dork-helper" fullWidth="false" %}
 
 ```python
 # Keywords
@@ -475,6 +483,8 @@ org:lemonade-hq  ( token: OR pass: OR secret: OR api_key: OR acess_token: )
 
 ## **Shodan Dorking**
 
+{% embed url="https://mr-koanti.github.io/shodan" %}
+
 ```python
 # Basic 
 ssl:"<ssl_for_target>"
@@ -501,3 +511,11 @@ port:8291 os:"MikroTik RouterOS 6.45.9"
 port:5006,5007 product:mitsubishi
 org:"xx" 200 http.favicon.hash:1428702434 # IDRAC servers try this credentials Username: root Password: calvin
 ```
+
+### Others
+
+* [ ] Exposed User's PII through IMGs
+
+{% embed url="https://x.com/GodfatherOrwa/status/1803430519582937170" %}
+
+*
