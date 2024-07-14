@@ -199,3 +199,4 @@
   * [Salesforce Hacking](cloud-sec/salesforce-hacking/README.md)
     * [Basics](cloud-sec/salesforce-hacking/basics.md)
     * [Salesforce SAAS Apps Hacking](cloud-sec/salesforce-hacking/salesforce-saas-apps-hacking.md)
+  * [Firebase](cloud-sec/firebase.md)
