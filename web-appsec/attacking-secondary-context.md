@@ -849,3 +849,10 @@ Content-Length: Number
 
 * [https://youtube.com/watch?v=ha6LD1-RiJU](https://youtube.com/watch?v=ha6LD1-RiJU)
 
+### References
+
+* [https://infocondb.org/con/kernelcon/kernelcon-2020/attacking-secondary-contexts-in-web-applications](https://infocondb.org/con/kernelcon/kernelcon-2020/attacking-secondary-contexts-in-web-applications)
+* [https://www.youtube.com/watch?v=hWmXEAi9z5w](https://www.youtube.com/watch?v=hWmXEAi9z5w)
+* [https://2020.kernelcon.org/cfp/K2020\_scurry.pdf](https://2020.kernelcon.org/cfp/K2020\_scurry.pdf)
+* [https://2018.zeronights.ru/wp-content/uploads/materials/20-Reverse-proxies-Inconsistency.pdf](https://2018.zeronights.ru/wp-content/uploads/materials/20-Reverse-proxies-Inconsistency.pdf)
+* [Secondary-Contexts.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/20824215-2216-4e41-a444-2e6158426b5c/1eccb217-8160-472f-86e9-8c05cac6419a/Secondary-Contexts.pdf)
