@@ -1,5 +1,9 @@
 # Attacking Secondary Context
 
+### Secondary Context in Web Applications
+
+**Secondary context** refers to the different ways a web application can handle and process requests indirectly related to the main content. This often involves proxies, back-end servers, and intermediate services that might introduce additional security risks.
+
 ### Identify Some " Hidden " Reverse HTTP Proxies
 
 {% embed url="https://agarri.fr/blog/archives/2011/11/12/traceroute-like_http_scanner/index.html" %}
