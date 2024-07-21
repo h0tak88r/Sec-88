@@ -17,7 +17,7 @@ Dependency confusion, also known as a supply chain substitution attack, occurs w
        * Develop packages with the same names as the identified private dependencies but with **higher versions**.
        * So if the package indexing is not properly done, it will automatically pull the **Higher** version package from the **Public** Registry.
 
-       <figure><img src="../.gitbook/assets/image.png" alt="" width="360"><figcaption></figcaption></figure>
+       <figure><img src="../.gitbook/assets/image (5).png" alt="" width="360"><figcaption></figcaption></figure>
 
        * Upload these packages to public repositories such as npm, PyPI, or RubyGems.
    * **Executing Malicious Code:**

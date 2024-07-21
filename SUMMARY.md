@@ -84,6 +84,7 @@
   * [Auth0, OAuth, SSO](web-appsec/auth0-oauth-sso.md)
   * [Dependency Confusion](web-appsec/dependency-confusion.md)
   * [Attacking Secondary Context](web-appsec/attacking-secondary-context.md)
+  * [Hacking Web Sockets](web-appsec/hacking-web-sockets.md)
 * [🐞 Bug Bounty](bug-bounty/README.md)
   * [Hunting Methodology](bug-bounty/hunting-methodology.md)
   * [API BAC leads to PII Data Disclosure](bug-bounty/api-bac-leads-to-pii-data-disclosure.md)

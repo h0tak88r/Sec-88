@@ -5,7 +5,7 @@
 *   After searching for keywords like "admin" in the LoginActivity if ound this \
 
 
-    <figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * this guy using a boolean value from resources to hide some functionalities
 *   Go to `res/values/stings.xml` and notice "**is\_admin**" is equal to no
 
