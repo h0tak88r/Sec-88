@@ -1,5 +1,53 @@
 # OAUTH Security Testing
 
+### Brute Force to Get Legacy OR Unimplemented OAuth Flows
+
+{% embed url="https://twitter.com/intigriti/status/1173566272468135939" %}
+
+### Modify `hd=` parameter
+
+In OAuth Connect With Google , Try To Modify hd Parameter From company.com To gmail.com To Be Able To Connect With Your Email
+
+[https://twitter.com/intigriti/status/1383397368691789825](https://twitter.com/intigriti/status/1383397368691789825)
+
+{% embed url="https://twitter.com/m4ll0k/status/1319783718249238535" %}
+
+```http
+GET /oauth/Connect?response_type=code&client_id=ID&scope=openid%20email&redirect_uri=https://company.com&nonce=Randim&hd=gmail.com HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Referer: https://previous.com/path
+Origin: https://www.company.com
+Accept-Encoding: gzip, deflate
+```
+
+### Remove `email`  from `scope`
+
+Try To Remove Your Email From Scope Parameter While Signing Up OR Signing In With Services Provider To Get Account Takeover
+
+{% embed url="https://akshanshjaiswal.medium.com/pre-access-to-victims-account-via-facebook-signup-60219e9e381d" %}
+
+{% embed url="https://twitter.com/intigriti/status/1158383750490800128" %}
+
+### Use Access Token Of Your App Instead Of Auth Token Of Victim App
+
+```go
+1 - Create Facebook App
+2 - Generate Access Token
+3 - Go To Victim App And Click On The Facebook Sign In
+ Button With Intercepting Traffic Using Burp Suite
+4 - Change Value Of auth_token Parameter To
+ The Access Token
+5 - Forward The Request And You Will Be Login Since
+ There Is No Validation Weather The Access Token
+ Generated For Victim App OR Other App
+```
+
+{% embed url="https://ankitthku.medium.com/account-takeover-via-common-misconfiguration-in-facebook-login-a2ac8b479b3" %}
+
+* [https://hackerone.com/reports/101977](https://hackerone.com/reports/101977)
+* [https://hackerone.com/reports/314808](https://hackerone.com/reports/314808)
+
 ### Authentication Bypass via OAuth Implicit Flow
 
 1. Study OAuth flow starting from the authorization request `GET /auth?client_id=[...]`.
