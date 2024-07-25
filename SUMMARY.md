@@ -203,3 +203,4 @@
     * [Basics](cloud-sec/salesforce-hacking/basics.md)
     * [Salesforce SAAS Apps Hacking](cloud-sec/salesforce-hacking/salesforce-saas-apps-hacking.md)
   * [Firebase](cloud-sec/firebase.md)
+  * [S3 Buckets Misconfigurations](cloud-sec/s3-buckets-misconfigurations.md)
