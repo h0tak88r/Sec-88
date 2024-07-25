@@ -34,6 +34,9 @@ aws s3 mv test.txt s3://bucket_name
 
 Delete command:
 aws s3 rm s3://qa-media.company/fileName.txt
+
+To Dump Data:
+aws s3 sync . s3://[bucketname]
 ```
 
 ### Tools
@@ -76,10 +79,12 @@ aws s3 rm s3://qa-media.company/fileName.txt
 
 [https://www.youtube.com/watch?v=G7Pre3Y46Fs](https://www.youtube.com/watch?v=G7Pre3Y46Fs)
 
-### Another References
+### Another Resources
 
 * [https://awsdocs.s3.amazonaws.com/S3/latest/s3-qrc.pdf](https://awsdocs.s3.amazonaws.com/S3/latest/s3-qrc.pdf) &#x20;
 
 {% embed url="https://3bodymo.medium.com/how-i-earned-by-amazon-s3-bucket-misconfigurations-29d51ee510de" %}
 
 {% embed url="https://medium.com/@janijay007/s3-bucket-misconfiguration-from-basics-to-pawn-6893776d1007" %}
+
+* [https://www.youtube.com/watch?v=tvWLgvK3QWo\&list=PLWDPse9uXlgPBpf\_dY0M9bIE\_8f6MUO6c](https://www.youtube.com/watch?v=tvWLgvK3QWo\&list=PLWDPse9uXlgPBpf\_dY0M9bIE\_8f6MUO6c)
