@@ -1,9 +1,5 @@
 # IDN Homograph Attack
 
-### References&#x20;
-
-{% embed url="https://honey-march-a14.notion.site/IDN-Homograph-38450662f8dc427cbf67c52f639f65ae" %}
-
 ### What is an IDN Homograph Attack?
 
 **IDN** stands for **Internationalized Domain Name**. These are domain names that include characters from various languages and scripts, not just the ASCII characters (a-z, 0-9) traditionally used in domain names.
@@ -89,3 +85,5 @@ Attacker's Email: victim@gmáil.com
 {% embed url="https://shahjerry33.medium.com/idn-homograph-attack-and-response-manipulation-the-rarest-case-85f64c272a1c" %}
 
 {% embed url="https://www.paubox.com/blog/homograph-attack-what-is-it-and-how-to-avoid-it" %}
+
+{% embed url="https://honey-march-a14.notion.site/IDN-Homograph-38450662f8dc427cbf67c52f639f65ae" %}
