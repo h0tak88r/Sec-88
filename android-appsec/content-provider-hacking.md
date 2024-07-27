@@ -63,7 +63,7 @@ textView.setText("cursor " + DatabaseUtils.dumpCursorToString(queryCursor));
 
 ### 2. SQL Injection Vulnerabilities
 
-<figure><img src="../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Steps to Identify:**
 

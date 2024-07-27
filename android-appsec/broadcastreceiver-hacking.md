@@ -18,7 +18,7 @@ First, define your receiver and its intent filters in the `AndroidManifest.xml`.
 
 In our example application, the receiver is configured to listen for two actions: `BOOT_COMPLETED` and `LOCKED_BOOT_COMPLETED`.
 
-<figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (10) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Sending a Broadcast Using `adb`**
 
@@ -30,13 +30,13 @@ adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
 
 After executing this command, you should observe in logcat that the application is handling the broadcast, possibly performing a system reset.
 
-<figure><img src="../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (11) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Compatibility with Newer Android Versions**
 
 The above method works for older versions of Android. For Android 8.0 (Oreo) and higher, broadcast receivers need to be registered in the Java code, not just in the manifest.
 
-<figure><img src="../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (12) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Checking the `onReceive` Method**
 
@@ -56,7 +56,7 @@ public void onReceive(Context context, Intent intent) {
 
 **Here is what we got in our vuln-app**
 
-<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (13) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Sending a Custom Broadcast**
 
@@ -66,11 +66,11 @@ To test your receiver by sending a custom broadcast with an extra value, use the
 adb shell am broadcast -a com.apphacking.broadcastreceiver.alarmState -es "status" "hacked"
 ```
 
-<figure><img src="../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (14) (2).png" alt=""><figcaption></figcaption></figure>
 
 You should see logcat messages indicating that the application has processed the "hacked" status.
 
-<figure><img src="../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (15) (2).png" alt=""><figcaption></figcaption></figure>
 
 **Arming the Alarm System**
 
@@ -80,7 +80,7 @@ Similarly, to arm the alarm system, you can send a broadcast with the status set
 adb shell am broadcast -a com.apphacking.broadcastreceiver.alarmState -es "status" "arm"
 ```
 
-<figure><img src="../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (16) (2).png" alt=""><figcaption></figcaption></figure>
 
 By following these steps, you can effectively send broadcasts using the Activity Manager in Android, whether you are working with older versions or the latest ones.
 

@@ -4,7 +4,7 @@ description: >-
   https://ko-fi.com/h0tak88r
 ---
 
-# My Methodlogy with Public BBP
+# From Recon to Reward: My Bug Bounty Methodology when Hunting on Public Bug Bounty Programs
 
 > _**In the name of Allah, the Most Beneficent, the Most Merciful**_
 
@@ -151,7 +151,7 @@ It is out of scope so the reported marked as informative&#x20;
 \
 
 
-<figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1).png" alt=""><figcaption><p>OOS result in being info report</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>OOS result in being info report</p></figcaption></figure>
 
 Another scenario led me to discover that if you receive an invitation, attempting to sign up or login won't work. Instead, you must use the invitation link and set your password to create an account in the organization. I experimented with scenarios where I deleted the user from the organization before they used the invitation login link, resulting in the user being forwarded to a blank page, unable to use any core features. This prevention method also extended to users attempting to sign up with the email; they will face a message guiding them to log in with the link they received.&#x20;
 

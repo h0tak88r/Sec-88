@@ -20,7 +20,7 @@
     <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 5.  **Exploration of Application Features**: Launch the application on the emulator to interact with its functionalities, Notice it is simple password manageer.
 
-    <figure><img src="../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 6.  **Identify Authentication Requirements**: Note any authentication mechanisms required by the application, such as password length or two-factor authentication (2FA) PIN.
 
     <figure><img src="../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
