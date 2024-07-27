@@ -27,20 +27,22 @@ A DNS rebinding attack is a technique used by attackers to bypass the security r
 
 <figure><img src="../.gitbook/assets/image (90).png" alt=""><figcaption><p>The DNS Rebending happens and now this domain resolve to the local host making it possible to get the secret.txt</p></figcaption></figure>
 
-### How Does It Work?
+### How Does DNS Rebinding Work in SSRF?
+
+In the context of SSRF (Server-Side Request Forgery), DNS rebinding can be used to manipulate a reverse proxy or internal server into making unauthorized requests to localhost or other internal resources. Here’s a step-by-step illustration of how this process works:
 
 1. **Initial Request:**
-   * The victim visits a malicious website controlled by the attacker. This site hosts JavaScript code that the attacker wants to execute in the victim's browser.
-2. **DNS Resolution:**
-   * The malicious site’s domain is resolved by the victim's browser using the attacker's DNS server. Initially, this domain resolves to an IP address that the attacker controls, allowing them to serve the malicious JavaScript.
+   * The attacker sets up a malicious website, e.g., `attacker-controlled.com`, which contains JavaScript code designed to exploit the vulnerability. The victim visits this site, and the JavaScript starts executing in their browser.
+2. **DNS Resolution by Reverse Proxy:**
+   * The victim's browser makes a request to the attacker's site. This request is forwarded to a reverse proxy server of a target application. The reverse proxy resolves the domain `attacker-controlled.com` using its own DNS settings, which initially points to the attacker's server.
 3. **Short TTL (Time To Live):**
-   * The DNS response from the attacker's server has a very short TTL value. TTL is a setting that tells the browser how long to cache the IP address before checking again. A short TTL ensures that the browser will quickly re-query the DNS server for a new IP address.
+   * The attacker's DNS server provides a DNS response with a very short TTL value. This short TTL ensures that the reverse proxy will frequently re-query the DNS server for updated IP addresses.
 4. **DNS Rebinding:**
-   * When the TTL expires, the victim’s browser requests a new DNS resolution for the same domain. This time, the attacker’s DNS server responds with the IP address of a different server – typically the IP address of the target application that the attacker wants to exploit (e.g., `127.0.0.1`, which refers to the localhost of the victim's machine).
-5. **Exploitation:**
-   * Now that the domain name points to the target application’s IP address, the malicious JavaScript running in the victim’s browser can make requests to the target application. Because the browser sees the requests as coming from the same origin (the domain controlled by the attacker), it bypasses the same-origin policy.
-6. **Data Exfiltration:**
-   * The attacker can then collect responses from these requests and send them back to their own server. This could allow them to access internal APIs, read sensitive information, or perform other malicious actions on the target application.
+   * When the TTL expires, the reverse proxy requests a new DNS resolution for `attacker-controlled.com`. This time, the attacker’s DNS server responds with the IP address of the internal server or localhost (e.g., `127.0.0.1`).
+5. **Request to Internal Server:**
+   * The reverse proxy, now believing that `attacker-controlled.com` points to an internal address, forwards the request to the internal server or localhost. This is because the DNS rebinding trick has made the attacker’s domain resolve to an IP address that the internal server accepts.
+6. **Exploitation:**
+   * The malicious JavaScript running in the victim’s browser can now send requests to `attacker-controlled.com`. Since the reverse proxy has been tricked into resolving this domain to `127.0.0.1`, these requests are forwarded to the internal server.
 
 ### Example Scenario
 
