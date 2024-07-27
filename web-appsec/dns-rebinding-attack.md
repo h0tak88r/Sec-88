@@ -1,20 +1,33 @@
-# Understanding DNS Rebinding Attack
+# DNS Rebinding Attack
 
-### **What is a DNS Rebinding Attack?**
+### What is a DNS Rebinding Attack?
 
-A DNS rebinding attack allows an attacker to bypass the same-origin policy of web browsers, enabling them to make arbitrary requests to a target application and read the responses. This is done by changing the IP address associated with an attacker-controlled domain to that of the target application.
+A DNS rebinding attack is a technique used by attackers to bypass the security restrictions built into web browsers, specifically the **same-origin policy**. This policy is designed to prevent a website from making requests to a different domain than the one it originated from. DNS rebinding allows attackers to trick a victim's browser into thinking that an attacker-controlled domain is the same as a trusted domain, thus enabling unauthorized access to internal resources or sensitive data.
 
-**How Does It Work?**
+### How Does It Work?
 
-1. **Initial Request**: When a victim accesses a malicious site, the attacker's DNS server first resolves the domain to an IP address controlled by the attacker, serving malicious JavaScript code to the victim's browser.
-2. **Short TTL (Time To Live)**: The DNS response has a very short TTL, causing the browser to soon request a new DNS resolution.
-3. **Rebinding**: When the TTL expires and the browser re-requests the DNS resolution, the attacker's DNS server responds with the IP address of the target application (e.g., `127.0.0.1`).
-4. **Exploitation**: The malicious JavaScript running in the victim's browser can now make requests to the target application, bypassing the same-origin policy.
-5. **Data Exfiltration**: The responses from the target application can be read and sent back to the attacker.
+1. **Initial Request:**
+   * The victim visits a malicious website controlled by the attacker. This site hosts JavaScript code that the attacker wants to execute in the victim's browser.
+2. **DNS Resolution:**
+   * The malicious site’s domain is resolved by the victim's browser using the attacker's DNS server. Initially, this domain resolves to an IP address that the attacker controls, allowing them to serve the malicious JavaScript.
+3. **Short TTL (Time To Live):**
+   * The DNS response from the attacker's server has a very short TTL value. TTL is a setting that tells the browser how long to cache the IP address before checking again. A short TTL ensures that the browser will quickly re-query the DNS server for a new IP address.
+4. **DNS Rebinding:**
+   * When the TTL expires, the victim’s browser requests a new DNS resolution for the same domain. This time, the attacker’s DNS server responds with the IP address of a different server – typically the IP address of the target application that the attacker wants to exploit (e.g., `127.0.0.1`, which refers to the localhost of the victim's machine).
+5. **Exploitation:**
+   * Now that the domain name points to the target application’s IP address, the malicious JavaScript running in the victim’s browser can make requests to the target application. Because the browser sees the requests as coming from the same origin (the domain controlled by the attacker), it bypasses the same-origin policy.
+6. **Data Exfiltration:**
+   * The attacker can then collect responses from these requests and send them back to their own server. This could allow them to access internal APIs, read sensitive information, or perform other malicious actions on the target application.
 
-### **Lab Exploitation Story**
+### Example Scenario
+
+Imagine an attacker sets up a malicious website with a domain like `malicious.com`. The attacker controls the DNS settings for this domain. When a victim visits `malicious.com`, the JavaScript on this site initially points to an IP address the attacker controls. However, after a short time, the DNS settings are changed to point to the victim’s internal network (e.g., `127.0.0.1`). The JavaScript then makes requests to `127.0.0.1`, which are interpreted by the victim’s browser as requests to the victim’s own server. If the victim's server has sensitive APIs or data, the attacker can now access this information.
+
+
 
 ***
+
+### **Lab Exploitation Story**
 
 ### Setting Up the Lab
 
