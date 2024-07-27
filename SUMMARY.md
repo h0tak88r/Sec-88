@@ -85,7 +85,6 @@
   * [Attacking Secondary Context](web-appsec/attacking-secondary-context.md)
   * [Hacking Web Sockets](web-appsec/hacking-web-sockets.md)
   * [IDN Homograph Attack](web-appsec/idn-homograph-attack.md)
-  * [Bypassing SSRF Protection with DNS Rebinding Attack](web-appsec/bypassing-ssrf-protection-with-dns-rebinding-attack.md)
   * [DNS Rebinding Attack](web-appsec/dns-rebinding-attack.md)
 * [🐞 Bug Bounty](bug-bounty/README.md)
   * [Hunting Methodology](bug-bounty/hunting-methodology.md)
