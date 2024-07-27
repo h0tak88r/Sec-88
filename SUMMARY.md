@@ -43,7 +43,6 @@
   * [OAUTH Misconfigurations](web-appsec/oauth-misconfigurations/README.md)
     * [OAuth 2.0 Basics](web-appsec/oauth-misconfigurations/oauth-2.0-basics.md)
     * [OAUTH Misconfigurations](web-appsec/oauth-misconfigurations/oauth-to-ato.md)
-    * [Auth0 Vs OAuth Vs SSO](web-appsec/oauth-misconfigurations/auth0-vs-oauth-vs-sso.md)
   * [Broken Access Control](web-appsec/broken-access-control/README.md)
     * [403 Bypass](web-appsec/broken-access-control/403-bypass.md)
   * [Broken Link Injection](web-appsec/broken-link-injection.md)
