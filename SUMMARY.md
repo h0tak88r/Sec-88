@@ -90,7 +90,7 @@
   * [API BAC leads to PII Data Disclosure](bug-bounty/api-bac-leads-to-pii-data-disclosure.md)
   * [Misconfigured OATUH leads to Pre-Account Takeover](bug-bounty/misconfigured-oatuh-leads-to-pre-account-takeover.md)
   * [Automating Bug Bounty with GitHub Actions](bug-bounty/github-actions.md)
-  * [My Methodlogy with Public BBP](bug-bounty/my-methodlogy-with-public-bbp.md)
+  * [From Recon to Reward: My Bug Bounty Methodology when Hunting on Public Bug Bounty Programs](bug-bounty/from-recon-to-reward-my-bug-bounty-methodology-when-hunting-on-public-bug-bounty-programs.md)
   * [Exploring Subdomains: From Enumeration to Takeover Victory](bug-bounty/exploring-subdomains-from-enumeration-to-takeover-victory.md)
   * [0-Click Account Takeover via Insecure Password Reset Feature](bug-bounty/0-click-account-takeover-via-insecure-password-reset-feature.md)
   * [How a Simple Click Can Lead to Account Takeover: An OAuth Insecure Implementation Vulnerability](bug-bounty/how-a-simple-click-can-lead-to-account-takeover-an-oauth-insecure-implementation-vulnerability.md)
