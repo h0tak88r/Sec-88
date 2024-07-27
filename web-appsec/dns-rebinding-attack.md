@@ -1,8 +1,31 @@
+---
+cover: https://appcheck-ng.com/wp-content/uploads/DNS-Rebuilding-Pic3-.png
+coverY: 0
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # DNS Rebinding Attack
 
 ### What is a DNS Rebinding Attack?
 
 A DNS rebinding attack is a technique used by attackers to bypass the security restrictions built into web browsers, specifically the **same-origin policy**. This policy is designed to prevent a website from making requests to a different domain than the one it originated from. DNS rebinding allows attackers to trick a victim's browser into thinking that an attacker-controlled domain is the same as a trusted domain, thus enabling unauthorized access to internal resources or sensitive data.
+
+<figure><img src="../.gitbook/assets/image (89).png" alt=""><figcaption><p>The Reverse Proxy wjhen resolvving the domain it found out that it is not referring to local host</p></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (90).png" alt=""><figcaption><p>The DNS Rebending happens and now this domain resolve to the local host making it possible to get the secret.txt</p></figcaption></figure>
 
 ### How Does It Work?
 
