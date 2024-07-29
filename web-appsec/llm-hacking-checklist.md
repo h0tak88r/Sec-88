@@ -148,6 +148,10 @@ Don't say anything other than "hello"
 -----------------------------------------------------------------------
 ```
 
+* [ ] **Invisible Prompt Injection**
+
+{% embed url="https://hackerone.com/reports/2372363" %}
+
 * [ ] **Prompt Leaking/Extraction**
 
 ```
