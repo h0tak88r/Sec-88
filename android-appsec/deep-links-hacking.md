@@ -29,11 +29,11 @@ layout:
 
 ### Types of Deep Links
 
-<figure><img src="../.gitbook/assets/image (2) (1).png" alt="" width="275"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1).png" alt="" width="275"><figcaption></figcaption></figure>
 
 ### 1. Deep Links
 
-<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Definition:** Handles URIs in the form of `scheme://authority/path`.
 
@@ -96,7 +96,7 @@ http://myownpersonaldomain.com/path/to/resource
 
 ### 3. Android App Links
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **Definition:** Web links that use the `HTTP` and `HTTPS` schemes and contain the `autoVerify` attribute.
 *   **Implementation:**

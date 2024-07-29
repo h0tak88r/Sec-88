@@ -86,6 +86,7 @@
   * [Hacking Web Sockets](web-appsec/hacking-web-sockets.md)
   * [IDN Homograph Attack](web-appsec/idn-homograph-attack.md)
   * [DNS Rebinding Attack](web-appsec/dns-rebinding-attack.md)
+  * [LLM Hacking Checklist](web-appsec/llm-hacking-checklist.md)
 * [🐞 Bug Bounty](bug-bounty/README.md)
   * [Hunting Methodology](bug-bounty/hunting-methodology.md)
   * [API BAC leads to PII Data Disclosure](bug-bounty/api-bac-leads-to-pii-data-disclosure.md)
