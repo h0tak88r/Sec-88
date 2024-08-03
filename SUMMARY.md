@@ -98,6 +98,7 @@
   * [How a Simple Click Can Lead to Account Takeover: An OAuth Insecure Implementation Vulnerability](bug-bounty/how-a-simple-click-can-lead-to-account-takeover-an-oauth-insecure-implementation-vulnerability.md)
   * [Finding High-Impact Bugs in a Private Bug Bounty Program: Our Success Story](bug-bounty/finding-high-impact-bugs-in-a-private-bug-bounty-program-our-success-story.md)
   * [Unlocking the Weak Spot: Exploiting Insecure Password Reset Tokens](bug-bounty/unlocking-the-weak-spot-exploiting-insecure-password-reset-tokens.md)
+  * [AI Under Siege: Discovering and Exploiting Vulnerabilities](bug-bounty/ai-under-siege-discovering-and-exploiting-vulnerabilities.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)
