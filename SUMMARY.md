@@ -160,6 +160,7 @@
     * [Git](operating-systems/linux/git.md)
     * [Install Go tools from private repositories using GitHub PAT](operating-systems/linux/install-go-tools-from-private-repositories-using-github-pat.md)
   * [VPS](operating-systems/vps.md)
+  * [Tools, Extensions and Softwares](operating-systems/tools-extensions-and-softwares.md)
 * [👨‍💻 Programming](programming/README.md)
   * [HTML](programming/html.md)
   * [JavaScript (JS)](programming/javascript-js/README.md)

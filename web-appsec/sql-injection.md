@@ -11,11 +11,14 @@ description: >-
 1. Study SQL
 2. [http://www.amazon.com/SQL-Injection-Attacks-Defense-Second/dp/1597499633/](http://www.amazon.com/SQL-Injection-Attacks-Defense-Second/dp/1597499633/)
 3. [https://portswigger.net/web-security/all-labs](https://portswigger.net/web-security/all-labs)
-4. [https://www.netsparker.com/blog/web-security/sql-injection-cheat-sheet/](https://www.netsparker.com/blog/web-security/sql-injection-cheat-sheet/)
-5. [https://github.com/Audi-1/sqli-labs](https://github.com/Audi-1/sqli-labs)
-6. [https://rails-sqli.org/](https://rails-sqli.org/)
-7. [https://www.youtube.com/watch?v=VIkVqvo97Hk](https://www.youtube.com/watch?v=VIkVqvo97Hk)
-8. [https://www.youtube.com/watch?v=SEuyruffJTw](https://www.youtube.com/watch?v=SEuyruffJTw)
+4. [https://www.youtube.com/watch?v=du-jkS6-sbo\&list=PLkiAz1NPnw8qEgzS7cgVMKavvOAdogsro](https://www.youtube.com/watch?v=du-jkS6-sbo\&list=PLkiAz1NPnw8qEgzS7cgVMKavvOAdogsro)
+5. [https://www.netsparker.com/blog/web-security/sql-injection-cheat-sheet/](https://www.netsparker.com/blog/web-security/sql-injection-cheat-sheet/)
+6. [https://github.com/Audi-1/sqli-labs](https://github.com/Audi-1/sqli-labs)
+7. [https://rails-sqli.org/](https://rails-sqli.org/)
+8. [https://www.youtube.com/watch?v=VIkVqvo97Hk](https://www.youtube.com/watch?v=VIkVqvo97Hk)
+9. [https://www.youtube.com/watch?v=SEuyruffJTw](https://www.youtube.com/watch?v=SEuyruffJTw)
+
+{% embed url="https://nav1n0x.gitbook.io/a-guide-to-manually-hunting-sql-injection/" %}
 
 > **Methodology**
 
