@@ -36,7 +36,7 @@
     * [Attacking Organizations with big scopes](web-appsec/reconnaissance/attacking-organizations-with-big-scopes.md)
   * [Subdomain Enumeration](web-appsec/web-app-security.md)
   * [Fingerprinting](web-appsec/fingerprinting.md)
-  * [Information Disclosure](web-appsec/information-disclosure.md)
+  * [Dorking](web-appsec/information-disclosure.md)
   * [XSS\_HTML Injection](web-appsec/xss\_html-injection.md)
   * [Improper Authentication](web-appsec/improper-authentication/README.md)
     * [JWT Security](web-appsec/improper-authentication/jwt-security.md)
