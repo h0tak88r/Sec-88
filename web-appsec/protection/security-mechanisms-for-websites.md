@@ -6,7 +6,7 @@
     * It ensures that web pages from different origins (domains, protocols, or ports) cannot interfere with each other's data.
     * This policy helps mitigate various types of attacks, such as cross-site scripting (XSS) and cross-site request forgery (CSRF).
 
-    <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 2. **Same-Site Cookies**:
    * Same-Site Cookies are a cookie attribute that restricts the cookie's scope to first-party or same-site context.
    * They help mitigate CSRF attacks by ensuring that cookies are only sent along with requests originating from the same site.

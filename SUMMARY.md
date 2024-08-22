@@ -99,6 +99,7 @@
   * [Unlocking the Weak Spot: Exploiting Insecure Password Reset Tokens](bug-bounty/unlocking-the-weak-spot-exploiting-insecure-password-reset-tokens.md)
   * [AI Under Siege: Discovering and Exploiting Vulnerabilities](bug-bounty/ai-under-siege-discovering-and-exploiting-vulnerabilities.md)
   * [Inside the Classroom: How We Hacked Our Way Past Authorization on a Leading EdTech Platform](bug-bounty/inside-the-classroom-how-we-hacked-our-way-past-authorization-on-a-leading-edtech-platform.md)
+  * [Critical OTP Verification Flaw: How We Achieved Full Account Takeover](bug-bounty/critical-otp-verification-flaw-how-we-achieved-full-account-takeover.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)
