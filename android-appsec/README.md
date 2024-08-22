@@ -24,3 +24,4 @@ description: >-
    3. [Hack-Tricks](https://book.hacktricks.xyz/mobile-pentesting/android-app-pentesting)&#x20;
    4. [Frida for Beginners](https://www.udemy.com/course/frida-for-beginners)
    5. [overSecuredBlog](https://blog.oversecured.com/)
+   6. [elcapitano-blog](https://mohamed-ashraf.notion.site/Mobile-pentest-df8295a9922a44e7aa171a598a820db4)
