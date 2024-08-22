@@ -4,5 +4,5 @@ description: >-
   https://ko-fi.com/h0tak88r
 ---
 
-# 🐞 Bug Bounty
+# 🐞 Write-Ups
 
