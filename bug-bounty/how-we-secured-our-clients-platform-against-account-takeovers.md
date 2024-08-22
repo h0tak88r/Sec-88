@@ -4,13 +4,13 @@ During a recent pentest engagement with CyberAR LLC, we uncovered a critical sec
 
 ***
 
-#### **The Discovery**
+## **The Discovery**
 
 Our target was a web application that implemented OTP-based authentication as an added layer of security. The user would enter their email, request an OTP, and then submit the received code to gain access to their account. It all seemed secure at first glance—until we dug deeper.
 
 <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-#### **Initial Exploration**
+## **Initial Exploration**
 
 The first thing we noticed was that the OTP mechanism didn't include any rate limiting. This was curious because, without proper rate limiting, an attacker could theoretically brute force the OTP. But we weren't just going to theorize—we needed to test it.
 
@@ -26,7 +26,7 @@ Content-Type: application/json
 
 At this point, we set up Burp Suite's Intruder tool to brute force the OTP field.
 
-#### **Executing the Attack**
+## **Executing the Attack**
 
 We configured the Intruder to iterate through possible OTP values. Since the OTP was six digits long. We figured that even with no rate limiting, the attack might take a while, but we were patient.
 
@@ -34,7 +34,7 @@ With the Intruder running, we monitored the responses. After several attempts, t
 
 <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
-#### **The Exploit: Account Takeover**
+## **The Exploit: Account Takeover**
 
 With the correct OTP in hand, we extracted the `OneTimeToken` from the server’s response. This token was the key to the kingdom.
 
@@ -51,7 +51,7 @@ This request returned the full authorization token for the victim’s account, e
 
 <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
-#### **Lessons Learned**
+## **Lessons Learned**
 
 This vulnerability highlighted several critical issues in the OTP verification process:
 
@@ -59,13 +59,13 @@ This vulnerability highlighted several critical issues in the OTP verification p
 * **Insecure OTP Mechanism:** The system should invalidate OTPs after a few incorrect attempts or after a short period.
 * **Inadequate Monitoring:** The application lacked sufficient logging and monitoring, allowing such an attack to go undetected.
 
-#### **Recommendations**
+## **Recommendations**
 
 * **Implement Rate Limiting:** Add rate limiting on OTP submissions to prevent brute force attacks.
 * **Session Management:** Ensure OTPs expire after a set time or after a few failed attempts.
 * **Enhanced Monitoring:** Log all failed OTP attempts and set up alerts for suspicious activity.
 
-#### **Conclusion**
+## **Conclusion**
 
 This pentest engagement with CyberAR LLC served as a stark reminder of how seemingly minor oversights in security mechanisms like OTP can lead to severe consequences, such as full account takeovers. Always think critically about how each piece of the security puzzle fits together, and never underestimate the importance of comprehensive security testing.
 
