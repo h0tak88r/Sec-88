@@ -1,4 +1,4 @@
-# Critical OTP Verification Flaw: How We Achieved Full Account Takeover
+# How We Secured Our Client’s Platform Against Interaction-Free Account Thefts
 
 During a recent pentest engagement with CyberAR LLC, we uncovered a critical security vulnerability in the OTP (One-Time Password) verification process of a popular web application. This vulnerability allowed us to bypass OTP verification, leading to a complete takeover of user accounts. Here's how it went down.
 
