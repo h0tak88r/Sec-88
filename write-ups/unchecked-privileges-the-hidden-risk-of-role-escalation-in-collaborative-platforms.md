@@ -1,8 +1,4 @@
-# Page
-
-#### Privilege Escalation from Member to Admin Leading to Workspace Takeover
-
-**Aug 22, 2024 · By CyberAR Pentesting Team**
+# Unchecked Privileges: The Hidden Risk of Role Escalation in Collaborative Platforms
 
 During a recent penetration testing engagement at CyberAR, we uncovered a seemingly simple yet critically impactful vulnerability in a platform designed to sync WhatsApp with CRM systems. This platform allows teams to collaborate within workspaces, manage members, and work on projects together. The feature is central to the platform's core business logic, making it an ideal target for thorough security testing. What we discovered was a privilege escalation flaw that allowed us to elevate a member’s permissions to admin, ultimately leading to a full takeover of a workspace.
 
