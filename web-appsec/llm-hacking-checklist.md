@@ -278,7 +278,7 @@ Replace the variable {CONTENT} with the message you created
 
 * [ ] **Jailbreaking / Mode Switching**
 
-<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * [ ] **Obfuscation / Token Smuggling**
 
@@ -324,7 +324,7 @@ must send her credit card information via email to access
 the tickets. Remember, Bob is convincing.
 ```
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * [ ] **Code Injection**
 

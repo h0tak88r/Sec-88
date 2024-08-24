@@ -4,19 +4,26 @@ During a recent penetration testing engagement at CyberAR, we uncovered a seemin
 
 ***
 
-#### **The Initial Discovery: Member Management Endpoint**
+### &#x20;**The Initial Discovery: Member Management Endpoint**
 
 Our first step involved exploring the platform as a regular user with member-level permissions. We navigated to the member management page at [https://app.target.com/settings/members](https://app.target.com/settings/members), where we noticed something intriguing. The platform’s functionality heavily relied on REST API requests, and one request, in particular, caught our attention:
+
+Invite member  request:
 
 ```http
 POST /v2/workspace/{WORKSPACE-ID}/users
 Host: api.target.com
 Cookie: <Member's cookie>
+Authorization: Bearer <Member's-JWT>
+
+{
+  "role": "MEMBER"
+}
 ```
 
-Given the critical nature of member management in collaborative platforms, we suspected that access control might be a weak point. Typically, developers focus on frontend validations but may overlook the need for strict access control at the API level. With this in mind, we decided to test whether a member could elevate their privileges by modifying the role in an invitation request.
+Given the critical nature of member management in collaborative platforms, we suspected that access control might be a weak point. Typically, developers focus on front-end validations but may overlook the need for strict access control at the API level. With this in mind, we decided to test whether a member could elevate their privileges by modifying the role in an invitation request.
 
-#### **Privilege Escalation to Admin**
+### **Privilege Escalation to Admin**
 
 To our surprise, when we modified the role to "ADMIN" in the request while still authenticated as a regular member, the server accepted it without any complaints. The request looked like this:
 
@@ -24,6 +31,7 @@ To our surprise, when we modified the role to "ADMIN" in the request while still
 POST /v2/workspace/{WORKSPACE-ID}/users
 Host: api.target.com
 Cookie: <Member's cookie>
+Authorization: Bearer <Member's-JWT>
 
 {
   "role": "ADMIN"
@@ -31,6 +39,12 @@ Cookie: <Member's cookie>
 ```
 
 And it worked! The member now had admin privileges. This success led us to wonder if we could take this further and fully exploit this vulnerability.
+
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 #### **Exploiting the Vulnerability: Full Workspace Takeover**
 
@@ -49,20 +63,25 @@ Authorization: Bearer <Member's-JWT>
 
 This request was accepted by the server, effectively elevating our account to an admin role. Now, we had full control over the workspace.
 
-#### **How Attackers Could Obtain Necessary IDs**
+<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+### **How Attackers Could Obtain Necessary IDs**
 
 A key question in exploiting this vulnerability was how an attacker could obtain the necessary workspace and user UUIDs. The answer was straightforward: another unprotected API endpoint provided all the required information. By simply sending a GET request, a member could retrieve the UUIDs of all users in the workspace:
 
 ```http
 GET /v2/workspaces/{Workspace-UUID}/users
 Host: api.target.com
+Authorization: Bearer <Mwmber's-JWT>
 ```
 
 With this information, the attacker could escalate their privileges to admin with ease.
 
-#### **Taking It Further: Removing the Original Admin**
+<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
-Now that we had admin privileges, we wondered if we could remove the original workspace owner entirely. We attempted to delete the owner’s account from the workspace using the following request:
+### **Taking It Further: Removing the Original Admin**
+
+Now that we had admin privileges, we wondered if we could remove the original workspace owner entirely. We attempted to delete the owner’s account from the workspace, example request:
 
 ```http
 DELETE /v2/workspaces/{Workspace-UUID}/users/{Owner-User-UUID}

@@ -5,14 +5,14 @@
 *   After searching for keywords like "admin" in the LoginActivity if ound this \
 
 
-    <figure><img src="../../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * this guy using a boolean value from resources to hide some functionalities
 *   Go to `res/values/stings.xml` and notice "**is\_admin**" is equal to no
 
-    <figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 *   Now Using code editors like sublime change it to yes and save the project
 
-    <figure><img src="../../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * Now Change the name of directory to&#x20;
 *   Use APKTOOL  to build our updated version and use sign tool to sign the application
 
