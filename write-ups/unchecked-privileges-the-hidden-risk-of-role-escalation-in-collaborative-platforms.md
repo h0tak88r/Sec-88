@@ -92,14 +92,24 @@ Authorization: Bearer <Admin's-JWT>
 
 Amazingly, the request succeeded, and we were now the sole admin of the workspace, having completely taken over the workspace from its original owner.
 
-#### **Summary**
-
-This vulnerability allowed us to escalate our privileges from a member to an admin, ultimately taking over an entire workspace. The issues we discovered stemmed from a lack of proper access control at the API level and exposed UUIDs that made exploitation straightforward.
-
-#### **Recommendations**
+### **Recommendations**
 
 * **Strict Access Control:** Ensure that API endpoints, especially those handling roles and permissions, are protected by server-side access control mechanisms.
 * **UUID Protection:** Avoid exposing critical IDs in API responses. Consider using role-based access to ensure only authorized users can access sensitive information.
 * **Thorough Testing:** Perform comprehensive security testing, particularly on features that involve user roles, permissions, and collaboration.
 
 This vulnerability underscores the importance of robust access control in multi-user platforms. Even a simple oversight can lead to complete system compromise. Always think critically, test thoroughly, and secure your endpoints.
+
+### **Conclusion**
+
+This vulnerability allowed us to escalate our privileges from a member to an admin, ultimately taking over an entire workspace. The issues we discovered stemmed from a lack of proper access control at the API level and exposed UUIDs that made exploitation straightforward.
+
+### Resources
+
+{% embed url="https://purplesec.us/learn/privilege-escalation-attacks/" %}
+
+{% embed url="https://www.keepersecurity.com/blog/2024/04/15/six-ways-to-prevent-privilege-escalation-attacks/" %}
+
+{% embed url="https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/03-Testing_for_Privilege_Escalation" %}
+
+{% embed url="https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html" %}
