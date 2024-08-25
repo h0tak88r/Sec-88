@@ -48,15 +48,15 @@
 
 ### **Understanding Salesforce HTTP Request**
 
-<figure><img src="../../.gitbook/assets/image (84).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (226).png" alt=""><figcaption></figcaption></figure>
 
 * Key parameters in POST requests: `message`, `aura.context`, `aura.pageURI`, `aura.token`.
 
-<figure><img src="../../.gitbook/assets/image (85).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (227).png" alt=""><figcaption></figcaption></figure>
 
 * Focus on the `message` parameter, particularly the `descriptor` and `params` key-value pairs.
 
-<figure><img src="../../.gitbook/assets/image (86).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (228).png" alt=""><figcaption></figcaption></figure>
 
 ### **Mapping Misconfigurations to Pen-Test**
 

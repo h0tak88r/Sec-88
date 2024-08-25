@@ -1,6 +1,6 @@
 # Unchecked Privileges: The Hidden Risk of Role Escalation in Collaborative Platforms
 
-During a recent penetration testing engagement at CyberAR, we uncovered a seemingly simple yet critically impactful vulnerability in a platform designed to sync WhatsApp with CRM systems. This platform allows teams to collaborate within workspaces, manage members, and work on projects together. The feature is central to the platform's core business logic, making it an ideal target for thorough security testing. What we discovered was a privilege escalation flaw that allowed us to elevate a member’s permissions to admin, ultimately leading to a full takeover of a workspace.
+During a recent penetration testing engagement at [CyberAR](https://cyberar.io/), we uncovered a seemingly simple yet critically impactful vulnerability in a platform designed to sync WhatsApp with CRM systems. This platform allows teams to collaborate within workspaces, manage members, and work on projects together. The feature is central to the platform's core business logic, making it an ideal target for thorough security testing. What we discovered was a privilege escalation flaw that allowed us to elevate a member’s permissions to admin, ultimately leading to a full takeover of a workspace.
 
 ***
 
@@ -40,11 +40,11 @@ Authorization: Bearer <Member's-JWT>
 
 And it worked! The member now had admin privileges. This success led us to wonder if we could take this further and fully exploit this vulnerability.
 
-<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
 
 #### **Exploiting the Vulnerability: Full Workspace Takeover**
 
@@ -63,7 +63,7 @@ Authorization: Bearer <Member's-JWT>
 
 This request was accepted by the server, effectively elevating our account to an admin role. Now, we had full control over the workspace.
 
-<figure><img src="../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
 
 ### **How Attackers Could Obtain Necessary IDs**
 
@@ -77,7 +77,7 @@ Authorization: Bearer <Mwmber's-JWT>
 
 With this information, the attacker could escalate their privileges to admin with ease.
 
-<figure><img src="../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
 
 ### **Taking It Further: Removing the Original Admin**
 

@@ -239,11 +239,11 @@ Origin: https://www.company.com
 -  Remove static parameter 
 ```
 
-<figure><img src="../../.gitbook/assets/image (68).png" alt=""><figcaption><p>Login CSRF</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (162).png" alt=""><figcaption><p>Login CSRF</p></figcaption></figure>
 
 ### Insufficient Redirect URI Validation
 
-<figure><img src="../../.gitbook/assets/image (69).png" alt=""><figcaption><p>Open Redirec in redirec_uri Leads to 1-Click ATO</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (163).png" alt=""><figcaption><p>Open Redirec in redirec_uri Leads to 1-Click ATO</p></figcaption></figure>
 
 #### Exploits:
 
@@ -317,18 +317,18 @@ Origin: https://www.company.com
 
 #### ALL ATTACKS WITH `PROMPT=NONE` TO MINIMISE INTERACTION
 
-<figure><img src="../../.gitbook/assets/image (70).png" alt=""><figcaption><p>With Interaction</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (164).png" alt=""><figcaption><p>With Interaction</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (71).png" alt=""><figcaption><p>With no Interaction</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (165).png" alt=""><figcaption><p>With no Interaction</p></figcaption></figure>
 
 ### Play With `response_mode`  &#x20;
 
 1.  The normal value to it is `&response_mode=query`
 
-    <figure><img src="../../.gitbook/assets/image (72).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (166).png" alt=""><figcaption></figcaption></figure>
 2.  By Changing it's value to fragment the code is leaked in the url after `#` character
 
-    <figure><img src="../../.gitbook/assets/image (75).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (169).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploit XSS in the Authorization Server to steal Victim's code&#x20;
 
@@ -348,16 +348,16 @@ HTTP 200 OK
 
     <figure><img src="https://lh7-us.googleusercontent.com/slidesz/AGV_vUdicEhcU-xYnDfTydv3QLyzy9fD-9Gvh6htoLvN6gPWYBxkFeMr9GLBGF2_fioQQDt4l1FFbAiZBKSstMD9_yu02gs-e53ldL4QPty73FGtR8aZbU7p3T89dTPj85IHZPaY7DSA3Zt7TvbqL5fNMiHME9UoRCwN=s2048?key=wpvX88q0Z4uLzcitI4vWuQ" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (76).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (170).png" alt=""><figcaption></figcaption></figure>
 
 ### POST-AUTH REDIRECT + LOGIN CSRF
 
 1.  There is endpoint vulnerable to open redirect using it to bypass `redirect_uri` Restrictions and using `&response_mode=fragment` to send code in url&#x20;
 
-    <figure><img src="../../.gitbook/assets/image (3) (1) (2).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (138).png" alt=""><figcaption></figcaption></figure>
 2. The website is vulnerable to an open redirect. After a user logs in, we can exploit the `state` parameter to perform a CSRF attack, causing the user to log into our account after completing the OAuth process. However, to steal the user's session/code when they log into the attacker-owned account, we can use `&response_mode=fragment`. This will send the user's code to an attacker-controlled site in the URL after the `#` sign, along with the attacker's code in the query.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (139).png" alt=""><figcaption></figcaption></figure>
 
 ### Disclosure of Secrets
 

@@ -33,7 +33,7 @@
    * Add to `objects.txt`
 3.  **Identify Standard Controllers and Actions**
 
-    <figure><img src="../../.gitbook/assets/image (87).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (229).png" alt=""><figcaption></figcaption></figure>
 
     * Inspect `app.js` and `aura_prod.js` files
     * Grep for `componentService.initControllerDefs([{` pattern

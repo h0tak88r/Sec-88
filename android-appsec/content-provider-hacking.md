@@ -27,7 +27,7 @@ Content Providers manage access to a structured set of data in Android applicati
     android:permission="com.example.provider.READ_WRITE" />
 ```
 
-<figure><img src="../.gitbook/assets/image (80).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (222).png" alt=""><figcaption></figcaption></figure>
 
 #### **Code Exploit**&#x20;
 
@@ -63,14 +63,14 @@ textView.setText("cursor " + DatabaseUtils.dumpCursorToString(queryCursor));
 
 ### 2. SQL Injection Vulnerabilities
 
-<figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (58).png" alt=""><figcaption></figcaption></figure>
 
 **Steps to Identify:**
 
 * **Check Query Methods**: Look at the `query` method to see if user inputs are properly sanitized.
 * **Identify Tables**: Locate the tables used within the Content Provider by searching for `content://` URIs in the code.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (59).png" alt=""><figcaption></figcaption></figure>
 
 **Example Code to Identify SQL Injection Points:**
 
@@ -81,7 +81,7 @@ Cursor cursor = db.rawQuery(selection, new String[]{username});
 
 Now we need to identify the tables in the Java code. We can look for the keyword “`content://`“.
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (60).png" alt=""><figcaption></figcaption></figure>
 
 #### **Case 1**
 

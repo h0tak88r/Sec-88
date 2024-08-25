@@ -11,7 +11,7 @@ description: https://www.youtube.com/watch?v=vFk0XtHfuSg
   bbot -t ebay.com -f subdomain-enum
   ```
 
-<figure><img src="../../.gitbook/assets/image (78).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (172).png" alt=""><figcaption></figcaption></figure>
 
 ### Reverse Whois
 
@@ -21,7 +21,7 @@ description: https://www.youtube.com/watch?v=vFk0XtHfuSg
 
 * Using Burp Intruder
 
-<figure><img src="../../.gitbook/assets/image (79).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (173).png" alt=""><figcaption></figcaption></figure>
 
 * Using FFUF
 

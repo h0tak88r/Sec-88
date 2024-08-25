@@ -59,14 +59,18 @@ This vulnerability highlighted several critical issues in the OTP verification p
 * **Insecure OTP Mechanism:** The system should invalidate OTPs after a few incorrect attempts or after a short period.
 * **Inadequate Monitoring:** The application lacked sufficient logging and monitoring, allowing such an attack to go undetected.
 
-### **Recommendations**
-
-* **Implement Rate Limiting:** Add rate limiting on OTP submissions to prevent brute force attacks.
-* **Session Management:** Ensure OTPs expire after a set time or after a few failed attempts.
-* **Enhanced Monitoring:** Log all failed OTP attempts and set up alerts for suspicious activity.
-
 ### **Conclusion**
 
 This pentest engagement with [CyberAR LLC](https://cyberar.io/) served as a stark reminder of how seemingly minor oversights in security mechanisms like OTP can lead to severe consequences, such as full account takeovers. Always think critically about how each piece of the security puzzle fits together, and never underestimate the importance of comprehensive security testing.
 
 Stay curious, stay secure, and happy hacking!
+
+### Resources
+
+{% embed url="https://book.hacktricks.xyz/pentesting-web/2fa-bypass" %}
+
+{% embed url="https://owasp.org/API-Security/editions/2019/en/0xa4-lack-of-resources-and-rate-limiting/" %}
+
+{% embed url="https://owasp.org/www-community/controls/Blocking_Brute_Force_Attacks" %}
+
+{% embed url="https://cwe.mitre.org/data/definitions/307.html" %}

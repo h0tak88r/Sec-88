@@ -5,10 +5,10 @@
 1. Install Apk in the androi emulator&#x20;
 2.  Fire up burp suite and configure the proxy to listen to all interfaces on port 8081
 
-    <figure><img src="../../.gitbook/assets/image (43).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (199).png" alt=""><figcaption></figcaption></figure>
 3.  Configure proxy settings in the android emulator WIFI settings to be your localip:8081
 
-    <figure><img src="../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (200).png" alt=""><figcaption></figcaption></figure>
 4. Install Certificate to your emulator by exporting the burp certificate -> rename it to `burp.cer` -> push it to the emulator via `adb push <PATH>` then install it to your device
 5. run app.py for your server and proxifiy traffic using burp and use all feature and collect all requests
 
@@ -64,4 +64,4 @@ base                      base-dex2jar.jar  sieve_patched_no_crypto.apk
     `run app.package.info -a com.android.insecurebankv2`\
     `run app.package.attacksurface com.android.insecurebannkv2`
 
-    <figure><img src="../../.gitbook/assets/image (16) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/image (80).png" alt=""><figcaption></figcaption></figure>

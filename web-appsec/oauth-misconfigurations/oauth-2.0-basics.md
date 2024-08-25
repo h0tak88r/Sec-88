@@ -37,7 +37,7 @@
 
 * Authorization Code Grant with [PKCE](https://oauth.net/2/pkce/)
 
-<figure><img src="../../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (196).png" alt=""><figcaption></figcaption></figure>
 
 ![](https://dev-to-uploads.s3.amazonaws.com/i/odkf14kzlb5gcbvrmuvx.gif)
 

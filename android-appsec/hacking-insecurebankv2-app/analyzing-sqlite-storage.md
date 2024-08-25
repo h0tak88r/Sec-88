@@ -3,7 +3,7 @@
 * It is as easy as just go to the database directory of the package in the data directory&#x20;
 * Then initialize sqlite and interact with it read tables and that stuff
 
-<figure><img src="../../.gitbook/assets/image (12) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (76).png" alt=""><figcaption></figcaption></figure>
 
 ```bash
 1|vbox86p:/data/data/com.android.insecurebankv2/databases # ls

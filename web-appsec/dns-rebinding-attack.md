@@ -23,9 +23,9 @@ layout:
 
 A DNS rebinding attack is a technique used by attackers to bypass the security restrictions built into web browsers, specifically the **same-origin policy**. This policy is designed to prevent a website from making requests to a different domain than the one it originated from. DNS rebinding allows attackers to trick a victim's browser into thinking that an attacker-controlled domain is the same as a trusted domain, thus enabling unauthorized access to internal resources or sensitive data.
 
-<figure><img src="../.gitbook/assets/image (89).png" alt=""><figcaption><p>The Reverse Proxy wjhen resolvving the domain it found out that it is not referring to local host</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (235).png" alt=""><figcaption><p>The Reverse Proxy wjhen resolvving the domain it found out that it is not referring to local host</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (90).png" alt=""><figcaption><p>The DNS Rebending happens and now this domain resolve to the local host making it possible to get the secret.txt</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (236).png" alt=""><figcaption><p>The DNS Rebending happens and now this domain resolve to the local host making it possible to get the secret.txt</p></figcaption></figure>
 
 ### How Does DNS Rebinding Work in SSRF?
 
@@ -99,11 +99,11 @@ Press CTRL+C to quit
 
 The journey began when I opened the lab, which greeted me with a normal login page.
 
-<figure><img src="../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
 
 After logging in, I observed an API request that retrieved user files using a UUID. While it wasn't vulnerable to IDOR (Insecure Direct Object References), I made a mental note of it, suspecting it might be useful later.
 
-<figure><img src="../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
 
 #### Finding the SSRF
 
@@ -111,7 +111,7 @@ On the application's homepage, there was a functionality allowing file uploads f
 
 Attempting to fetch a file from localhost, I encountered a 403 status code with an "invalid URL" message.
 
-<figure><img src="../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (43).png" alt=""><figcaption></figcaption></figure>
 
 #### Fuzzing for SSRF
 
@@ -121,7 +121,7 @@ With a list of SSRF payloads in hand, I sent the request to Burp Suite's Intrude
 
 Initial attempts did not yield any promising results.
 
-<figure><img src="../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
 
 #### DNS Rebinding Attack
 
@@ -129,7 +129,7 @@ Next, I decided to try a DNS rebinding attack using a tool I found online:
 
 [DNS Rebinding Tool](https://lock.cmpxchg8b.com/rebinder.html)
 
-<figure><img src="../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
 
 I configured the tool to rebind between Google's IP address and localhost. Verifying the DNS rebind was successful through nslookup:
 
@@ -153,7 +153,7 @@ Address: 127.0.0.1
 
 So here what we need is to make multiple tries in the request until we success, But unfortunately the  still couldn't bypass SSRF protection
 
-<figure><img src="../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (46).png" alt=""><figcaption></figcaption></figure>
 
 #### Crafting the Exploit
 
@@ -161,7 +161,7 @@ Despite the rebind working, the SSRF protection still held strong. I thought to 
 
 I used `Content Type Converter`  Burp Suite Extension to do so&#x20;
 
-<figure><img src="../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
 
 **Original Request:**
 
@@ -203,7 +203,7 @@ I then decided to try another common technique: downgrading API versions from v3
 
 The Server returned A response with Status Code of `404 NOT FOUND`  cause actually there is no `secret.txt`   on the local host&#x20;
 
-<figure><img src="../.gitbook/assets/image (19).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
 
 #### Brute Forcing Files and Directories
 
@@ -247,7 +247,7 @@ Content-Length: 29
 
 Requesting `/api/users` returned all registered user UUIDs. I used one of these UUIDs to retrieve user files:
 
-<figure><img src="../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (49).png" alt=""><figcaption></figcaption></figure>
 
 Remember this Request ?
 
@@ -264,7 +264,7 @@ I used the parameter `user_uuid`  in the request as a get  parameter to make ser
 
 &#x20;
 
-<figure><img src="../.gitbook/assets/image (21).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
 
 #### Final Breakthrough
 

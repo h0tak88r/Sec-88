@@ -800,7 +800,7 @@ upload a picture file, intercept it, change picturename.jpg to xss payload
       Try in login pages, redirects, forms & dynamic URL construction (`~/images/`). Payload: `/(A(%22onerror='alert%60123%60'test))/`\
       Credits:  [https://x.com/nav1n0x/status/1799384973407031565](https://x.com/nav1n0x/status/1799384973407031565)
 
-      <figure><img src="../.gitbook/assets/image (81).png" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../.gitbook/assets/image (223).png" alt=""><figcaption></figcaption></figure>
 
 ### [Mind Map](https://xmind.ai/share/CTAMcPfH?xid=O720Am6q)
 

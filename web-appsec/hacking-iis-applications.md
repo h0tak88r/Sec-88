@@ -34,7 +34,7 @@ https://www.youtube.com/watch?v=yyD8Z5Qar5I&#x20;
 * It is IP but you can get the subdomain from the certificate common name
 *   Edit the Host Header&#x20;
 
-    <figure><img src="../.gitbook/assets/image (83).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (225).png" alt=""><figcaption></figcaption></figure>
 
 ### VHost Hopping <a href="#id-7ce1" id="id-7ce1"></a>
 

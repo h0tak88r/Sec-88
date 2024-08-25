@@ -11,17 +11,17 @@ Hello, fellow hackers! After some deep diving into a private bug bounty program 
 
 When you first land on the platform's homepage, you're immediately met with a barrier: there's no way in without an authorization code. These codes are distributed by teachers or administrators, and without one, you're stuck on the outside looking in. The code itself is a six-digit number—simple yet hard enough to guess by random chance.
 
-<figure><img src="../.gitbook/assets/image (107).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (252).png" alt=""><figcaption></figcaption></figure>
 
 Naturally, this piqued my interest. I started investigating the structure of these codes and realized they were being sent in GET requests. That's where the fun began.
 
-<figure><img src="../.gitbook/assets/image (106).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (251).png" alt=""><figcaption></figcaption></figure>
 
 ### The Brute Force Approach
 
 Using tools like ffuf and Burp Suite, I scripted a brute force attack on these codes. Considering the popularity of the platform and the number of active users, I figured there had to be plenty of active codes. And I was right—after some effort, I managed to uncover several valid codes. With one of these codes in hand, I bypassed the entry authorization code and successfully registered on the platform.
 
-<figure><img src="../.gitbook/assets/image (108).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (253).png" alt=""><figcaption></figcaption></figure>
 
 Once inside, I was granted access to the student profile and dashboard. But that wasn’t the end of the road.
 
@@ -29,7 +29,7 @@ Once inside, I was granted access to the student profile and dashboard. But that
 
 The real treasure on this platform is the classes themselves. However, just like the initial entry, access to a class requires a class code—another barrier set up by the teachers. My first instinct was to try the brute force approach again, but this time I hit a wall. The platform had implemented rate limiting on class code attempts, effectively blocking my attempts to guess the codes.
 
-<figure><img src="../.gitbook/assets/image (110).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (255).png" alt=""><figcaption></figcaption></figure>
 
 ### A New Approach: Hunting for Leaks
 
@@ -43,11 +43,11 @@ With this new domain in mind, I intercepted the requests using Burp Suite, extra
 
 Suddenly, I had a list of class codes that had been unintentionally exposed. Armed with these codes, I joined a class and found myself with access to even more features, including details about other students and class-specific resources.
 
-<figure><img src="../.gitbook/assets/image (111).png" alt=""><figcaption><p>the results of the tool</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (256).png" alt=""><figcaption><p>the results of the tool</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (112).png" alt=""><figcaption><p>Whe valid code signin code returns in the response</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (257).png" alt=""><figcaption><p>Whe valid code signin code returns in the response</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (113).png" alt=""><figcaption><p>we are in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (258).png" alt=""><figcaption><p>we are in</p></figcaption></figure>
 
 ### Conclusion: Lessons Learned
 

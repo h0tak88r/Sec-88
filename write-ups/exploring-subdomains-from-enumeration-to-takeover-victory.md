@@ -14,7 +14,7 @@ So today i will talk about how i got my critical subdomain takeover on ford moto
 
 ### Choose target
 
-<figure><img src="../.gitbook/assets/image (26).png" alt=""><figcaption><p>our target is ford.com domain</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (182).png" alt=""><figcaption><p>our target is ford.com domain</p></figcaption></figure>
 
 ### Subdomain enumeration
 
@@ -46,7 +46,7 @@ subov88r -f subfalconResults.txt
 
 The results was something like
 
-<figure><img src="../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (178).png" alt=""><figcaption></figcaption></figure>
 
 the result that talk my attention was like
 
@@ -58,20 +58,20 @@ So i quickly started to look into this subdomain but the `httpx` tool didn't rec
 
 Then i decided to see this subdomain in the browser and as i expected\\
 
-<figure><img src="../.gitbook/assets/image (38).png" alt=""><figcaption><p>Message that the subdomain may not be valid</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (194).png" alt=""><figcaption><p>Message that the subdomain may not be valid</p></figcaption></figure>
 
 Ok let's check can i take over xyz project
 
 [https://github.com/EdOverflow/can-i-take-over-xyz/issues/35](https://github.com/EdOverflow/can-i-take-over-xyz/issues/35)\
 Oh no they say that it is not vulnerable
 
-<figure><img src="../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (179).png" alt=""><figcaption></figcaption></figure>
 
 Still, I didn't give up. I decided to investigate on my own, and guess what? I found out that there was indeed an issue, and I successfully took control of it. It's always good to double-check! 🛡️🌐
 
 Undeterred, I decided to manually investigate, and voila! Success – I managed to take over the CNAME `<vulnerable>.trafficmanager.com` . Always good to verify! 🛡️🌐
 
-<figure><img src="../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (180).png" alt=""><figcaption></figcaption></figure>
 
 Then reported the issue with HIGHT severity and the Team changed the severity to Critical and triaged my report\
 Update: Issue Resolved !!

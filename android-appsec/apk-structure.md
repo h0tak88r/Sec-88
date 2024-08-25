@@ -9,4 +9,4 @@
 7. **res**: Contains resources with a predefined hierarchy for different screen orientations, OS versions, and languages. Appdome repacks these files during the Fusion process, often adding new files or altering existing ones.
 8. **resources.arsc**: Links code to resources, facilitating the display of appropriate text or assets based on device settings. This file is also repacked by Appdome.
 
-<figure><img src="../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (197).png" alt=""><figcaption></figcaption></figure>

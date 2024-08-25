@@ -36,4 +36,4 @@ adb logcat [options] [filter] [filter]          # (view device log)
 adb bugreport                                   # (print bug reports)
 ```
 
-<figure><img src="../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (198).png" alt=""><figcaption></figcaption></figure>
