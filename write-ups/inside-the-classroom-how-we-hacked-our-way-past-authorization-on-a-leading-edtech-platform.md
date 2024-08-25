@@ -5,11 +5,9 @@ coverY: 0
 
 # Inside the Classroom: How We Hacked Our Way Past Authorization on a Leading EdTech Platform
 
-<<<<<<< HEAD
-=======
 Hello, fellow hackers! After some deep diving into a private bug bounty program on HackerOne, I uncovered an interesting vulnerability on a well-known learning platform. What started as a curiosity about how students and teachers interact on this platform quickly turned into a fascinating journey of brute force, code hunting, and a bit of creativity. Let me walk you through the process.
 
-### The Entry Barrier: Authorization Codes
+### &#x20;The Entry Barrier: Authorization Codes
 
 When you first land on the platform's homepage, you're immediately met with a barrier: there's no way in without an authorization code. These codes are distributed by teachers or administrators, and without one, you're stuck on the outside looking in. The code itself is a six-digit number—simple yet hard enough to guess by random chance.
 
@@ -45,7 +43,7 @@ With this new domain in mind, I intercepted the requests using Burp Suite, extra
 
 Suddenly, I had a list of class codes that had been unintentionally exposed. Armed with these codes, I joined a class and found myself with access to even more features, including details about other students and class-specific resources.
 
-<figure><img src="../.gitbook/assets/image (111).png" alt=""><figcaption><p>the results of the tool </p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (111).png" alt=""><figcaption><p>the results of the tool</p></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (112).png" alt=""><figcaption><p>Whe valid code signin code returns in the response</p></figcaption></figure>
 
@@ -58,5 +56,3 @@ This exploration into the learning platform was a reminder that sometimes, the d
 I hope this story serves as both a guide and inspiration. Always stay curious, keep digging, and remember—sometimes the answers are hiding where you least expect them.
 
 Happy hacking!
-
->>>>>>> eb5f300 (RestoreMistakelyDeletedFiles)

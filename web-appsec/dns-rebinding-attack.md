@@ -99,11 +99,11 @@ Press CTRL+C to quit
 
 The journey began when I opened the lab, which greeted me with a normal login page.
 
-<figure><img src="../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 After logging in, I observed an API request that retrieved user files using a UUID. While it wasn't vulnerable to IDOR (Insecure Direct Object References), I made a mental note of it, suspecting it might be useful later.
 
-<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Finding the SSRF
 
@@ -111,7 +111,7 @@ On the application's homepage, there was a functionality allowing file uploads f
 
 Attempting to fetch a file from localhost, I encountered a 403 status code with an "invalid URL" message.
 
-<figure><img src="../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Fuzzing for SSRF
 

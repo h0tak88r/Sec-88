@@ -63,7 +63,7 @@ textView.setText("cursor " + DatabaseUtils.dumpCursorToString(queryCursor));
 
 ### 2. SQL Injection Vulnerabilities
 
-<figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Steps to Identify:**
 
@@ -81,7 +81,7 @@ Cursor cursor = db.rawQuery(selection, new String[]{username});
 
 Now we need to identify the tables in the Java code. We can look for the keyword “`content://`“.
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### **Case 1**
 

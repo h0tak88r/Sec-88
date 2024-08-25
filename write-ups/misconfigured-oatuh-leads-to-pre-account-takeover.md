@@ -6,8 +6,6 @@ description: >-
 
 # Misconfigured OATUH leads to Pre-Account Takeover
 
-<<<<<<< HEAD
-=======
 > _**In the name of Allah, the most gracious and merciful,**_
 
 Dear Security Researchers,
@@ -31,4 +29,3 @@ However, it’s worth noting that I could only change my email to an unregistere
 5. The attacker attempts to authenticate using OAuth.
 6. The platform mistakenly grants access to the victim’s account, allowing the attacker to take control.
 7. Subsequently, no matter what actions the victim takes (changing their password or email), the attacker retains access to the account.
->>>>>>> eb5f300 (RestoreMistakelyDeletedFiles)

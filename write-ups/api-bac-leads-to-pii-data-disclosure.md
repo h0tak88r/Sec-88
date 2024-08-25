@@ -6,8 +6,6 @@ description: >-
 
 # API BAC leads to PII Data Disclosure
 
-<<<<<<< HEAD
-=======
 > _**In the name of Allah, the Most Beneficent, the Most Merciful**_
 
 Hello Ethical Hackers,
@@ -69,4 +67,3 @@ Here's the workflow:
 This vulnerability unveils numerous security risks. I'm eager to see how this issue will be addressed.
 
 In conclusion, this experience highlights the significance of not only identifying unusual behavior in features but also proactively seeking workarounds that may turn them into vulnerabilities. It's fascinating how initially observing the abnormal behavior of the email change feature eventually revealed a cluster of security flaws. So, the next time you encounter an anomaly, remember that it might be hiding doors that, when opened, reveal new insights and enhance the security of the systems we interact with. Happy hacking, and stay curious!
->>>>>>> eb5f300 (RestoreMistakelyDeletedFiles)

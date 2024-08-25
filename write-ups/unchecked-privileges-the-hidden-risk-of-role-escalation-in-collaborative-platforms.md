@@ -40,11 +40,11 @@ Authorization: Bearer <Member's-JWT>
 
 And it worked! The member now had admin privileges. This success led us to wonder if we could take this further and fully exploit this vulnerability.
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### **Exploiting the Vulnerability: Full Workspace Takeover**
 
@@ -63,7 +63,7 @@ Authorization: Bearer <Member's-JWT>
 
 This request was accepted by the server, effectively elevating our account to an admin role. Now, we had full control over the workspace.
 
-<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **How Attackers Could Obtain Necessary IDs**
 
@@ -77,7 +77,7 @@ Authorization: Bearer <Mwmber's-JWT>
 
 With this information, the attacker could escalate their privileges to admin with ease.
 
-<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Taking It Further: Removing the Original Admin**
 

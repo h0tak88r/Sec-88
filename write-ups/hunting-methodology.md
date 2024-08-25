@@ -6,8 +6,6 @@ description: >-
 
 # Hunting Methodology
 
-<<<<<<< HEAD
-=======
 > _**Recon**_
 
 * [ ] Automation
@@ -219,10 +217,7 @@ description: >-
 * [ ] Unverified User Can Post Newsletter -> https://hackerone.com/reports/1691603
 * [ ] BAC -> Fill the form with other's email -> https://hackerone.com/reports/145396
 * [ ] No Rate Limit -> No-Captcha -> Spam Victim -> https://hackerone.com/reports/145612
-* [ ] Host Header Injection -> https://hackerone.com/reports/229498
-
-> _**\[\[OAUTH to ATO]]**_
-
+* [ ] Host Header Injection -> https://hackerone.com/reports/229498_**OAUTH to ATO**_
 * [ ] Test `edirect_uri` for \[\[Open Redirect]]
 * [ ] [**XSS on OAuth authorize/authenticate endpoint**](https://hackerone.com/reports/87040) | \[\[XSS\_HTML Injection]]
 * [ ] Test the existence of `response_type=token`
@@ -242,7 +237,7 @@ description: >-
 * [ ] [**Race Conditions in OAuth 2 API implementations**](https://hackerone.com/reports/55140)
 * [ ] OAuth Misconfiguration -> Account Squatting | Pre-ATO
 
-> _**\[\[2FA Feature]] Abuse**_
+> _**2FA Feature Abuse**_
 
 * [ ] Weak 2FA Implementation > 2FA Secret Cannot be Rotated\
   Rotating the secret means changing this key periodically to enhance security. If the 2FA secret cannot be rotated, it means that once the secret is compromised, an attacker could potentially gain ongoing access to the account without the user’s knowledge, as there is no way for the user to change the secret.
@@ -267,7 +262,7 @@ description: >-
 * [ ] Password not checked when 2FA Disable
 * [ ] Clickjacking on 2FA Disabling Page
 
-> _**\[\[JWT Security Testing]]**_
+> _**JWT Security Testing**_
 
 * [ ] Edit the JWT with another User ID / Email
 * [ ] Sensitive Data Exposure
@@ -287,7 +282,7 @@ description: >-
 * [ ] Command injection `kid: key.crt; whoami && python -m SimpleHTTPServer 1337 &`
 * [ ] Check that keys and secrets are different between ENVs
 
-> _**\[\[File Upload Feature]] Abuse**_
+> _**File Upload Feature Abuse**_
 
 Reference:https://brutelogic.com.br/blog/file-upload-xss/
 
@@ -327,12 +322,12 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
 * [ ] [XXE ON JPEG](https://hackerone.com/reports/836877)
 * [ ] [Create A picture that steals Data](https://medium.com/@iframe\_h1/a-picture-that-steals-data-ff604ba101)
 
-> \***\[\[Ban Feature]] Abuse**
+> **Ban Feature Abuse**
 
 * [ ] Try register account with the same name with you and block him
 * [ ] [**Banned user still able to invited to reports as a collabrator and reset the password**](https://hackerone.com/reports/1959219)
 
-> \***\[\[Commenting Feature]] Abuse**
+> **Commenting Feature Abuse**
 
 * [ ] \[\[IDOR|IDOR]] Posting comments impersonating some other users.
 * [ ] **DOM Clobbering**
@@ -341,7 +336,7 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
 * [ ] Race Condition
 * [ ] Privilege Escalation
 
-> _**\[\[Chatting Features]]-\[\[Rich Editor Feature]]**_
+> _**Chatting Features-Rich Editor Feature**_
 
 * [ ] HTML Injection
 * [ ] \[\[XSS\_HTML Injection]] in email id
@@ -358,7 +353,7 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
 * [ ] flood the application using the session data of an old user > Improper Session Management
 * [ ] \[\[IDOR]]
 
-> _**\[\[Money Features]] Abuse**_
+> _**Money Features Abuse**_
 
 > Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
 
@@ -420,7 +415,7 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
 * [ ] Try tampering with the delivery charge rates to -ve values to see if the final amount can be reduced.
 * [ ] Try checking for the free delivery by tampering with the params.
 
-> _**\[\[Review Feature]]**_
+> _**Review Feature**_
 
 * [ ] Some applications have an option where verified reviews are marked with some tick or it’s mentioned. Try to see if you can post a review as a **Verified Reviewer without purchasing that product**.
 * [ ] Some app provides you with an option to provide a rating on a scale of 1 to 5, try to go beyond/below the scale-like **provide 0 or 6 or -ve**.
@@ -429,4 +424,3 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
 * [ ] Try to post reviews like some other users.
 * [ ] Try **performing CSRF** on this functionality, often is not protected by tokens
 * [ ] Get Better Yearly Rates by tampering parameters like `‘yearly_rate’: ‘3644’`
->>>>>>> eb5f300 (RestoreMistakelyDeletedFiles)

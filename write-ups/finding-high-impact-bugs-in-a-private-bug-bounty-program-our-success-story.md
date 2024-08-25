@@ -17,11 +17,9 @@ layout:
     visible: true
 ---
 
-# Finding High-Impact Bugs in a Private Bug Bounty Program: Our Success Story
+# The Power Of IDOR even if it is unpredictable IDs
 
-<<<<<<< HEAD
-=======
-#### Introduction
+### **Introduction**
 
 Participating in private bug bounty programs can be both thrilling and rewarding. Recently, we had the opportunity to take part in a private bug bounty program on HackerOne. The scope was limited to the main application, and within this constrained environment, we managed to uncover two high-severity vulnerabilities. Here's a detailed account of our findings and the impact they had.
 
@@ -75,7 +73,7 @@ A crafted request to the vulnerable endpoint returned the following sensitive da
 
 <figure><img src="../.gitbook/assets/2024-07-06_20-08.png" alt=""><figcaption></figcaption></figure>
 
-**Additional Findings**
+### **Additional Findings**
 
 While investigating, we discovered that some of the invite IDs were still valid and could be used by attackers to gain unauthorized access to organizations. **`These invite IDs were found on public archives, such as the Wayback Machine`**, making them easily accessible to malicious actors.
 
@@ -83,7 +81,7 @@ While investigating, we discovered that some of the invite IDs were still valid 
 
 **Impact**
 
-The vulnerability exposed sensitive information, including user email addresses and detailed project data, which could lead to privacy violations and unauthorized access to user accounts. The discovery of valid invite IDs in public archives further exacerbates the risk, as attackers could leverage these to gain access and  infiltrate organizations.
+The vulnerability exposed sensitive information, including user email addresses and detailed project data, which could lead to privacy violations and unauthorized access to user accounts. The discovery of valid invite IDs in public archives further exacerbates the risk, as attackers could leverage these to gain access and infiltrate organizations.
 
 ### Privilege Escalation in Member Management API
 
@@ -132,7 +130,7 @@ The API response included sensitive information such as invitation keys and emai
 
 This vulnerability allowed unauthorized users to retrieve and potentially use invitation keys to claim invitations, leading to unauthorized access to team data and operations and impersonating the victim's by claiming their accounts.
 
-#### Conclusion
+**Conclusion**
 
 Finding and reporting these high-impact vulnerabilities highlighted the importance of thorough testing and the value of private bug bounty programs. By identifying and responsibly disclosing these issues, we helped enhance the security of the application and protected sensitive user information.
 
@@ -141,4 +139,3 @@ Participating in this program was a valuable experience, underscoring the critic
 ***
 
 _Note: Specific details and sensitive information have been redacted to protect the confidentiality of the program and its users._
->>>>>>> eb5f300 (RestoreMistakelyDeletedFiles)
