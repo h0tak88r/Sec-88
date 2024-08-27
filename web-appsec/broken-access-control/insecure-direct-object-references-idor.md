@@ -1,4 +1,8 @@
-# IDOR
+---
+description: 'CWE-639: Authorization Bypass Through User-Controlled Key'
+---
+
+# Insecure Direct Object References (IDOR)
 
 ## **Understanding Insecure Direct Object References (IDOR)**
 
