@@ -12,156 +12,6 @@ IDOR vulnerabilities typically arise when the application fails to verify if a u
 
 ***
 
-## **Common Examples of IDOR**
-
-#### **1. IDOR with Direct Reference to Database Objects**
-
-**Scenario:** A URL that directly references a customer account number:
-
-```
-https://insecure-website.com/customer_account?customer_number=132355
-```
-
-**Vulnerability:** An attacker can change the `customer_number` parameter to access another user's account, leading to unauthorized access.
-
-**2. IDOR with Direct Reference to Static Files**
-
-**Scenario:** A URL that directly references a file stored on the server:
-
-```
-https://insecure-website.com/static/12144.txt
-```
-
-**Vulnerability:** An attacker can modify the file name to access other users' files, potentially revealing sensitive information.
-
-#### **3. IDOR in POST Body**
-
-**Scenario:** A form that includes a hidden field with a user ID:
-
-```html
-<form action="/update_profile" method="post">
-  <input type="hidden" name="user_id" value="12345">
-  <button type="submit">Update Profile</button>
-</form>
-```
-
-**Vulnerability:** If proper access controls are not in place, an attacker can manipulate the `user_id` field to update another user's profile.
-
-***
-
-## Vulnerable Code Examples
-
-#### **1. PHP Example**
-
-**Scenario:** An application retrieves user profile information based on a user ID passed as a GET parameter.
-
-**Vulnerable Code:**
-
-```php
-<?php
-// Vulnerable code: No access control check
-$user_id = $_GET['user_id'];
-$query = "SELECT * FROM users WHERE id = $user_id";
-$result = mysqli_query($conn, $query);
-$user = mysqli_fetch_assoc($result);
-
-// Display user information
-echo "Username: " . $user['username'] . "<br>";
-echo "Email: " . $user['email'] . "<br>";
-?>
-```
-
-**Explanation:**
-
-* The application directly uses the `user_id` parameter from the URL to retrieve user information.
-* An attacker can modify the `user_id` parameter to access the profiles of other users.
-
-***
-
-#### **2. JavaScript/Node.js Example**
-
-**Scenario:** A Node.js application allows users to view their account details by passing a user ID in the URL.
-
-**Vulnerable Code:**
-
-```javascript
-// Vulnerable code: No access control check
-app.get('/user/:id', (req, res) => {
-  const user = db.users.find(user => user.id === req.params.id);
-  res.json(user);
-});
-```
-
-**Explanation:**
-
-* The application directly accesses the user data based on the `id` parameter from the URL.
-* An attacker can change the `id` in the URL to access the details of other users.
-
-***
-
-#### **3. Python/Flask Example**
-
-**Scenario:** A Flask application retrieves user information based on a user ID passed in the URL.
-
-**Vulnerable Code:**
-
-```python
-# Vulnerable code: No access control check
-@app.route('/user/<int:user_id>')
-def get_user(user_id):
-    user = User.query.get(user_id)
-    return jsonify(user.serialize())
-```
-
-**Explanation:**
-
-* The application retrieves user data directly based on the `user_id` from the URL.
-* An attacker can modify the `user_id` in the URL to access the data of other users.
-
-***
-
-#### **4. Ruby on Rails Example**
-
-**Scenario:** A Rails application allows users to access project details by passing a project ID in the URL.
-
-**Vulnerable Code:**
-
-```ruby
-# Vulnerable code: No access control check
-def show
-  @project = Project.find(params[:id])
-  render json: @project
-end
-```
-
-**Explanation:**
-
-* The application retrieves project data directly based on the `id` parameter from the URL.
-* An attacker can modify the `id` to access details of projects they don't own.
-
-***
-
-#### **5. Java Example (JSP/Servlet)**
-
-**Scenario:** A Java web application retrieves order details based on an order ID passed as a request parameter.
-
-**Vulnerable Code:**
-
-```java
-// Vulnerable code: No access control check
-String orderId = request.getParameter("order_id");
-Order order = orderService.getOrderById(orderId);
-request.setAttribute("order", order);
-request.getRequestDispatcher("/orderDetails.jsp").forward(request, response);
-```
-
-**Explanation:**
-
-* The application retrieves order data based on the `order_id` parameter from the request.
-* An attacker can modify the `order_id` to access the details of other users' orders.
-
-***
-
 #### **6. C#/.NET Example (ASP.NET MVC)**
 
 **Scenario:** An ASP.NET MVC application allows users to view their orders by passing an order ID in the query string.
@@ -215,9 +65,63 @@ public ActionResult ViewOrder(int orderId)
 5. **Assess ID Predictability:** Determine if the IDs are predictable. If they aren't, investigate where they might be leaked, such as in other API responses. This could help in further exploitation or verification of the vulnerability.
 {% endhint %}
 
-***
+## **Unpredictable IDORs: How Unpredictable IDs Can Be Discovered**
 
-## **Code Examples for Prevention**
+{% embed url="https://imgur.com/a/VrquUx6" %}
+
+Unpredictable IDs may seem secure, but there are various ways they can still be found:
+
+*   [ ] &#x20;**Wayback Machine:** This archive service can store old URLs, which might contain unpredictable IDs. You can search it using:
+
+    {% code overflow="wrap" %}
+    ```
+    https://web.archive.org/cdx/search/cdx?url=*.test.com/*&output=text&fl=original&collapse=urlkey
+    ```
+    {% endcode %}
+*   [ ] **AlienVault OTX:** This threat intelligence platform inadvertently archives URLs, which might have unpredictable IDs in parameters or paths. Use the API:
+
+    ```
+    https://otx.alienvault.com/api/v1/indicators/{TYPE}/{DOMAIN}/url_list?limit=500
+    ```
+*   [ ] **URLScan:** This tool scans websites for malicious content, often logging unpredictable IDs in URLs:
+
+    ```
+    https://urlscan.io/api/v1/search/?q=domain:{DOMAIN}&size=10000
+    ```
+*   [ ] **Common Crawl:** This project archives web pages, which may contain unpredictable IDs:
+
+    ```
+    https://commoncrawl.org/
+    ```
+*   [ ] **VirusTotal:** This service analyzes suspicious URLs, which might leak IDs:
+
+    ```
+    https://www.virustotal.com/vtapi/v2/domain/report?apikey={APIKEY}&domain={DOMAIN}
+    ```
+* [ ] **Google Search:** Google indexes URLs that might contain IDs in paths or parameters. Cached pages may also expose IDs.
+* [ ] **GitHub Search:** Public GitHub repositories might contain requests or scripts where users inadvertently hardcode unpredictable IDs.
+* [ ] **Insider Threat - Previous Employee:** A former employee could have logged or memorized IDs before leaving, making them vulnerable.
+* [ ] **Insider Threat - RO User:** A read-only user within an organization might be able to view unpredictable IDs, leading to potential privilege escalation.
+* [ ] **Referrer Header:** When an ID is passed in a URL, the referrer header can leak it to other servers.
+* [ ] **Browser History:** Access to a browser’s history can reveal IDs in URLs.
+* [ ] **Web Logs:** HTTP logs, whether accessed by IT staff, VPN providers, or ISPs, can contain unpredictable IDs in URLs.
+* [ ] **Unknown or Future Bug:** Even if no current method exists to leak IDs, future bugs could create vulnerabilities.
+* [ ] **Predictability Flaws:** Many "unpredictable" IDs may have flaws, making them easier to predict than intended.
+* [ ] **Clickjacking:** This technique can be used to steal unpredictable IDs.
+* [ ] **OAuth Buttons:** "Sign in with" OAuth buttons might expose organization UUIDs in URLs.
+* [ ] **Accidental Screen Share:** Screen sharing can expose URLs with UUIDs, making them vulnerable to IDOR attacks.
+* [ ] **Hard-Coded IDs:** Developers might accidentally hard-code UUIDs, creating vulnerabilities.
+* [ ] **It might not be unpredictable**: Any cryptography expert will tell you “random” with computers is very hard. It’s one reason why [Cloudflare uses lava lamps](https://blog.cloudflare.com/randomness-101-lavarand-in-production/). Many “unpredictable” IDs may actually have a design flaw which leads to predictability, Some times it is as easy to guess as `timestamp + machine ID`
+
+{% embed url="https://x.com/0xLupin/status/1745805050562105739" %}
+
+* [ ] **Fixed-IDs**
+
+> Interestingly, the application used some fixed UUIDs like 00000000-0000-0000-0000-000000000000 and 11111111-1111-1111-1111-111111111111 for some \_administrative\_ users
+
+{% embed url="https://x.com/MrTuxracer/status/1560639161966555141?s=20&t=3WJ-KgS7GeBe3ZM_vXqkNQ" %}
+
+## **Code Examples**
 
 #### **1. PHP Example**
 
@@ -273,12 +177,16 @@ def get_user(user_id):
 
 ***
 
-### **Prevention Techniques**
-
-#### **1. Implement Access Control Checks**
+## **Prevention Techniques**
 
 * Always verify that the user is authorized to access or modify the object.
-
-#### **2. Avoid Exposing Identifiers in URLs**
-
 * Use session or JWT tokens to determine the current user instead of relying on user-controlled parameters.
+* Avoid Exposing Identifiers in URLs
+
+***
+
+## Resources
+
+{% embed url="https://josephthacker.com/hacking/cybersecurity/2022/08/18/unpredictable-idors.html" %}
+
+{% embed url="https://portswigger.net/web-security/access-control/idor" %}
