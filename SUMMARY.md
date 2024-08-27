@@ -39,7 +39,7 @@
     * [Same-origin policy (SOP)](web-appsec/cors/same-origin-policy-sop.md)
   * [CRLF](web-appsec/crlf.md)
   * [CSRF](web-appsec/csrf/README.md)
-    * [Bypassing SameSite Cookie Restrictions](web-appsec/csrf/bypassing-samesite-cookie-restrictions.md)
+    * [SameSite Cookie Restrictions](web-appsec/csrf/bypassing-samesite-cookie-restrictions.md)
   * [Host Header Injection](web-appsec/host-header-injection.md)
   * [HTTP request smuggling](web-appsec/http-request-smuggling.md)
   * [JSON Request Testing](web-appsec/json-request-testing.md)
