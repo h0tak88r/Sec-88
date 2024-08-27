@@ -98,6 +98,10 @@ Unpredictable IDs may seem secure, but there are various ways they can still be 
     ```
     https://www.virustotal.com/vtapi/v2/domain/report?apikey={APIKEY}&domain={DOMAIN}
     ```
+* [ ] **Atomated tools:** Collect urls using automated ools like waymore,waybackurls and gau and then using regex extract urls that otains uuids on it&#x20;
+
+{% embed url="https://github.com/xnl-h4ck3r/waymore" %}
+
 * [ ] **Google Search:** Google indexes URLs that might contain IDs in paths or parameters. Cached pages may also expose IDs.
 * [ ] **GitHub Search:** Public GitHub repositories might contain requests or scripts where users inadvertently hardcode unpredictable IDs.
 * [ ] **Insider Threat - Previous Employee:** A former employee could have logged or memorized IDs before leaving, making them vulnerable.
@@ -120,6 +124,10 @@ Unpredictable IDs may seem secure, but there are various ways they can still be 
 > Interestingly, the application used some fixed UUIDs like 00000000-0000-0000-0000-000000000000 and 11111111-1111-1111-1111-111111111111 for some \_administrative\_ users
 
 {% embed url="https://x.com/MrTuxracer/status/1560639161966555141?s=20&t=3WJ-KgS7GeBe3ZM_vXqkNQ" %}
+
+* [ ] **OLD UUIDs:** If you can leak some old IDs using wayback machine for instance, you might be able to brute force sequentially the ones after.
+
+{% embed url="https://x.com/0xLupin/status/1745813550260515322" %}
 
 ## **Code Examples**
 
@@ -190,3 +198,5 @@ def get_user(user_id):
 {% embed url="https://josephthacker.com/hacking/cybersecurity/2022/08/18/unpredictable-idors.html" %}
 
 {% embed url="https://portswigger.net/web-security/access-control/idor" %}
+
+{% embed url="https://github.com/xnl-h4ck3r/waymore" %}
