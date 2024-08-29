@@ -69,7 +69,89 @@ public ActionResult ViewOrder(int orderId)
 5. **Assess ID Predictability:** Determine if the IDs are predictable. If they aren't, investigate where they might be leaked, such as in other API responses. This could help in further exploitation or verification of the vulnerability.
 {% endhint %}
 
-## **Unpredictable IDORs: How Unpredictable IDs Can Be Discovered**
+## **UUID/GUID**
+
+UUID (Universally Unique Identifier) or GUID (Globally Unique Identifier) is a 128-bit number used to uniquely identify information in computer systems. They are widely used in databases, software development, and distributed systems to ensure that identifiers are unique across different systems and times.
+
+UUIDs are typically represented as a series of hexadecimal digits, often split into five groups, separated by hyphens. For example: `123e4567-e89b-12d3-a456-426614174000`.
+
+#### Types of UUID
+
+Tools for decoding and analyzing UUIDs
+
+{% embed url="https://www.uuidtools.com/decode" %}
+
+The version and variant are encoding within UUIDs.
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Version Digit ("M")**
+
+| Hex Digit | UUID Version    |
+| --------- | --------------- |
+| 1         | version-1       |
+| 2         | version-2       |
+| 3         | version-3       |
+| 4         | version-4       |
+| 5         | version-5       |
+| 6 - f, 0  | version unknown |
+
+**Variant digit ("N")**
+
+| Binary Representation ‡ | Hex Digit | Variant                              |
+| ----------------------- | --------- | ------------------------------------ |
+| 0xxx                    | 0 - 7     | reserved (NCS backward compatible)   |
+| 10xx                    | 8 - b     | DCE 1.1, ISO/IEC 11578:1996          |
+| 110x                    | c - d     | reserved (Microsoft GUID)            |
+| 1110                    | e         | reserved (future use)                |
+| 1111                    | f         | unknown / invalid. Must end with "0" |
+
+* Nil UUID – Version 0
+
+```
+00000000-0000-0000-0000-000000000000
+```
+
+Usually used for fixed UUIDs like for testing accounts and default credentials,.............
+
+* Time-based UUID – Version 1
+
+```
+e6e3422c-c82d-11ed-8761-3ff799965458
+```
+
+this kind of UUIDs is time and node based and the  Clock part is usually random
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+As you might expect, relying on UUID v1 for sensitive actions is inherently insecure. In this video, a scenario is demonstrated where an application uses UUID v1 as a token for password resets. An attacker can easily extract other users' UUIDs (eg. from creating account or API calls), determine the timestamp, and either manually generate valid password reset tokens or brute-force the clock component.
+
+{% embed url="https://www.youtube.com/watch?v=an69nKkLEBM" %}
+
+* DCE Security UUID – Version 2
+
+```
+b165e8c6-5e9a-21ea-9e00-0242ac130003
+```
+
+* Name-based UUID - Version 3 and 5
+
+```
+18f99f82-61f7-3530-8d8a-8fdf2cd0cae0
+b21b95a4-56c3-51de-8828-1bb7bd249fd2
+```
+
+* Randomly Generated GUID - Version 4
+
+```
+0d706e07-75b5-4553-8abd-6c3d52fdbf70
+```
+
+***
+
+## **Hacking Unpredictable IDORs**
 
 {% embed url="https://imgur.com/a/VrquUx6" %}
 
@@ -204,3 +286,5 @@ def get_user(user_id):
 {% embed url="https://portswigger.net/web-security/access-control/idor" %}
 
 {% embed url="https://github.com/xnl-h4ck3r/waymore" %}
+
+{% embed url="https://danaepp.com/attacking-predictable-guids-when-hacking-apis" %}
