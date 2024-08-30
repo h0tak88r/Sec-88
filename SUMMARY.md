@@ -75,6 +75,7 @@
   * [DNS Rebinding Attack](web-appsec/dns-rebinding-attack.md)
   * [LLM Hacking Checklist](web-appsec/llm-hacking-checklist.md)
   * [Bypass URL Filtration](web-appsec/bypass-url-filtration.md)
+  * [Cross-Site Path Traversal  (CSPT)](web-appsec/cross-site-path-traversal-cspt.md)
 * [✉️ API-Sec](api-sec/README.md)
   * [API Recon](api-sec/api-recon.md)
   * [API Token Attacks](api-sec/api-token-attacks.md)

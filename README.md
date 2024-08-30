@@ -17,12 +17,16 @@ Dive into various cybersecurity fields with me, including:
 
 * Web AppSec, Android AppSec, Network Sec, Bug Bouty, API Sec, Operating Systems, Programming, Desktop Apps Sec
 
-... and many more security-related domains.
+... and many more security-related topics.
 
 ### What to Expect:
 
 In this digital space, you'll find my comprehensive notes in cybersecurity—a collection of insights gathered from diverse resources, reflecting my continuous learning journey. While you might encounter content similar to what you've seen elsewhere, the goal is to curate a repository that serves as both a personal reference and a resource for fellow cybersecurity enthusiasts in their quest for knowledge.
 
 Join me as we navigate the ever-expanding landscape of cybersecurity. Every line of code, every application, and every connection holds the potential for both innovation and risk.
+
+### Cyber-Security Rood Map
+
+{% embed url="https://xmind.ai/N2eBBiEh?xid=rdfa7L0R" %}
 
 Let's dive into the intriguing realm of cybersecurity together!

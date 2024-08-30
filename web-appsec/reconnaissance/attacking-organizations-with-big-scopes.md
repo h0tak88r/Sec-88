@@ -31,9 +31,11 @@ ffuf -w namelist.txt -u http://10.129.184.109 -H "HOST: FUZZ.inlanefreight.htb".
 
 * Gobuster
 
+{% code overflow="wrap" %}
 ```bash
 gobuster vhost -u http://10.129.118.153 -w namelist.txt -p pattern --exclude-length 301 -t 10
 ```
+{% endcode %}
 
 ### ASN Mapping
 
@@ -74,7 +76,7 @@ cat urls | rush -j10 "python3 LinkFinder/linkfinder.py -o cli -i {} | sort -u >>
 cat urls output | tr "/" "\n" | sort -u | more 
 ```
 
-* DORKING\
+* Dorking\
   The asterisks (\*) are wildcards that match any character(s). In this case, the dork will match any domain or subdomain that contains the word "example".
 
 ```bash
@@ -94,4 +96,3 @@ Dork: “ip:127.0.0.1”
 inbody:example
 instreamset:(title url):example
 ```
-
