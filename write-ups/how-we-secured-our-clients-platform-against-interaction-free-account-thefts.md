@@ -8,7 +8,7 @@ During a recent pentest engagement with [CyberAR LLC](https://cyberar.io/), we u
 
 Our target was a web application that implemented OTP-based authentication as an added layer of security. The user would enter their email, request an OTP, and then submit the received code to gain access to their account. It all seemed secure at first glance—until we dug deeper.
 
-<figure><img src="../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (11) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Initial Exploration**
 
