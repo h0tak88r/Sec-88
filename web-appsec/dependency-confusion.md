@@ -120,6 +120,8 @@ Dependency confusion vulnerabilities pose a significant threat to software suppl
 
 ### References
 
+{% embed url="https://www.youtube.com/watch?v=IXqcddojM0o" %}
+
 {% embed url="https://medium.com/@alex.birsan/dependency-confusion-4a5d60fec610" %}
 
 {% embed url="https://systemweakness.com/rce-via-dependency-confusion-e0ed2a127013" %}
