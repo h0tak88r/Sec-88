@@ -4,10 +4,6 @@
 
 Client-side prototype pollution is a powerful vulnerability that allows attackers to manipulate JavaScript's global objects by injecting properties into prototypes. This guide will walk you through the process of identifying and exploiting these vulnerabilities, both manually and using automated tools like DOM Invader. You’ll also get hands-on practice exploiting prototype pollution for DOM-based Cross-Site Scripting (XSS) on intentionally vulnerable labs.
 
-## What is Prototype Pollution?
-
-Prototype pollution refers to the ability to inject properties into JavaScript’s global `Object.prototype`. This allows attackers to manipulate object behavior across the application, leading to severe security issues such as DOM-based XSS. Understanding the basic concepts of sources, sinks, and gadgets is crucial to mastering this vulnerability.
-
 ## Finding Client-Side Prototype Pollution Sources Manually
 
 **High-Level Steps:**
@@ -41,7 +37,7 @@ Once you’ve identified a source, the next step is to find gadgets—pieces of 
 4. In Burp's browser, go to the page on which the target script is loaded. The `debugger` statement pauses execution of the script.
 5. While the script is still paused, switch to the console and enter the following command, replacing `YOUR-PROPERTY` with one of the properties that you think is a potential gadget:
 
-```
+```javascript
 Object.defineProperty(Object.prototype, 'YOUR-PROPERTY', {
     get() {
         console.trace();
@@ -59,6 +55,9 @@ The property is added to the global `Object.prototype`, and the browser will log
 
 ## Exploitation
 
+* Reflected XSS: [Reflected XSS on www.hackerone.com via Wistia embed code - #986386](https://hackerone.com/reports/986386)
+* Client-side bypass: [Prototype pollution – and bypassing client-side HTML sanitizers](https://research.securitum.com/prototype-pollution-and-bypassing-client-side-html-sanitizers/)
+
 ### Bypasses
 
 #### Prototype Pollution via the Constructor
@@ -74,6 +73,14 @@ https://example.com/?__proto__[foo]=bar
 https://example.com/?__proto__.foo=bar
 https://example.com/?constructor.[prototype][foo]=bar
 https://example.com/?constructor.prototype.foo=bar
+Object.constructor.prototype.evilProperty="evilPayload"
+Object.constructor["prototype"]["evilProperty"]="evilPayload"
+x[__proto__][abaeead] = abaeead
+x.__proto__.edcbcab = edcbcab
+__proto__[eedffcb] = eedffcb
+__proto__.baaebfc = baaebfc
+?__proto__[test]=test
+
 # Bypass sanitization
 https://example.com/?__pro__proto__to__[foo]=bar
 https://example.com/?__pro__proto__to__.foo=bar
@@ -127,7 +134,8 @@ Research has shown that certain HTML sanitizers like `sanitize-html` and `DOMPur
 * [PortSwigger Web Security](https://portswigger.net/web-security/prototype-pollution/client-side)
 * [Intigriti Revenge Challenge Writeup](https://blog.huli.tw/2022/05/02/en/intigriti-revenge-challenge-author-writeup/)
 * [GitHub - Client-Side Prototype Pollution](https://github.com/BlackFan/client-side-prototype-pollution)
-* [Khaled-Sakr Video](https://www.youtube.com/watch?v=xc7iilyFCWA)
+* [Khaled-Sakr Video](https://www.youtube.com/watch?v=xc7iilyFCWA) \[Arabic]
+* [https://www.youtube.com/watch?v=elRZDl8i0RY](https://www.youtube.com/watch?v=elRZDl8i0RY) \[Arabic]
 * [pp-research](https://blog.s1r1us.ninja/research/PP)
 * [https://blog.huli.tw/2022/05/02/en/intigriti-revenge-challenge-author-writeup/](https://blog.huli.tw/2022/05/02/en/intigriti-revenge-challenge-author-writeup/)
 * [https://book.hacktricks.xyz/pentesting-web/deserialization/nodejs-proto-prototype-pollution/client-side-prototype-pollution#finding-script-gadgets](https://book.hacktricks.xyz/pentesting-web/deserialization/nodejs-proto-prototype-pollution/client-side-prototype-pollution#finding-script-gadgets)
@@ -135,3 +143,5 @@ Research has shown that certain HTML sanitizers like `sanitize-html` and `DOMPur
 * [https://github.com/BlackFan/client-side-prototype-pollution](https://github.com/BlackFan/client-side-prototype-pollution)
 * [https://research.securitum.com/prototype-pollution-and-bypassing-client-side-html-sanitizers/](https://research.securitum.com/prototype-pollution-and-bypassing-client-side-html-sanitizers/)
 * [https://github.com/HacKeD0x90/Prototype\_Pollution](https://github.com/HacKeD0x90/Prototype\_Pollution)
+* [https://github.com/BlackFan/client-side-prototype-pollution?tab=readme-ov-file\
+  ](https://github.com/BlackFan/client-side-prototype-pollution?tab=readme-ov-file)
