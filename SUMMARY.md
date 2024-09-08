@@ -218,3 +218,4 @@
   * [Inside the Classroom: How We Hacked Our Way Past Authorization on a Leading EdTech Platform](write-ups/inside-the-classroom-how-we-hacked-our-way-past-authorization-on-a-leading-edtech-platform.md)
   * [How We Secured Our Client’s Platform Against Interaction-Free Account Thefts](write-ups/how-we-secured-our-clients-platform-against-interaction-free-account-thefts.md)
   * [Unchecked Privileges: The Hidden Risk of Role Escalation in Collaborative Platforms](write-ups/unchecked-privileges-the-hidden-risk-of-role-escalation-in-collaborative-platforms.md)
+  * [Decoding Server Behavior: The Key to Mass Account Takeover](write-ups/decoding-server-behavior-the-key-to-mass-account-takeover.md)
