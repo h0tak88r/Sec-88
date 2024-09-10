@@ -8,7 +8,7 @@ During a recent pentest engagement with [CyberAR LLC](https://cyberar.io/), we u
 
 Our target was a web application that implemented OTP-based authentication as an added layer of security. The user would enter their email, request an OTP, and then submit the received code to gain access to their account. It all seemed secure at first glance—until we dug deeper.
 
-<figure><img src="../.gitbook/assets/image (11) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (11) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Initial Exploration**
 
@@ -32,13 +32,13 @@ We configured the Intruder to iterate through possible OTP values. Since the OTP
 
 With the Intruder running, we monitored the responses. After several attempts, the server responded with an HTTP 200 status code. Bingo! We had guessed the correct OTP.
 
-<figure><img src="../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (12) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **The Exploit: Account Takeover**
 
 With the correct OTP in hand, we extracted the `OneTimeToken` from the server’s response. This token was the key to the kingdom.
 
-<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (13) (1).png" alt=""><figcaption></figcaption></figure>
 
 Next, we used the `OneTimeToken` in a follow-up request to the API:
 
@@ -49,7 +49,7 @@ Host: api.target.io
 
 This request returned the full authorization token for the victim’s account, effectively logging us in as the user. From there, we had full control over the account—accessing personal data, modifying account settings, and more.
 
-<figure><img src="../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Lessons Learned**
 

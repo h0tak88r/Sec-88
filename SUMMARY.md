@@ -52,7 +52,7 @@
   * [SSRF](web-appsec/ssrf.md)
   * [SSTI](web-appsec/ssti.md)
   * [Subdomain Takeover](web-appsec/subdomain-takeover.md)
-  * [WCD - WCP](web-appsec/wcd-wcp.md)
+  * [Web Caching Vulnerabilities](web-appsec/wcd-wcp.md)
   * [WebSockets](web-appsec/websockets.md)
   * [XXE](web-appsec/xxe.md)
   * [Cookie Based Attacks](web-appsec/cookie-based-attacks.md)

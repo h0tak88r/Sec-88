@@ -51,7 +51,7 @@ console.log(myObject.toString());   // Inherited from Object.prototype
 
 The prototype chain allows objects to inherit properties and methods from other objects, creating a hierarchy of inheritance.
 
-<figure><img src="../../.gitbook/assets/image (10) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Modifying Prototypes**
 
@@ -67,7 +67,7 @@ String.prototype.removeWhitespace = function(){
 
 ## **What is Prototype Pollution?**
 
-<figure><img src="../../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Prototype pollution is a JavaScript vulnerability that allows an attacker to add or modify properties on global object prototypes, which are then inherited by other objects. This can lead to various security issues, such as executing arbitrary code or altering the behavior of applications.
 
