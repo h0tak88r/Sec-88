@@ -68,6 +68,10 @@ Victim's Email: victim@gmail.com
 Attacker's Email: victim@gmáil.com
 ```
 
+* [ ] &#x20;2FA Bypass
+
+{% embed url="https://shahjerry33.medium.com/2fa-bypass-idn-mischief-157f06cb6904" %}
+
 ### Tools
 
 {% embed url="https://github.com/evilsocket/ditto" %}
