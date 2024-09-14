@@ -37,7 +37,7 @@ In Dalvik, registers are always 32 bits and can hold any type of value. For 64-b
 | V4             | P3             |
 | V(...)         | P(...)         |
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Local Registers and Types
 
@@ -229,4 +229,8 @@ Control flow in applications is often determined by conditional statements that 
 **Conditional Instructions**
 
 <table data-header-hidden data-full-width="true"><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td><strong>Syntax</strong></td><td><strong>Description</strong></td><td><strong>Example</strong></td></tr><tr><td><code>if-eqz vx, target</code></td><td>If <code>vx</code> equals 0, jump to <code>target</code></td><td><code>if-eqz v0, :target</code></td></tr><tr><td><code>if-nez vx, target</code></td><td>If <code>vx</code> is not 0, jump to <code>target</code></td><td><code>if-nez v0, :target</code></td></tr><tr><td><code>if-ltz vx, target</code></td><td>If <code>vx</code> is less than 0, jump to <code>target</code></td><td><code>if-ltz v0, :target</code></td></tr><tr><td><code>if-gez vx, target</code></td><td>If <code>vx</code> is greater than or equal to 0, jump to <code>target</code></td><td><code>if-gez v0, :target</code></td></tr><tr><td><code>if-gtz vx, target</code></td><td>If <code>vx</code> is greater than 0, jump to <code>target</code></td><td><code>if-gtz v0, :target</code></td></tr><tr><td><code>if-lez vx, target</code></td><td>If <code>vx</code> is less than or equal to 0, jump to <code>target</code></td><td><code>if-lez v0, :target</code></td></tr><tr><td><code>if-eq vx, vy, target</code></td><td>If <code>vx</code> equals <code>vy</code>, jump to <code>target</code></td><td><code>if-eq v0, v1, :target</code></td></tr><tr><td><code>if-ne vx, vy, target</code></td><td>If <code>vx</code> is not equal to <code>vy</code>, jump to <code>target</code></td><td><code>if-ne v0, v1, :target</code></td></tr><tr><td><code>if-lt vx, vy, target</code></td><td>If <code>vx</code> is less than <code>vy</code>, jump to <code>target</code></td><td><code>if-lt v0, v1, :target</code></td></tr><tr><td><code>if-ge vx, vy, target</code></td><td>If <code>vx</code> is greater than or equal to <code>vy</code>, jump to <code>target</code></td><td><code>if-ge v0, v1, :target</code></td></tr><tr><td><code>if-gt vx, vy, target</code></td><td>If <code>vx</code> is greater than <code>vy</code>, jump to <code>target</code></td><td><code>if-gt v0, v1, :target</code></td></tr><tr><td><code>if-le vx, vy, target</code></td><td>If <code>vx</code> is less than or equal to <code>vy</code>, jump to <code>target</code></td><td><code>if-le v0, v1, :target</code></td></tr></tbody></table>
+
+## Smali File Structure
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
