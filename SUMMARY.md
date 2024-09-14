@@ -122,6 +122,7 @@
   * [Signing the APK](android-appsec/signing-the-apk.md)
   * [Reverse Engineering APK](android-appsec/reverse-engineering-apk.md)
   * [Deep Links Hacking](android-appsec/deep-links-hacking.md)
+  * [SMALI](android-appsec/smali.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)
