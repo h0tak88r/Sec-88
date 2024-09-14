@@ -59,6 +59,10 @@ Comparing the output from two decompilers, **JADX-GUI** and **APKTOOL**, we see 
 
 Personally, I prefer the APKTOOL approach, and I'll be using it throughout the course.
 
+## Operators
+
+
+
 ## Method Definitions
 
 **Method Definition**
@@ -197,3 +201,32 @@ Smali code uses `if-*` instructions to handle conditional logic and `goto` for u
     move v0, v1    # Move the value of v1 to v0
     return-void    # End the method with no return value
 ```
+
+***
+
+## List of Dalvik Opcodes
+
+{% embed url="http://pallergabor.uw.hu/androidblog/dalvik_opcodes.html" %}
+
+### Variables - Assigning
+
+Here's a structured table for the Smali commands and their Java equivalents:
+
+<table data-header-hidden data-full-width="true"><thead><tr><th width="309"></th><th width="270"></th><th></th></tr></thead><tbody><tr><td><strong>Command</strong></td><td><strong>Description</strong></td><td><strong>Example (Java / Smali)</strong></td></tr><tr><td><code>move vx, vy</code></td><td>Moves the content of <code>vy</code> into <code>vx</code>.</td><td><code>int a = 12;</code><br><code>move v0, v1</code></td></tr><tr><td><code>const/4 vx, lit4</code></td><td>Puts a 4-bit constant into <code>vx</code>. The maximum value is 7. For higher values, use <code>const</code> instead.</td><td><code>int level = 3;</code><br><code>const/4 v0, 0x5</code></td></tr><tr><td><code>new-array vx, vy, type_id</code></td><td>Generates a new array of <code>type_id</code> with <code>vy</code> elements and puts the reference to the array into <code>vx</code>.</td><td><code>byte[] bArr = {0, 1, 2, 3, 4};</code><br><code>const/4 v0, 0x5</code><br><code>new-array v0, v0, [B</code></td></tr><tr><td><code>const vx, lit32</code></td><td>Puts a 32-bit integer constant into <code>vx</code>.</td><td><code>int level = 10000;</code><br><code>const v0, 0x2710</code></td></tr><tr><td><code>const-string vx, string_id</code></td><td>Puts a reference to a string constant identified by <code>string_id</code> into <code>vx</code>.</td><td><code>String name = "Player";</code><br><code>const-string v5, "Player"</code></td></tr><tr><td><code>iget vx, vy, field_id</code></td><td>Reads an instance field into <code>vx</code>. The instance is referenced by <code>vy</code>.</td><td><code>return this.highScore;</code><br><code>iget v0, p0, Lde/fgerbig/spacepeng/services/Profile;->highScore:I</code></td></tr><tr><td><code>iput vx, vy, field_id</code></td><td>Puts <code>vx</code> into an instance field. The instance is referenced by <code>vy</code>.</td><td><code>this.lastPlayedLevel = lastPlayedLevel2;</code><br><code>iput p1, p0, Lde/fgerbig/spacepeng/</code></td></tr></tbody></table>
+
+### **Common operators**
+
+Here’s a structured table for the most common operators in Smali:
+
+<table data-header-hidden data-full-width="true"><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td><strong>Command</strong></td><td><strong>Description</strong></td><td><strong>Example (Java / Smali)</strong></td></tr><tr><td><code>add-int vx, vy, vz</code></td><td>Calculates <code>vy + vz</code> and puts the result into <code>vx</code>.</td><td><code>score = score + 1;</code><br><code>add-int v5, v5, 0x1</code></td></tr><tr><td><code>sub-int vx, vy, vz</code></td><td>Calculates <code>vy - vz</code> and puts the result into <code>vx</code>.</td><td><code>score = score - 1;</code><br><code>sub-int v5, v5, 0x1</code></td></tr><tr><td><code>mul-int vx, vy, vz</code></td><td>Multiplies <code>vy</code> with <code>vz</code> and puts the result into <code>vx</code>.</td><td><code>bonus = bonus * 50;</code><br><code>mul-int v6, v1, 0x32</code></td></tr><tr><td><code>div-int vx, vy, vz</code></td><td>Divides <code>vy</code> by <code>vz</code> and puts the result into <code>vx</code>.</td><td><code>bonus = bonus / 2;</code><br><code>div-int v4, v1, 0x2</code></td></tr><tr><td><code>rem-int vx, vy, vz</code></td><td>Calculates <code>vy % vz</code> and puts the result into <code>vx</code>.</td><td><code>Math.abs(step2 % 4);</code><br><code>rem-int v0, p1, 0x4</code></td></tr><tr><td><code>and-int vx, vy, vz</code></td><td>Calculates <code>vy &#x26; vz</code> and puts the result into <code>vx</code>.</td><td><code>int result = b &#x26; 127;</code><br><code>and-int v1, p3, 0x1f</code></td></tr><tr><td><code>or-int vx, vy, vz</code></td><td>Calculates `vy</td><td>vz<code>and puts the result into</code>vx`.</td></tr><tr><td><code>xor-int vx, vy, vz</code></td><td>Calculates <code>vy ^ vz</code> and puts the result into <code>vx</code>.</td><td><code>Key = a ^ b;</code><br><code>xor-int v1, v2, v</code></td></tr></tbody></table>
+
+### IF - ELSE - GOTO
+
+**Modifying Application Behavior**
+
+Control flow in applications is often determined by conditional statements that dictate actions based on specific conditions. Understanding how to modify these conditions in Smali can significantly impact the behavior of the application. Below is a summary of common Smali conditional instructions and how you can use them to alter the program flow:
+
+**Conditional Instructions**
+
+<table data-header-hidden data-full-width="true"><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td><strong>Syntax</strong></td><td><strong>Description</strong></td><td><strong>Example</strong></td></tr><tr><td><code>if-eqz vx, target</code></td><td>If <code>vx</code> equals 0, jump to <code>target</code></td><td><code>if-eqz v0, :target</code></td></tr><tr><td><code>if-nez vx, target</code></td><td>If <code>vx</code> is not 0, jump to <code>target</code></td><td><code>if-nez v0, :target</code></td></tr><tr><td><code>if-ltz vx, target</code></td><td>If <code>vx</code> is less than 0, jump to <code>target</code></td><td><code>if-ltz v0, :target</code></td></tr><tr><td><code>if-gez vx, target</code></td><td>If <code>vx</code> is greater than or equal to 0, jump to <code>target</code></td><td><code>if-gez v0, :target</code></td></tr><tr><td><code>if-gtz vx, target</code></td><td>If <code>vx</code> is greater than 0, jump to <code>target</code></td><td><code>if-gtz v0, :target</code></td></tr><tr><td><code>if-lez vx, target</code></td><td>If <code>vx</code> is less than or equal to 0, jump to <code>target</code></td><td><code>if-lez v0, :target</code></td></tr><tr><td><code>if-eq vx, vy, target</code></td><td>If <code>vx</code> equals <code>vy</code>, jump to <code>target</code></td><td><code>if-eq v0, v1, :target</code></td></tr><tr><td><code>if-ne vx, vy, target</code></td><td>If <code>vx</code> is not equal to <code>vy</code>, jump to <code>target</code></td><td><code>if-ne v0, v1, :target</code></td></tr><tr><td><code>if-lt vx, vy, target</code></td><td>If <code>vx</code> is less than <code>vy</code>, jump to <code>target</code></td><td><code>if-lt v0, v1, :target</code></td></tr><tr><td><code>if-ge vx, vy, target</code></td><td>If <code>vx</code> is greater than or equal to <code>vy</code>, jump to <code>target</code></td><td><code>if-ge v0, v1, :target</code></td></tr><tr><td><code>if-gt vx, vy, target</code></td><td>If <code>vx</code> is greater than <code>vy</code>, jump to <code>target</code></td><td><code>if-gt v0, v1, :target</code></td></tr><tr><td><code>if-le vx, vy, target</code></td><td>If <code>vx</code> is less than or equal to <code>vy</code>, jump to <code>target</code></td><td><code>if-le v0, v1, :target</code></td></tr></tbody></table>
+
