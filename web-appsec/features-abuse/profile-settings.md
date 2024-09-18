@@ -228,3 +228,11 @@ Once you've claimed an email associated with another organization's domain, iden
     # References
     - <https://hackerone.com/reports/1040373>
     ```
+
+## Social Media Links
+
+* [ ] &#x20;Unsafe handle of social media links on profile&#x20;
+
+{% embed url="https://hackerone.com/reports/2483422" %}
+
+*
