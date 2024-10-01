@@ -31,3 +31,5 @@ SSL/TLS certificates are crucial for secure online communication. They are issue
 * A new certificate is issued with a digital stamp.
 
 **Effective certificate management is essential for maintaining secure online operations.**
+
+{% embed url="https://www.sectigo.com/resource-library/the-evolving-ssl-tls-certificate-lifecycle-how-to-manage-the-changes#The%20SSL/TLS%20certificate%20lifecycle%20stages" %}
