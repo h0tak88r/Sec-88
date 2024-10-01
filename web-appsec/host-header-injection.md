@@ -34,6 +34,13 @@ _· Also use multi-factor authentication to prevent account hijacking , and one 
 * [ ] Bypass front server restrictions and access to forbidden files and directories through
 * [ ] Add line wrapping
 * [ ] Supply an absolute URL
+* [ ] &#x20;[Password reset poisoning](https://portswigger.net/web-security/host-header/exploiting/password-reset-poisoning)
+* [ ] [Web cache poisoning](https://portswigger.net/web-security/host-header/exploiting#web-cache-poisoning-via-the-host-header)
+* [ ] [Exploiting classic server-side vulnerabilities](https://portswigger.net/web-security/host-header/exploiting#exploiting-classic-server-side-vulnerabilities)
+* [ ] [Bypassing authentication](https://portswigger.net/web-security/host-header/exploiting#accessing-restricted-functionality)
+* [ ] [Virtual host brute-forcing](https://portswigger.net/web-security/host-header/exploiting#accessing-internal-websites-with-virtual-host-brute-forcing)
+* [ ] [Routing-based SSRF](https://portswigger.net/web-security/host-header/exploiting#routing-based-ssrf)
+* [ ] [Connection state attacks](https://portswigger.net/web-security/host-header/exploiting#connection-state-attacks)
 
 ### References
 
