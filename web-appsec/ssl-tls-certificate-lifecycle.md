@@ -2,9 +2,9 @@
 
 ## **Understanding the SSL/TLS Certificate Lifecycle**
 
-SSL/TLS certificates are crucial for secure online communication. They are issued by Certificate Authorities (CAs) and verify the identity of websites and servers. Each certificate has a lifecycle, starting with a request and ending with expiration or revocation.
-
 <figure><img src="../.gitbook/assets/image (290).png" alt=""><figcaption></figcaption></figure>
+
+SSL/TLS certificates are crucial for secure online communication. They are issued by Certificate Authorities (CAs) and verify the identity of websites and servers. Each certificate has a lifecycle, starting with a request and ending with expiration or revocation.
 
 ## Stages
 
@@ -34,7 +34,29 @@ SSL/TLS certificates are crucial for secure online communication. They are issue
 
 **Effective certificate management is essential for maintaining secure online operations.**
 
+## CRL
+
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+A certificate revocation list (CRL) is a list of [digital certificates](https://www.techtarget.com/searchsecurity/definition/digital-certificate) that have been revoked by the issuing certificate authority ([CA](https://www.techtarget.com/searchsecurity/definition/certificate-authority)) before their actual or assigned expiration date.
+
+It is a type of blocklist that includes certificates that should no longer be trusted and is used by various endpoints, including [web browsers](https://www.techtarget.com/whatis/definition/browser), to verify if a certificate is valid and [trustworthy](https://searchcloudsecurity.techtarget.com/tip/Are-Amazon-certificate-authority-services-trustworthy).
+
+The CRL file is signed by the CA to prevent tampering.
+
+## OCSP
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+The Online Certificate Status Protocol (OCSP) is an alternative to the certificate revocation list (CRL) and is used to check whether a digital certificate is valid or if it has been revoked.
+
+The OCSP is an Internet Protocol (IP) that certificate authorities (CAs) use to determine the status of secure sockets layer/transport layer security (SSL/TLS) certificates, which are common applications of X.509 digital certificates. This helps web browsers check the status and validity of Hypertext Transfer Protocol Secure (HTTPS) websites.
+
 ## References
+
+{% embed url="https://www.fortinet.com/de/resources/cyberglossary/ocsp" %}
 
 {% embed url="https://www.youtube.com/watch?v=CVFi9v2gmBk&list=PLDRMxi70CdSCnfKDKYGNhkZB0iq0QVJ8D&index=1" %}
 
