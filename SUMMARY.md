@@ -87,6 +87,7 @@
   * [Tools-Extensions-Bookmarks](web-appsec/tools-extensions-and-softwares.md)
   * [WAF Bypassing Techniques](web-appsec/waf-bypassing-techniques.md)
   * [SSL/TLS Certificate Lifecycle](web-appsec/ssl-tls-certificate-lifecycle.md)
+  * [Serialization in .NET](web-appsec/serialization-in-.net.md)
 * [✉️ API-Sec](api-sec/README.md)
   * [API Recon](api-sec/api-recon.md)
   * [API Token Attacks](api-sec/api-token-attacks.md)
