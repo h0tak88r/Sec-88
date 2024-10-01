@@ -4,6 +4,8 @@
 
 SSL/TLS certificates are crucial for secure online communication. They are issued by Certificate Authorities (CAs) and verify the identity of websites and servers. Each certificate has a lifecycle, starting with a request and ending with expiration or revocation.
 
+<figure><img src="../.gitbook/assets/image (290).png" alt=""><figcaption></figcaption></figure>
+
 ## Stages
 
 **1. Request and Enrollment**
@@ -31,5 +33,9 @@ SSL/TLS certificates are crucial for secure online communication. They are issue
 * A new certificate is issued with a digital stamp.
 
 **Effective certificate management is essential for maintaining secure online operations.**
+
+## References
+
+{% embed url="https://www.youtube.com/watch?v=CVFi9v2gmBk&list=PLDRMxi70CdSCnfKDKYGNhkZB0iq0QVJ8D&index=1" %}
 
 {% embed url="https://www.sectigo.com/resource-library/the-evolving-ssl-tls-certificate-lifecycle-how-to-manage-the-changes#The%20SSL/TLS%20certificate%20lifecycle%20stages" %}
