@@ -227,3 +227,4 @@
   * [How We Secured Our Client’s Platform Against Interaction-Free Account Thefts](write-ups/how-we-secured-our-clients-platform-against-interaction-free-account-thefts.md)
   * [Unchecked Privileges: The Hidden Risk of Role Escalation in Collaborative Platforms](write-ups/unchecked-privileges-the-hidden-risk-of-role-escalation-in-collaborative-platforms.md)
   * [Decoding Server Behavior: The Key to Mass Account Takeover](write-ups/decoding-server-behavior-the-key-to-mass-account-takeover.md)
+  * [Exploiting JSON-Based CSRF: The Hidden Threat in Profile Management](write-ups/exploiting-json-based-csrf-the-hidden-threat-in-profile-management.md)

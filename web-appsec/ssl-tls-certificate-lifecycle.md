@@ -36,7 +36,7 @@ SSL/TLS certificates are crucial for secure online communication. They are issue
 
 ## CRL
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 A certificate revocation list (CRL) is a list of [digital certificates](https://www.techtarget.com/searchsecurity/definition/digital-certificate) that have been revoked by the issuing certificate authority ([CA](https://www.techtarget.com/searchsecurity/definition/certificate-authority)) before their actual or assigned expiration date.
 
@@ -46,7 +46,7 @@ The CRL file is signed by the CA to prevent tampering.
 
 ## OCSP
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (291).png" alt=""><figcaption></figcaption></figure>
 

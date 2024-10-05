@@ -82,9 +82,9 @@ To further confirm this theory, I made malformed requests with arbitrary values 
     {"password":"NewPassword123","verificationCode":"uczvfg"}
     ```
 
-<figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption><p>"recaptchaToken":null</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption><p>"recaptchaToken":null</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption><p>Empty captcha</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption><p>Empty captcha</p></figcaption></figure>
 
 Each of these requests returned a `400 Bad Request` and CAPTCHA error, whether the token was valid or not, confirming that CAPTCHA existence validation. However, by setting the CAPTCHA token to any random value or `true`, the response was a `400 Bad Request` with a verification code error if the verification code  was invalid. If the verification code was valid, the request was passed to the second server, which validated the entire request to change the user's password and returned a CAPTCHA error with a different response body structure and status. This confirmed that another server was handling the request. See the example of its response below:
 
@@ -95,9 +95,9 @@ Content-type: application/json
 {"errorMessage":{"code":"authorization.invalid_recaptcha","params":{}}}
 ```
 
-<figure><img src="../.gitbook/assets/image (5) (1).png" alt=""><figcaption><p>captcha exist and the verification code is valid the secode nserver validated the value of the captcha and said it is nto valid</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption><p>captcha exist and the verification code is valid the secode nserver validated the value of the captcha and said it is nto valid</p></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (7) (1).png" alt=""><figcaption><p>Captcha true and valid code</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption><p>Captcha true and valid code</p></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (9) (1).png" alt=""><figcaption><p>captcha true but invalid code</p></figcaption></figure>
 
