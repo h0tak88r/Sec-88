@@ -37,7 +37,7 @@ In Dalvik, registers are always 32 bits and can hold any type of value. For 64-b
 | V4             | P3             |
 | V(...)         | P(...)         |
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Local Registers and Types
 
