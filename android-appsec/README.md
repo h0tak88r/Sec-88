@@ -6,7 +6,7 @@ description: >-
 
 # 📱 Android-AppSec
 
-
+{% embed url="https://github.com/Ralireza/Android-Security-Teryaagh/blob/main/00-Roadmap/Android-Security-Roadmap.pdf" %}
 
 1. Learned Web Pentesting&#x20;
 2. Learned JAVA basics and OOP
