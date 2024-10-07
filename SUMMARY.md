@@ -70,7 +70,7 @@
     * [Cookie Flags](web-appsec/protection/cookie-flags.md)
     * [SameSite Cookie Restrictions](web-appsec/protection/bypassing-samesite-cookie-restrictions.md)
     * [Same-origin policy (SOP)](web-appsec/protection/same-origin-policy-sop.md)
-    * [CS](web-appsec/protection/cs.md)
+    * [CSP](web-appsec/protection/csp.md)
   * [Hacking IIS Applications](web-appsec/hacking-iis-applications.md)
   * [Dependency Confusion](web-appsec/dependency-confusion.md)
   * [Attacking Secondary Context](web-appsec/attacking-secondary-context.md)
