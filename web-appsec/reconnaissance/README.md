@@ -148,3 +148,29 @@ done < "$file"
 grep -r -E "aws_access_key|aws_secret_key|api key|passwd|pwd|heroku|slack|firebase|swagger|aws_secret_key|aws key|password|ftp password|jdbc|db|sql|secret jet|config|admin|pwd|json|gcp|htaccess|.env|ssh key|.git|access key|secret token|oauth_token|oauth_token_secret|smtp|GTM-" *.js
 
 ```
+
+## Bypass WAF and Find Origin IPs
+
+### Using hakoriginfinder&#x20;
+
+* References:
+* &#x20;[https://x.com/Jayesh25\_/status/1735240906750443851?s=35](https://x.com/Jayesh25\_/status/1735240906750443851?s=35)
+* [https://github.com/hakluke/hakoriginfinder](https://github.com/hakluke/hakoriginfinder)
+
+1. Discover your target's ASN and check [https://bgp.he.net/AS33848#\_prefixes…](https://t.co/0pQS70hOLL) &#x20;
+2. Make a note of the target's IP range.&#x20;
+3. Assuming you have a WAF-protected domain called example\[.]com. Use this command with the IP range Identified in step 1 and pass your target host against the -h parameter:
+
+```bash
+prips 93.184.216.0/24 | hakoriginfinder -h example.com
+```
+
+If you receive a "MATCH" output, there's a strong likelihood that you've successfully identified the Origin IP. Now, you can send requests with the same Host header to bypass WAF
+
+### Using Netlas/Shodan&#x20;
+
+* [https://x.com/Jayesh25\_/status/1843646332239544341](https://x.com/Jayesh25\_/status/1843646332239544341)
+
+1. Go to [Netlas](https://app.netlas.io/registration/), [shodan](https://www.shodan.io/), SecurityTrails or other similar platforms&#x20;
+2. &#x20;Make filters like `http.title:"My_target_title"`
+3. Sometyimes There is Origin IPs exposed

@@ -4,6 +4,8 @@ description: 'CWE-611: Improper Restriction of XML External Entity Reference'
 
 # XXE
 
+<figure><img src="../../.gitbook/assets/image (295).png" alt=""><figcaption></figcaption></figure>
+
 ## What is XXE (XML External Entity) Vulnerability?
 
 **XML External Entity (XXE)** is a type of vulnerability that occurs when an application processes user-supplied XML data without properly validating it. In XML, the term **Entity** refers to a storage unit of data, which can be internal (within the XML document) or external (an external file or URL). An attacker can exploit XXE to:
