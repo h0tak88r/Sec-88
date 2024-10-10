@@ -261,6 +261,10 @@ Referer: https://evil.com/test@example.com
 * [ ] **Sometimes the anti-csrf check is dependent on User-Agent as well.**
   * If you try to use a mobile/tablet user agent, the application may not even check for an anti-csrf token.
 
+## Slides
+
+{% embed url="https://docs.google.com/presentation/d/1B2g1fL4PfTCNaMVP-1X5qLKEm-tTIQ_u93IrnOeUol8/edit#slide=id.gc6fa3c898_0_5" %}
+
 ## Where To Find
 
 1. **Authentication-Required Actions**: Look for actions that require authentication, such as changing account settings, updating passwords, or making transactions. These are common areas where CSRF vulnerabilities can have significant impact.
