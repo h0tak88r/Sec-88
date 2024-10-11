@@ -133,6 +133,7 @@
   * [SMALI](android-appsec/smali/README.md)
     * [SMALI Cheat Sheet](android-appsec/smali/smali-cheat-sheet.md)
     * [Patching With SMALI](android-appsec/smali/patching-with-smali.md)
+    * [Page](android-appsec/smali/page.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)

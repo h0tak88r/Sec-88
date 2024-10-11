@@ -102,9 +102,43 @@ Here’s a table summarizing the syntax and descriptions for the conditional com
 | `if-gt vx, vy, target` | Jumps to `target` if `vx > vy`  |
 | `if-le vx, vy, target` | Jumps to `target` if `vx <= vy` |
 
-## Method Definitions
+### GOTO
 
-**Method Definition**
+| **Command**     | **Description**                                                        | **Example (Java/Smali)** |
+| --------------- | ---------------------------------------------------------------------- | ------------------------ |
+| `goto label`    | Unconditionally jumps to the specified label in the code.              | `goto :label_1`          |
+| `goto/16 label` | Unconditionally jumps to a label, used when the target is far in code. | `goto/16 :label_2`       |
+| `goto/32 label` | Unconditionally jumps to a label for even farther targets.             | `goto/32 :label_3`       |
+
+## Methods - Objects
+
+Here’s a table summarizing the commands and descriptions for invoking methods in Java/Smali:
+
+<table data-header-hidden data-full-width="true"><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td><strong>Command</strong></td><td><strong>Description</strong></td><td><strong>Example (Java/Smali)</strong></td></tr><tr><td><code>invoke-virtual {parameters}, methodtocall</code></td><td>Invokes a virtual method with parameters.</td><td><code>this.ds.increaseScore(value);</code><br><br><code>invoke-virtual {v5, v6}, Lde/fgerbig/spacepeng/systems/DirectorSystem;->increaseScore(I)V</code></td></tr><tr><td><code>invoke-direct {parameters}, methodtocall</code></td><td>Invokes a method with parameters without virtual method resolution.</td><td><code>DoubleShot doubleShot = new DoubleShot();</code><br><br><code>invoke-direct {v0}, Lde/fgerbig/spacepeng/components/powerup/DoubleShot;->&#x3C;init>()V</code></td></tr><tr><td><code>invoke-static {parameters}, methodtocall</code></td><td>Invokes a static method with parameters.</td><td><code>MathUtils.random((float) MIN_DELAY, (float) MAX_DELAY);</code><br><br><code>invoke-static {v0, v1}, Lcom/example/MathUtils;->random(FF)F</code></td></tr><tr><td><code>invoke-interface {parameters}, methodtocall</code></td><td>Invokes an interface method.</td><td><code>itrt.hasNext();</code><br><br><code>invoke-interface {v3}, Ljava/util/Iterator;->hasNext()Z</code></td></tr><tr><td><code>Sget-object</code></td><td>Retrieves the value of a static object field and puts it into a register</td><td><code>String name = MyClass.staticField;</code><br><br><code>sget-object v0, Lcom/example/MyClass;->staticField:Ljava/lang/String;</code></td></tr></tbody></table>
+
+### **Method Invocation**&#x20;
+
+Different instructions are used depending on whether you are invoking a method statically, virtually, or on an interface.
+
+* **`invoke-virtual`**: Calls a method on an object instance(public method).
+* **`invoke-static`**: Calls a static method.
+* **`invoke-direct`**: Calls a method on the current object directly (private)(typically constructors).
+
+**Example**:
+
+{% code overflow="wrap" %}
+```smali
+invoke-static {}, Ljava/lang/System;->gc()V  # Invokes the static method 'gc' from System class
+```
+{% endcode %}
+
+{% code overflow="wrap" %}
+```smali
+invoke-virtual {v0}, Ljava/lang/String;->length()I   # Call the length() method on a String object stored in v0
+```
+{% endcode %}
+
+### Method Definitions
 
 A method in Smali starts with a `.method` directive and is followed by the method signature, return type, and parameters.
 
@@ -147,83 +181,6 @@ In Smali, arrays are handled with the `new-array` instruction, which creates an 
     new-array v1, v0, [I      # Create an integer array of length 3
     aput v0, v1, 0            # Assign value v0 to array index 0
     aget v2, v1, 1            # Load the value from index 1 into v2
-```
-
-***
-
-## **Comparisons and Conditionals**
-
-Smali uses conditional instructions to perform comparisons and control the flow of execution.
-
-**Comparison Instructions**
-
-* `if-eq/if-ne`: Compare if equal or not equal.
-* `if-lt/if-ge`: Compare less than or greater than/equal to.
-
-**Example**:
-
-```smali
-    const/4 v0, 5           # Assign 5 to v0
-    const/4 v1, 3           # Assign 3 to v1
-    if-lt v0, v1, :label1   # If v0 < v1, jump to label1
-```
-
-**Unconditional Jump**
-
-* **goto**: Perform an unconditional jump to a label.
-
-**Example**:
-
-```smali
-    goto :label2    # Jumps to label2 unconditionally
-```
-
-***
-
-## **Method Invocation**&#x20;
-
-Different instructions are used depending on whether you are invoking a method statically, virtually, or on an interface.
-
-* **`invoke-virtual`**: Calls a method on an object instance(public method).
-* **`invoke-static`**: Calls a static method.
-* **`invoke-direct`**: Calls a method on the current object directly (private)(typically constructors).
-
-**Example**:
-
-{% code overflow="wrap" %}
-```smali
-invoke-static {}, Ljava/lang/System;->gc()V  # Invokes the static method 'gc' from System class
-```
-{% endcode %}
-
-{% code overflow="wrap" %}
-```smali
-invoke-virtual {v0}, Ljava/lang/String;->length()I   # Call the length() method on a String object stored in v0
-```
-{% endcode %}
-
-***
-
-## **Conditionals and Jumps**
-
-Smali code uses `if-*` instructions to handle conditional logic and `goto` for unconditional jumps.
-
-**Conditionals**
-
-* **`if-eq`**: Jumps if two registers are equal.
-* **`if-ne`**: Jumps if two registers are not equal.
-* **`if-lt`**: Jumps if the first register is less than the second.
-
-**Unconditional Jumps**
-
-* **`goto`**: Jumps to a label unconditionally.
-
-**Example**:
-
-```smali
-    const/4 v0, 0x1        # Load constant 1 into v0
-    if-eq v0, v1, :label   # If v0 == v1, jump to label
-    goto :nextLabel        # Otherwise, jump to nextLabel
 ```
 
 ***
