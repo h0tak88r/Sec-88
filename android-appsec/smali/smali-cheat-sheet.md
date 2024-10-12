@@ -51,7 +51,7 @@ In Dalvik, registers are always 32 bits and can hold any type of value. For 64-b
 | `iget vx, vy, field_id`     | Reads an instance field into `vx`, where the instance is referenced by `vy`.                              | <p><code>return this.highScore;</code><br><code>iget v0, p0, Lde/fgerbig/spacepeng/services/Profile;->highScore:I</code><br><code>return v0</code></p> |
 | `iput vx,vy, field_id`      | Puts `vx` into an instance field, where the instance is referenced by `vy`.                               | <p><code>this.lastPlayedLevel = lastPlayedLevel2;</code><br><code>iput p1, p0, Lde/fgerbig/spacepeng/services/Profile;->lastPlayedLevel:I</code></p>   |
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Local Registers and Types
 
@@ -197,6 +197,68 @@ In Smali, arrays are handled with the `new-array` instruction, which creates an 
     move v0, v1    # Move the value of v1 to v0
     return-void    # End the method with no return value
 ```
+
+## Useful SMALI snippets
+
+### **Printing Variables/Return Values Using `System.out.println`**
+
+This is a simple and effective way to print variables such as passwords, secrets, or comparison values to logcat. By injecting a `System.out.println` statement into the Smali code, you can monitor the output of specific values in the application logs.
+
+**Java Code:**
+
+```java
+String password = "Pa%%w0rd!";
+System.out.println(password);
+```
+
+**Smali Equivalent:**
+
+You can print the value of a variable by loading it into a register (e.g., `v0`), then using `sget-object` and `invoke-virtual` to print it.
+
+```smali
+.line 14
+const-string v0, "Pa%%w0rd!"
+.line 15
+.local v0, "password":Ljava/lang/String;
+sget-object v1, Ljava/lang/System;->out:Ljava/io/PrintStream;
+invoke-virtual {v1, v0}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V
+```
+
+After inserting this code into the Smali file, you can run the app and check the logcat output to see the printed value, which can be useful for debugging or extracting sensitive data.
+
+### **Printing Byte Values as Base64 Encoded Strings**
+
+Often, cryptographic functions store sensitive data like keys or initialization vectors (IVs) as byte arrays. To print these byte arrays in a readable format, you can encode them as Base64 strings and output them.
+
+**Java Code:**
+
+```java
+System.out.println(Base64.encodeToString(<byte array>, Base64.DEFAULT));
+```
+
+**Smali Equivalent:**
+
+Insert the following code into the existing Smali code. Ensure that the register (`v5` in this case) refers to the correct byte array.
+
+```smali
+.line 14
+const-string v0, "Pa%%w0rd!"
+.line 15
+.local v0, "password":Ljava/lang/String;
+sget-object v1, Ljava/lang/System;->out:Ljava/io/PrintStream;
+invoke-virtual {v1, v0}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V
+
+# Base64 encoding of byte array
+const/4 v5, 0x0   # Reference to your byte array
+invoke-static {v2, v5}, Landroid/util/Base64;->encodeToString([BI)Ljava/lang/String;
+move-result-object v5
+
+# Print the encoded string
+sget-object v1, Ljava/lang/System;->out:Ljava/io/PrintStream;
+invoke-virtual {v1, v5}, Ljava/io/PrintStream;->println(Ljava/lang/String;)V
+```
+
+This will print the byte array as a Base64-encoded string, making it easier to inspect and understand cryptographic data. You can insert this snippet into any Smali file where byte arrays are processed.
 
 ## References
 
