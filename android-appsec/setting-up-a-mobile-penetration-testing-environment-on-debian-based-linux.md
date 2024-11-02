@@ -178,28 +178,8 @@ APK Signer is required to sign APKs. It comes with the Android SDK’s build too
 
     Replace `my-release-key.jks` with your keystore file and `unsigned.apk` with the file you want to sign.
 
-**Step 5: Medusa and Jadx for Static Analysis**
+## Magisk
 
-Medusa and Jadx are essential tools for performing brute-force attacks on network services and decompiling APK files.
+{% embed url="https://support.genymotion.com/hc/en-us/articles/360011385178-How-to-install-Xposed-EdXposed-LSPosed-Magisk-with-Genymotion-Device-image-PaaS" %}
 
-1. **Medusa**: [Medusa GitHub Repository](https://github.com/jmk-foofus/medusa)
-   *   Install Medusa from the source:
-
-       ```bash
-       sudo apt update
-       sudo apt install -y git build-essential
-       git clone https://github.com/jmk-foofus/medusa.git
-       cd medusa
-       make && sudo make install
-       ```
-2. **Jadx**: [Jadx GitHub Releases](https://github.com/skylot/jadx/releases)
-   *   Download the latest release, extract it, and run Jadx:
-
-       ```bash
-       wget https://github.com/skylot/jadx/releases/download/v1.4.5/jadx-1.4.5.zip
-       unzip jadx-1.4.5.zip
-       cd jadx
-       ./bin/jadx -d output_folder app.apk
-       ```
-
-Jadx decompiles APKs into human-readable source code, helping you analyze app vulnerabilities.
+{% embed url="https://support.genymotion.com/hc/en-us/articles/8957952431389-How-to-install-Magisk-on-Genymotion" %}
