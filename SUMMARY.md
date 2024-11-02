@@ -102,6 +102,7 @@
   * [OWASP API TOP 10 MindMap](api-sec/owasp-api-top-10-mindmap.md)
   * [Scanning APIs with OWASP ZAP](api-sec/scanning-apis-with-owasp-zap.md)
 * [📱 Android-AppSec](android-appsec/README.md)
+  * [Setting Up a Mobile Penetration Testing Environment on Debian-Based Linux](android-appsec/setting-up-a-mobile-penetration-testing-environment-on-debian-based-linux.md)
   * [APK Pentesting Checklist](android-appsec/apk-pentesting-checklist.md)
   * [Hacking InsecureBankv2 App](android-appsec/hacking-insecurebankv2-app/README.md)
     * [Information Gathering](android-appsec/hacking-insecurebankv2-app/information-gathering.md)
@@ -230,3 +231,4 @@
   * [Unchecked Privileges: The Hidden Risk of Role Escalation in Collaborative Platforms](write-ups/unchecked-privileges-the-hidden-risk-of-role-escalation-in-collaborative-platforms.md)
   * [Decoding Server Behavior: The Key to Mass Account Takeover](write-ups/decoding-server-behavior-the-key-to-mass-account-takeover.md)
   * [Exploiting JSON-Based CSRF: The Hidden Threat in Profile Management](write-ups/exploiting-json-based-csrf-the-hidden-threat-in-profile-management.md)
+  * [XSS from Medium to High](write-ups/xss-from-medium-to-high.md)

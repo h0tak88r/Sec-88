@@ -8,7 +8,7 @@ Smali is the assembly language used to represent Android's DEX bytecode. This gu
 
 ## Smali File Structure
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Types
 
@@ -51,7 +51,7 @@ In Dalvik, registers are always 32 bits and can hold any type of value. For 64-b
 | `iget vx, vy, field_id`     | Reads an instance field into `vx`, where the instance is referenced by `vy`.                              | <p><code>return this.highScore;</code><br><code>iget v0, p0, Lde/fgerbig/spacepeng/services/Profile;->highScore:I</code><br><code>return v0</code></p> |
 | `iput vx,vy, field_id`      | Puts `vx` into an instance field, where the instance is referenced by `vy`.                               | <p><code>this.lastPlayedLevel = lastPlayedLevel2;</code><br><code>iput p1, p0, Lde/fgerbig/spacepeng/services/Profile;->lastPlayedLevel:I</code></p>   |
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Local Registers and Types
 
