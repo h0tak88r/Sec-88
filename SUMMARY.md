@@ -30,6 +30,7 @@
   * [OAUTH Misconfigurations](web-appsec/oauth-misconfigurations/README.md)
     * [OAuth 2.0 Basics](web-appsec/oauth-misconfigurations/oauth-2.0-basics.md)
     * [OAUTH Misconfigurations](web-appsec/oauth-misconfigurations/oauth-to-ato.md)
+  * [Auth0 Misconfigurations](web-appsec/auth0-misconfigurations.md)
   * [Broken Access Control](web-appsec/broken-access-control/README.md)
     * [Insecure Direct Object References (IDOR)](web-appsec/broken-access-control/insecure-direct-object-references-idor.md)
     * [403 Bypass](web-appsec/broken-access-control/403-bypass.md)

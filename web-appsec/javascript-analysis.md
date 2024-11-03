@@ -62,6 +62,37 @@ JSMiner
    [`https://chromewebstore.google.com/detail/retirejs/moibopkbhjceeedibkbkbchbjnkadmom?hl=en`](https://chromewebstore.google.com/detail/retirejs/moibopkbhjceeedibkbkbchbjnkadmom?hl=en)
 5. Search for their exploit in [https://security.snyk.io/ ](https://security.snyk.io/)
 
+* Manually Extract Endpoints and Paths&#x20;
+
+{% embed url="https://mux0xx.medium.com/how-to-expand-your-attack-surface-and-avoid-duplicates-6c5b01f32b93" %}
+
+```bash
+- Identify all JS files by browsing the target’s functionalities and interacting with buttons and forms.
+Extract JS Files in Burp Suite
+
+- Use Burp Suite's HTTP history to filter and save in-scope JavaScript files (without Base64 encoding).
+Identify Unique Endpoints
+
+- Select at least 10 endpoints, focusing on those with variables (like IDs).
+Pattern Recognition with Regex
+
+- Observe endpoint patterns in JS files; create regex to match these patterns and automate discovery.
+Automated Extraction Tools
+
+- Use tools like jsluice, endext, or xnLinkFinder to assist with endpoint extraction.
+Spot Endpoint Patterns
+
+- Identify naming conventions (e.g., get or update) and explore modifications to discover hidden endpoints.
+Prioritize Critical Endpoints
+
+- Focus on sensitive areas (e.g., payments, admin) and use regex to search for secrets in these endpoints.
+Advanced Fuzzing
+
+- Extract strings within double quotes ("") and use them to fuzz for additional paths and endpoints.
+```
+
+
+
 ### Dynamic Analysis
 
 * Function Monitoring
