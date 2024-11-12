@@ -5,6 +5,8 @@
 > **Tools**
 
 * https://github.com/h0tak88r/AutoSubRecon
+* [https://github.com/h0tak88r/reconraptor](https://github.com/h0tak88r/reconraptor)
+* [https://github.com/h0tak88r/subfalcon](https://github.com/h0tak88r/subfalcon)
 * https://github.com/h0tak88r/submonit88r
 * https://github.com/bing0o/SubEnum
 * https://github.com/shmilylty/OneForAll
