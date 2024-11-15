@@ -83,7 +83,7 @@ Tools for decoding and analyzing UUIDs
 
 The version and variant are encoding within UUIDs.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (11) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -124,7 +124,7 @@ e6e3422c-c82d-11ed-8761-3ff799965458
 
 this kind of UUIDs is time and node based and the  Clock part is usually random
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 As you might expect, relying on UUID v1 for sensitive actions is inherently insecure. In this video, a scenario is demonstrated where an application uses UUID v1 as a token for password resets. An attacker can easily extract other users' UUIDs (eg. from creating account or API calls), determine the timestamp, and either manually generate valid password reset tokens or brute-force the clock component.
 
