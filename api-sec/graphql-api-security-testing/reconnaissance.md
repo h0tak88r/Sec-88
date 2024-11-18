@@ -190,10 +190,22 @@ query {
 
 **Visualizing Introspection Data**
 
-* Use **GraphQL Voyager** to explore schema relationships:
-  1. Navigate to [GraphQL Voyager](https://ivangoncharov.github.io/graphql-voyager/).
-  2. Paste the introspection response or upload the SDL file.
-  3. View relationships visually (e.g., `PasteObject` links to `OwnerObject`).
+*   Use **GraphQL Voyager** to explore schema relationships:
+
+    1. Navigate to [GraphQL Voyager](https://ivangoncharov.github.io/graphql-voyager/).
+    2. Paste the introspection response or upload the SDL file.
+    3. View relationships visually (e.g., `PasteObject` links to `OwnerObject`).
+
+
+* Using Nmap tpo Scan for Intruspection
+
+```
+nmap --script=graphql-introspection -iL hosts.txt -sV -p 5013
+```
+
+
+
+
 
 ***
 
@@ -354,21 +366,10 @@ Command:
 eyewitness --web --single http://localhost:5013/graphiql -d dvga-report
 ```
 
-Output:
-
-```plaintext
-[*] Done! Report written in the dvga-report folder!
-Would you like to open the report now? [Y/n]
+```bash
+echo 'http://localhost:5013/graphiql' > urls.txt
+eyewitness --web -f urls.txt -d dvga-report
 ```
-
-**Output Report:**
-
-* Includes screenshots and source code of detected web pages.
-* Stored in folders like `screens`, `source`, and `report.html`.
-
-***
-
-**Building Custom Wordlists**
 
 **Creating URL Lists for EyeWitness:** Command:
 
@@ -378,6 +379,10 @@ for i in $(cat /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt); do
 done
 ```
 
-* Appends each directory in the wordlist to the base URL.
+## Visualizing Introspection with GraphQL Voyager <a href="#h2-502840c04-0008" id="h2-502840c04-0008"></a>
 
-***
+<figure><img src="../../.gitbook/assets/f04007.png" alt=""><figcaption><p> <a href="https://ivangoncharov.github.io/graphql-voyager">https://ivangoncharov.github.io/graphql-voyager</a> or <a href="http://lab.blackhatgraphql.com:9000">http://lab.blackhatgraphql.com:9000</a>,</p></figcaption></figure>
+
+### Generating Introspection Documentation with SpectaQL
+
+> _SpectaQL_ ([https://github.com/anvilco/spectaql](https://github.com/anvilco/spectaql)) is an open source project that allows you to generate static documentation based on an SDL file. The document that gets generated will include information about how to construct queries, mutations, and subscriptions; the different types; and their fields. We’ve hosted an example SpectaQL-generated schema of DVGA at [http://lab.blackhatgraphql.com:9001](http://lab.blackhatgraphql.com:9001) so you can see how SpectaQL looks when it’s functional.
