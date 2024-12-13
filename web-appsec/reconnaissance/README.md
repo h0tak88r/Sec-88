@@ -14,8 +14,7 @@
 > **Write ups**
 
 * https://h0tak88r.medium.com/mastering-subdomain-enumeration-6c84571b07b
-* https://h0tak88r.github.io/posts/Deep-Subdomains-Enumeration/
-*
+* [#subdomain-enumeration](./#subdomain-enumeration "mention")
 
 ## API Recon
 
@@ -115,7 +114,7 @@ https?://(www.)?[-a-zA-Z0–9@:%.+~#=]{1,256}.[a-zA-Z0–9()]{1,6}\b([-a-zA-Z0�
 
 > **Tools**
 
-* [Scripts/python scripts/JS\_Leaks\_spider.py](https://github.com/h0tak88r/Scripts/blob/main/python%20scripts/JS\_Leaks\_spider.py)
+* [Scripts/python scripts/JS\_Leaks\_spider.py](https://github.com/h0tak88r/Scripts/blob/main/python%20scripts/JS_Leaks_spider.py)
 * Use This Extension to analyse JS Files [FindSomething - Chrome Web Store (google.com)](https://chrome.google.com/webstore/detail/findsomething/kfhniponecokdefffkpagipffdefeldb/related)
 * [Can analyzing javascript files lead to remote code execution? | by Asem Eleraky | Medium](https://melotover.medium.com/can-analyzing-javascript-files-lead-to-remote-code-execution-f24112f1aa1f)
 
@@ -156,7 +155,7 @@ grep -r -E "aws_access_key|aws_secret_key|api key|passwd|pwd|heroku|slack|fireba
 ### Using hakoriginfinder&#x20;
 
 * References:
-* &#x20;[https://x.com/Jayesh25\_/status/1735240906750443851?s=35](https://x.com/Jayesh25\_/status/1735240906750443851?s=35)
+* &#x20;[https://x.com/Jayesh25\_/status/1735240906750443851?s=35](https://x.com/Jayesh25_/status/1735240906750443851?s=35)
 * [https://github.com/hakluke/hakoriginfinder](https://github.com/hakluke/hakoriginfinder)
 
 1. Discover your target's ASN and check [https://bgp.he.net/AS33848#\_prefixes…](https://t.co/0pQS70hOLL) &#x20;
@@ -171,8 +170,48 @@ If you receive a "MATCH" output, there's a strong likelihood that you've success
 
 ### Using Netlas/Shodan&#x20;
 
-* [https://x.com/Jayesh25\_/status/1843646332239544341](https://x.com/Jayesh25\_/status/1843646332239544341)
+* [https://x.com/Jayesh25\_/status/1843646332239544341](https://x.com/Jayesh25_/status/1843646332239544341)
 
 1. Go to [Netlas](https://app.netlas.io/registration/), [shodan](https://www.shodan.io/), SecurityTrails or other similar platforms&#x20;
 2. &#x20;Make filters like `http.title:"My_target_title"`
 3. Sometyimes There is Origin IPs exposed
+
+## Fuzzing Tips
+
+````
+Use Some Hash's And Encoding Algorithm's (MD5 , SHA-1 , SHA-256 , base32 , base64 , etc . . . )
+From Most Common WordList Content Discovery With Common Extensions , Say :
+https://example*com/<HashValue>.php
+https://example*com/Fuzz/<Encoding>.php
+https://example*com/Fuzz/<HashValue>.asp , . . .
+--
+Use Random Bytes With base64 To Fuzz Sensitive Fails , With Extension Or Not , Say:
+https://example*com/path/<RandomBytes-Base64>.php 
+https://example*com/path/<RandomBytes-Base64>
+--
+- Generate Wordlist Examples 
+```
+cat  common.txt | while read word; do echo -n "$word" | base64 | tee -a base64-wordlist.txt ; done
+cat wordlist.txt | while read word; do echo -n "$word" | md5sum | cut -d ' ' -f1 | tee -a MD5-Hashs.txt; done
+```
+uploads => 5128f35c9b4be13788ba41bdb6d1fc1f
+cmd => dfff0a7fa1a55c8c1a4966c19f6da452
+index => aW5keAo=
+. . .
+https://examples*com/path/5128f35c9b4be13788ba41bdb6d1fc1f
+https://examples*com/path/dfff0a7fa1a55c8c1a4966c19f6da452.php
+https://examples*com/path/aW5keAo=.bak
+. . .
+- Say In Ffuf
+ffuf -w MD5-Hashs.txt:/W1 -w extensions.txt:/W2 -u "https://example*com/path/W1.W2" -mc 200
+ffuf -w base64-wordlist.txt:/W1 -w extensions.txt:/W2 -u "https://example*com/path/W1.W2" -mc 200
+-- 
+U Can After get 200 Status Code From Fails With Extension  , Discover Parameters Using (arjun, ParamSpider , etc . . . ) Tools
+https://examples*com/path/dfff0a7fa1a55c8c1a4966c19f6da452.php?cmd=
+etc . . .
+--
+````
+
+
+
+{% embed url="https://www.facebook.com/100085121092587/posts/pfbid0du1bMhQZwbqfNNQy1u9NGqQHrQoiLJhLBMGLCAjmSdqApWDHPoTKzH3ZwKpaZXrVl/?app=fbl" %}
