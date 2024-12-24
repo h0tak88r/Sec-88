@@ -156,13 +156,13 @@ description: >-
 * [ ] Request password reset -> Enter New Password -> Change Reference -> **IDOR** -> **0-CLICK** ATO
 * [ ] \[\[Race Condition]] -> **0-CLICK** ATO
 * [ ] [**Password reset token leaked via Referer header**](https://hackerone.com/reports/1320242)
-* [ ] [**HTML\_Injection\_on\_password\_reset\_page**](https://github.com/KathanP19/HowToHunt/blob/master/HTML\_Injection/HTML\_Injection\_on\_password\_reset\_page.md)
+* [ ] [**HTML\_Injection\_on\_password\_reset\_page**](https://github.com/KathanP19/HowToHunt/blob/master/HTML_Injection/HTML_Injection_on_password_reset_page.md)
 * [ ] Token is Not Invalidated After Use
 * [ ] Token is Not Invalidated After Email Change/Password Change
   * [Chaturbate | Report #411337 - Forget password link not expiring after email change. | HackerOne](https://hackerone.com/reports/411337)
 * [ ] CRLF in URL `/resetPassword?0a%0dHost:atracker.tld` -> Host Header Injection
 * [ ] [**IDN Homograph Attack leads to ATO**](https://infosecwriteups.com/how-i-was-able-to-change-victims-password-using-idn-homograph-attack-587111843aff)
-* [ ] `victim.com@attacker.com` -> [0xacb.com/normalization\_table](https://0xacb.com/normalization\_table) -> Host Header Injection
+* [ ] `victim.com@attacker.com` -> [0xacb.com/normalization\_table](https://0xacb.com/normalization_table) -> Host Header Injection
 
 > _**\[\[Profile - Settings]]**_
 
@@ -217,7 +217,7 @@ description: >-
 * [ ] Unverified User Can Post Newsletter -> https://hackerone.com/reports/1691603
 * [ ] BAC -> Fill the form with other's email -> https://hackerone.com/reports/145396
 * [ ] No Rate Limit -> No-Captcha -> Spam Victim -> https://hackerone.com/reports/145612
-* [ ] Host Header Injection -> https://hackerone.com/reports/229498_**OAUTH to ATO**_
+* [ ] Host Header Injection -> https://hackerone.com/reports/22949&#x38;_**OAUTH to ATO**_
 * [ ] Test `edirect_uri` for \[\[Open Redirect]]
 * [ ] [**XSS on OAuth authorize/authenticate endpoint**](https://hackerone.com/reports/87040) | \[\[XSS\_HTML Injection]]
 * [ ] Test the existence of `response_type=token`
@@ -316,11 +316,11 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
 * [ ] XSS metadata `exiftool -Artist=’ “><img src=1 onerror=alert(document.domain)>’ 88.jpeg`
 * [ ] XSS in SVG `<svg xmlns="http://www.w3.org/2000/svg" onload="alert(document.domain)"/>`
 * [ ] GIF to XSS `GIF89a/*<svg/onload=alert(1)>*/=alert(document.domain)//;`
-* [ ] [**XSS in PDF**](https://drive.google.com/file/d/1JQ\_DVGdopanC59hnf6TF1dOwNsF\_wkFY/view)
+* [ ] [**XSS in PDF**](https://drive.google.com/file/d/1JQ_DVGdopanC59hnf6TF1dOwNsF_wkFY/view)
 * [ ] [ZIP TO XXE](https://hackerone.com/reports/105434)
 * [ ] [SQL Injection - File name](https://shahjerry33.medium.com/sql-injection-the-file-upload-playground-6580b089d013)
 * [ ] [XXE ON JPEG](https://hackerone.com/reports/836877)
-* [ ] [Create A picture that steals Data](https://medium.com/@iframe\_h1/a-picture-that-steals-data-ff604ba101)
+* [ ] [Create A picture that steals Data](https://medium.com/@iframe_h1/a-picture-that-steals-data-ff604ba101)
 
 > **Ban Feature Abuse**
 
@@ -331,7 +331,7 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
 
 * [ ] \[\[IDOR|IDOR]] Posting comments impersonating some other users.
 * [ ] **DOM Clobbering**
-* [ ] Markup Language? try [**Create A picture that steals Data**](https://medium.com/@iframe\_h1/a-picture-that-steals-data-ff604ba1012)
+* [ ] Markup Language? try [**Create A picture that steals Data**](https://medium.com/@iframe_h1/a-picture-that-steals-data-ff604ba1012)
 * [ ] \[\[IDOR|IDOR]] to Read any other's private comments
 * [ ] Race Condition
 * [ ] Privilege Escalation
@@ -349,7 +349,7 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
     <a href="j%26Tab%3bavascript%26colon%3ba%26Tab%3blert()">x</a>
     ```
 * [ ] Hyperlink Injection `Click on me to claim 100$ vouchers](<https://evil.com>)`
-* [ ] Markup Language? try [**Create A picture that steals Data**](https://medium.com/@iframe\_h1/a-picture-that-steals-data-ff604ba1012)
+* [ ] Markup Language? try [**Create A picture that steals Data**](https://medium.com/@iframe_h1/a-picture-that-steals-data-ff604ba1012)
 * [ ] flood the application using the session data of an old user > Improper Session Management
 * [ ] \[\[IDOR]]
 

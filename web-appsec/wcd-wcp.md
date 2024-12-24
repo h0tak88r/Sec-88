@@ -62,7 +62,7 @@ X-Forwarded-Host
 X-Forwarded-Host
 ```
 
-4. **Query Parameter Fuzzing:**Focus on unkeyed query parameters (e.g., `utm_.*`, `_method`) that the cache server ignores but the web server processes, leading to potential XSS, DoS, or information leakage.
+4. **Query Parameter Fuzzing:**&#x46;ocus on unkeyed query parameters (e.g., `utm_.*`, `_method`) that the cache server ignores but the web server processes, leading to potential XSS, DoS, or information leakage.
 5.  **FatGet:** Handling GET method with a body&#x20;
 
     <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
@@ -124,7 +124,7 @@ X-Forwarded-Host
     <figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 12. **Testing for DoS:** Exploit cache poisoning for DoS by forcing the cache to serve incorrect or error responses, such as caching empty responses or invalid status codes.
 
-## Tools & Extension**:**
+## Tools & Extensio&#x6E;**:**
 
 * **Randomizer:** For generating random tokens in requests to help as a cache buster.
   * Burp session configurations&#x20;
@@ -140,8 +140,8 @@ X-Forwarded-Host
 Configure burpsuite to add custom columns using bambada code e.g.
 
 > _**Age**_\
-> _**Cf-Cache-Status**_\
-> _**X-Cache**_
+> &#xNAN;_**Cf-Cache-Status**_\
+> &#xNAN;_**X-Cache**_
 >
 > _**X-Cacheable**_
 

@@ -6,21 +6,7 @@ GraphQL has many implementations written in a variety of programming languages, 
 
 **GraphQL Implementations and Languages**
 
-| Server Implementation | Language   |
-| --------------------- | ---------- |
-| Apollo                | TypeScript |
-| Graphene              | Python     |
-| Yoga                  | TypeScript |
-| Ariadne               | Python     |
-| graphql-ruby          | Ruby       |
-| graphql-php           | PHP        |
-| graphql-go            | Go         |
-| graphql-java          | Java       |
-| Sangria               | Scala      |
-| Juniper               | Rust       |
-| HyperGraphQL          | Java       |
-| Strawberry            | Python     |
-| Tartiflette           | Python     |
+<table><thead><tr><th width="242">Server Implementation</th><th>Language</th></tr></thead><tbody><tr><td>Apollo</td><td>TypeScript</td></tr><tr><td>Graphene</td><td>Python</td></tr><tr><td>Yoga</td><td>TypeScript</td></tr><tr><td>Ariadne</td><td>Python</td></tr><tr><td>graphql-ruby</td><td>Ruby</td></tr><tr><td>graphql-php</td><td>PHP</td></tr><tr><td>graphql-go</td><td>Go</td></tr><tr><td>graphql-java</td><td>Java</td></tr><tr><td>Sangria</td><td>Scala</td></tr><tr><td>Juniper</td><td>Rust</td></tr><tr><td>HyperGraphQL</td><td>Java</td></tr><tr><td>Strawberry</td><td>Python</td></tr><tr><td>Tartiflette</td><td>Python</td></tr></tbody></table>
 
 ## Common Endpoints
 
@@ -73,7 +59,14 @@ app.add_url_rule('/graphiql', view_func=GraphQLView.as_view(
 
 ## **Common GraphQL Responses**
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+If the operation is a query, the result of the operation is the result of executing the operation’s top-level selection set with the query root operation type. An initial value may be provided when executing a query operation: `ExecuteQuery(query, schema, variableValues, initialValue)`
+
+1. Let `queryType` be the root Query type in the schema.
+2. Assert: `queryType` is an Object type.
+3. Let `selectionSet` be the top-level selection set in the query.
+4. Let data be the result of running `ExecuteSelectionSet(selectionSet, queryType, initialValue, variableValues)` normally (allowing parallelization).
+5. Let errors be any field errors produced while executing the selection set.
+6. Return an unordered map containing data and errors. In practice, this means a GraphQL API will return a data JSON field when there is a result to return to a client’s query. It will also return an errors JSON field whenever errors occur during the execution of a client query.
 
 GraphQL APIs follow a standardized response structure, making them relatively easy to identify during penetration tests or bug bounty hunts. According to the GraphQL specification:
 
@@ -86,67 +79,97 @@ These predictable behaviors allow automated tools to identify GraphQL APIs by se
 
 ***
 
-#### **Example of Valid Query Response**
+### **Nmap Scan**
 
-Send a query to fetch the `id` field from the `pastes` object using the **HTTP POST** method:
+A common GraphQL response returned when a client makes a GET request.
 
-```graphql
-query {
-  pastes {
-    id
-  }
-}
+```bash
+curl -X GET http://localhost:5013/graphql
+{"errors":[{"message":"Must provide query string."}]}
 ```
 
-**Response**:
+With this information, we now have the ability to automate a scan and pick up any other GraphQL servers that may exist on a network.
 
-```json
-{
-  "data": {
-    "pastes": [
-      {
-        "id": "1"
-      }
-    ]
-  }
-}
+{% code overflow="wrap" %}
+```bash
+nmap -p 5013 -sV --script=http-grep --script-args='match="Must provide query string", http-grep.url="/graphql"' localhost
 ```
+{% endcode %}
 
 ***
 
-#### **Example of Invalid Query Response**
+### The \_\_typename Field
 
-Send an invalid query referencing a non-existent field (`badfield`):
+Meta-fields are built-in fields that GraphQL APIs expose to clients. One example is \_\_schema (part of introspection in GraphQL). Another example of a meta-field is \_\_typename. When used, it returns the name of the object type being queried.&#x20;
 
 ```graphql
 query {
-  badfield {
-    id
-  }
-}
-```
-
-**Response**:
-
-```json
-{
-  "errors": [
-    {
-      "message": "Cannot query field \"badfield\" on type \"Query\".",
-      "locations": [
-        {
-          "line": 2,
-          "column": 3
-        }
-      ]
+    pastes {
+        __typename
     }
-  ]
 }
+
+----------------------
+"data": {
+    "pastes": [
+        {
+            "__typename": "PasteObject"
+        }
+    ]
+}
+```
+
+As you can see, GraphQL tells us that the pastes object’s type name is PasteObject. The real hack here is that the \_\_typename meta-field can be used against the query root type as well
+
+{% code overflow="wrap" %}
+```bash
+# Detecting GraphQL by using GET-based queries with Nmap
+nmap -p 5013 -sV --script=http-grep --script-args='match="__typename",http-grep.url="/graphql?query=\{__typename\}"' localhost
+
+# Scanning multiple targets defined in a file with Nmap
+nmap -p 5013 -iL hosts.txt -sV --script=http-grep --script-args='match="__typename", http-grep.url="/graphql?query=\{__typename\}"'
+
+# Sending a POST-based query using cURL
+curl -X POST http://localhost:5013/graphql -d '{"query":"{__typename }"}' -H "Content-Type: application/json"
+
+# A Bash script to automate a POST-based GraphQL detection using cURL
+for host in $(cat hosts.txt); do
+    curl -X POST "$host" -d '{"query":"{__typename }"}' -H "Content-Type: application/json"
+done
+```
+{% endcode %}
+
+***
+
+### [Graphw00f](https://github.com/dolevf/graphw00f)
+
+GraphQL tool based on Python for detecting GraphQL and performing implementation-level fingerprinting.
+
+Graphw00f allows you to specify a custom list of endpoints when running a scan. If you don’t provide a list, Graphw00f will use its hardcoded list of common endpoints whenever it is tasked with detecting GraphQL.
+
+```bash
+# https://github.com/dolevf/graphw00f
+cd ~/graphw00f
+python3 main.py -d -t http://localhost:5013
+python3 main.py -d -t http://localhost:5013 -w wordlist.txt
 ```
 
 ***
 
-## **GraphQL Fingerprinting**
+### Detecting GraphiQL Explorer and GraphQL Playground
+
+```bash
+# EyeWitness
+eyewitness --web --single http://localhost:5013/graphiql -d dvga-report
+
+# Scanning multiple URLs with EyeWitness
+echo 'http://localhost:5013/graphiql' > urls.txt
+eyewitness --web -f urls.txt -d dvga-report
+```
+
+<figure><img src="../../.gitbook/assets/image (298).png" alt=""><figcaption><p>An HTML report produced by EyeWitness</p></figcaption></figure>
+
+***
 
 ### **Introspection**
 
@@ -161,7 +184,7 @@ query {
 | Ruby     | graphql-ruby   | Enabled               | Yes            |
 | Java     | graphql-java   | Enabled               | No             |
 
-**Example Introspection Query**
+**An introspection query in its simplest form**
 
 ```graphql
 query {
@@ -197,187 +220,13 @@ query {
     3. View relationships visually (e.g., `PasteObject` links to `OwnerObject`).
 
 
-* Using Nmap tpo Scan for Intruspection
+* A GraphQL introspection detection with the Nmap NSE
 
 ```
 nmap --script=graphql-introspection -iL hosts.txt -sV -p 5013
 ```
 
-
-
-
-
 ***
-
-### **Meta-Fields for Detection**
-
-**The `__typename` Meta-Field**
-
-GraphQL provides built-in meta-fields like `__typename`, which reveal the type of an object being queried.
-
-**Example Query:**
-
-```graphql
-query {
-  pastes {
-    __typename
-  }
-}
-```
-
-**Response:**
-
-```json
-{
-  "data": {
-    "pastes": [
-      {
-        "__typename": "PasteObject"
-      }
-    ]
-  }
-}
-```
-
-**Example Query at Root Level:**
-
-```graphql
-query {
-  __typename
-}
-```
-
-**Response:**
-
-```json
-{
-  "data": {
-    "__typename": "Query"
-  }
-}
-```
-
-* **Purpose:** Useful for detecting GraphQL without prior knowledge of the schema.
-
-***
-
-**Automating Detection with Nmap**
-
-**Example 2: Using `__typename`**
-
-Command:
-
-```bash
-nmap -p 5013 -sV --script=http-grep --script-args='match="__typename", http-grep.url="/graphql?query={__typename}"' localhost
-```
-
-Output:
-
-```plaintext
-PORT     STATE SERVICE VERSION
-5013/tcp open  http    Werkzeug httpd
-| http-grep:
-|   (1) http://localhost:5013/graphql?query={__typename}:
-|     (1) User Pattern 1:
-|_      + __typename
-```
-
-**Example 3: Scanning Multiple Hosts**
-
-Command:
-
-```bash
-nmap -p 5013 -iL hosts.txt -sV --script=http-grep --script-args='match="__typename", http-grep.url="/graphql?query={__typename}"'
-```
-
-* **hosts.txt** contains a list of target IPs or domain names.
-
-***
-
-### **Detecting GraphQL with cURL**
-
-**Using HTTP POST**
-
-Command:
-
-```bash
-curl -X POST http://localhost:5013/graphql -d '{"query":"{__typename}"}' -H "Content-Type: application/json"
-```
-
-**Automating with Bash**
-
-Command:
-
-```bash
-for host in $(cat hosts.txt); do
-  curl -X POST "$host" -d '{"query":"{__typename}"}' -H "Content-Type: application/json"
-done
-```
-
-* **hosts.txt:** Contains a list of full target URLs.
-
-***
-
-### **Graphw00f for Detection**
-
-**Description:** Graphw00f is a Python-based tool for detecting GraphQL and fingerprinting implementations.
-
-**Common Endpoints in Graphw00f**
-
-| Endpoint      | Notes       |
-| ------------- | ----------- |
-| `/graphql`    | Default     |
-| `/console`    | Alternative |
-| `/playground` | IDE         |
-| `/gql`        | Shortened   |
-| `/query`      | Query path  |
-
-**Command for Detection**
-
-Command:
-
-```bash
-python3 main.py -d -t http://localhost:5013
-```
-
-Output:
-
-```plaintext
-[*] Checking http://localhost:5013/
-[*] Checking http://localhost:5013/graphql
-[!] Found GraphQL at http://localhost:5013/graphql
-```
-
-***
-
-### **Detecting GraphQL IDEs**
-
-**GraphiQL and GraphQL Playground**
-
-These IDEs are JavaScript-based and often overlooked by traditional scanners.
-
-**Using EyeWitness**
-
-EyeWitness captures screenshots of web pages to detect graphical interfaces.
-
-Command:
-
-```bash
-eyewitness --web --single http://localhost:5013/graphiql -d dvga-report
-```
-
-```bash
-echo 'http://localhost:5013/graphiql' > urls.txt
-eyewitness --web -f urls.txt -d dvga-report
-```
-
-**Creating URL Lists for EyeWitness:** Command:
-
-```bash
-for i in $(cat /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt); do
-  echo http://localhost:5013/$i >> urls.txt
-done
-```
 
 ## Visualizing Introspection with GraphQL Voyager <a href="#h2-502840c04-0008" id="h2-502840c04-0008"></a>
 

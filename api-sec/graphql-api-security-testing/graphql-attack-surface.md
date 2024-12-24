@@ -1,6 +1,8 @@
 # GraphQL Attack Surface
 
-### **What Is an Attack Surface?**
+## GraphQL Attack Surface
+
+#### **What Is an Attack Surface?**
 
 An attack surface refers to all potential entry points an attacker can exploit to compromise a system. GraphQL, like any system, has its own unique vulnerabilities based on its features and configuration. These entry points include queries, mutations, subscriptions, and various other elements of the GraphQL language and type system.
 
@@ -8,15 +10,13 @@ Imagine a building with multiple doors and windows. Each entry point is an oppor
 
 ***
 
-### **Core Components of the GraphQL Language**
+#### **Core Components of the GraphQL Language**
 
-<figure><img src="../../.gitbook/assets/F03001.png" alt=""><figcaption></figcaption></figure>
-
-<table><thead><tr><th width="77">#</th><th width="194">Component</th><th>Description</th></tr></thead><tbody><tr><td>1</td><td>Operation type</td><td>Type that defines the method of interaction with the server (query, mutation, or subscription)</td></tr><tr><td>2</td><td>Operation name</td><td>Arbitrary client-created label used to provide a unique name to an operation</td></tr><tr><td>3</td><td>Top-level field</td><td>Function that returns a single unit of information or object requested within an operation (may contain nested fields)</td></tr><tr><td>4</td><td>Argument (of a top-level field)</td><td>Parameter name used to send information to a field to tailor the behavior and results of that field</td></tr><tr><td>5</td><td>Value</td><td>Data related to an argument sent to a field</td></tr><tr><td>6</td><td>Field</td><td>Nested function that returns a single unit of information or object requested within an operation</td></tr><tr><td>7</td><td>Directive</td><td>Feature used to decorate fields to change their validation or execution behavior, altering a value returned by a GraphQL server</td></tr><tr><td>8</td><td>Argument (of a directive)</td><td>Parameter name used to send information to a field or object to tailor its behavior and results</td></tr><tr><td>9</td><td>Argument (of a field)</td><td>Parameter name used to send information to a field to tailor the behavior and results of the field</td></tr></tbody></table>
+<table><thead><tr><th width="84">#</th><th width="227">Component</th><th>Description</th></tr></thead><tbody><tr><td>1</td><td>Operation type</td><td>Type that defines the method of interaction with the server (query, mutation, or subscription)</td></tr><tr><td>2</td><td>Operation name</td><td>Arbitrary client-created label used to provide a unique name to an operation</td></tr><tr><td>3</td><td>Top-level field</td><td>Function that returns a single unit of information or object requested within an operation (may contain nested fields)</td></tr><tr><td>4</td><td>Argument (of a top-level field)</td><td>Parameter name used to send information to a field to tailor the behavior and results of that field</td></tr><tr><td>5</td><td>Value</td><td>Data related to an argument sent to a field</td></tr><tr><td>6</td><td>Field</td><td>Nested function that returns a single unit of information or object requested within an operation</td></tr><tr><td>7</td><td>Directive</td><td>Feature used to decorate fields to change their validation or executio</td></tr></tbody></table>
 
 GraphQL queries consist of various components, each of which has security implications:
 
-## **Operation Types**:
+### **Operation Types**:
 
 * **Query**: Retrieve data.
 * **Mutation**: Modify data, such as creating or updating records.
@@ -34,11 +34,12 @@ mutation {
     }
   }
 }
+
 ```
 
 This mutation modifies the content of a specific paste while also fetching the updated data. The flexibility in mutation operations can be a source of business logic vulnerabilities.
 
-2. **Subscriptions**: Subscriptions rely on WebSocket connections for real-time updates. While useful, they are prone to vulnerabilities such as Cross-Site WebSocket Hijacking (CSWSH) and Man-in-the-Middle (MITM) attacks if origin validation or encryption (via TLS) is absent.
+1. **Subscriptions**: Subscriptions rely on WebSocket connections for real-time updates. While useful, they are prone to vulnerabilities such as Cross-Site WebSocket Hijacking (CSWSH) and Man-in-the-Middle (MITM) attacks if origin validation or encryption (via TLS) is absent.
 
 **Example: WebSocket Handshake**\
 Request:
@@ -48,6 +49,7 @@ GET /subscriptions HTTP/1.1
 Host: 0.0.0.0:5013
 Connection: Upgrade
 Upgrade: websocket
+
 ```
 
 Response:
@@ -56,6 +58,7 @@ Response:
 HTTP/1.1 101 Switching Protocols
 Upgrade: websocket
 Connection: Upgrade
+
 ```
 
 After the handshake, a subscription might look like this:
@@ -70,8 +73,6 @@ subscription {
 }
 ```
 
-3. **Fields and Arguments**: Fields return specific data and may contain nested fields. Arguments customize queries and filter responses.
-
 **Example: Query with Arguments**
 
 ```graphql
@@ -83,57 +84,21 @@ query {
 }
 ```
 
-Response:
-
-```json
-{
-  "data": {
-    "users": [
-      {
-        "id": "1",
-        "username": "admin"
-      }
-    ]
-  }
-}
-```
-
-Arguments, while powerful, can be abused for injection attacks if improperly validated.
-
-4. **Directives**: Allow modifications to the query at runtime, enhancing flexibility but adding complexity.
-5. **Operation Names**: Custom operation names are labels that help identify operations but can also be manipulated.
-
-**Example: Operation Names**
-
-```graphql
-query getPasteTitles {
-  pastes {
-    title
-  }
-}
-query getPasteContent {
-  pastes {
-    content
-  }
-}
-```
-
-Malicious clients could use misleading operation names to disguise their true intent in logs.
-
 ***
 
-### **Key Attack Vectors in GraphQL**
+#### **Key Attack Vectors in GraphQL**
 
 1. **Field Suggestions**:\
    When a field is misspelled, GraphQL servers often suggest corrections. This helpful feature can inadvertently expose undocumented fields.
 
 **Example: Error Message with Suggestions**
 
-```plaintext
-"Cannot query field \"titl\" on type \"PasteObject\". Did you mean \"title\"?"
+```
+"Cannot query field \\"titl\\" on type \\"PasteObject\\". Did you mean \\"title\\"?"
+
 ```
 
-2. **Nested Queries**: GraphQL allows deep nesting, which can lead to recursive queries and potential server overload.
+1. **Nested Queries**: GraphQL allows deep nesting, which can lead to recursive queries and potential server overload.
 
 **Example: Circular Field Relationships**
 
@@ -152,9 +117,10 @@ Malicious clients could use misleading operation names to disguise their true in
     }
   }
 }
+
 ```
 
-3. **Argument Exploitation**: Arguments are client-driven and can contain malicious inputs. For example, improperly validated inputs can lead to injection attacks.
+1. **Argument Exploitation**: Arguments are client-driven and can contain malicious inputs. For example, improperly validated inputs can lead to injection attacks.
 
 **Example: Argument Exploitation**
 
@@ -165,35 +131,14 @@ query {
     username
   }
 }
+
 ```
 
 ***
 
-### **Aliases**
+#### **Aliases**
 
 Aliases allow renaming fields in GraphQL queries, resolving conflicts when the same field is queried with different arguments. For example:
-
-```graphql
-query {
-  pastes {
-    myalias: title
-  }
-}
-```
-
-Response:
-
-```json
-{
-  "data": {
-    "pastes": [
-      { "myalias": "My Title!" }
-    ]
-  }
-}
-```
-
-#### Example of avoiding conflicts:
 
 Without aliases:
 
@@ -221,6 +166,7 @@ query {
     title
   }
 }
+
 ```
 
 Response:
@@ -232,11 +178,12 @@ Response:
     "queryTwo": [{ "title": "Testing Testing" }]
   }
 }
+
 ```
 
 ***
 
-### **Fragments**
+#### **Fragments**
 
 Fragments allow reusable field sets for improved readability:
 
@@ -251,17 +198,42 @@ query {
     ...CommonFields
   }
 }
+
 ```
 
-#### Note:
+#### Security Implications
 
-Fragments can create circular dependencies, leading to DoS vulnerabilities.
+From a security perspective, fragments can be constructed such that they reference one another, which can create a circular fragment condition that could lead to denial-of-service (DoS) conditions
+
+. This is because a circular dependency among fragments can lead to an infinite loop when the GraphQL server attempts to resolve the query
+
+For example, consider a scenario with two fragments, Start and End:
+
+```graphql
+query {
+    pastes {
+        ...Start
+    }
+}
+
+fragment Start on PasteObject {
+    title
+    content
+    ...End
+}
+
+fragment End on PasteObject {
+   ...Start
+}
+```
+
+In this case, the Start fragment includes the End fragment, which includes the Start fragment again, creating a circular reference. This can lead to a DoS condition if the server doesn't handle such circular references correctly
 
 ***
 
-### **Variables**
+#### **Variables**
 
-Variables simplify runtime argument handling:
+Variables in GraphQL are a way to pass dynamic values to a query, mutation, or subscription, making operations more flexible and reusable. They are defined using a dollar sign ($) symbol followed by a name and a type
 
 ```graphql
 query publicPastes($status: Boolean!) {
@@ -271,19 +243,21 @@ query publicPastes($status: Boolean!) {
     content
   }
 }
+
 ```
 
-Passing variables via JSON:
+In this example, $status is a variable of type Boolean that is passed to the public argument of the pastes field. The client would then provide the value for $status as a JSON object, such as {"status": true} or {"status": false}, along with the query
 
 ```json
 {
   "status": false
 }
+
 ```
 
 ***
 
-### **Directives**
+#### **Directives**
 
 Directives modify field behavior dynamically. Common directives:
 
@@ -307,6 +281,7 @@ query pasteDetails($pasteOnly: Boolean!) {
     }
   }
 }
+
 ```
 
 Custom directives like `@computed` can enhance functionality, e.g., merging fields:
@@ -317,11 +292,12 @@ type User {
   lastName: String
   fullName: String @computed(value: "$firstName $lastName")
 }
+
 ```
 
 ***
 
-### **Data Types**
+#### **Data Types**
 
 GraphQL supports six types: **Object**, **Scalar**, **Enum**, **Union**, **Interface**, and **Input**.
 
@@ -336,17 +312,37 @@ type PasteObject {
   content: String
   public: Boolean
 }
+
 ```
 
 #### Scalars
 
-Core scalar types include `ID`, `Int`, `Float`, `String`, `Boolean`. Custom scalars:
+Core scalar types include `ID`, `Int`, `Float`, `String`, `Boolean`. Implementations can also define their own custom scalars.
 
 ```graphql
 scalar DateTime
+type PasteObject {
+		id: ID!
+		title: String}
+		content: String
+		public: Boolean
+		userAgent: String
+		ipAddr: String
+		ownerId: Int
+		burn: Boolean
+		owner: OwnerObject
+		createdAt: DateTime!
+	}
 ```
 
 #### Enums
+
+Enums are special types that allow a field to return only one value from a predefined set of possible values⁠. They are useful when you want to restrict a field to specific options.
+
+Here's how they work:
+
+* You define an enum type by listing all possible values it can have. For example, the UserSortEnum allows sorting users by `ID`, `EMAIL`, `USERNAME`, or `DATE_JOINED⁠⁠`
+* When using an enum in a query, you can only use one of these predefined values. For instance, in the example query, users are being sorted by ID:**⁠**
 
 Allow specific values for fields:
 
@@ -357,14 +353,28 @@ enum UserSortEnum {
   USERNAME
   DATE_JOINED
 }
+
+input UserOrderType {
+  sort: UserSortEnum!
+}
+
+type UserObject {
+  id: Int!
+  username: String!
+}
+
+type Query {
+  users(limit: Int, order: UserOrderType): UserObject!
+}
 ```
 
-Example:
+Example Query:
 
 ```graphql
 query {
   users(limit: 100, order: { sort: ID })
 }
+
 ```
 
 #### Unions
@@ -373,6 +383,19 @@ Return one of multiple object types:
 
 ```graphql
 union SearchResults = UserObject | PasteObject
+type UserObject {
+		id: ID!
+		username: String!
+}
+type PasteObject {
+		id: ID!
+		title: String
+		content: String
+		--snip--
+}
+type Query {
+	search(keyword: String): [SearchResults!]
+}
 ```
 
 Query:
@@ -384,6 +407,22 @@ query {
     ... on PasteObject { title content }
   }
 }
+
+---------------
+// result
+{
+"data": {
+"search": [
+{
+"title": "This is my first paste",
+"content": "What does your room look like?"
+},
+{
+"id": "2",
+"username": "operator"
+}}
+}
+]
 ```
 
 #### Interfaces
@@ -392,13 +431,25 @@ Define common fields across types:
 
 ```graphql
 interface SearchItem {
-  keywords: [String!]
+	keywords: [String!]
 }
 
 type UserObject implements SearchItem {
-  id: ID!
-  username: String!
-  keywords: [String!]
+		id: ID!
+		username: String!
+		keywords: [String!]
+}
+
+type PasteObject implements SearchItem {
+		id: ID!
+		title: String
+		content: String
+		keywords: [String!]
+		--snip--
+}
+
+type Query {
+		search(keyword: String): [SearchItem!]!
 }
 ```
 
@@ -412,6 +463,7 @@ input UserInput {
   password: String!
   email: String!
 }
+
 ```
 
 Mutation example:
@@ -424,6 +476,7 @@ mutation newUser($input: UserInput!) {
     }
   }
 }
+
 ```
 
 JSON for variables:
@@ -436,13 +489,14 @@ JSON for variables:
     "email": "tom@example.com"
   }
 }
+
 ```
 
 Apologies for missing the source code earlier. Here's a revised version that includes all relevant queries and responses.
 
 ***
 
-### **GraphQL Introspection**
+#### **GraphQL Introspection**
 
 | Introspection type | Usage                                                                                       |
 | ------------------ | ------------------------------------------------------------------------------------------- |
@@ -472,6 +526,7 @@ Apologies for missing the source code earlier. Here's a revised version that inc
            }
          }
        }
+
        ```
 
        **Response:**
@@ -490,6 +545,7 @@ Apologies for missing the source code earlier. Here's a revised version that inc
            }
          }
        }
+
        ```
 2. **Deep Dive into Custom Types:**
    *   Investigate specific types to uncover fields and relationships:
@@ -508,6 +564,7 @@ Apologies for missing the source code earlier. Here's a revised version that inc
            }
          }
        }
+
        ```
 
        **Response:**
@@ -525,11 +582,12 @@ Apologies for missing the source code earlier. Here's a revised version that inc
            ]
          }
        }
+
        ```
 
 ***
 
-### **Validation and Execution**
+#### **Validation and Execution**
 
 1. **Validation Process:**
    * GraphQL queries are checked against the schema for:
@@ -538,7 +596,7 @@ Apologies for missing the source code earlier. Here's a revised version that inc
      * Directive support
 2. **GraphQL Threat Matrix:**
 
-<figure><img src="../../.gitbook/assets/f03004.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (296).png" alt=""><figcaption></figcaption></figure>
 
 * A framework for comparing GraphQL implementations based on:
   * Security maturity
@@ -547,36 +605,3 @@ Apologies for missing the source code earlier. Here's a revised version that inc
 
 1. **Execution Stage:**
    * Resolvers process valid queries, but weak implementations can lead to exploits.
-
-***
-
-### **Common Weaknesses with Examples**
-
-1. **Denial of Service (DoS):**
-   * Complex queries can overwhelm servers if protections aren’t in place.
-   * Example vectors include:
-     * Deeply nested queries
-     * Excessive aliasing
-     * Recursive fragments
-2. **Information Disclosure:**
-   * Introspection queries expose sensitive schema details:
-     * Hidden fields
-     * Relationships
-   * Mitigation: Disable introspection in production environments.
-3. **Authentication/Authorization Flaws:**
-   * Example exploits:
-     * Using aliases or batch queries to bypass restrictions.
-   * Security must be enforced in resolvers, not just in schemas.
-4. **Injection Attacks:**
-   * Unvalidated input via arguments or mutations can lead to:
-     * SQL injection
-     * Command injection
-   *   Example mutation prone to injection:
-
-       ```graphql
-       mutation {
-         updateUser(id: "1"; name: "Injected Payload") {
-           success
-         }
-       }
-       ```

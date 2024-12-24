@@ -32,7 +32,7 @@ With an understanding of the Same Origin Policy, it becomes clear why mechanisms
 
 The JavaScript `postMessage()` function enables secure cross-origin communication between windows, such as a parent window and an iframe or a popup. This is especially useful when a web application needs to embed an iframe or open a new window, like a third-party contact form, and the parent and child windows have different origins. The Same Origin Policy (SOP) restricts communication between these windows, but `postMessage()` allows them to exchange data securely without generating an HTTP request.
 
-### **Syntax of `postMessage()`  ->** Sending Window**:**
+### **Syntax of `postMessage()`  ->** Sending Windo&#x77;**:**
 
 ```javascript
 postMessage(message, targetOrigin, transfer);
@@ -44,7 +44,7 @@ postMessage(message, targetOrigin, transfer);
 
 <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-### **Syntax of `postMessage()`  ->** Recieving Window**:**
+### **Syntax of `postMessage()`  ->** Recieving Windo&#x77;**:**
 
 ```javascript
 window.addEventListener("message", function(event) {
@@ -378,7 +378,7 @@ var regex = /^https*:\/\/(mail|www)\.google\.com/i;
 
 * [PortSwigger Web Security Academy: Same Origin Policy](https://portswigger.net/web-security/cors/same-origin-policy)
 * [Medium: Exploiting postMessage](https://medium.com/@chiragrai3666/exploiting-postmessage-e2b01349c205)
-* [https://docs.ioin.in/writeup/www.exploit-db.com/\_docs\_40287\_pdf/index.pdf](https://docs.ioin.in/writeup/www.exploit-db.com/\_docs\_40287\_pdf/index.pdf)
+* [https://docs.ioin.in/writeup/www.exploit-db.com/\_docs\_40287\_pdf/index.pdf](https://docs.ioin.in/writeup/www.exploit-db.com/_docs_40287_pdf/index.pdf)
 * [https://www.youtube.com/watch?v=rbHC3DHk6Vg](https://www.youtube.com/watch?v=rbHC3DHk6Vg)
 
 {% embed url="https://payatu.com/blog/postmessage-vulnerabilities/" %}
