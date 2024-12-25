@@ -108,11 +108,11 @@ This indicates that the `__proto__` pollution worked, and the property `foo` was
 
 ### Ignore query prefix
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Allow dots <a href="#allow-dots" id="allow-dots"></a>
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Content type <a href="#content-type" id="content-type"></a>
 
@@ -280,4 +280,4 @@ content-type: application/json
 8. [JavaScript Prototype Pollution Attack - Medium Guide](https://medium.com/@dodir.sec/javascript-prototype-pollution-attack-a-simplified-guide-c3b4ba8a6441)
 9. [Payloads All The Things - Prototype Pollution Exploitation](https://swisskyrepo.github.io/PayloadsAllTheThings/Prototype%20Pollution/#prototype-pollution-exploitation)
 10. [Server-side Prototype Pollution Video - YouTube](https://www.youtube.com/watch?v=c3oBNbrSYGA) \[Arabic]
-11. [JavaScript Prototype Pollution Attack Video - YouTube](https://www.youtube.com/watch?v=LD-KcuKM\_0M) \[Arabic]
+11. [JavaScript Prototype Pollution Attack Video - YouTube](https://www.youtube.com/watch?v=LD-KcuKM_0M) \[Arabic]
