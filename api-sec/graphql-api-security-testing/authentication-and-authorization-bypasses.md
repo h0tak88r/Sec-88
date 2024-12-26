@@ -13,7 +13,7 @@
   * When authentication and authorization mechanisms are part of the GraphQL schema, they are more likely to be targeted and potentially bypassed.
 * **Out-of-band Authentication and Authorization**: These delegate the security functions to external systems, which can be a more secure approach.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>The gateway, API, business, and persistence layers</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption><p>The gateway, API, business, and persistence layers</p></figcaption></figure>
 
 ### Common Authentication Approaches
 
@@ -216,7 +216,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNjU3MDQ2NjI
 ```
 {% endcode %}
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Exploiting Authorization Controls
 

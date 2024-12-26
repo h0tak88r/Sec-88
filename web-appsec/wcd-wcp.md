@@ -65,25 +65,25 @@ X-Forwarded-Host
 4. **Query Parameter Fuzzing:**&#x46;ocus on unkeyed query parameters (e.g., `utm_.*`, `_method`) that the cache server ignores but the web server processes, leading to potential XSS, DoS, or information leakage.
 5.  **FatGet:** Handling GET method with a body&#x20;
 
-    <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 6.  **Cache Key Normalization:** Handling unencoding of special characters&#x20;
 
-    <figure><img src="../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 7.  **Path Traversal:** Test for path traversal (`../`, `..%2F`, etc.) to manipulate cache paths and cache sensitive responses.
 
     ### ⚠️ Static Cache Response OR Dynamic Cache Response ! <a href="#id-552e" id="id-552e"></a>
 
     > _**Some web administrator configure CDNs to cache e.g. path/\* so we can use this to cache something not cacheable e.g. user info OR self-XSS**_
 
-    <figure><img src="../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (5) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 8.  **Self Bugs + Senseetive response -> Cache Deception**
 
     &#x20;`.js->file.js-> /.js-> /file.js->.css`\
     &#x20;
 
-    <figure><img src="../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (6) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 9.  **Special Characters and Delimiters:**
 
     ```
@@ -104,7 +104,7 @@ X-Forwarded-Host
     *   Discrepancies in how the cache and origin server use characters and strings as delimiters can result in cache deception .\
 
 
-        <figure><img src="../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 10. **Delimiter discrepancies lead to cache deception:** if there is a delimiter I can trick a cache server to cache uncacheable response .\
 
 
@@ -135,7 +135,7 @@ X-Forwarded-Host
 
 * **Burpsuite AND** **Reshaper:** For highlighting cacheable responses.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Configure burpsuite to add custom columns using bambada code e.g.
 
@@ -151,7 +151,7 @@ Configure burpsuite to add custom columns using bambada code e.g.
 
 * **Intruder with NULL payloads:** For testing short cache durations (under 5 seconds).
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **CDN Headers for Debugging:**
   * Akamai: `Pragma: akamai-x-check-cacheable`

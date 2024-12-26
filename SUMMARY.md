@@ -103,6 +103,8 @@
     * [GraphQL DOS](api-sec/graphql-api-security-testing/graphql-dos.md)
     * [Information Disclosure](api-sec/graphql-api-security-testing/information-disclosure.md)
     * [AUTHENTICATION AND AUTHORIZATION BYPASSES](api-sec/graphql-api-security-testing/authentication-and-authorization-bypasses.md)
+    * [Injection Vulnerabilities in GraphQL](api-sec/graphql-api-security-testing/injection-vulnerabilities-in-graphql.md)
+    * [REQUEST FORGERY AND HIJACKING](api-sec/graphql-api-security-testing/request-forgery-and-hijacking.md)
   * [API Recon](api-sec/api-recon.md)
   * [API Token Attacks](api-sec/api-token-attacks.md)
   * [Broken Object Level Authorization (BOLA)](api-sec/broken-object-level-authorization-bola.md)
