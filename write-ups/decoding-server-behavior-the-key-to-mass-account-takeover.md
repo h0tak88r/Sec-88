@@ -82,7 +82,7 @@ To further confirm this theory, I made malformed requests with arbitrary values 
     {"password":"NewPassword123","verificationCode":"uczvfg"}
     ```
 
-<figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>"recaptchaToken":null</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>"recaptchaToken":null</p></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Empty captcha</p></figcaption></figure>
 

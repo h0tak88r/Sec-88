@@ -65,9 +65,9 @@ X-Forwarded-Host
 4. **Query Parameter Fuzzing:**&#x46;ocus on unkeyed query parameters (e.g., `utm_.*`, `_method`) that the cache server ignores but the web server processes, leading to potential XSS, DoS, or information leakage.
 5.  **FatGet:** Handling GET method with a body&#x20;
 
-    <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 6.  **Cache Key Normalization:** Handling unencoding of special characters&#x20;
 
     <figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
@@ -135,7 +135,7 @@ X-Forwarded-Host
 
 * **Burpsuite AND** **Reshaper:** For highlighting cacheable responses.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Configure burpsuite to add custom columns using bambada code e.g.
 
@@ -151,7 +151,7 @@ Configure burpsuite to add custom columns using bambada code e.g.
 
 * **Intruder with NULL payloads:** For testing short cache durations (under 5 seconds).
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **CDN Headers for Debugging:**
   * Akamai: `Pragma: akamai-x-check-cacheable`

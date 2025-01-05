@@ -8,7 +8,7 @@
 
 ### Cheat Sheets and Guides
 
-* **OWASP GraphQL Cheat Sheet:** [Link](https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.xhtml)
+* **OWASP GraphQL Cheat Sheet:** [Link](https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html)
 * **HackTricks GraphQL by Carlos Polop:** [Link](https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/graphql)
 * **API Security Empire by Momen Eldawakhly:** [Link](https://github.com/cyprosecurity/API-SecurityEmpire)
 * **Doyensec's "GraphQL—Security Overview" by Paolo Stagno:** [Link](https://blog.doyensec.com/2018/05/17/graphql-security-overview.xhtml)
