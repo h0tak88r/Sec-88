@@ -227,6 +227,8 @@ The `WebAppInterface` exposes a method (`getUserToken`) that returns a token. An
 
 **Exploiting RegistrationWebView for Local File Exfiltration**
 
+<figure><img src="../.gitbook/assets/image (300).png" alt=""><figcaption></figcaption></figure>
+
 The `setAllowUniversalAccessFromFileURLs(true)` setting allows JavaScript to read local files and exfiltrate them.
 
 **Exploit JavaScript Code**:
