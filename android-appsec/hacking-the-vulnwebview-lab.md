@@ -1,3 +1,7 @@
+---
+description: 'Lab Link: https://github.com/t4kemyh4nd/vulnwebview'
+---
+
 # Hacking the VulnWebView Lab
 
 In this blog post, I’ll walk you through how I hacked the **VulnWebView** lab, an Android application designed to demonstrate common WebView vulnerabilities. By exploiting these vulnerabilities, I was able to achieve **Cross-Site Scripting (XSS)**, **token theft**, and **local file exfiltration**. Let’s dive into the details!
