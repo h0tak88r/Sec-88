@@ -6,7 +6,7 @@ Injection vulnerabilities occur when an application accepts and processes untrus
 
 ### **The Injection Surface**&#x20;
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption><p>Network trust boundaries</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption><p>Network trust boundaries</p></figcaption></figure>
 
 {% embed url="https://owasp.org/API-Security/editions/2023/en/0x11-t10/" %}
 
@@ -86,11 +86,11 @@ query GetDirectives {
 
 * **Operation Names:** Clients can define operation names, and these can be manipulated to potentially bypass security measures or mislead log analysis. An example involves spoofing the operation name to bypass audit logging, for example using `SpoofedOperationName` instead of `createPaste`.
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Executing a selected query based on its operation name in GraphiQL Explorer</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>Executing a selected query based on its operation name in GraphiQL Explorer</p></figcaption></figure>
 
 * **Input Entry Points:** Any place where user-controlled data is input, such as fields in mutations, which are used to create, update, or delete data, can be injection points. The `createPaste` mutation, which uses `content`, `title`, and `public` arguments, is one example.
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **SQL Injection (SQLi):** The chapter dedicates significant attention to SQL injection, explaining that it can occur when user input is used to construct SQL queries.
   * **Identification:** The chapter advises focusing on fields that accept string values and have names suggesting filtering, such as the `filter` argument in the `pastes` query.
@@ -120,7 +120,7 @@ sqlmap -r request.txt --dbms=sqlite --tables
 
 ```
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **Operating System Command Injection:** The chapter explains how a GraphQL API can be vulnerable to OS command injection, for example when user input is incorporated into system commands.
   * **Code Review:** The chapter highlights the importance of reviewing resolver functions to identify where user inputs are used in OS commands.
@@ -162,7 +162,7 @@ http://example.com/graphql?query=query%20%7B%0A%20%20hello(msg%3A%22hello%22)%0A
 http://example.com/graphql?query=query {hello(msg:"hello")}
 ```
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption><p>A stored XSS vulnerability impacting adjacent applications</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption><p>A stored XSS vulnerability impacting adjacent applications</p></figcaption></figure>
 
 
 
