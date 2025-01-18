@@ -126,7 +126,7 @@ python3 -m clairvoyance http://localhost:5013/graphql -w ~/high-frequency-vocabu
 ```
 {% endcode %}
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption><p>The original DVGA schema</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption><p>The original DVGA schema</p></figcaption></figure>
 
 Tools like the Custom Word List Generator (CeWL), which comes preinstalled in Kali, can extract keywords from the application’s frontend HTML. Try using the following one-liner to profile and extract information from the DVGA interface:
 

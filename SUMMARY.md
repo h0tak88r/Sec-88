@@ -253,4 +253,4 @@
   * [Unchecked Privileges: The Hidden Risk of Role Escalation in Collaborative Platforms](write-ups/unchecked-privileges-the-hidden-risk-of-role-escalation-in-collaborative-platforms.md)
   * [Decoding Server Behavior: The Key to Mass Account Takeover](write-ups/decoding-server-behavior-the-key-to-mass-account-takeover.md)
   * [Exploiting JSON-Based CSRF: The Hidden Threat in Profile Management](write-ups/exploiting-json-based-csrf-the-hidden-threat-in-profile-management.md)
-  * [XSS from Medium to High](write-ups/xss-from-medium-to-high.md)
+  * [How I Turned a Medium XSS into a High Bounty by Bypassing HttpOnly Cookie](write-ups/how-i-turned-a-medium-xss-into-a-high-bounty-by-bypassing-httponly-cookie.md)
