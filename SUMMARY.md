@@ -155,6 +155,7 @@
     * [Exploiting Weak Cryptography](android-appsec/hacking-insecurebankv2-app/exploiting-weak-cryptography.md)
     * [IDOR Leads to ATO](android-appsec/hacking-insecurebankv2-app/idor-leads-to-ato.md)
   * [Hacking the VulnWebView Lab](android-appsec/hacking-the-vulnwebview-lab.md)
+  * [Intent Redirection Vulnerability](android-appsec/intent-redirection-vulnerability.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)
