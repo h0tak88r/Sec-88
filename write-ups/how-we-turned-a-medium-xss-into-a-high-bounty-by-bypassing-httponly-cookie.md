@@ -57,6 +57,8 @@ Here’s the payload I used to change the victim’s profile name:
 ```
 {% endcode %}
 
+<figure><img src="../.gitbook/assets/image (307).png" alt=""><figcaption></figcaption></figure>
+
 <figure><img src="../.gitbook/assets/image (301).png" alt=""><figcaption></figcaption></figure>
 
 ### **4. Achieving Account Takeover**
