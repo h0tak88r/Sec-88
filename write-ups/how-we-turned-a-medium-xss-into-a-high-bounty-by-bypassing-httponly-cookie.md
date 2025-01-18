@@ -1,5 +1,7 @@
 # How We Turned a Medium XSS into a High Bounty by Bypassing HttpOnly Cookie
 
+#### **﷽**
+
 During a recent security assessment on a private bug bounty program with my friends @0d\_sami and @karemelsaqary , We discovered a Stored Cross-Site Scripting (XSS) vulnerability that was initially triaged as medium severity. However, by uncovering a way to bypass HttpOnly cookies, I was able to escalate its impact, resulting in a high-severity classification and a 3x increase in the bounty. Let’s dive into the details of this finding and how I achieved this escalation.
 
 ***
@@ -90,3 +92,5 @@ The security team ultimately agreed with my assessment, reclassifying the vulner
 Stay curious, and happy hunting!
 
 <figure><img src="../.gitbook/assets/image (306).png" alt=""><figcaption></figcaption></figure>
+
+**سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ ، أَشْهَدُ أَنْ لا إِلَهَ إِلا أَنْتَ ، أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ**
