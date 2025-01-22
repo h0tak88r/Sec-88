@@ -21,6 +21,8 @@ layout:
 
 ### Resources
 
+{% embed url="https://www.hackingarticles.in/android-pentest-deep-link-exploitation/" %}
+
 {% embed url="https://medium.com/@Sisi0x/android-deep-links-exploit-with-3-apps-6f604d288318" %}
 
 {% embed url="https://deepstrike.io/blog/full-account-takeover-deeplinks" %}

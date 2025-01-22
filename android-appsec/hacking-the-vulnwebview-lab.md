@@ -291,3 +291,7 @@ The `setAllowUniversalAccessFromFileURLs(true)` setting allows JavaScript to rea
     adb shell am start -n com.tmh.vulnwebview/.RegistrationWebView --es reg_url "file:///sdcard/poc.html"
     ```
 3. The contents of `MainActivity.xml` will be exfiltrated to the attacker's server.
+
+### Resources
+
+{% embed url="https://www.hackingarticles.in/android-penetration-testing-webview-attacks/" %}
