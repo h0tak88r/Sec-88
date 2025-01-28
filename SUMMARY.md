@@ -122,6 +122,7 @@
   * [Scanning APIs with OWASP ZAP](api-sec/scanning-apis-with-owasp-zap.md)
 * [📱 Android-AppSec](android-appsec/README.md)
   * [Setup Android Pentest Env on Arch](android-appsec/setup-android-pentest-env-on-arch.md)
+  * [Setup Android App Pen-testing environment on M4](android-appsec/setup-android-app-pen-testing-environment-on-m4.md)
   * [Setup Android Pentesting Environment on Debian-Based Linux](android-appsec/setup-android-pentesting-environment-on-debian-based-linux.md)
   * [Android App Fundamentals](android-appsec/android-app-fundamentals/README.md)
     * [Android Architecture](android-appsec/android-app-fundamentals/android-architecture.md)
