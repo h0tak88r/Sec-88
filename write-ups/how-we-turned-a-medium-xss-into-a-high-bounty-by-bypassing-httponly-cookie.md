@@ -45,7 +45,7 @@ fetch('/backend/settings/change_account').then(r => r.json()).then(d => location
 
 This payload forced the victim’s browser to make a request to the vulnerable endpoint, leaking all user data and sending it to my Burp Collaborator server.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **3. Bypassing HttpOnly for CSRF Tokens**
 
