@@ -62,3 +62,58 @@ avdmanager create avd -n my_emulator_arm -k "system-images;android-34;google_api
 emulator -avd my_emulator_arm
 ```
 
+### Install apktool
+
+```bash
+brew install apktool
+```
+
+### Install Frida
+
+```bash
+pipx install frida-tools
+# make sure that your emulator virtual device is arm 
+adb shell getprop ro.product.cpu.abi
+arm64-v8a
+# install frida server frida-server-16.6.6-android-arm64.xz
+https://github.com/frida/frida/releases
+unxz frida-server-16.6.6-android-arm64.xz
+adb push frida-server-16.6.6-android-arm64 /data/local/tmp/
+adb shell chmod +x /data/local/tmp/frida-server
+adb shell mv /data/local/tmp/frida-server-16.6.6-android-arm64  /data/local/tmp/frida-server
+adb shell /data/local/tmp/frida-server &
+```
+
+### Install APK Signer
+
+{% embed url="https://github.com/patrickfav/uber-apk-signer/releases" %}
+
+### Install dex2jar
+
+```bash
+brew install dex2jar
+```
+
+### Install Drozer
+
+```bash
+pipx install drozer 
+# https://github.com/WithSecureLabs/drozer-agent/releases/tag/3.1.0
+adb install drozer-agent.apk
+adb forward tcp:31415 tcp:31415
+drozer console connect
+```
+
+### Install Jadx
+
+```bash
+brew install jadx
+```
+
+### Rooting Android Studio with Magisk
+
+{% embed url="https://systemweakness.com/rooting-emulator-and-installing-magisk-c3cbd34ec436" %}
+
+### Magisk Frida
+
+{% embed url="https://github.com/ViRb3/magisk-frida" %}
