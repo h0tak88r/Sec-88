@@ -10,6 +10,7 @@
 
 ```bash
 brew install openjdk
+brew install --cask temurin
 ```
 
 ### Install Android Command line tools
@@ -17,6 +18,13 @@ brew install openjdk
 {% embed url="https://developer.android.com/studio#downloads" %}
 
 <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+```bash
+or 
+brew install android-commandlinetools
+```
+
+
 
 ```bash
 mkdir /Library/Android
@@ -35,7 +43,7 @@ sdkmanager --list
 
 {% code overflow="wrap" %}
 ```bash
-sdkmanager --install "platform-tools" "emulator" "system-images;android-34;google_apis;x86_64"
+sdkmanager --install "platform-tools" "emulator"
 ```
 {% endcode %}
 
@@ -43,7 +51,7 @@ sdkmanager --install "platform-tools" "emulator" "system-images;android-34;googl
 
 {% code overflow="wrap" %}
 ```bash
-sdkmanager --install "system-images;android-34;google_apis;arm64-v8a"                               echo 'export PATH=$PATH:/Library/Android/sdk/emulator' >> ~/.zprofile
+sdkmanager --install "system-images;android-26;google_apis;arm64-v8a"                               echo 'export PATH=$PATH:/Library/Android/sdk/emulator' >> ~/.zprofile
 source ~/.zprofile
 ```
 {% endcode %}
@@ -52,7 +60,7 @@ source ~/.zprofile
 
 {% code overflow="wrap" %}
 ```bash
-avdmanager create avd -n my_emulator_arm -k "system-images;android-34;google_apis;arm64-v8a" --force
+avdmanager create avd -n my_emulator_arm -k "system-images;android-26;google_apis;arm64-v8a" --force
 ```
 {% endcode %}
 
@@ -110,9 +118,15 @@ drozer console connect
 brew install jadx
 ```
 
-### Rooting Android Studio with Magisk
+### Install Magisk
 
-{% embed url="https://systemweakness.com/rooting-emulator-and-installing-magisk-c3cbd34ec436" %}
+{% embed url="https://github.com/topjohnwu/Magisk/releases/tag/v28.1" %}
+
+### Rooting Android Studio Emulator
+
+{% embed url="https://github.com/newbit1/rootAVD" %}
+
+{% embed url="https://www.youtube.com/watch?v=vO92Gs9kyfg" %}
 
 ### Magisk Frida
 
