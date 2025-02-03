@@ -36,6 +36,28 @@ GraphQL has many implementations written in a variety of programming languages, 
 /api/v1/graphiql
 /api/v2/graphiql
 /api/v3/graphiql
+/graphql.php
+/graphql/console
+/api
+/api/graphql
+/graphql/api
+/graphql/graphql
+/v1/graphql
+/v2/graphql
+/graphql/v1
+/graphql/v2
+/gql
+/graphql-playground
+/playground
+/altair
+/query
+/graphql/query
+/graphql-explorer
+/api/v1/graphql
+/api/v2/graphql
+/public/graphql
+/private/graphql
+/internal/graphql
 ```
 
 * Endpoints like `/graphql` or IDE endpoints (`/graphiql`, `/playground`) are common but can \
