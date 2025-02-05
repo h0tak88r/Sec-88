@@ -2,6 +2,10 @@
 
 ## GraphQL Penetration Testing Resources
 
+### Blogs
+
+{% embed url="https://deepstrike.io/blog/graphql-api-vulnerabilities-and-common-attacks" %}
+
 ### Books
 
 * **GraphQL BlackHat Book**
