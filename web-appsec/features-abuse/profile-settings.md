@@ -74,7 +74,7 @@
 
 ## **Change Email Feature**
 
-* [ ] [Unlocking Important Resources with Email Verification Bypass](https://twitter.com/Jayesh25\_/status/1725429962931335599)
+* [ ] [Unlocking Important Resources with Email Verification Bypass](https://twitter.com/Jayesh25_/status/1725429962931335599)
 
 ```
 Identify critical features linked to a user's email domain. For instance, consider a target app that grants access to resources based on your email domain. Some apps let you join a team or workspace directly if your email matches the team's domain (e.g., join Victim SITE XYZ only with sample@victimsitexyz[.]com). Others restrict access to documents or videos based on email domain whitelisting. Numerous such opportunities exist where email plays a crucial role.
@@ -235,4 +235,7 @@ Once you've claimed an email associated with another organization's domain, iden
 
 {% embed url="https://hackerone.com/reports/2483422" %}
 
-*
+* [ ] Change Username to Restricted PATH to Bypass Access Control to IDOR&#x20;
+
+{% embed url="https://x.com/Mohnad/status/1886451919276679282?t=ykPDjfv7FfYLmDAzAhBuxA&s=09" %}
+

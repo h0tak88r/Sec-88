@@ -1,4 +1,4 @@
-# GraphQL API Testing Checklist
+# GraphQL Hacking Checklist
 
 ### Reconnaissance
 
