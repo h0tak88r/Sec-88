@@ -107,7 +107,7 @@
     * [Injection Vulnerabilities in GraphQL](api-sec/graphql-api-security-testing/injection-vulnerabilities-in-graphql.md)
     * [REQUEST FORGERY AND HIJACKING](api-sec/graphql-api-security-testing/request-forgery-and-hijacking.md)
     * [VULNERABILITIES, REPORTS AND EXPLOITS](api-sec/graphql-api-security-testing/vulnerabilities-reports-and-exploits.md)
-    * [GraphQL API Testing Checklist](api-sec/graphql-api-security-testing/graphql-api-testing-checklist.md)
+    * [GraphQL Hacking Checklist](api-sec/graphql-api-security-testing/graphql-hacking-checklist.md)
   * [API Recon](api-sec/api-recon.md)
   * [API Token Attacks](api-sec/api-token-attacks.md)
   * [Broken Object Level Authorization (BOLA)](api-sec/broken-object-level-authorization-bola.md)

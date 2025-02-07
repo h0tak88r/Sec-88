@@ -438,7 +438,7 @@ me.com%09company.com
 /\me.com
 ```
 
-* [https://deepsec.net/docs/Slides/2016/Go\_Hack\_Yourself...\_Frans\_Rosen.pdf](https://deepsec.net/docs/Slides/2016/Go\_Hack\_Yourself...\_Frans\_Rosen.pdf)
+* [https://deepsec.net/docs/Slides/2016/Go\_Hack\_Yourself...\_Frans\_Rosen.pdf](https://deepsec.net/docs/Slides/2016/Go_Hack_Yourself..._Frans_Rosen.pdf)
 * [https://i.blackhat.com/asia-19/Fri-March-29/bh-asia-Wang-Make-Redirection-Evil-Again.pdf](https://i.blackhat.com/asia-19/Fri-March-29/bh-asia-Wang-Make-Redirection-Evil-Again.pdf)
 * [https://twitter.com/kunalp94/status/1195321932612169728](https://twitter.com/kunalp94/status/1195321932612169728)
 * [https://twitter.com/kunalp94/status/1195321932612169728](https://twitter.com/kunalp94/status/1195321932612169728)
@@ -573,3 +573,14 @@ window.addEventListener('oauth', function(Token) {alert(Token.data.name);
 {% embed url="https://www.amolbaikar.com/facebook-oauth-framework-vulnerability/" %}
 
 {% embed url="https://hackerone.com/reports/821896" %}
+
+### ATO Using OKTA SSO Misconfiguration
+
+* Suppose `victim@gmail.com` is a member of `VictimOrganization` on _target.com_.
+* The attacker creates `AttackerOrganization` on _target.com_ and invites _`victim@gmail.com`_ as a member
+* The attacker then sets up Okta and links it with their `AttackerOrganization`
+* In their Okta instance, the attacker creates a user account with the email `victim@gmail.com`&#x20;
+* Using this fake(attacker) Okta account linked to `victim@gmail.com`, the attacker logs into _target.com_ as `victim@gmail.com`&#x20;
+* Since `victim@gmail.com` is also a member of `VictimOrganization` , the attacker is able to switch organizations within _target.com_, gaining unauthorized access to sensitive data and functionality.
+
+{% embed url="https://rikeshbaniya.medium.com/account-takeover-using-sso-logins-fa35f28a358b" %}
