@@ -158,6 +158,7 @@
     * [IDOR Leads to ATO](android-appsec/hacking-insecurebankv2-app/idor-leads-to-ato.md)
   * [Hacking the VulnWebView Lab](android-appsec/hacking-the-vulnwebview-lab.md)
   * [Intent Redirection Vulnerability](android-appsec/intent-redirection-vulnerability.md)
+  * [Janus Vulnerability (CVE-2017-13156)](android-appsec/janus-vulnerability-cve-2017-13156.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)
