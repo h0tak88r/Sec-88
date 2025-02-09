@@ -12,15 +12,15 @@
 2. Download the Drozer agent apk file from [https://github.com/WithSecureLabs/drozer-agent/releases/tag/3.0.0](https://github.com/WithSecureLabs/drozer-agent/releases/tag/3.0.0)
 3.  Install Drozer via command`sudo pip3 install drozer-3.0.2-py3-none-any.whl`
 
-    <figure><img src="../../.gitbook/assets/image (65).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (65).png" alt=""><figcaption></figcaption></figure>
 4. Install apk file in the emulator via command: `adb install drozer-agent.apk`
 5.  Initialize drozer server and get the port&#x20;
 
-    <figure><img src="../../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
 6.  Now forward traffick to this port and connect drozer console \
 
 
-    <figure><img src="../../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
 7. Now here is some usefull drozer commands
 
 ```bash
@@ -65,5 +65,4 @@ run app.broadcast.sniff --action <action>
 run app.service.info -a <package name>
 run app.service.start --action <action> --component <package name> <component name>
 run app.service.send <package name> <component name> --msg <what> <arg1> <arg2> --extra <type> <key> <value> --bundle-as-obj
-
 ```
