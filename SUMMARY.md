@@ -149,6 +149,7 @@
   * [Intent Redirection Vulnerability](android-appsec/intent-redirection-vulnerability.md)
   * [Janus Vulnerability (CVE-2017-13156)](android-appsec/janus-vulnerability-cve-2017-13156.md)
   * [Hacking Labs](android-appsec/hacking-labs/README.md)
+    * [Injured Android](android-appsec/hacking-labs/injured-android.md)
     * [Hacking the VulnWebView Lab](android-appsec/hacking-labs/hacking-the-vulnwebview-lab.md)
     * [Hacking InsecureBankv2 App](android-appsec/hacking-labs/hacking-insecurebankv2-app.md)
 * [📶 Network-Sec](network-sec/README.md)
