@@ -282,3 +282,16 @@ if (uri != null) {
     }
 }
 ```
+
+**How to Mitigate?**
+
+✅ Set `android:exported="false"` for sensitive activities.\
+✅ Enforce authentication before executing deep link actions.\
+✅ Use `android:autoVerify="true"` for web-based deep links.\
+✅ Sanitize Input in Deep Links\
+✅ Disable JavaScript & restrict URL loads in WebView.
+
+```javascript
+webView.getSettings().setJavaScriptEnabled(false);
+webView.getSettings().setAllowFileAccess(false);
+```
