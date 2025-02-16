@@ -1,4 +1,4 @@
-# Android Application Components Security Cheatsheet
+# Android App Components Security Cheatsheet
 
 ## **`Activities`**
 
@@ -84,7 +84,7 @@ Services run background tasks. Exported services can be triggered by external ap
 
 #### **What to Look For?**
 
-* **Exported Services** `<services` (`android:exported="true"`) in `AndroidManifest.xml`.
+* **Exported Services** `<services` and (`android:exported="true"`) in `AndroidManifest.xml`.
 * **Sensitive Operations** performed without authentication.
 * **Binding to Services** that lack proper permission checks.
 
@@ -110,7 +110,7 @@ adb shell am startservice -n com.vulnapp/.DataSyncService --es "sync" "malicious
 
 ***
 
-### **`Broadcast Receivers`**
+## **`Broadcast Receivers`**
 
 #### **What is it?**
 
