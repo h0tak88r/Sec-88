@@ -86,11 +86,11 @@ query GetDirectives {
 
 * **Operation Names:** Clients can define operation names, and these can be manipulated to potentially bypass security measures or mislead log analysis. An example involves spoofing the operation name to bypass audit logging, for example using `SpoofedOperationName` instead of `createPaste`.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Executing a selected query based on its operation name in GraphiQL Explorer</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Executing a selected query based on its operation name in GraphiQL Explorer</p></figcaption></figure>
 
 * **Input Entry Points:** Any place where user-controlled data is input, such as fields in mutations, which are used to create, update, or delete data, can be injection points. The `createPaste` mutation, which uses `content`, `title`, and `public` arguments, is one example.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **SQL Injection (SQLi):** The chapter dedicates significant attention to SQL injection, explaining that it can occur when user input is used to construct SQL queries.
   * **Identification:** The chapter advises focusing on fields that accept string values and have names suggesting filtering, such as the `filter` argument in the `pastes` query.

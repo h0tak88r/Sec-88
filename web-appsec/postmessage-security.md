@@ -26,7 +26,7 @@ These three components collectively form the origin for this page. For any other
 
 With an understanding of the Same Origin Policy, it becomes clear why mechanisms like **postMessage** were introduced. These allow for controlled, secure communication between different origins when necessary.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## The JavaScript postMessage() function
 
@@ -42,7 +42,7 @@ postMessage(message, targetOrigin, transfer);
 * **targetOrigin:** Specifies the origin that the message is intended for. This should be a specific origin for security reasons, though a wildcard `*` can be used to send the message to any origin.
 * **transfer:** (Optional) A sequence of Transferable Objects. These are transferred with the message but are not copied.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Syntax of `postMessage()`  ->** Recieving Windo&#x77;**:**
 
@@ -100,7 +100,7 @@ To exploit `postMessage()` vulnerabilities, you must first determine whether the
 
     * The "Global Listener" feature in the "Sources" pane of Developer Tools can be used to identify the use of `postMessage()`. By opening the Global Listener and clicking on "messages," you can view the message handlers that have been set up.
 
-    <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 4. **Using Posta:**
    * Posta is a tool designed for researching Cross-document Messaging communication. It allows you to track, explore, and exploit `postMessage()` vulnerabilities. Posta includes features like replaying messages sent between windows in any attached browser, providing valuable insights into the communication flow.
 5. **Using PMHook:**
