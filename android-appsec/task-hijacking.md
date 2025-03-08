@@ -38,6 +38,8 @@ For task hijacking, the **singleTask** mode is most relevant. It ensures that an
 
 ### Proof of Concept (PoC)
 
+Full Source-Code: [https://github.com/az0mb13/Task\_Hijacking\_Strandhogg/tree/main](https://github.com/az0mb13/Task_Hijacking_Strandhogg/tree/main)
+
 #### Creating a Vulnerable Victim App
 
 To demonstrate the attack, let’s create a vulnerable app (e.g., _Super Secure App_). Below is its `AndroidManifest.xml`:
