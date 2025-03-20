@@ -38,6 +38,8 @@
 
 {% embed url="https://medium.com/@iknowhatodo/exploiting-auth0-misconfigurations-a-case-study-on-account-linking-vulnerabilities-76fb6b9703f8" %}
 
+{% embed url="https://kareemelsadek.github.io/posts/exploiting-auth0-misconfiguration/" %}
+
 1. **Identify the Social Login Mechanism**:
    * Access the login page of the target application and check for any social login options, like "Sign up with Google."
    * Note the primary email address used during the social login (e.g., using `testacc2399@gmail.com`).
@@ -99,6 +101,3 @@
 6. **Confirm Account Takeover**:
    * Check if both email variants (`victim@domain.com` and `vıctim@domain.com`) can log in, especially if each set of credentials provides access to the same user data.
    * This behavior suggests that Auth0’s inconsistent email normalization is causing an **account takeover** scenario.
-
-
-

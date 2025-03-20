@@ -123,7 +123,7 @@
 * [📱 Android-AppSec](android-appsec/README.md)
   * [Setup Android App Pentesting environment on Arch](android-appsec/setup-android-app-pentesting-environment-on-arch.md)
   * [Setup Android App Pentesting environment on Mac M4](android-appsec/setup-android-app-pentesting-environment-on-mac-m4.md)
-  * [Setup Android Pentesting Environment on Debian-Based Linux](android-appsec/setup-android-pentesting-environment-on-debian-based-linux.md)
+  * [Setup Android Pentesting Environment on Debian Linux](android-appsec/setup-android-pentesting-environment-on-debian-linux.md)
   * [Android App Fundamentals](android-appsec/android-app-fundamentals/README.md)
     * [Android Architecture](android-appsec/android-app-fundamentals/android-architecture.md)
     * [Android Security Model](android-appsec/android-app-fundamentals/android-security-model.md)

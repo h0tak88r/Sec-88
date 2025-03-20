@@ -377,6 +377,12 @@ HTTP 200 OK
     code=authorization_code&redirect_uri=callback_url&grant_type=authorization_code&client_id=client_id&client_secret=[bruteforce]
     ```
 
+### ATO via OAUTH Hijacking
+
+{% embed url="https://medium.com/@iknowhatodo/oauth-hijacking-leads-to-account-takeover-a051bdb5e9f0" %}
+
+<figure><img src="https://miro.medium.com/v2/resize:fit:700/1*JI8S6sbzv-MRu3ZK_T-3Gg.png" alt="" height="394" width="700"><figcaption></figcaption></figure>
+
 ### Referrer Header Leaking Code + State
 
 * Verify if the code and state are reflected in the Referrer header when the user navigates to another page.
