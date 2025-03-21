@@ -34,7 +34,7 @@
   * Use the credentials you specified in the signup request to attempt login on the application.
   * If successful, this confirms the misconfiguration, as you've bypassed the disabled signup restriction.
 
-## Account Linking Misconfiguration in Aouth-Logging-Only Targets
+## Account Linking Misconfiguration in OAuth-Only Targets
 
 {% embed url="https://medium.com/@iknowhatodo/exploiting-auth0-misconfigurations-a-case-study-on-account-linking-vulnerabilities-76fb6b9703f8" %}
 
