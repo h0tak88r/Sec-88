@@ -18,6 +18,8 @@
 
 {% embed url="https://www.studocu.com/vdp.html" %}
 
+{% embed url="https://github.com/Micro0x00/Bug-Bounty-Platforms" %}
+
 * Bug Bounty Switzerland&#x20;
 * Bug Hunt Bugbase&#x20;
 * BugBounter&#x20;
