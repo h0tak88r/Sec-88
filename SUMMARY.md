@@ -93,6 +93,7 @@
   * [Serialization in .NET](web-appsec/serialization-in-.net.md)
   * [Client-Side Attacks](web-appsec/client-side-attacks/README.md)
     * [JavaScript Analysis](web-appsec/client-side-attacks/javascript-analysis.md)
+  * [Bug Bounty Platforms/Programs](web-appsec/bug-bounty-platforms-programs.md)
 * [✉️ API-Sec](api-sec/README.md)
   * [GraphQL API Security Testing](api-sec/graphql-api-security-testing/README.md)
     * [The Basics](api-sec/graphql-api-security-testing/the-basics.md)
