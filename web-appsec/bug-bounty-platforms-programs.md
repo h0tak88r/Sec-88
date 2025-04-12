@@ -9,3 +9,8 @@
 {% embed url="https://bugbase.ai/programs" %}
 
 {% embed url="https://bugv.io/" %}
+
+{% embed url="https://github.com/swisscom/bugbounty/blob/main/scope/inscope.txt" %}
+
+
+
