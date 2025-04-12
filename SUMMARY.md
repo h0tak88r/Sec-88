@@ -154,6 +154,7 @@
     * [Injured Android](android-appsec/hacking-labs/injured-android.md)
     * [Hacking the VulnWebView Lab](android-appsec/hacking-labs/hacking-the-vulnwebview-lab.md)
     * [Hacking InsecureBankv2 App](android-appsec/hacking-labs/hacking-insecurebankv2-app.md)
+  * [Frida Cheat Sheet](android-appsec/frida-cheat-sheet.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)
