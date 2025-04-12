@@ -12,5 +12,8 @@
 
 {% embed url="https://github.com/swisscom/bugbounty/blob/main/scope/inscope.txt" %}
 
+{% embed url="https://support.phrendly.com/hc/en-us/articles/217857288-Do-you-have-a-bug-bounty-if-I-find-an-issue-with-your-site" %}
 
+{% embed url="https://help.studocu.com/hc/en-us/sections/22251290652946-Bug-Bounty-program" %}
 
+{% embed url="https://www.studocu.com/vdp.html" %}
