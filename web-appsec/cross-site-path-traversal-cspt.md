@@ -2,7 +2,7 @@
 description: 'CWE-35: Path Traversal'
 ---
 
-# Cross-Site Path Traversal  (CSPT)
+# Cross-Site Path Traversal (CSPT)
 
 ## Introduction
 
@@ -61,7 +61,7 @@ Restrictions are specific to the source.
 
 ### **1-click CSPT2CSRF in Rocket.Chat**
 
-* [https://www.doyensec.com/resources/Doyensec\_CSPT2CSRF\_OWASP\_Appsec\_Lisbon.pdf](https://www.doyensec.com/resources/Doyensec\_CSPT2CSRF\_OWASP\_Appsec\_Lisbon.pdf)
+* [https://www.doyensec.com/resources/Doyensec\_CSPT2CSRF\_OWASP\_Appsec\_Lisbon.pdf](https://www.doyensec.com/resources/Doyensec_CSPT2CSRF_OWASP_Appsec_Lisbon.pdf)
 
 ```javascript
 const appId = useSearchParameter('id');
@@ -402,7 +402,55 @@ When exploiting vulnerabilities in sinks, especially in the context of web appli
 
 ## Additional Resources
 
+*   ### Publications (blog posts, advisories, …) <a href="#publications-blog-posts-advisories" id="publications-blog-posts-advisories"></a>
+
+    * **Maxence Schmitt**: [Exploiting Client-Side Path Traversal to Perform Cross-Site Request Forgery - Introducing CSPT2CSRF](https://blog.doyensec.com/2024/07/02/cspt2csrf.html)
+    * **Maxence Schmitt**: [CSPT & File Upload Bypasses](https://blog.doyensec.com/2025/01/09/cspt-file-upload.html)
+    * **Dafydd Stuttard**: [PortSwigger - On-Site Request Forgery](https://portswigger.net/blog/on-site-request-forgery)
+    * **Renwa**: [Client-Side Path Traversal (CSPT) Bug Bounty Reports and Techniques](https://medium.com/@renwa/client-side-path-traversal-cspt-bug-bounty-reports-and-techniques-8ee6cd2e7ca1)
+    * **Kapytein**: [From an Innocent Client-Side Path Traversal to Account Takeover](https://kapytein.nl/from-an-innocent-client-side-path-traversal-to-account-takeover)
+    * **Mr. Medi**: [Practical Client-Side Path Traversal Attacks](https://mr-medi.github.io/research/2022/11/04/practical-client-side-path-traversal-attacks.html)
+    * **Alvaro Balada**: [The Power of Client-Side Path Traversal: How I Found and Escalated 2 Bugs](https://medium.com/@Nightbloodz/the-power-of-client-side-path-traversal-how-i-found-and-escalated-2-bugs-through-670338afc90f)
+    * **Michelin CERT**: [Grafana CVE-2023-5123 Write-Up](https://medium.com/@maxime.escourbiac/grafana-cve-2023-5123-write-up-74e1be7ef652)
+    * **Netragard**: [Saving CSRF: Client-Side Path Traversal to the Rescue](https://netragard.com/saving-csrf-client-side-path-traversal-to-the-rescue/)
+    * **Sam Curry**: [CSPT2CSRF and CSPT->Open Redirect->XSS](https://x.com/samwcyo/status/1437030056627523590)
+    * **Hussein Daher**: [CSPT->JSONP->XSS](https://x.com/HusseiN98D/status/1809164551822172616)
+    * **Ron Masas**: [CSPT->XSS](https://x.com/RonMasas/status/1759603359646974386)
+    * **Isira Adithya**: [CSPT->JSONP->XSS](https://x.com/isira_adithya/status/1809228815002136719)
+    * **Johan Carlsson**: [1 Click CSPT->Stored id from a rogue Sentry server->PUT CSRF](https://x.com/joaxcar/status/1809706806647652424)
+    * **Erasec**: [Client-Side Path Manipulation](https://erasec.be/blog/client-side-path-manipulation/)
+    * **Acut3**: [Fetch Diversion](https://acut3.net/posts/2023-01-03-fetch-diversion)
+    * **Matan Berson**: [CSPT Levels](https://matanber.com/blog/cspt-levels)
+    * **Facebook**: [Facebook Notes on CSPT](https://www.facebook.com/notes/996734990846339/)
+
+    ### Videos <a href="#videos" id="videos"></a>
+
+    * **Maxence Schmitt**: [OWASP Lisbon 2024 - Exploiting Client-Side Path Traversal: CSRF Is Dead, Long Live CSRF](https://www.youtube.com/watch?v=O1ZN_OCfNzg)
+    * **Maxence Schmitt**: [Volcamp 2024 - FR: Exploiting Client-Side Path Traversal: CSRF Is Dead, Long Live CSRF](https://www.youtube.com/watch?v=cv7a1B1QptI)
+    * **Soheil Khodayari**: [OWASP Lisbon 2024 - Deep dive into CSPT techniques](https://www.youtube.com/watch?v=7L4koVoZ7Uw)
+    * **Justin Gardner**: [Critical Thinking Podcast Channel](https://www.youtube.com/@criticalthinkingpodcast)
+    * **Grzegorz Niedziela**: [Bug Bounty Reports Explained Channel](https://www.youtube.com/watch?v=z27bkSMARA8)
+
+    ### Tools <a href="#tools" id="tools"></a>
+
+    * **Maxence Schmitt**: [CSPT Burp Extension](https://github.com/doyensec/CSPTBurpExtension)
+    * **Dennis Goodlett**: [CSPT with Eval Villain](https://blog.doyensec.com/2024/12/03/cspt-with-eval-villain.html)
+    * **Kevin Mizu**: [DOMLoggerpp](https://github.com/kevin-mizu/domloggerpp)
+    * **PortSwigger**: [Burp Suite DOM Invader](https://portswigger.net/burp/documentation/desktop/tools/dom-invader)
+    * **Vitor Falcão**: [Automating CSPT Discovery](https://vitorfalcao.com/posts/automating-cspt-discovery/)
+
+    ### Challenges <a href="#challenges" id="challenges"></a>
+
+    * **Cryptocat**: [Intigriti Challenge 0824 - SafeNotes\_2](https://challenge-0824.intigriti.io/)
+      * **Write-up**: [SafeNotes\_2 Write-up](https://book.cryptocat.me/ctf-writeups/2024/intigriti/web/safenotes_2)
+    * **Aleandro Prudenzano**: [European Cybersecurity Challenge 2024 CTF - Jeopardy - Web01)](https://github.com/ECSC2024/ECSC2024-CTF-Jeopardy/tree/main/web01)
+      * **Write-up**: [European Cybersecurity Challenge 2024 CTF - Jeopardy - Web01](https://github.com/ECSC2024/ECSC2024-CTF-Jeopardy/blob/main/web01/writeup.md)
+
+    ### Labs <a href="#labs" id="labs"></a>
+
+    * **Maxence Schmitt**: [CSPT Playground](https://github.com/doyensec/CSPTPlayground)
+
 {% embed url="https://blog.doyensec.com/2024/07/02/cspt2csrf.html" %}
 
-* [https://www.doyensec.com/resources/Doyensec\_CSPT2CSRF\_OWASP\_Appsec\_Lisbon.pdf](https://www.doyensec.com/resources/Doyensec\_CSPT2CSRF\_OWASP\_Appsec\_Lisbon.pdf)
+* [https://www.doyensec.com/resources/Doyensec\_CSPT2CSRF\_OWASP\_Appsec\_Lisbon.pdf](https://www.doyensec.com/resources/Doyensec_CSPT2CSRF_OWASP_Appsec_Lisbon.pdf)
 * [https://www.usenix.org/system/files/sec21-khodayari.pdf](https://www.usenix.org/system/files/sec21-khodayari.pdf)
