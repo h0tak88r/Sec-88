@@ -6,7 +6,7 @@ description: Password Reset Security testing Checklist
 
 * [ ] [**Weak Cryptography to Account Takeover’s**](https://vasuyadav0786.medium.com/weak-cryptography-to-account-takeovers-87782224ed0d)
 * [ ] [**Weak Cryptography in Password Reset**](https://infosecwriteups.com/weak-cryptography-in-password-reset-to-full-account-takeover-fc61c75b36b9)
-*   [ ] [Host Header Poisoning](https://hackerone.com/reports/1108874) [0xacb.com/normalization\_table](https://0xacb.com/normalization\_table)
+*   [ ] [Host Header Poisoning](https://hackerone.com/reports/1108874) [0xacb.com/normalization\_table](https://0xacb.com/normalization_table)
 
     ```python
     victim.com@attacker.com 
@@ -76,11 +76,11 @@ and forward the request.
 
     The last one was also an Basic IDOR, When I requested for reset password then the request response looks like this
 
-    ![https://miro.medium.com/v2/1\*7GQ1sbFDEllEY1kpQodGoA.jpeg](https://miro.medium.com/v2/1\*7GQ1sbFDEllEY1kpQodGoA.jpeg)
+    ![https://miro.medium.com/v2/1\*7GQ1sbFDEllEY1kpQodGoA.jpeg](https://miro.medium.com/v2/1*7GQ1sbFDEllEY1kpQodGoA.jpeg)
 
     Then OTP came to my email and I entered the OTP but when I entered new password and captured that request
 
-    ![https://miro.medium.com/v2/1\*Vk7-7Tdd\_bFmWAul2\_BsSQ.jpeg](https://miro.medium.com/v2/1\*Vk7-7Tdd\_bFmWAul2\_BsSQ.jpeg)
+    ![https://miro.medium.com/v2/1\*Vk7-7Tdd\_bFmWAul2\_BsSQ.jpeg](https://miro.medium.com/v2/1*Vk7-7Tdd_bFmWAul2_BsSQ.jpeg)
 
     Then I noticed there was no OTP field, but there was a user id, which was encrypted but was being leaked in the response, so I just replaced it with the user id of another account, and bam, my other account’s password was changed.
 *   [ ] Race Condition
@@ -100,7 +100,7 @@ and forward the request.
     ```
 * [ ] [**Password reset broken logic \[Portswigger\]**](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic)
 * [ ] [**No length on password**](https://hackerone.com/reports/1411363)
-* [ ] [xss\_html-injection.md](../xss\_html-injection.md "mention") **in email section**
+* [ ] [xss\_html-injection.md](../xss_html-injection.md "mention") **in email section**
 * [ ] [**Reset/Forgotten Password Bypass \[Hacktricks\]**](https://book.hacktricks.xyz/pentesting-web/reset-password)
 * [ ] [**Bruteforcing password reset tokens**](https://hackerone.com/reports/271533)
 * [ ] [**No Rate Limit On Reset Password**](https://hackerone.com/reports/1166066)
@@ -118,7 +118,7 @@ and forward the request.
   * [https://medium.com/@rubiojhayz1234/toyotas-password-reset-token-and-email-address-leak-via-referer-header-b0ede6507c6a](https://medium.com/@rubiojhayz1234/toyotas-password-reset-token-and-email-address-leak-via-referer-header-b0ede6507c6a)
   * [https://medium.com/@shahjerry33/password-reset-token-leak-via-referrer-2e622500c2c1](https://medium.com/@shahjerry33/password-reset-token-leak-via-referrer-2e622500c2c1) **Impact** It allows the person who has control of particular site to change the user’s password (CSRF attack), because this person knows reset password token of the user.
 * [ ] [**Failure to Invalidate Session > On Password Reset**](https://hackerone.com/reports/411337)
-*   [ ] [**HTML\_Injection\_on\_password\_reset\_page**](https://github.com/KathanP19/HowToHunt/blob/master/HTML\_Injection/HTML\_Injection\_on\_password\_reset\_page.md)
+*   [ ] [**HTML\_Injection\_on\_password\_reset\_page**](https://github.com/KathanP19/HowToHunt/blob/master/HTML_Injection/HTML_Injection_on_password_reset_page.md)
 
     ```
     ### Steps
@@ -144,6 +144,10 @@ and forward the request.
 * [ ] Token Has Long Timed Expiry
 * [ ] Token is Not Invalidated After New Token is Requested
 * [ ] Token is Not Invalidated After Login
+* [ ] If there is a feature to reset password using username then try make two accounts with the same username but different emails&#x20;
+
+{% embed url="https://shahjerry33.medium.com/duplicate-registration-the-twinning-twins-883dfee59eaf" %}
+
 *   [ ] CRLF in URL
 
     ```

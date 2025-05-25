@@ -127,6 +127,8 @@ Once you've claimed an email associated with another organization's domain, iden
   3. so he will probably change mail to the another mail address for e.g [victim3@gmail.com](mailto:victim999@gmail.com) which he owns and has access to
   4. but it is found that even after verifying victim3@gmail.com, the old link which was sent to victim2@gmail.com is active, so user/attacker having access to that mail can verify it and Observe the OAuth misconfiguration that leads to account takeover
 * [ ] [Ability To Takeover any account by Emaill.](https://hackerone.com/reports/240821)
+* [ ] Bypassing **“email already exists” error** while updating my email, I bypassed it by NULL Byte Attack and Special Characters `%20` at the end (e.g., `your@email.com%20`
+* [ ] IDN Homograph Attack
 
 ## **Change Numbers Feature**
 

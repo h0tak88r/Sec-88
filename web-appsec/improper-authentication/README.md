@@ -1,4 +1,4 @@
-# CWE-285: Improper Authorization
+# Improper Authentication
 
 #### **Easy Ways**
 
@@ -30,29 +30,23 @@ lol@company.com@burbcollaboratorpayload.com
 
 #### **Default Credentials**
 
-\*\*[https://github.com/ihebski/DefaultCreds-cheat-sheet\*\*](https://github.com/ihebski/DefaultCreds-cheat-sheet\*\*)
+[https://github.com/ihebski/DefaultCreds-cheat-sheet](https://github.com/ihebski/DefaultCreds-cheat-sheet**)
 
-\*\*[http://www.phenoelit.org/dpl/dpl.html\*\*](http://www.phenoelit.org/dpl/dpl.html\*\*)
+[http://www.phenoelit.org/dpl/dpl.html](http://www.phenoelit.org/dpl/dpl.html**)
 
-\*\*[http://www.vulnerabilityassessment.co.uk/passwordsC.htm\*\*](http://www.vulnerabilityassessment.co.uk/passwordsC.htm\*\*)
+[http://www.vulnerabilityassessment.co.uk/passwordsC.htm](http://www.vulnerabilityassessment.co.uk/passwordsC.htm**)
 
-\*\*[https://192-168-1-1ip.mobi/default-router-passwords-list/\*\*](https://192-168-1-1ip.mobi/default-router-passwords-list/\*\*)
+[https://192-168-1-1ip.mobi/default-router-passwords-list/](https://192-168-1-1ip.mobi/default-router-passwords-list/**)
 
-\*\*[https://datarecovery.com/rd/default-passwords/\*\*](https://datarecovery.com/rd/default-passwords/\*\*)
+[https://datarecovery.com/rd/default-passwords/](https://datarecovery.com/rd/default-passwords/**)
 
-\*\*[https://bizuns.com/default-passwords-list\*\*](https://bizuns.com/default-passwords-list\*\*)
+[https://bizuns.com/default-passwords-list](https://bizuns.com/default-passwords-list**)[https://github.com/danielmiessler/SecLists/blob/master/Passwords/Default-Credentials/default-passwords.csv](https://github.com/danielmiessler/SecLists/blob/master/Passwords/Default-Credentials/default-passwords.csv**)[https://github.com/Dormidera/WordList-Compendium](https://github.com/Dormidera/WordList-Compendium**)[https://www.cirt.net/passwords](https://www.cirt.net/passwords**)
 
-\*\*[https://github.com/danielmiessler/SecLists/blob/master/Passwords/Default-Credentials/default-passwords.csv\*\*](https://github.com/danielmiessler/SecLists/blob/master/Passwords/Default-Credentials/default-passwords.csv\*\*)
+[http://www.passwordsdatabase.com/](http://www.passwordsdatabase.com/**)
 
-\*\*[https://github.com/Dormidera/WordList-Compendium\*\*](https://github.com/Dormidera/WordList-Compendium\*\*)
+[https://many-passwords.github.io](https://many-passwords.github.io/**)
 
-\*\*[https://www.cirt.net/passwords\*\*](https://www.cirt.net/passwords\*\*)
-
-\*\*[http://www.passwordsdatabase.com/\*\*](http://www.passwordsdatabase.com/\*\*)
-
-\*\*[https://many-passwords.github.io/\*\*](https://many-passwords.github.io/\*\*)
-
-\*\*[https://theinfocentric.com/\*\*](https://theinfocentric.com/\*\*)
+[https://theinfocentric.com/](https://theinfocentric.com/**)
 
 #### **Common Combinations**
 
@@ -280,7 +274,7 @@ Steps
 * [**Abuse of "Remember Me" functionality**](https://hackerone.com/reports/37822)
 * [**Weakness in the remember me feature**](https://www.youtube.com/watch?v=cO0HPCyDAM0)
 * [**Improper session handling**](https://github.com/pi-hole/AdminLTE/security/advisories/GHSA-33w4-xf7m-f82m)
-* [**OTGv4**](https://kennel209.gitbooks.io/owasp-testing-guide-v4/content/en/web\_application\_security\_testing/test\_remember\_password\_functionality\_otg-authn-005.html)
+* [**OTGv4**](https://kennel209.gitbooks.io/owasp-testing-guide-v4/content/en/web_application_security_testing/test_remember_password_functionality_otg-authn-005.html)
 
 #### **Other Checks**
 
@@ -322,7 +316,7 @@ or Wherever  You enter a Passw
 
 * [Az0x7/vulnerability-Checklist](https://github.com/Az0x7/vulnerability-Checklist/blob/main/Admin%20panal/adminpanal.md)
 * [default credentials](https://book.hacktricks.xyz/generic-methodologies-and-resources/brute-force#default-credentials)
-* \*\*\[Admin Approval Bypass]\(https://hackerone.com/reports/1861487
+* \[Admin Approval Bypass]\(https://hackerone.com/reports/1861487)&#x20;
 
 ## HackerOne Reports :
 
@@ -352,7 +346,7 @@ or Wherever  You enter a Passw
 * [Oauth authentication bypass on airbnb acquistion using wierd 1 char open redirect](https://xpoc.pro/oauth-authentication-bypass-on-airbnb-acquisition-using-weird-1-char-open-redirect/)
 * [Two factor authentication bypass](https://gauravnarwani.com/two-factor-authentication-bypass/)
 * [Instagram multi factor authentication bypass](https://medium.com/@vishnu0002/instagram-multi-factor-authentication-bypass-924d963325a1)
-* [Authentication bypass in nodejs application](https://medium.com/@\_bl4de/authentication-bypass-in-nodejs-application-a-bug-bounty-story-d34960256402)
+* [Authentication bypass in nodejs application](https://medium.com/@_bl4de/authentication-bypass-in-nodejs-application-a-bug-bounty-story-d34960256402)
 * [Symantec authentication Bypass](https://artkond.com/2018/10/10/symantec-authentication-bypass/)
 * [Authentication bypass in CISCO meraki](https://blog.takemyhand.xyz/2018/06/authentication-bypass-in-cisco-meraki.html)
 * [Slack SAML authentocation bypass](https://blog.intothesymmetry.com/2017/10/slack-saml-authentication-bypass.html)

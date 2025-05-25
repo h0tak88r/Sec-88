@@ -2,7 +2,13 @@
 
 ## **Throw Way Email Services**
 
-Use throwaway email to create a temporary email: ○[https://mail.protonmail.com](https://mail.protonmail.com) ○[http://en.getairmail.com](http://en.getairmail.com) ○ [https://temp-mail.org/en](https://temp-mail.org/en) ○[https://www.mailinator.com](https://www.mailinator.com)
+Use throwaway email to create a temporary email: ○[https://mail.protonmail.com](https://mail.protonmail.com)&#x20;
+
+○[http://en.getairmail.com](http://en.getairmail.com)&#x20;
+
+○ [https://temp-mail.org/en](https://temp-mail.org/en)&#x20;
+
+○[https://www.mailinator.com](https://www.mailinator.com)
 
 * [ ] Username/Email Enumeration > Non-Brute Force
 
