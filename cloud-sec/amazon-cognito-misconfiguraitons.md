@@ -105,19 +105,7 @@ aws cognito-idp admin-update-user-attributes --user-pool-id <your-user-pool-id> 
 
 If the update succeeds without verification, your setup may be vulnerable.
 
-### Best Practices for Securing Amazon Cognito
-
-To prevent these vulnerabilities, follow these best practices:
-
-* **Disable Self-Signup**: Unless explicitly needed, disable self-signup in your user pool to prevent unauthorized account creation.
-* **Restrict Attribute Permissions**: Limit Read/Write access to custom attributes, ensuring only necessary attributes are modifiable by users.
-* **Secure Sensitive IDs**: Store App Client IDs, User Pool IDs, and Identity Pool IDs server-side, avoiding exposure in client-side code.
-* **Enable Multi-Factor Authentication (MFA)**: Enforce MFA for critical actions to add an extra layer of security.
-* **Regular Audits**: Use tools like ScoutSuite to periodically audit your Cognito configurations for misconfigurations.
-
-### Conclusion
-
-Amazon Cognito is a robust tool for user management, but misconfigurations can expose your application to significant risks. By systematically testing for vulnerabilities using the test cases above and implementing best practices, you can ensure your Cognito setup is secure. Stay proactive, audit regularly, and keep up with the latest security research to protect your users and AWS resources.
+### Refrences
 
 For further reading, check out these excellent resources:
 
