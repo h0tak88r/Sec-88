@@ -29,6 +29,41 @@ Amazon Cognito simplifies user management with its user pools (for sign-up and s
 
 
     <figure><img src="../.gitbook/assets/image (321).png" alt=""><figcaption><p>When creating a new user pool, self-registration may be enabled by default, allowing users to sign up for an account on their own.</p></figcaption></figure>
+* [ ] **Unverified Email/Phone Attributes:**&#x20;
+
+-   If application doesn't require email verification this may lead to duplicate registerationa, Account Overwrite and ATO attacks\
+
+
+    <figure><img src="../.gitbook/assets/image (325).png" alt=""><figcaption></figcaption></figure>
+- If an email address is configured as an alias and a new user is created with a duplicate email, the alias can be transferred to the newer user, un-verifying the former user's email\
+  [https://repost.aws/knowledge-center/cognito-email-verified-attribute](https://repost.aws/knowledge-center/cognito-email-verified-attribute)
+
+* [ ] **Insecure Callback URLs**: Insecure callback URL configurations are a common misconfiguration in OAuth 2.0 and OIDC flows used by Cognito. This includes using HTTP instead of HTTPS (except for `http://localhost` for testing), configuring overly broad wildcard URLs (e.g., `*` or `*.example.com`), or failing to strictly validate the redirect URI in authentication requests\
+  [https://community.auth0.com/t/security-risks-of-using-localhost-for-callback-url/118781/1](https://community.auth0.com/t/security-risks-of-using-localhost-for-callback-url/118781/1)\
+  [https://repost.aws/questions/QURn-XLoSyQoGDbfqr6H\_BAw/adding-localhost-to-hosted-ui-callback-urls-for-testing-security-risks](https://repost.aws/questions/QURn-XLoSyQoGDbfqr6H_BAw/adding-localhost-to-hosted-ui-callback-urls-for-testing-security-risks)
+* [ ] **MFA Enforcement Bypass Scenarios:**&#x20;
+
+- Attempt to authenticate without providing MFA after password entry.
+- Test if MFA can be disabled by a standard user (User unintentionally has the `Wright` permission).
+
+* [ ] **Password Reset and Account Recovery**: Test for race conditions or token replay vulnerabilities in the reset process
+
+<figure><img src="../.gitbook/assets/image (324).png" alt=""><figcaption></figcaption></figure>
+
+* [ ] **Misconfigured Attributes read and write permissions**: In some websites users can't update their info like email in the UI so attacker can change this info via the API if the attribute write permission is enabled
+* [ ] **Token Revocation Issues:** Cognioto Succesfully revoked the code but the application's api didn't
+
+<figure><img src="../.gitbook/assets/image (326).png" alt=""><figcaption></figcaption></figure>
+
+* [ ] **Token Intigriti Issues:**
+
+> - The session is indeed checked to see if it lines up with the correct username.
+> - The **`IdToken`** is checked to see if it’s valid (i.e., not expired).
+> - **However**, there wasn’t any code linking that **`IdToken`** to the specific session or user. That’s because the dev who wrote the custom challenge logic didn’t do that last piece of validation!
+
+[**https://boom-stinger-c76.notion.site/AWS-Cognito-Chaos-The-Major-Flaw-That-Let-Attackers-Takeover-User-Accounts-17953b6a0d6e80bf8a75f6d03654eecf**](https://boom-stinger-c76.notion.site/AWS-Cognito-Chaos-The-Major-Flaw-That-Let-Attackers-Takeover-User-Accounts-17953b6a0d6e80bf8a75f6d03654eecf)
+
+
 
 **Test Third-Party Identity Providers (IdP) and Federation**
 
@@ -66,17 +101,19 @@ httpCopyEditscope=openid profile email aws.cognito.signin.user.admin
 
 * Look at returned claims in `id_token` or `access_token`
 
-- [ ] **Unverified Email/Phone Attributes:** if an email address is configured as an alias and a new user is created with a duplicate email, the alias can be transferred to the newer user, un-verifying the former user's email\
-  [https://repost.aws/knowledge-center/cognito-email-verified-attribute](https://repost.aws/knowledge-center/cognito-email-verified-attribute)
-- [ ] **Insecure Callback URLs**: Insecure callback URL configurations are a common misconfiguration in OAuth 2.0 and OIDC flows used by Cognito. This includes using HTTP instead of HTTPS (except for `http://localhost` for testing), configuring overly broad wildcard URLs (e.g., `*` or `*.example.com`), or failing to strictly validate the redirect URI in authentication requests\
-  [https://community.auth0.com/t/security-risks-of-using-localhost-for-callback-url/118781/1](https://community.auth0.com/t/security-risks-of-using-localhost-for-callback-url/118781/1)\
-  [https://repost.aws/questions/QURn-XLoSyQoGDbfqr6H\_BAw/adding-localhost-to-hosted-ui-callback-urls-for-testing-security-risks](https://repost.aws/questions/QURn-XLoSyQoGDbfqr6H_BAw/adding-localhost-to-hosted-ui-callback-urls-for-testing-security-risks)
-- [ ] **MFA Enforcement Bypass Scenarios:**&#x20;
-  * [ ] Attempt to authenticate without providing MFA after password entry.
-  * [ ] Test if MFA can be disabled by a standard user.
-- [ ] **Password Reset and Account Recovery**: Test for race conditions or token replay vulnerabilities in the reset process
-
 ### Common IdentityPools attacks <a href="#id-8841" id="id-8841"></a>
+
+* [ ] &#x20;**Dorks**
+
+```
+IdentityPoolId 
+Aws_cognito_identity_pool_id 
+Identity Pool Id 
+AWSCognitoIdentityService 
+clientId 
+client_id 
+aws_user_pools_web_client_id
+```
 
 *   [ ] **Leakage of Secrets like Identity Pool ID in JS Files:** Inspect client-side code or API responses for exposed Identity Pool IDs, then attempt to generate temporary AWS credentials then use tool to enumerate permissions associated with these credentials like [_**Enumerate-iam**_](https://github.com/andresriancho/enumerate-iam). \
     \`\`\
@@ -110,6 +147,8 @@ If the update succeeds without verification, your setup may be vulnerable.
 For further reading, check out these excellent resources:
 
 * [Hacking AWS Cognito Misconfigurations](https://notsosecure.com/hacking-aws-cognito-misconfigurations)
+* [https://medium.com/@mukundbhuva/account-takeover-due-to-cognito-misconfiguration-earns-me-xxxx-3a7b8bb9a619](https://medium.com/@mukundbhuva/account-takeover-due-to-cognito-misconfiguration-earns-me-xxxx-3a7b8bb9a619)
+* [https://www.youtube.com/watch?v=rJEealvGdJo](https://www.youtube.com/watch?v=rJEealvGdJo)
 * [Flickr Account Takeover Advisory](https://security.lauritz-holtmann.de/advisories/flickr-account-takeover/#assembling-the-puzzle-account-takeover)
 * [Exploit Two of the Most Common Vulnerabilities in Amazon Cognito with CloudGoat](https://trustoncloud.com/blog/exploit-two-of-the-most-common-vulnerabilities-in-amazon-cognito-with-cloudgoat/)
 * [AWS Cognito Pitfalls: Default Settings Attackers Love](https://www.secforce.com/blog/aws-cognito-pitfalls-default-settings-attackers-love-and-you-should-know-about/)
