@@ -9,11 +9,6 @@ Amazon Cognito simplifies user management with its user pools (for sign-up and s
 ### **Common UserPools attacks** <a href="#id-8c4c" id="id-8c4c"></a>
 
 * [ ] &#x20;**Detect Cognito UserPools usage**: Extract UserPoolID or ClientId from the JS/HTML or Signup/Login
-* [ ] **Unverified Email/Phone Attributes:** if an email address is configured as an alias and a new user is created with a duplicate email, the alias can be transferred to the newer user, un-verifying the former user's email\
-  [https://repost.aws/knowledge-center/cognito-email-verified-attribute](https://repost.aws/knowledge-center/cognito-email-verified-attribute)
-* [ ] **Insecure Callback URLs**: Insecure callback URL configurations are a common misconfiguration in OAuth 2.0 and OIDC flows used by Cognito. This includes using HTTP instead of HTTPS (except for `http://localhost` for testing), configuring overly broad wildcard URLs (e.g., `*` or `*.example.com`), or failing to strictly validate the redirect URI in authentication requests\
-  [https://community.auth0.com/t/security-risks-of-using-localhost-for-callback-url/118781/1](https://community.auth0.com/t/security-risks-of-using-localhost-for-callback-url/118781/1)\
-  [https://repost.aws/questions/QURn-XLoSyQoGDbfqr6H\_BAw/adding-localhost-to-hosted-ui-callback-urls-for-testing-security-risks](https://repost.aws/questions/QURn-XLoSyQoGDbfqr6H_BAw/adding-localhost-to-hosted-ui-callback-urls-for-testing-security-risks)
 *   [ ] **Zero Click Account Takeover via Updating Email Before Verification:** Updating email attributes to already registere email addresses and before verification try to login with the new email address Leads to ATO \
     **Reference**: [Flickr Account Takeover Advisory](https://security.lauritz-holtmann.de/advisories/flickr-account-takeover/#assembling-the-puzzle-account-takeover) \
     `aws cognito-idp admin-update-user-attributes --user-pool-id <your-user-pool-id> --username <username> --user-attributes Name="email",Value="Victim@gmail.com"` \
@@ -34,6 +29,52 @@ Amazon Cognito simplifies user management with its user pools (for sign-up and s
 
 
     <figure><img src="../.gitbook/assets/image (321).png" alt=""><figcaption><p>When creating a new user pool, self-registration may be enabled by default, allowing users to sign up for an account on their own.</p></figcaption></figure>
+
+**Test Third-Party Identity Providers (IdP) and Federation**
+
+* [ ] &#x20;**Test for Arbitrary Identity Token Acceptance**: If Cognito accepts ID tokens from any IdP without validation, it may allow attackers to impersonate users
+
+1. Forge a valid-looking **JWT token** (for OIDC) with your own IdP (e.g., a local Keycloak or Auth0 instance).
+2. Set the `iss` (issuer) to match the target’s expected IdP.
+3. Replace the `aud` with the expected Cognito client ID.
+
+```bash
+curl -X POST https://<domain>.auth.<region>.amazoncognito.com/oauth2/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=authorization_code&code=...&redirect_uri=..." \
+  -H "Authorization: Bearer <your_forged_token>"
+```
+
+* [ ] &#x20;**IDP Role Injection via Claims Mapping:** If role/permission claims from IdP are mapped to AWS roles or Cognito groups without validation, an attacker could elevate privileges
+
+- Forge or modify an identity assertion (SAML or JWT) that includes elevated claims like:
+
+```json
+jsonCopyEdit"custom:role": "admin"
+```
+
+* Use a test IdP you control to submit these claims.
+* Watch if Cognito accepts the claim and assigns privileges (e.g., in app or AWS permissions).
+
+- [ ] &#x20;**Scope/Claims Overreach**: If the application doesn’t restrict OIDC/SAML scopes/claims, attackers might access unintended user data.
+
+* Try requesting **excessive scopes**:
+
+```http
+httpCopyEditscope=openid profile email aws.cognito.signin.user.admin
+```
+
+* Look at returned claims in `id_token` or `access_token`
+
+- [ ] **Unverified Email/Phone Attributes:** if an email address is configured as an alias and a new user is created with a duplicate email, the alias can be transferred to the newer user, un-verifying the former user's email\
+  [https://repost.aws/knowledge-center/cognito-email-verified-attribute](https://repost.aws/knowledge-center/cognito-email-verified-attribute)
+- [ ] **Insecure Callback URLs**: Insecure callback URL configurations are a common misconfiguration in OAuth 2.0 and OIDC flows used by Cognito. This includes using HTTP instead of HTTPS (except for `http://localhost` for testing), configuring overly broad wildcard URLs (e.g., `*` or `*.example.com`), or failing to strictly validate the redirect URI in authentication requests\
+  [https://community.auth0.com/t/security-risks-of-using-localhost-for-callback-url/118781/1](https://community.auth0.com/t/security-risks-of-using-localhost-for-callback-url/118781/1)\
+  [https://repost.aws/questions/QURn-XLoSyQoGDbfqr6H\_BAw/adding-localhost-to-hosted-ui-callback-urls-for-testing-security-risks](https://repost.aws/questions/QURn-XLoSyQoGDbfqr6H_BAw/adding-localhost-to-hosted-ui-callback-urls-for-testing-security-risks)
+- [ ] **MFA Enforcement Bypass Scenarios:**&#x20;
+  * [ ] Attempt to authenticate without providing MFA after password entry.
+  * [ ] Test if MFA can be disabled by a standard user.
+- [ ] **Password Reset and Account Recovery**: Test for race conditions or token replay vulnerabilities in the reset process
 
 ### Common IdentityPools attacks <a href="#id-8841" id="id-8841"></a>
 
