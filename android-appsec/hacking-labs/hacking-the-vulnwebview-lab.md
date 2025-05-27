@@ -174,7 +174,7 @@ private void loadWebView() {
 
 #### **4. Exploitation**
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### Exploit Exported **SupportWebView**
 
@@ -295,3 +295,4 @@ The `setAllowUniversalAccessFromFileURLs(true)` setting allows JavaScript to rea
 ### Resources
 
 {% embed url="https://www.hackingarticles.in/android-penetration-testing-webview-attacks/" %}
+

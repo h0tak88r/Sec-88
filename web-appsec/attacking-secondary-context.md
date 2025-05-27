@@ -853,14 +853,22 @@ Content-Length: Number
 
 * [https://youtube.com/watch?v=ha6LD1-RiJU](https://youtube.com/watch?v=ha6LD1-RiJU)
 
+## RealWorld Examples
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+{% embed url="https://nokline.github.io/bugbounty/2024/02/04/ChatGPT-ATO.html" %}
+
+
+
 ### References
 
 * [https://infocondb.org/con/kernelcon/kernelcon-2020/attacking-secondary-contexts-in-web-applications](https://infocondb.org/con/kernelcon/kernelcon-2020/attacking-secondary-contexts-in-web-applications)
 * [https://www.youtube.com/watch?v=hWmXEAi9z5w](https://www.youtube.com/watch?v=hWmXEAi9z5w)
-* [https://2020.kernelcon.org/cfp/K2020\_scurry.pdf](https://2020.kernelcon.org/cfp/K2020\_scurry.pdf)
+* [https://2020.kernelcon.org/cfp/K2020\_scurry.pdf](https://2020.kernelcon.org/cfp/K2020_scurry.pdf)
 * [https://2018.zeronights.ru/wp-content/uploads/materials/20-Reverse-proxies-Inconsistency.pdf](https://2018.zeronights.ru/wp-content/uploads/materials/20-Reverse-proxies-Inconsistency.pdf)
 * [Secondary-Contexts.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/20824215-2216-4e41-a444-2e6158426b5c/1eccb217-8160-472f-86e9-8c05cac6419a/Secondary-Contexts.pdf)
 * [https://blog.detectify.com/industry-insights/common-nginx-misconfigurations-that-leave-your-web-server-ope-to-attack/](https://blog.detectify.com/industry-insights/common-nginx-misconfigurations-that-leave-your-web-server-ope-to-attack/)
-* [https://docs.google.com/presentation/d/1N9Ygrpg0Z-1GFDhLMiG3jJV6B\_yGqBk8tuRWO1ZicV8/edit#slide=id.g722ec9d5aa\_0\_0](https://docs.google.com/presentation/d/1N9Ygrpg0Z-1GFDhLMiG3jJV6B\_yGqBk8tuRWO1ZicV8/edit#slide=id.g722ec9d5aa\_0\_0)
+* [https://docs.google.com/presentation/d/1N9Ygrpg0Z-1GFDhLMiG3jJV6B\_yGqBk8tuRWO1ZicV8/edit#slide=id.g722ec9d5aa\_0\_0](https://docs.google.com/presentation/d/1N9Ygrpg0Z-1GFDhLMiG3jJV6B_yGqBk8tuRWO1ZicV8/edit#slide=id.g722ec9d5aa_0_0)
 * [https://x.com/samwcyo/status/1243998130108084224?lang=en](https://x.com/samwcyo/status/1243998130108084224?lang=en)
 * [https://www.youtube.com/watch?v=P5nVGsZ18G4](https://www.youtube.com/watch?v=P5nVGsZ18G4)

@@ -262,11 +262,11 @@ BatchQL was able to detect that both array-based batching and alias- based batch
 * **Manual review of SDL files**: Developers should look for circular relationships in the schema, or they can use GraphQL Voyager to visualize the schema.
 * Using Schema Definition Language Files: Example: [https://github.com/dolevf/Black-Hat-GraphQL/blob/master/ch05/sdl.graphql](https://github.com/dolevf/Black-Hat-GraphQL/blob/master/ch05/sdl.graphql)&#x20;
 
-<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * Using GraphQL Voyager:&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Object relationships in GraphQL Voyager</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Object relationships in GraphQL Voyager</p></figcaption></figure>
 
 * **InQL:**
 
