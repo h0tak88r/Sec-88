@@ -318,6 +318,27 @@ or Wherever  You enter a Passw
 * [default credentials](https://book.hacktricks.xyz/generic-methodologies-and-resources/brute-force#default-credentials)
 * \[Admin Approval Bypass]\(https://hackerone.com/reports/1861487)&#x20;
 
+### Improper Token Scope and Validation Allowing Unauthorized Access and Authentication Bypass Across Multiple API Endpoints
+
+{% embed url="https://web.archive.org/web/20240906203459/https://vojtechcekal.medium.com/12000-3-critical-0-click-tiktok-account-takeover-vulnerabilities-2fa-bypass-more-security-78554827cfc3" %}
+
+1. **TikTok Account Recovery Flaws**:
+   * TikTok’s recovery process allows users to search for accounts using usernames, revealing linked phone numbers or emails without authentication.
+   * Using Burp Suite and a script to bypass SSL pinning, Cekal intercepted API requests to endpoints like /tiktok\_username/, /safe\_verify/, and /available\_ways/. These endpoints provided sensitive account details, such as masked emails and linked third-party platforms, via a "not login token."
+2. **Not Login Token Issue**:
+   * The "not login token," generated during account recovery, was overly permissive, allowing access to sensitive actions like sending verification codes to linked phone numbers or emails without needing account credentials.
+3. **Account Takeover Vulnerability #1**:
+   * A flaw in the password reset process allowed bypassing the SMS verification code by omitting the codeparameter, enabling password changes for accounts with known phone numbers. Using the not login token, attackers could reset passwords by only knowing the username, provided a phone number was linked. This was quickly reported and patched.
+4. **OTP Bypass for Unlinking Phone Numbers/Emails**:
+   * Cekal found that the same "verify token" used for unlinking phone numbers or emails was generated during 2FA setup when entering a correct password. This allowed attackers with the account password to bypass OTP verification and unlink contact details, facilitating account takeover. TikTok marked this as a duplicate and has not patched it as of 2024.
+5. **Account Takeover Vulnerability #2**:
+   * Cekal exploited flaws in the email change process, where the /email/update/ endpoint failed to validate the verify token properly and accepted the not login token instead of a session ID. By spoofing verification codes and using a verify token from 2FA setup, he could link his email to any TikTok account, enabling password resets. Reported and patched in early 2024, earning a $12,000 bounty.
+6. **Account Takeover Vulnerability #3**:
+   * A more advanced exploit involved using the not login token and a misconfigured /verification\_manage/endpoint to obtain a valid verify token for any account without logging in. By sending a spoofed OTP and exploiting a 30-second validation window, Cekal could change an account’s email and bypass 2FA. This was patched but marked as a duplicate, with no bounty awarded due to a near-simultaneous report.
+
+\
+
+
 ## HackerOne Reports :
 
 1. [Potential pre-auth RCE on Twitter VPN](https://hackerone.com/reports/591295) to Twitter - 1157 upvotes, $20160
