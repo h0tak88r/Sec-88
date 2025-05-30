@@ -116,8 +116,10 @@ aws_user_pools_web_client_id
 ```
 
 *   [ ] **Leakage of Secrets like Identity Pool ID in JS Files:** Inspect client-side code or API responses for exposed Identity Pool IDs, then attempt to generate temporary AWS credentials then use tool to enumerate permissions associated with these credentials like [_**Enumerate-iam**_](https://github.com/andresriancho/enumerate-iam). \
-    \`\`\
-    `aws cognito-identity get-credentials-for-identity --identity-id <identity-pool-id>`\
+    \
+    `aws cognito-identity get-id --identity-pool-id '[IdentityPoolId]' --logins "cognito-idp.{region}.amazonaws.com/{UserPoolId}={idToken}"`\
+    \
+    `aws cognito-identity get-credentials-for-identity --identity-id '{IdentityId}' --logins "cognito-idp.{region}.amazonaws.com/{UserPoolId}={idToken}"`\
     **Reference**: [AWS Cognito Pitfalls: Default Settings Attackers Love](https://www.secforce.com/blog/aws-cognito-pitfalls-default-settings-attackers-love-and-you-should-know-about/)\
     **Reference**: [Exploit Two of the Most Common Vulnerabilities in Amazon Cognito with CloudGoat](https://trustoncloud.com/blog/exploit-two-of-the-most-common-vulnerabilities-in-amazon-cognito-with-cloudgoat/)\
     **Reference**: [AWS Cognito Pitfalls: Default Settings Attackers Love](https://www.secforce.com/blog/aws-cognito-pitfalls-default-settings-attackers-love-and-you-should-know-about/)\
