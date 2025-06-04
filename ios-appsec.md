@@ -4,10 +4,6 @@ icon: apple
 
 # IOS-AppSec
 
-From:
-
-{% embed url="https://habr.com/ru/companies/swordfish_security/articles/660179/#ios" %}
-
 Analysis Tools
 
 Everything that can be useful in analyzing applications: various libraries, modules to find vulnerabilities, whole frameworks and systems.
@@ -114,6 +110,7 @@ In this block - a variety of articles and materials on iOS. Russian-speaking and
 * [Hacking and implementing your code into someone else’s iOS application](https://habr.com/ru/company/jugru/blog/570220/)
 * [iOS App security: guide for beginners](https://habr.com/ru/company/wrike/blog/544754/)
 * [Just for fun: How much does iOS live to Jailbreak](https://habr.com/ru/company/swordfish_security/blog/525772/)
+* [https://www.allysonomalley.com](https://www.allysonomalley.com)
 
 </details>
 
@@ -202,4 +199,12 @@ In this block - a variety of articles and materials on iOS. Russian-speaking and
 * [NowSecure Academy](https://academy.nowsecure.com/)
 
 </details>
+
+#### Collected Resources
+
+{% embed url="https://habr.com/ru/companies/swordfish_security/articles/660179/#ios" %}
+
+#### Checklists
+
+{% embed url="https://book.hacktricks.wiki/en/mobile-pentesting/ios-pentesting-checklist.html" %}
 
