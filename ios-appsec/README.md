@@ -104,7 +104,8 @@ In this block - a variety of articles and materials on iOS. Russian-speaking and
 
 <summary>References</summary>
 
-* [Your flashlight can send SMS](https://habr.com/ru/company/pt/blog/155937/)
+* [Your flashlight can send SMS](https://habr.com/ru/company/pt/blog/155937/)\\
+* [https://medium.com/@sharp488/configure-xcode-ios-simulator-burpsuite-for-pentesting-on-macos-9abb8e7ab957](https://medium.com/@sharp488/configure-xcode-ios-simulator-burpsuite-for-pentesting-on-macos-9abb8e7ab957)
 * [The iPhone boot process. Part 1: Boot ROM](https://habr.com/ru/post/556582/)
 * [Guide to reverse iOS app on the example of ExpressVPN](https://habr.com/ru/post/569034/)
 * [Hacking and implementing your code into someone else’s iOS application](https://habr.com/ru/company/jugru/blog/570220/)
@@ -199,6 +200,11 @@ In this block - a variety of articles and materials on iOS. Russian-speaking and
 * [NowSecure Academy](https://academy.nowsecure.com/)
 
 </details>
+
+#### Courses
+
+* [https://www.mobilehackinglab.com/course/free-ios-application-security-course](https://www.mobilehackinglab.com/course/free-ios-application-security-course)
+* [https://www.youtube.com/playlist?list=PLwk2o8vr7P8Hu7xRPd2n8qxA3w8nP5OQP](https://www.youtube.com/playlist?list=PLwk2o8vr7P8Hu7xRPd2n8qxA3w8nP5OQP)
 
 #### Collected Resources
 

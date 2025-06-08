@@ -255,4 +255,5 @@
   * [Decoding Server Behavior: The Key to Mass Account Takeover](write-ups/decoding-server-behavior-the-key-to-mass-account-takeover.md)
   * [Exploiting JSON-Based CSRF: The Hidden Threat in Profile Management](write-ups/exploiting-json-based-csrf-the-hidden-threat-in-profile-management.md)
   * [How We Turned a Medium XSS into a High Bounty by Bypassing HttpOnly Cookie](write-ups/how-we-turned-a-medium-xss-into-a-high-bounty-by-bypassing-httponly-cookie.md)
-* [IOS-AppSec](ios-appsec.md)
+* [IOS-AppSec](ios-appsec/README.md)
+  * [Understanding iOS Security Basics](ios-appsec/understanding-ios-security-basics.md)
