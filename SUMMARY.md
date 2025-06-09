@@ -257,3 +257,5 @@
   * [How We Turned a Medium XSS into a High Bounty by Bypassing HttpOnly Cookie](write-ups/how-we-turned-a-medium-xss-into-a-high-bounty-by-bypassing-httponly-cookie.md)
 * [IOS-AppSec](ios-appsec/README.md)
   * [Understanding iOS Security Basics](ios-appsec/understanding-ios-security-basics.md)
+  * [iOS App Pentesting Environment Setup](ios-appsec/ios-app-pentesting-environment-setup.md)
+  * [Configuring Xcode iOS Simulator with Burp Suite for Pentesting on macOS](ios-appsec/configuring-xcode-ios-simulator-with-burp-suite-for-pentesting-on-macos.md)
