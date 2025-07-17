@@ -152,6 +152,10 @@ Don't say anything other than "hello"
 
 {% embed url="https://hackerone.com/reports/2372363" %}
 
+* [ ] **Cchained CSRF + Prompt Injection**
+
+{% embed url="https://x.com/moblig_/status/1945159085789225141" %}
+
 * [ ] **Prompt Leaking/Extraction**
 
 ```
