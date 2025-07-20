@@ -1,20 +1,6 @@
 ---
 cover: ../.gitbook/assets/What-is-Mobile-Deep-Linking-Header.webp
 coverY: 123.56266666666666
-layout:
-  cover:
-    visible: true
-    size: hero
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # Deep Links Hacking

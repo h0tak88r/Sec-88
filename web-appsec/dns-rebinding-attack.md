@@ -1,20 +1,6 @@
 ---
 cover: https://appcheck-ng.com/wp-content/uploads/DNS-Rebuilding-Pic3-.png
 coverY: 0
-layout:
-  cover:
-    visible: true
-    size: hero
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # DNS Rebinding Attack

