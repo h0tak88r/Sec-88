@@ -27,7 +27,7 @@
   * [Subdomain Enumeration](web-appsec/web-app-security.md)
   * [Fingerprinting](web-appsec/fingerprinting.md)
   * [Dorking](web-appsec/information-disclosure.md)
-  * [XSS-HTML Injection](web-appsec/xss_html-injection/README.md)
+  * [XSS-HTML Injection](web-appsec/xss_html-injection.md)
     * [Self-XSS Bypass](web-appsec/xss_html-injection/self-xss-bypass.md)
   * [Improper Authentication](web-appsec/improper-authentication/README.md)
     * [JWT Security](web-appsec/improper-authentication/jwt-security.md)

@@ -1,5 +1,9 @@
 # Self-XSS Bypass
 
+### CSRF In Login
+
+* Search for csrf in login and now attacker force the victim to login ton his account be affected with the js execution
+
 ### Using fetchLater()&#x20;
 
 {% embed url="https://x.com/ctbbpodcast/status/1940085637912186998" %}
