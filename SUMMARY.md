@@ -97,6 +97,7 @@
   * [Bug Bounty Platforms/Programs](web-appsec/bug-bounty-platforms-programs.md)
   * [DNS Dangling / NS Takeover](web-appsec/dns-dangling-ns-takeover.md)
   * [X-Correlation Injection](web-appsec/x-correlation-injection.md)
+  * [DoS - Exploiting WAF Request Size Limits](web-appsec/dos-exploiting-waf-request-size-limits.md)
 * [✉️ API-Sec](api-sec/README.md)
   * [GraphQL API Security Testing](api-sec/graphql-api-security-testing/README.md)
     * [The Basics](api-sec/graphql-api-security-testing/the-basics.md)
