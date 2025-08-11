@@ -141,6 +141,7 @@
       * [Pending Intents](android-appsec/android-app-fundamentals/android-app-components/pending-intents.md)
   * [Android App Components Security Cheatsheet](android-appsec/android-app-components-security-cheatsheet.md)
   * [Android App Pentesting Checklist](android-appsec/apk-pentesting-checklist.md)
+  * [SSL Pinning Bypass](android-appsec/ssl-pinning-bypass.md)
   * [How To Get APK file for application](android-appsec/how-to-get-apk-file-for-application.md)
   * [ADB Commands](android-appsec/adb-commands.md)
   * [APK structure](android-appsec/apk-structure.md)
