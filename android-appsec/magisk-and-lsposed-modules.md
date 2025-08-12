@@ -1,4 +1,4 @@
-# Bypassing App Protections with Magisk & LSPosed Modules
+# Magisk & LSPosed Modules
 
 ### **1. Magisk with Zygisk Enabled**
 

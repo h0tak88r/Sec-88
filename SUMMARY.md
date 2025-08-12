@@ -165,7 +165,7 @@
     * [Hacking InsecureBankv2 App](android-appsec/hacking-labs/hacking-insecurebankv2-app.md)
   * [Frida Cheat Sheet](android-appsec/frida-cheat-sheet.md)
   * [Genymotion - Proxying Android App Traffic Through Burp Suite](android-appsec/genymotion-proxying-android-app-traffic-through-burp-suite.md)
-  * [Bypassing App Protections with Magisk & LSPosed Modules](android-appsec/bypassing-app-protections-with-magisk-and-lsposed-modules.md)
+  * [Magisk & LSPosed Modules](android-appsec/magisk-and-lsposed-modules.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)
