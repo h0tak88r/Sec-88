@@ -104,6 +104,7 @@
   * [Nuxt CP - DOS](web-appsec/nuxt-cp-dos.md)
   * [Next.js Middleware Bypass](web-appsec/next.js-middleware-bypass.md)
   * [Exploiting Parser Flaws for Access Bypasses](web-appsec/exploiting-parser-flaws-for-access-bypasses.md)
+  * [Session Puzzling Attack](web-appsec/session-puzzling-attack.md)
 * [✉️ API-Sec](api-sec/README.md)
   * [GraphQL API Security Testing](api-sec/graphql-api-security-testing/README.md)
     * [The Basics](api-sec/graphql-api-security-testing/the-basics.md)
