@@ -580,6 +580,8 @@ window.addEventListener('oauth', function(Token) {alert(Token.data.name);
 
 {% embed url="https://hackerone.com/reports/821896" %}
 
+***
+
 ### ATO Using OKTA SSO Misconfiguration
 
 * Suppose `victim@gmail.com` is a member of `VictimOrganization` on _target.com_.
@@ -590,3 +592,21 @@ window.addEventListener('oauth', function(Token) {alert(Token.data.name);
 * Since `victim@gmail.com` is also a member of `VictimOrganization` , the attacker is able to switch organizations within _target.com_, gaining unauthorized access to sensitive data and functionality.
 
 {% embed url="https://rikeshbaniya.medium.com/account-takeover-using-sso-logins-fa35f28a358b" %}
+
+***
+
+### **Token Reuse Attack**
+
+{% embed url="https://salt.security/blog/oh-auth-abusing-oauth-to-take-over-millions-of-accounts" %}
+
+1. **Find a target that supports social login**\
+   Example: “Login with Google” or “Login with Facebook”.
+2. **Get a valid OAuth access token** from the provider (e.g., Google)
+   * Do this by signing into _any_ other app that also uses the same OAuth provider.
+   * Save the token (you can catch it in Burp/ZAP or browser devtools).
+3. **Replay that token against the target**
+   * Instead of letting Target.com fetch its own token, intercept the login request.
+   * Replace the token in the request with the one from another app.
+4. **Check the response**
+   * If the target accepts the token and logs you in → it’s vulnerable.
+   * If it rejects it with “invalid token” → it’s safe.
