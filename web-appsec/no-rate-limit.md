@@ -4,8 +4,6 @@ description: 'CWE-400: Uncontrolled Resource Consumption'
 
 # No Rate Limit
 
-
-
 * [ ] [Rate-Limit-Bypass](https://book.hacktricks.xyz/pentesting-web/rate-limit-bypass)
 * [ ] add `%00` at the end of mail in intruder whenever error 429 comes Or `%2e`,`%0d` ,`%0a`
 * [ ] add `X-Forwarded-For: 127.0.0.1`
@@ -20,3 +18,5 @@ description: 'CWE-400: Uncontrolled Resource Consumption'
 * [ ] Server Security Misconfiguration > No Rate Limiting on Form > Email-Triggering
 * [ ] Server Security Misconfiguration > No Rate Limiting on Form > SMS-Triggering **P5**
 * [ ] Server Security Misconfiguration > No Rate Limiting on Form > Change Password
+* [ ] Remove the `user-agent` header -> [https://medium.com/@mrxdevil404/how-i-bypassed-rate-limits-to-trigger-account-takeovers-sms-flooding-and-impersonation-9ed42ca1501](https://medium.com/@mrxdevil404/how-i-bypassed-rate-limits-to-trigger-account-takeovers-sms-flooding-and-impersonation-9ed42ca1501f)
+* [ ] Modifying the phone number parameter on each request—effectively submitting unique numbers—the attacker bypassed rate-limiting -> [https://medium.com/@mrxdevil404/how-i-bypassed-rate-limits-to-trigger-account-takeovers-sms-flooding-and-impersonation-9ed42ca1501f](https://medium.com/@mrxdevil404/how-i-bypassed-rate-limits-to-trigger-account-takeovers-sms-flooding-and-impersonation-9ed42ca1501f)
