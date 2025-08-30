@@ -127,6 +127,21 @@ aws_user_pools_web_client_id
 
     <figure><img src="../.gitbook/assets/image (322).png" alt=""><figcaption><p>js file leak the AWS credentials ( User Pool ID, User Pool ID, Region)</p></figcaption></figure>
 
+### Cognito + Google OAUTH
+
+{% embed url="https://boom-stinger-c76.notion.site/Authentication-Bypass-17853b6a0d6e80f8aea8d59e9e5dc874" %}
+
+An application uses **Google OAuth** and **Amazon Cognito** together. Here’s the vulnerable flow:
+
+1. **Login via Google**\
+   The user signs in via Google. Cognito returns tokens including an **IdToken** that contains the Google `user_id` (a unique identifier linked to the user's Google account).
+2. **Account Linking**\
+   The app calls a `/v1/user/connect` endpoint to link that `user_id` with the user's email in the app, using the IdToken of course.
+3. **Changing Email via Cognito**\
+   When a user updates their email in the app, Cognito processes the change (via `UpdateUserAttributes`) but marks the email as _unverified_.
+4. **Token Refresh Leak**\
+   If the user then refreshes their token using their **RefreshToken**, Cognito issues a new IdToken that now includes the _unverified_ email—because it's embedded directly in the token regardless of verification status.
+
 ### How to Use These Test Cases
 
 To execute these test cases, you’ll need tools like the AWS CLI, Burp Suite for intercepting requests, or enumeration tools like `enumerate-iam` and `ScoutSuite`. Here’s a quick guide to get started:
