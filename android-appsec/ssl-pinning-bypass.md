@@ -2,28 +2,15 @@
 
 {% embed url="https://redhuntlabs.com/wp-content/uploads/2023/07/Ultimate-Guide-to-SSL-Pinning-Bypass-RedHunt-Labs.pdf" %}
 
-### **Bypassing SSL pinning using Xposed \[** JustTrustMe Module **]**
+{% embed url="https://mas.owasp.org/MASTG/techniques/android/MASTG-TECH-0012/" %}
 
-to analyze the network traffic of an Android application is very much important from a penetration tester point of view to find vulnerable endpoints and functionality.
+### Xposed
 
-Xposed framework “JustTrustMe”  module: To bypass the spinning Xposed framework “JustTrustMe”  module is used.it helps in disabling the SSL certificate checking.&#x20;
+**Xposed** is a framework for Android that lets you change how apps and the system behave **without modifying the APKs or flashing a custom ROM**.
 
-**Step 1**: Download JustTrustMe apk  [here](https://github.com/Fuzion24/JustTrustMe/releases/tag/v.2)
-
-**Step 2**: Goto downloaded the folder of apk and open CLI.
-
-Run “adb install JustTrustMe.apk” and accept the allow option in Mobile at the same time.
-
-**Step 3**: Open Xposed, go to modules and checkmark “JustTrustMe”
-
-‍
-
-<figure><img src="https://cdn.prod.website-files.com/624cc1e34dac8ecb3040000a/624cc60f71dbe707d05ba5bc_004%20(1).png" alt=""><figcaption><p>JustTrustMe Module enabled</p></figcaption></figure>
-
-‍
-
-**Step 4**: Reboot your device.\
-Now you will be able to capture the application traffic using the proxy.
+* [https://github.com/ViRb3/TrustMeAlready](https://github.com/ViRb3/TrustMeAlready)
+* [**https://github.com/Fuzion24/JustTrustMe**](https://github.com/Fuzion24/JustTrustMe)
+* [https://github.com/ac-pm/SSLUnpinning\_Xposed](https://github.com/ac-pm/SSLUnpinning_Xposed)&#x20;
 
 ### Frida
 
@@ -55,12 +42,10 @@ objection explore --startup-command 'android sslpinning disable'
 
 ### Frida Gadget
 
-
-
 You can automate this by using the above Objection command:&#x20;
 
 ```
- objection patchapk s package.apk
+objection patchapk -s package.apk
 ```
 
 Else, you can follow the manual way of patching the apk [described in this guide](https://koz.io/using-frida-on-android-without-root/).&#x20;
@@ -83,7 +68,3 @@ Install the patched APK on an Android device and open it. The app waits till Fri
 ### Inspeckage
 
 {% embed url="https://github.com/ac-pm/Inspeckage" %}
-
-### SSL Unpinning
-
-{% embed url="https://github.com/ac-pm/SSLUnpinning_Xposed" %}
