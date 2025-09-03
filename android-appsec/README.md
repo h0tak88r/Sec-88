@@ -342,6 +342,7 @@ This is the largest section of all. Here are articles on various topics related 
 * [Pentesting Non-Proxy Aware Mobile Applications Without Root/Jailbreak](https://medium.com/@meshal_/pentesting-non-proxy-aware-mobile-applications-65161f62a965)
 * [2 Click Remote Code execution in Evernote Android](https://hackerone.com/reports/1377748)
 * [Android 13 deep dive: Every change up to DP2, documented](https://blog.esper.io/android-13-deep-dive/)
+* [https://valuementor.com/blogs/my-fav-7-methods-for-bypassing-android-root-detection](https://valuementor.com/blogs/my-fav-7-methods-for-bypassing-android-root-detection)
 
 </details>
 
