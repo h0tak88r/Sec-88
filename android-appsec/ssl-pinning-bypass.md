@@ -68,3 +68,40 @@ Install the patched APK on an Android device and open it. The app waits till Fri
 ### Inspeckage
 
 {% embed url="https://github.com/ac-pm/Inspeckage" %}
+
+### Flutter Application
+
+* ProxyDroid for global tunneling
+* Frida scripts to bypass SSL pinning
+* reFlutter
+* Modify APK
+* [Diable TLS Verification](https://github.com/NVISOsecurity/disable-flutter-tls-verification) -> A Frida script that disables Flutter's TLS verification  -> [Read Here](https://wahaz.medium.com/finally-ssl-pinning-for-flutter-bypassed-after-frustration-4573e15ed18e)
+
+### Code to Add in “main.dart” <a href="#id-7c81" id="id-7c81"></a>
+
+```
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    if (Platform.isAndroid) {
+      return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+    }
+
+    return super.createHttpClient(context)
+      ..findProxy = (uri) {
+        return "PROXY IP:PORT";
+      }
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
+}
+```
+
+### Modifying “`main()"`: <a href="#id-5d7c" id="id-5d7c"></a>
+
+```
+HttpOverrides.global = MyHttpOverrides();
+```
+
+With this setup, I could run ProxyDroid and intercept the application’s traffic without needing an SSL pinning bypass.
+
+{% embed url="https://medium.com/@k3r0/how-i-discovered-a-0-click-account-takeover-ato-vulnerability-in-a-flutter-application-74c7a5c4dc70" %}

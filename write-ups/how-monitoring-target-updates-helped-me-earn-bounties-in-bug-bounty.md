@@ -51,11 +51,11 @@ This automation meant I could react immediately when something new went live.
 
 The results were clear: I started receiving Discord alerts about new features **before the program mentioned them on H1**. Testing these early features often led me to discover vulnerabilities before other researchers noticed them.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 In fact, several of my successful reports and bounties came directly from this strategy. By being among the first to test a new feature, I dramatically increased my chances of finding impactful bugs.
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
