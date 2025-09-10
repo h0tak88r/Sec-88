@@ -61,8 +61,6 @@ In fact, several of my successful reports and bounties came directly from this s
 
 <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
-
 ### Final Thoughts
 
 If you’re serious about bug bounty, don’t just wait for H1 notifications. Proactively monitoring product updates gives you an edge over other researchers. Every target is different—some publish updates in release notes, others in blogs, others in videos or changelogs. Once you figure out where your target announces features, you can build a monitoring workflow that keeps you ahead of the game.
