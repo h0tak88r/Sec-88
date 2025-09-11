@@ -274,3 +274,4 @@
   * [Understanding iOS Security Basics](ios-appsec/understanding-ios-security-basics.md)
   * [iOS App Pentesting Environment Setup](ios-appsec/ios-app-pentesting-environment-setup.md)
   * [Configuring Xcode iOS Simulator with Burp Suite for Pentesting on macOS](ios-appsec/configuring-xcode-ios-simulator-with-burp-suite-for-pentesting-on-macos.md)
+  * [How to Grep/Install IPA](ios-appsec/how-to-grep-install-ipa.md)
