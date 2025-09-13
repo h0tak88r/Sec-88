@@ -1,8 +1,8 @@
-# How To Get APK file for application
+# Get APK for Target
 
 Provided By program&#x20;
 
-* via Google drive orhosted by programs Themselves
+* via Google drive or hosted by programs Themselves
 
 Provided Package Name&#x20;
 
@@ -14,4 +14,6 @@ Provided Package Name&#x20;
 * Chrome Extention -> APK Downloader
 * [https://apkgk.com/APK-Downloader](https://apkgk.com/APK-Downloader)
 * [https://apps.evozi.com/apk-downloader/](https://apps.evozi.com/apk-downloader/)
-*
+* Aurora Store (Android app)
+* Aurora CLI (keygenqt)
+* [https://github.com/EFForg/apkeep](https://github.com/EFForg/apkeep)
