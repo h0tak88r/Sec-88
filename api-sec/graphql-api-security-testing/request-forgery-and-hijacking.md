@@ -2,7 +2,7 @@
 
 **Cross-Site Request Forgery (CSRF)**
 
-<figure><img src="../../.gitbook/assets/image (5) (1).png" alt=""><figcaption><p>The flow of a CSRF attack</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption><p>The flow of a CSRF attack</p></figcaption></figure>
 
 * CSRF attacks target clients by forcing them to perform unwanted actions.
 * These actions are usually state-changing, such as updating a user's email or password, transferring money, or disabling security settings.
@@ -76,7 +76,7 @@ async function csrf() {
 
 
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 
 #### **Testing for GET-Based Vulnerabilities**
 

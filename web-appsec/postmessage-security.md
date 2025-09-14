@@ -26,7 +26,7 @@ These three components collectively form the origin for this page. For any other
 
 With an understanding of the Same Origin Policy, it becomes clear why mechanisms like **postMessage** were introduced. These allow for controlled, secure communication between different origins when necessary.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## The JavaScript postMessage() function
 
@@ -42,7 +42,7 @@ postMessage(message, targetOrigin, transfer);
 * **targetOrigin:** Specifies the origin that the message is intended for. This should be a specific origin for security reasons, though a wildcard `*` can be used to send the message to any origin.
 * **transfer:** (Optional) A sequence of Transferable Objects. These are transferred with the message but are not copied.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Syntax of `postMessage()`  ->** Recieving Windo&#x77;**:**
 
@@ -100,7 +100,7 @@ To exploit `postMessage()` vulnerabilities, you must first determine whether the
 
     * The "Global Listener" feature in the "Sources" pane of Developer Tools can be used to identify the use of `postMessage()`. By opening the Global Listener and clicking on "messages," you can view the message handlers that have been set up.
 
-    <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 4. **Using Posta:**
    * Posta is a tool designed for researching Cross-document Messaging communication. It allows you to track, explore, and exploit `postMessage()` vulnerabilities. Posta includes features like replaying messages sent between windows in any attached browser, providing valuable insights into the communication flow.
 5. **Using PMHook:**
@@ -181,26 +181,26 @@ In this scenario, we'll explore how a vulnerability in the `postMessage()` imple
 
     * The application has a "Change Password" feature that, when clicked, opens a child window for the user to update their password.
 
-    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 2.  **Password Update Process:**
 
     * The user enters the new password and confirmation, then clicks "Save."
     * Upon saving, a message is displayed on the parent window indicating that the password was updated successfully.
 
-    <figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 3.  **Event Listener in the Parent Window:**
 
     * The parent window contains an `addEventListener` that listens for the `message` event. This event is triggered whenever the parent window receives a message.
     * The event listener function updates the HTML content of an element with `id="displayMessage"` upon receiving a message.
 
-    <figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 4.  **Source Code of the Child Window:**
 
     * The child window sends an XHR request to update the password. Upon success, the server responds with a `200` status code and the message "Password update Successfull!".
     * The response is passed to the `sendMessage` function.
     * The `sendMessage` function uses `postMessage()` to send the success message to the parent window, identifying the parent via `window.opener`.
 
-    <figure><img src="../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 **Vulnerability Analysis**
 
