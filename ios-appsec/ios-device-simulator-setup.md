@@ -45,7 +45,7 @@
 ### **Installing Apps**
 
 * **Via Xcode**: Compile & run directly
-* **From IPA**: Use `ideviceinstaller` (libimobiledevice) or Cydia Impactor
+* **From IPA**: Use `ideviceinstaller` (libimobiledevice) or Cydia Impactor or xcode
 * **From App Store**: Direct install (limited debug features)
 
 ***

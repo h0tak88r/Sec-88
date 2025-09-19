@@ -172,6 +172,8 @@
   * [iOS App Pentesting Environment Setup](ios-appsec/ios-app-pentesting-environment-setup.md)
   * [Configuring Xcode iOS Simulator with Burp Suite for Pentesting on macOS](ios-appsec/configuring-xcode-ios-simulator-with-burp-suite-for-pentesting-on-macos.md)
   * [How to Grep/Install IPA](ios-appsec/how-to-grep-install-ipa.md)
+  * [Common SSH and libimobiledevice Commands](ios-appsec/common-ssh-and-libimobiledevice-commands.md)
+  * [Intercepting Network Traffic with Burp Suite](ios-appsec/intercepting-network-traffic-with-burp-suite.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)
