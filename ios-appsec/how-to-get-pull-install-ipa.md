@@ -1,4 +1,4 @@
-# How to Grep/Install IPA
+# How to GET/PULL/Install IPA
 
 #### 1) Install `ipatool` (macOS, easiest)
 
@@ -81,3 +81,25 @@ ipatool download -i 1624045881 -o ./FlinkWorkforce.ipa --purchase
 * **Via Xcode**: Compile & run directly
 * **From IPA**: Use `ideviceinstaller` (libimobiledevice) or Cydia Impactor or xcode
 * **From App Store**: Direct install (limited debug features)
+* **Apple Configurator**: [https://apps.apple.com/eg/app/apple-configurator/id1037126344?mt=12](https://apps.apple.com/eg/app/apple-configurator/id1037126344?mt=12)
+
+***
+
+### Pulling an IPA File from a Jailbroken iOS Device <a href="#el_1726086802128_342" id="el_1726086802128_342"></a>
+
+```bash
+# connect to the device
+ssh root@10.11.1.1
+# list all installed app directories
+find /var/containers/Bundle/Application/ -name "*.app"
+# Packaging the App into an IPA
+cd /tmp/
+mkdir Payload
+cp -r /var/containers/Bundle/Application/70961402-4C6E-4FF6-B316-59D3ED83828F/DVIA-v2.app /tmp/Payload/
+# Compress the Payload Directory into an IPA
+cd /tmp/
+zip -r DVIA-v2.ipa Payload
+# Transferring the IPA to Your Computer
+rm -rf /tmp/Payload /tmp/DVIA-v2.ipa
+```
+

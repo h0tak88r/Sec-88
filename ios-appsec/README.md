@@ -4,7 +4,11 @@ icon: apple
 
 # IOS-AppSec
 
-Analysis Tools
+{% embed url="https://github.com/prateek147/DVIA-v2" %}
+
+{% embed url="https://www.mobilehackinglab.com/course/free-ios-application-security-course" %}
+
+**Analysis Tools**
 
 Everything that can be useful in analyzing applications: various libraries, modules to find vulnerabilities, whole frameworks and systems.
 
