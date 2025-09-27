@@ -175,6 +175,7 @@
   * [Common SSH and libimobiledevice Commands](ios-appsec/common-ssh-and-libimobiledevice-commands.md)
   * [Intercepting Network Traffic with Burp Suite](ios-appsec/intercepting-network-traffic-with-burp-suite.md)
   * [Automatic Static Analysis](ios-appsec/automatic-static-analysis.md)
+  * [Reverse Engineering](ios-appsec/reverse-engineering.md)
 * [📶 Network-Sec](network-sec/README.md)
   * [Networking Fundamentals](network-sec/networking-fundamentals.md)
   * [Open Ports Security Testing](network-sec/open-ports-security-testing.md)
