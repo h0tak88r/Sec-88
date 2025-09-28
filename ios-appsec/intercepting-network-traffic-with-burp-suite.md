@@ -125,7 +125,7 @@ searchSwiftExports(className, methodName);
 
 * #### Manipulating Return Values: This script changes the return value of **isJailbroken** in **JailbreakDetectionViewController** to always return **false**. <a href="#el_1726132029737_1311" id="el_1726132029737_1311"></a>
 
-```
+```bash
 var myMethod = Module.findExportByName(null, "$s7DVIA_v232JailbreakDetectionViewControllerC12isJailbrokenSbyF");
 
 if (myMethod) {
