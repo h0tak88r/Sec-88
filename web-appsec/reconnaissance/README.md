@@ -178,7 +178,7 @@ If you receive a "MATCH" output, there's a strong likelihood that you've success
 
 ## Fuzzing Tips
 
-````
+````http
 Use Some Hash's And Encoding Algorithm's (MD5 , SHA-1 , SHA-256 , base32 , base64 , etc . . . )
 From Most Common WordList Content Discovery With Common Extensions , Say :
 https://example*com/<HashValue>.php
@@ -212,6 +212,90 @@ etc . . .
 --
 ````
 
-
-
 {% embed url="https://www.facebook.com/100085121092587/posts/pfbid0du1bMhQZwbqfNNQy1u9NGqQHrQoiLJhLBMGLCAjmSdqApWDHPoTKzH3ZwKpaZXrVl/?app=fbl" %}
+
+### FFuf Tips
+
+{% embed url="https://github.com/reewardius/bbFuzzing.txt/tree/main?tab=readme-ov-file" %}
+
+```bash
+> ffuf -u target.com/FUZZ -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ -H "Host: 127.0.0.1" -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ -H "Host: localhost" -w bbFuzzing.txt
+
+> ffuf -u target.com/FUZZ.example -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ.sample -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ.template -w bbFuzzing.txt
+
+> ffuf -u target.com/FUZZ/ -w bbFuzzing.txt
+> ffuf -u target.com/%3B/FUZZ/ -w bbFuzzing.txt
+> ffuf -u target.com/..%3B/FUZZ/ -w bbFuzzing.txt
+
+> ffuf -u target.com/FUZZ..%2f -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ%09 -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ%23 -w bbFuzzing.txt
+
+> ffuf -u target.com/FUZZ..%00 -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ;%09 -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ;%09.. -w bbFuzzing.txt
+
+> ffuf -u target.com/FUZZ;%09..; -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ;%2f.. -w bbFuzzing.txt
+> ffuf -u target.com/.FUZZ -w bbFuzzing.txt
+
+> ffuf -u target.com/%0AFUZZ -w bbFuzzing.txt
+> ffuf -u target.com/%0D%0AFUZZ -w bbFuzzing.txt
+> ffuf -u target.com/%0DFUZZ -w bbFuzzing.txt
+
+> ffuf -u target.com/%2e/FUZZ/ -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ%20 -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ%2520 -w bbFuzzing.txt
+
+> ffuf -u target.com/%u002e%u002e/%u002e%u002e/FUZZ -w bbFuzzing.txt
+> ffuf -u target.com/%2e%2e%2f/FUZZ/ -w bbFuzzing.txt
+> ffuf -u target.com/%2EFUZZ -w bbFuzzing.txt
+
+> ffuf -u target.com/FUZZ.old -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ?.css -w fuzzing.txt
+> ffuf -u target.com/FUZZ?.js -w fuzzing.txt
+
+> ffuf -u target.com/_FUZZ -w bbFuzzing.tx
+> ffuf -u target.com/FUZZ_ -w bbFuzzing.txt
+> ffuf -u target.com/_FUZZ_ -w bbFuzzing.txt
+
+> ffuf -u target.com/..;/FUZZ/ -w bbFuzzing.txt
+> ffuf -u target.com/..;/..;/FUZZ/ -w bbFuzzing.txt
+> ffuf -u target.com/../FUZZ -w bbFuzzing.txt
+
+> ffuf -u target.com/-FUZZ -w bbFuzzing.txt
+> ffuf -u target.com/~FUZZ -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ..;/ -w bbFuzzing.txt
+
+> ffuf -u target.com/FUZZ;/ -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ# -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ/~ -w bbFuzzing.txt
+
+> ffuf -u target.com/!FUZZ -w bbFuzzing.txt
+> ffuf -u target.com/#/FUZZ/ -w bbFuzzing.txt
+> ffuf -u target.com/-/FUZZ/ -w bbFuzzing.txt
+
+> ffuf -u target.com/FUZZ~ -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ/.git/config -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ/.env -w bbFuzzing.txt
+
+> ffuf -u target.com/FUZZ. -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ/* -w bbFuzzing.txt
+> ffuf -u target.com/FUZZ/? -w bbFuzzing.txt
+
+> ffuf -u target.com/FUZZ -recursive -w fuzzing.txt
+> ffuf -u target.com/FUZZ -recursive -w fuzzing.txt -e .asp,.aspx,.ashx,.ash,.jsp,.jspx,.php,.js,.dll,.json,.bak,.bkp,.conf,.txt,.py,.zip,.tar.gz,.tar,.7z,.old
+
+Any special occasions (cookieless) - IIS + ASP
+> ffuf -u target.com/(A(ABCD))/FUZZ
+> ffuf -u target.com/(ABCD)/FUZZ
+> ffuf -u target.com/(A(XXXXXXXX)F(YYYYYYYY))/FUZZ
+> ffuf -u target.com/FUZZ/(S(X))/
+> ffuf -u target.com/bin::$INDEX_ALLOCATION/FUZZ
+> ffuf -u target.com/bin::$INDEX_ALLOCATION/FUZZ.dll
+> ffuf -u target.com/bin::$INDEX_ALLOCATION/FUZZ -e .asp,.aspx,.ashx,.ash,.dll
+```
