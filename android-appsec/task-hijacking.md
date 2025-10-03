@@ -225,7 +225,7 @@ To mitigate this vulnerability, developers should:
 2. **Use `singleInstance` launch mode** if an activity should not share tasks.
 3. **Override `onBackPressed()`** to prevent unexpected task switching.
 
-<figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Resources
 

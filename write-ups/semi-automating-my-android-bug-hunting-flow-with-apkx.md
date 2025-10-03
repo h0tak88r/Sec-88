@@ -83,21 +83,21 @@ I decided to build **apkX**, a comprehensive Android security analysis tool that
 
 1. **Automated APK Acquisition:** apkX uses [apkeep](https://github.com/EFForg/apkeep) for downloading APK files from various sources
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 After Providing the Package Name and Initializing the scan you can download hte APK by one click&#x20;
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 1. **Static Regex Based Scanning:** Regex Based Secrets and vulnerability Scanning With Differrent Report Formats (HTML - Json) So you can integrate it with other tools easily
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 1. **Manifest Scanning and Export:** Regex Based Manifest Scan and One-Click Downloade Manifest if you still prefer manual approuch or if you wanna take a close look
 
 <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 1. **HTTPS Introspection:** apkX Uses [apk-mitm](https://github.com/niklashigi/apk-mitm) to automatically prepares Android APK files for HTTPS inspection
 
