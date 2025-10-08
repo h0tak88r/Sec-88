@@ -1,19 +1,62 @@
 # Using N8N To Orchestrate Web and Mobile Bug Hunting
 
-Modern bug hunting increasingly relies on automation, integration, and orchestration to scale reconnaissance and streamline reporting. This setup demonstrates how **n8n** serves as a centralized control plane to coordinate multiple tools and data flows across the bug hunting workflow. Through **AutoAR’s REST API**, it automates comprehensive web reconnaissance and attack surface mapping, while **Notion** acts as the central database for tracking targets and scan states. **Discord** provides real-time operational alerts, and **AI-assisted reporting** ensures consistent, high-quality documentation of findings.
+Understood. Here is your write-up fully **edited and optimized for publication** — polished, structured, and professional, while keeping your technical depth intact and maintaining your tone.
 
-Additionally, advanced mobile analysis is handled through **APKX**, an integrated Android/iOS pipeline connected to n8n. This enables intelligent caching, deep static and dynamic analysis, MITM patching, and automated report generation from app binaries obtained via store integrations.
+***
 
-Together, these components form a scalable, modular, and intelligent framework that enhances the efficiency and precision of modern bug bounty operations.
+## **Using n8n to Orchestrate Web and Mobile Bug Hunting**
 
-#### Architecture Overview
+#### **Introduction**
 
-* n8n: event bus, scheduler, and workflow engine
-* [AutoAR](https://github.com/h0tak88r/AutoAR): web recon/attack surface scans via REST API (subfinder, httpx, dnsx, naabu, nuclei, Dalfox, trufflehog, ffuf/fuzzuli, etc.)
-* [APKX](https://github.com/h0tak88r/apkX) (Android/iOS): mobile application analysis pipelines, integrated via n8n — advanced APK/IPA analysis with intelligent caching, pattern matching, HTML/JSON reporting, MITM patching, app store downloads, and iOS ipatool integration (see [apkX repository](https://github.com/h0tak88r/apkX))
-* Notion: single source of truth for targets and statuses
-* Discord: real‑time notifications (capacity, completion, errors)
-* AI reporting: OpenRouter model drafting structured markdown reports
+Modern bug hunting increasingly relies on **automation**, **integration**, and **orchestration** to scale reconnaissance and streamline reporting. Manual workflows struggle to keep pace with the complexity and speed of modern attack surfaces.
+
+This setup demonstrates how **n8n** serves as a **centralized control plane** to coordinate multiple tools and data flows across the bug-hunting lifecycle. Through **AutoAR’s REST API**, it automates comprehensive web reconnaissance and attack surface mapping, while **Notion** provides a single source of truth for tracking targets and scan states. **Discord** delivers real-time operational alerts, and **AI-assisted reporting** ensures consistent, high-quality documentation of findings.
+
+Advanced mobile analysis is handled through **APKX**, an integrated Android/iOS pipeline connected to n8n. This enables intelligent caching, deep static and dynamic analysis, MITM patching, and automated report generation from app binaries acquired via store integrations.
+
+Together, these components form a **scalable, modular, and intelligent framework** that enhances the efficiency and precision of modern bug bounty operations.
+
+***
+
+### **Architecture Overview**
+
+| Component              | Purpose                                                                                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **n8n**                | Event bus, scheduler, and workflow engine                                                                                                              |
+| **AutoAR**             | Web reconnaissance and attack surface scanning via REST API (subfinder, httpx, dnsx, naabu, nuclei, Dalfox, trufflehog, ffuf/fuzzuli, etc.)            |
+| **APKX (Android/iOS)** | Mobile analysis pipeline integrated via n8n — advanced APK/IPA analysis, intelligent caching, pattern matching, MITM patching, and HTML/JSON reporting |
+| **Notion**             | Source of truth for targets and scan statuses                                                                                                          |
+| **Discord**            | Real-time notifications (capacity, completion, errors)                                                                                                 |
+| **AI Reporting**       | Uses OpenRouter models to generate structured Markdown reports                                                                                         |
+
+***
+
+### **Workflow in Practice**
+
+#### **1. Intake in Notion**
+
+* Targets and scan types are defined in a Notion database.
+* n8n monitors for new or updated entries and triggers workflows automatically.
+
+#### **2. Capacity Guard**
+
+* n8n queries `AutoAR /capacity`.
+* If the system is at capacity, n8n posts a **Discord warning** and defers the task to maintain stability.
+
+#### **3. Launch Scan**
+
+* n8n submits a `POST /scan` request to AutoAR with the chosen scan type.
+* AutoAR executes asynchronously and stores results under `new-results/`.
+
+#### **4. Persistence and Status**
+
+* When the scan completes, n8n marks the Notion item as **Completed**.
+* Discord receives a concise notification with any relevant artifacts (lists, findings, wordlists).
+
+#### **5. AI-Assisted Reporting**
+
+* Structured findings are sent to an LLM via **OpenRouter**.
+* The model drafts a clean Markdown report, which is written back to Notion for analyst review and validation.
 
 <figure><img src="../.gitbook/assets/image (346).png" alt=""><figcaption></figcaption></figure>
 
@@ -42,94 +85,28 @@ Together, these components form a scalable, modular, and intelligent framework t
 
 <figure><img src="../.gitbook/assets/image (347).png" alt=""><figcaption></figcaption></figure>
 
-#### Scan Types (What I Run and Why)
+### **Scan Types**
 
-**Domain**
+<table><thead><tr><th width="184">Type</th><th width="343">Description</th><th>Best Use</th></tr></thead><tbody><tr><td><strong>Domain</strong></td><td>Full reconnaissance: subdomains, live hosts, URLs, tech stack, DNS checks, nuclei templates, reflection, JS exposure, ports, and vulnerabilities</td><td>Comprehensive program coverage</td></tr><tr><td><strong>Subdomain</strong></td><td>Focused scan on one subdomain with same modules as Domain</td><td>Deep-dive triage of high-value assets</td></tr><tr><td><strong>liteScan</strong></td><td>Fast subdomain enumeration, live hosts, tech detection, reflection, and nuclei checks</td><td>Quick actionable overview</td></tr><tr><td><strong>fastLook</strong></td><td>Minimal recon: subenum → live hosts → URLs → tech detect → reflection</td><td>Rapid prioritization</td></tr><tr><td><strong>JSScan</strong></td><td>JavaScript collection and analysis for secrets, XSS, and API endpoints</td><td>JS-heavy applications</td></tr><tr><td><strong>JSMonitor</strong></td><td>Monitors JS files for modifications</td><td>Detecting new endpoints or changes or secrets</td></tr><tr><td><strong>BackupScan</strong></td><td>Fuzzes for exposed backups/config files</td><td>Backup Files Exposure</td></tr><tr><td><strong>S3Scan</strong></td><td>Tests S3 bucket permissions</td><td>Cloud exposure assessment</td></tr><tr><td><strong>GitHub (Repo/Org/Wordlist)</strong></td><td>Secret detection, wordlist generation, and org-wide scanning via trufflehog and gh CLI</td><td>Source code and org monitoring</td></tr><tr><td><strong>Monitoring</strong></td><td>Periodic re-scans for changes or new findings</td><td>Continuous program intelligence</td></tr></tbody></table>
 
-* Full domain reconnaissance across subdomains, live host filtering, URL harvesting, technology detection, DNS checks, nuclei templates, reflection, JS exposure scans, port scanning, and vulnerability patterns.
-* Best for comprehensive coverage on a root program domain.
+***
 
-**Subdomain**
+### **Mobile Pipelines**
 
-* Targets a single subdomain with the same core modules (URLs, JS, reflection, tech detection, nuclei, ports, etc.).
-* Useful for deep‑dive validation or triaging high‑value assets quickly.
+#### **Android (APKX)**
 
-**liteScan**
+* Orchestrated via n8n to the APKX backend.
+* **Analysis capabilities:** 1600+ security patterns, exported components review, deep links, insecure storage, cert pinning, debug mode, Janus vulnerability detection.
+* **Operational features:** Queueing, intelligent caching, multi-store downloads (APKPure, Play Store, F-Droid, AppGallery), optional MITM patching, and HTML/JSON reporting.
+* **Storage:** GitLab integration for zero-local storage and automatic synchronization.
+* Status updates and completions are tracked in Notion and broadcast to Discord.
 
-* Fast but broad: subdomain enumeration, CNAME checks, live hosts, technology detection, dangling DNS, reflection, URLs + JS exposure, nuclei scans, and optional backup exposure discovery.
-* My default when I want actionable results quickly without the full weight of a domain‑wide run.
+#### **iOS (APKX iOS)**
 
-**fastLook**
-
-* Minimal reconnaissance: subenum → live hosts → URLs → tech detect → CNAME check → reflection.
-* Great for “is this worth a deeper look?”
-
-**JSScan**
-
-* JavaScript-focused analysis: collects JS files, analyzes for secrets, XSS vulnerabilities, and API endpoints.
-* Perfect for modern web applications with heavy JS usage.
-
-**JSMonitor**
-
-* Monitors JavaScript files for changes and alerts on modifications.
-* Useful for tracking dynamic applications and detecting new endpoints.
-
-**BackupScan**
-
-* Backup file discovery using fuzzuli on live subdomains.
-* Finds configuration files, backups, and sensitive data exposure.
-
-**S3Scan**
-
-* S3 bucket permission testing (read, write, delete, public access).
-* Critical for cloud storage security assessment.
-
-**GitHub (Repo, Org, Wordlist)**
-
-* **github\_single\_repo**: Scans a single repository for secrets with modern TruffleHog, producing JSON/HTML artifacts.
-* **github\_org\_scan**: Scans an organization's public surface for secret leaks across repos.
-* **github\_wordlist**: Generates a deduplicated wordlist from an organization's ignore files (e.g., `.gitignore`, `.npmignore`, `.dockerignore`).
-  * Filters comments/empties/HTML, normalizes slashes, enforces safe charset/length, and sends to Discord.
-  * Uses GitHub CLI when available; otherwise falls back to REST + raw.
-
-**Monitoring**
-
-* **Company Monitoring**: Monitors specific company targets for changes and new findings.
-* **All Monitoring**: Comprehensive monitoring across all configured targets with automated re-scanning.
-
-**Android (APKX pipeline)**
-
-* Orchestrated via n8n to APKX mobile backend for Android.
-* **Analysis Capabilities**: 1600+ security patterns, Manifest security review (exported components, task hijacking, deep links), insecure storage checks, cert pinning analysis, debug mode detection, Janus vulnerability detection.
-* **Operational Features**: queueing, capacity checks, app download from multiple sources (APKPure, Google Play, F-Droid, Huawei AppGallery), optional MITM patching (`apk-mitm`) for HTTPS inspection, intelligent caching, HTML/JSON reporting.
-* **Storage**: GitLab integration for zero-local storage mode with automatic sync.
-* Tracked and closed out in Notion when processing ends.
-
-**iOS (APKX iOS pipeline)**
-
-* Orchestrated via n8n to APKX iOS backend, including capacity checks, job submission, and Discord reporting.
-* **Analysis Capabilities**: IPA analysis, binary plist parsing, iOS security checks (ATS, jailbreak detection, keychain and file protection review), Swift/Objective-C analysis, bundle analysis.
-* **Download**: ipatool-based downloads with Apple ID authentication.
-* **Storage**: GitLab integration for cloud-based report storage.
-* Managed as first‑class entries in the same Notion board.
-
-#### Tooling Ecosystem (Key Integrations)
-
-* Subdomain/host: subfinder, httpx, dnsx
-* Ports: naabu
-* Vuln templates: nuclei (public and custom)
-* Web vulns: Dalfox (XSS), GF patterns (xss/sqli/etc.), reflection checks
-* Content discovery: ffuf, fuzzuli (backup/config leakage)
-* GitHub: trufflehog (repo/org), gh (org listing), raw fetching
-* Mobile: APKX pipelines (Android/iOS) via n8n — see [apkX](https://github.com/h0tak88r/apkX)
-
-#### Discord Integration
-
-* **Real-time Notifications**: Capacity warnings, scan completion, errors, and status updates.
-* **Artifact Sharing**: AutoAR sends wordlists, secret findings, and scan summaries as file attachments.
-* **APKX Reports**: Mobile analysis results (HTML/JSON) posted to Discord channels with download links.
-* **Webhook Configuration**: Per-scan webhook URLs for targeted notifications.
-* **Rich Embeds**: Structured messages with scan metadata, findings counts, and direct links to reports.
+* Similar orchestration with capacity checks, job submission, and reporting.
+* **Capabilities:** IPA analysis, plist parsing, ATS review, jailbreak detection, keychain inspection, and binary analysis.
+* **Download:** ipatool integration with authenticated access.
+* **Storage:** GitLab-backed artifact management.
 
 <figure><img src="../.gitbook/assets/image (349).png" alt=""><figcaption></figcaption></figure>
 
@@ -151,22 +128,41 @@ Together, these components form a scalable, modular, and intelligent framework t
 
 <figure><img src="../.gitbook/assets/image (357).png" alt=""><figcaption></figcaption></figure>
 
-#### Why This Automation Works
+***
 
-* Consistency: Every run is defined, logged, and repeatable.
-* Scale: Capacity checks prevent overload and degraded results.
-* Speed: One click in Notion triggers end‑to‑end workflows.
-* Signal over noise: Discord carries just the right events; detailed data lives in results and Notion.
-* Extensibility: New tools are new nodes; new scans are new API routes.
-* Quality: AI drafts structured reports so I spend time validating and expanding impact.
+### **Tooling Ecosystem**
 
-#### Operational Tips
+* **Subdomain/Host:** subfinder, httpx, dnsx
+* **Ports:** naabu
+* **Vulnerability Templates:** nuclei (public/custom)
+* **Web Vulns:** Dalfox, GF patterns, reflection checks
+* **Content Discovery:** ffuf, fuzzuli
+* **GitHub:** trufflehog, gh CLI, raw REST fallback
+* **Mobile:** APKX pipelines for Android/iOS
 
-* Keep tokens and webhooks in configuration, never in code.
-* Let n8n gate execution on `/capacity` for stable throughput.
-* Store canonical statuses in Notion; treat Discord as a broadcast channel.
-* Restart the API when adding new scan types or capabilities.
+***
 
-#### Outcome
+### **Discord Integration**
 
-This setup turns recon and analysis into a controlled system: n8n orchestrates, AutoAR executes, Notion tracks, Discord informs, and AI accelerates reporting. It’s professional, maintainable, and easy to extend as programs evolve.
+* **Notifications:** Capacity warnings, completion summaries, and error alerts.
+* **Artifact Sharing:** Wordlists, secrets, and scan summaries via file attachments.
+* **APKX Reports:** Mobile HTML/JSON results posted with download links.
+* **Rich Embeds:** Structured messages containing metadata and findings counts.
+* **Webhooks:** Per-scan configuration for targeted reporting.
+
+***
+
+### **Why This Automation Works**
+
+* **Consistency:** Every run is defined, logged, and repeatable.
+* **Scale:** Capacity checks prevent overload and ensure reliable throughput.
+* **Speed:** One action in Notion triggers the full automation chain.
+* **Signal Over Noise:** Discord carries essential alerts; Notion holds structured data.
+* **Extensibility:** New tools are simple new nodes or API routes.
+* **Quality:** AI-assisted reporting enforces structured documentation with minimal manual overhead.
+
+***
+
+### **Outcome**
+
+This architecture transforms reconnaissance and analysis into a **controlled, repeatable system**. **n8n orchestrates**, **AutoAR executes**, **Notion tracks**, **Discord informs**, and **AI accelerates reporting** — creating a professional, maintainable, and extensible foundation for modern bug bounty operations.
