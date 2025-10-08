@@ -282,3 +282,4 @@
     * [Injured Android](write-ups/hacking-labs/injured-android.md)
     * [Hacking the VulnWebView Lab](write-ups/hacking-labs/hacking-the-vulnwebview-lab.md)
     * [Hacking InsecureBankv2 App](write-ups/hacking-labs/hacking-insecurebankv2-app.md)
+  * [Using N8N To Orchestrate Web and Mobile Bug Hunting](write-ups/using-n8n-to-orchestrate-web-and-mobile-bug-hunting.md)

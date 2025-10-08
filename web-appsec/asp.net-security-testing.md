@@ -57,7 +57,7 @@ ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u https://
 
 * [**fuzzuli**](https://github.com/musana/fuzzuli)
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ```
 go install -v github.com/musana/fuzzuli@latest
@@ -132,7 +132,7 @@ if (Request.Cookies[".ASPXAUTH"] != null
 3. GET /admin/S(X))/login.ASPX --> 200 OK
 ```
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Uncovering Secrets in ASP.NET JS Files.
 

@@ -26,7 +26,7 @@ These three components collectively form the origin for this page. For any other
 
 With an understanding of the Same Origin Policy, it becomes clear why mechanisms like **postMessage** were introduced. These allow for controlled, secure communication between different origins when necessary.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## The JavaScript postMessage() function
 
@@ -42,7 +42,7 @@ postMessage(message, targetOrigin, transfer);
 * **targetOrigin:** Specifies the origin that the message is intended for. This should be a specific origin for security reasons, though a wildcard `*` can be used to send the message to any origin.
 * **transfer:** (Optional) A sequence of Transferable Objects. These are transferred with the message but are not copied.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### **Syntax of `postMessage()`  ->** Recieving Windo&#x77;**:**
 
