@@ -1,12 +1,6 @@
 # Using N8N To Orchestrate Web and Mobile Bug Hunting
 
-Understood. Here is your write-up fully **edited and optimized for publication** — polished, structured, and professional, while keeping your technical depth intact and maintaining your tone.
-
-***
-
-## **Using n8n to Orchestrate Web and Mobile Bug Hunting**
-
-#### **Introduction**
+### **Introduction**
 
 Modern bug hunting increasingly relies on **automation**, **integration**, and **orchestration** to scale reconnaissance and streamline reporting. Manual workflows struggle to keep pace with the complexity and speed of modern attack surfaces.
 
@@ -20,14 +14,7 @@ Together, these components form a **scalable, modular, and intelligent framework
 
 ### **Architecture Overview**
 
-| Component              | Purpose                                                                                                                                                |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **n8n**                | Event bus, scheduler, and workflow engine                                                                                                              |
-| **AutoAR**             | Web reconnaissance and attack surface scanning via REST API (subfinder, httpx, dnsx, naabu, nuclei, Dalfox, trufflehog, ffuf/fuzzuli, etc.)            |
-| **APKX (Android/iOS)** | Mobile analysis pipeline integrated via n8n — advanced APK/IPA analysis, intelligent caching, pattern matching, MITM patching, and HTML/JSON reporting |
-| **Notion**             | Source of truth for targets and scan statuses                                                                                                          |
-| **Discord**            | Real-time notifications (capacity, completion, errors)                                                                                                 |
-| **AI Reporting**       | Uses OpenRouter models to generate structured Markdown reports                                                                                         |
+<table><thead><tr><th width="184">Component</th><th>Purpose</th></tr></thead><tbody><tr><td><strong>n8n</strong></td><td>Event bus, scheduler, and workflow engine</td></tr><tr><td><strong>AutoAR</strong></td><td>Web reconnaissance and attack surface scanning via REST API (subfinder, httpx, dnsx, naabu, nuclei, Dalfox, trufflehog, ffuf/fuzzuli, etc.)</td></tr><tr><td><strong>APKX (Android/iOS)</strong></td><td>Mobile analysis pipeline integrated via n8n — advanced APK/IPA analysis, intelligent caching, pattern matching, MITM patching, and HTML/JSON reporting</td></tr><tr><td><strong>Notion</strong></td><td>Source of truth for targets and scan statuses</td></tr><tr><td><strong>Discord</strong></td><td>Real-time notifications (capacity, completion, errors)</td></tr><tr><td><strong>AI Reporting</strong></td><td>Uses OpenRouter models to generate structured Markdown reports</td></tr></tbody></table>
 
 ***
 
