@@ -28,6 +28,7 @@
     * [Self-XSS Bypass](web-appsec/xss_html-injection/self-xss-bypass.md)
   * [Improper Authentication](web-appsec/improper-authentication/README.md)
     * [JWT Security](web-appsec/improper-authentication/jwt-security.md)
+    * [SAML Authentication](web-appsec/improper-authentication/saml-authentication.md)
   * [OAUTH Misconfigurations](web-appsec/oauth-misconfigurations/README.md)
     * [OAuth 2.0 Basics](web-appsec/oauth-misconfigurations/oauth-2.0-basics.md)
     * [OAUTH Misconfigurations](web-appsec/oauth-misconfigurations/oauth-to-ato.md)
