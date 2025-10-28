@@ -2,7 +2,8 @@
 
 * [🧑 Whoami](README.md)
 * [🕸️ Web-AppSec](web-appsec/README.md)
-  * [Industry Based Checklist](web-appsec/industry-based-checklist.md)
+  * [Industry Based Checklist](web-appsec/industry-based-checklist/README.md)
+    * [Financially-Oriented Web Applications](web-appsec/industry-based-checklist/financially-oriented-web-applications.md)
   * [Services Based Pentest Checklist](web-appsec/services-based-pentest-checklist.md)
   * [Features Abuse](web-appsec/features-abuse/README.md)
     * [2FA](web-appsec/features-abuse/2fa.md)
