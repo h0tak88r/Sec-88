@@ -90,3 +90,9 @@
 
 * [ ] Deposit in one currency, withdraw in another, exploit rounding/exchange rate differences for profit.&#x20;
 * [ ] Verify if different parts of system (deposit API / withdrawal API) use inconsistent exchange rates or rounding rules.&#x20;
+
+***
+
+#### References
+
+{% embed url="https://soroush.me/downloadable/common-security-issues-in-financially-orientated-web-applications.pdf" %}
