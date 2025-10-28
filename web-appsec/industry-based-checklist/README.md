@@ -1,3 +1,2 @@
 # Industry Based Checklist
 
-###
