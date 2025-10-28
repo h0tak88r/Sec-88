@@ -2,6 +2,7 @@
 
 * [🧑 Whoami](README.md)
 * [🕸️ Web-AppSec](web-appsec/README.md)
+  * [Services Based Pentest Checklist](web-appsec/services-based-pentest-checklist.md)
   * [Features Abuse](web-appsec/features-abuse/README.md)
     * [2FA](web-appsec/features-abuse/2fa.md)
     * [Ban Feature](web-appsec/features-abuse/ban-feature.md)
