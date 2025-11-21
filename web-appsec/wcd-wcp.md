@@ -101,12 +101,10 @@ X-Forwarded-Host
 
     * Delimiter: Specify boundaries between different elements in URLs e.g. `;` OR `%00` OR `%0d` OR `%0a` OR `%09` etc
     * Use delimiters like `;`, `%00`, `%0d` to exploit discrepancies between how cache and origin servers parse requests, leading to cache poisoning.
-    *   Discrepancies in how the cache and origin server use characters and strings as delimiters can result in cache deception .\
-
+    *   Discrepancies in how the cache and origin server use characters and strings as delimiters can result in cache deception .<br>
 
         <figure><img src="../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
-10. **Delimiter discrepancies lead to cache deception:** if there is a delimiter I can trick a cache server to cache uncacheable response .\
-
+10. **Delimiter discrepancies lead to cache deception:** if there is a delimiter I can trick a cache server to cache uncacheable response .<br>
 
     <figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption><p><a href="https://x.com/_ayoubfathi_/status/1639637351042359296">https://x.com/_ayoubfathi_/status/1639637351042359296<br></a></p></figcaption></figure>
 
@@ -135,7 +133,7 @@ X-Forwarded-Host
 
 * **Burpsuite AND** **Reshaper:** For highlighting cacheable responses.
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Configure burpsuite to add custom columns using bambada code e.g.
 
@@ -151,7 +149,7 @@ Configure burpsuite to add custom columns using bambada code e.g.
 
 * **Intruder with NULL payloads:** For testing short cache durations (under 5 seconds).
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * **CDN Headers for Debugging:**
   * Akamai: `Pragma: akamai-x-check-cacheable`
@@ -203,8 +201,7 @@ To test for web cache deception try one of the several path confusing payloads a
 
 **Web Cache Deception**
 
-* &#x20;[_**https://www.usenix.org/conference/usenixsecurity20/presentation/mirheidari**_](https://www.usenix.org/conference/usenixsecurity20/presentation/mirheidari)\
-
+* &#x20;[_**https://www.usenix.org/conference/usenixsecurity20/presentation/mirheidari**_](https://www.usenix.org/conference/usenixsecurity20/presentation/mirheidari)<br>
 * [_**https://www.usenix.org/conference/usenixsecurity22/presentation/mirheidari**_](https://www.usenix.org/conference/usenixsecurity22/presentation/mirheidari)
 * [_**https://portswigger.net/research/gotta-cache-em-all**_](https://portswigger.net/research/gotta-cache-em-all)
 

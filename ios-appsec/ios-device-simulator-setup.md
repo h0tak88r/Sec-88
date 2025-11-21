@@ -68,8 +68,7 @@ iOS Simulator Setup\
  <a href="#el_1726005943684_341" id="el_1726005943684_341"></a>
 ---------------------------------------------------------------
 
-To setup Simulator, you need to have XCode installed. If you haven't already, follow [Host Software Setup ](https://www.mobilehackinglab.com/path-player?courseid=ios-appsec\&unit=66c5b9fee8fdad44270acb8e)to install it.\
-
+To setup Simulator, you need to have XCode installed. If you haven't already, follow [Host Software Setup ](https://www.mobilehackinglab.com/path-player?courseid=ios-appsec\&unit=66c5b9fee8fdad44270acb8e)to install it.<br>
 
 * After you have installed XCode, open it from Launchpad or Spotlight search.
 * As you open XCode for the first time, it will ask you which platform to install. Select iOS 15.5. If it does not shows up, open the XCode's Settings from the top menu:

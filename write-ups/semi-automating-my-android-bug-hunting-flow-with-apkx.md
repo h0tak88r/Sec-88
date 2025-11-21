@@ -87,7 +87,7 @@ I decided to build **apkX**, a comprehensive Android security analysis tool that
 
 After Providing the Package Name and Initializing the scan you can download hte APK by one click&#x20;
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 1. **Static Regex Based Scanning:** Regex Based Secrets and vulnerability Scanning With Differrent Report Formats (HTML - Json) So you can integrate it with other tools easily
 

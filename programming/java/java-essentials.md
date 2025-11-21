@@ -178,8 +178,7 @@ class Main {
 ```
 
 \
-\
-
+<br>
 
 **Output**
 
@@ -275,8 +274,7 @@ if (number < 0.0) {
 
 ### Labeled break Statement <a href="#labeled-break" id="labeled-break"></a>
 
-\
-
+<br>
 
 <figure><img src="https://cdn.programiz.com/sites/tutorial2program/files/labeled-break-statement-Java.jpg" alt="The labeled break statement is used to break the outermost loop." height="276" width="350"><figcaption><p>Working of the labeled break statement in Java</p></figcaption></figure>
 

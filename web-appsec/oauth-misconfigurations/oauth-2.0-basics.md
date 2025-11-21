@@ -41,8 +41,7 @@
 
 ![](https://dev-to-uploads.s3.amazonaws.com/i/odkf14kzlb5gcbvrmuvx.gif)
 
-*   [Client Credentials](https://oauth.net/2/grant-types/client-credentials/) Grant flow\
-
+*   [Client Credentials](https://oauth.net/2/grant-types/client-credentials/) Grant flow<br>
 
     ![a resource owner (user) had to provide consent. There can also be scenarios where a user's authorization is not required every time. Think of machine-to-machine communication (or app-to-app). In this case, the client is confidential by nature and the apps may need to act on behalf of themselves rather than that of the user.](https://dev-to-uploads.s3.amazonaws.com/i/gp4n79x84xujj8mn625w.gif)
 *   #### Resource Owner Password Credentials Grant flow <a href="#resource-owner-password-credentials" id="resource-owner-password-credentials"></a>

@@ -336,8 +336,7 @@ or Wherever  You enter a Passw
 6. **Account Takeover Vulnerability #3**:
    * A more advanced exploit involved using the not login token and a misconfigured /verification\_manage/endpoint to obtain a valid verify token for any account without logging in. By sending a spoofed OTP and exploiting a 30-second validation window, Cekal could change an account’s email and bypass 2FA. This was patched but marked as a duplicate, with no bounty awarded due to a near-simultaneous report.
 
-\
-
+<br>
 
 ## HackerOne Reports :
 

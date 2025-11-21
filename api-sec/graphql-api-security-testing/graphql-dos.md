@@ -266,7 +266,7 @@ BatchQL was able to detect that both array-based batching and alias- based batch
 
 * Using GraphQL Voyager:&#x20;
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Object relationships in GraphQL Voyager</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Object relationships in GraphQL Voyager</p></figcaption></figure>
 
 * **InQL:**
 

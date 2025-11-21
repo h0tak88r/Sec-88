@@ -72,8 +72,7 @@ base                      base-dex2jar.jar  sieve_patched_no_crypto.apk
 
 * Fire up JADX and open up the `base.apk` file&#x20;
 * Now you can see the source code and the apk data like the resources files
-*   After searching for keywords like "admin" in the LoginActivity if ound this \
-
+*   After searching for keywords like "admin" in the LoginActivity if ound this <br>
 
     <figure><img src="../../.gitbook/assets/image (68).png" alt=""><figcaption></figcaption></figure>
 * this guy using a boolean value from resources to hide some functionalities
@@ -325,11 +324,9 @@ Using `SQLiteQueryBuilder` without proper input validation can lead to SQL injec
 
 <figure><img src="../../.gitbook/assets/image (204).png" alt=""><figcaption></figcaption></figure>
 
-*   In burp the request was sple api request with parameters username and newpassword\
-
+*   In burp the request was sple api request with parameters username and newpassword<br>
 
     <figure><img src="../../.gitbook/assets/image (205).png" alt=""><figcaption></figcaption></figure>
-*   So I Edited the username parameter to another username and it worked i changed other user's password\
-
+*   So I Edited the username parameter to another username and it worked i changed other user's password<br>
 
     <figure><img src="../../.gitbook/assets/image (206).png" alt=""><figcaption></figcaption></figure>

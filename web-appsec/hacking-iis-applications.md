@@ -13,8 +13,7 @@ https://www.youtube.com/watch?v=cqM-MdPkaWo&#x20;
 
 https://www.youtube.com/watch?v=yyD8Z5Qar5I&#x20;
 
-[https://www.youtube.com/watch?v=\_4W0WXUatiw](https://www.youtube.com/watch?v=\_4W0WXUatiw)\
-
+[https://www.youtube.com/watch?v=\_4W0WXUatiw](https://www.youtube.com/watch?v=_4W0WXUatiw)<br>
 
 {% embed url="https://x.com/infosec_au/status/1340785029899698181" %}
 
@@ -78,7 +77,7 @@ https://www.youtube.com/watch?v=yyD8Z5Qar5I&#x20;
 
 ### IIS Discovery Bruteforce <a href="#iis-discovery-bruteforce" id="iis-discovery-bruteforce"></a>
 
-* [iisfinal.txt](https://129538173-files.gitbook.io/\~/files/v0/b/gitbook-legacy-files/o/assets%2F-L\_2uGJGU7AVNRcqRvEi%2F-L\_YlVBGlH\_l7w9zCtQO%2F-L\_YlWYOMUA7fr799GvH%2Fiisfinal.txt?alt=media\&token=de499b23-3599-45ce-ad7e-7800858b3dac)
+* [iisfinal.txt](https://129538173-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-L_2uGJGU7AVNRcqRvEi%2F-L_YlVBGlH_l7w9zCtQO%2F-L_YlWYOMUA7fr799GvH%2Fiisfinal.txt?alt=media\&token=de499b23-3599-45ce-ad7e-7800858b3dac)
 * [https://github.com/orwagodfather/WordList/blob/main/iis.txt](https://github.com/orwagodfather/WordList/blob/main/iis.txt)
 * [https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/IIS.fuzz.txt](https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/IIS.fuzz.txt)&#x20;
 * [http://itdrafts.blogspot.com/2013/02/aspnetclient-folder-enumeration-and.html](http://itdrafts.blogspot.com/2013/02/aspnetclient-folder-enumeration-and.html)&#x20;

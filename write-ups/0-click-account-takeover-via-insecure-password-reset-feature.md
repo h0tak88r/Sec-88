@@ -28,16 +28,13 @@ The vulnerability We found resides in the password reset mechanism. This flaw al
     ```
 
     Unfortunately, I didn’t find anything significant with this method.
-3.  **Discovering the Vulnerable Feature**: I then found an interesting feature called "request user," which allows the creation of a new user and sends an email with the credentials provided.\
+3.  **Discovering the Vulnerable Feature**: I then found an interesting feature called "request user," which allows the creation of a new user and sends an email with the credentials provided.<br>
 
-
-    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-4.  Initially, I thought of testing HTML injection in the email and found it was vulnerable. The portal was sending credentials via email, so an attacker could potentially steal the user's credentials using HTML injection. For instance, the attacker could use payloads like those found in [HackTricks' guide on Dangling Markup](https://book.hacktricks.xyz/pentesting-web/dangling-markup-html-scriptless-injection). However, I didn’t fully explore this avenue because I received a quick response indicating the issue was a duplicate.\
-
+    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+4.  Initially, I thought of testing HTML injection in the email and found it was vulnerable. The portal was sending credentials via email, so an attacker could potentially steal the user's credentials using HTML injection. For instance, the attacker could use payloads like those found in [HackTricks' guide on Dangling Markup](https://book.hacktricks.xyz/pentesting-web/dangling-markup-html-scriptless-injection). However, I didn’t fully explore this avenue because I received a quick response indicating the issue was a duplicate.<br>
 
     <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-5.  I tried to log in with the credentials but couldn’t because my user was not activated and needed approval from someone on the portal.\
-
+5.  I tried to log in with the credentials but couldn’t because my user was not activated and needed approval from someone on the portal.<br>
 
     <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 6. So, I turned my attention to the "Forgot Password" feature
@@ -46,8 +43,7 @@ The vulnerability We found resides in the password reset mechanism. This flaw al
    2. Locate the `g_recaptcha_response` parameter in the request.
    3. Modify the value of the `g_recaptcha_response` parameter to any random string (e.g., `randomString123`).
    4. Send the modified request.
-   5.  Observe that the password reset link is sent successfully to the entered email address without proper CAPTCHA verification.\\\
-
+   5.  Observe that the password reset link is sent successfully to the entered email address without proper CAPTCHA verification.\\<br>
 
        <figure><img src="../.gitbook/assets/image (4) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 8. **Password Reset Vulnerable Logic**:
@@ -63,8 +59,7 @@ The vulnerability We found resides in the password reset mechanism. This flaw al
        ```arduino
        https://brandcentral.target.com/mars/reset.hash_reset?p_hash={FUZZ}&p_sign=
        ```
-   *   Through fuzzing, identify that the specific reset token `B367AD4F` is valid and leads to the password reset page.\
-
+   *   Through fuzzing, identify that the specific reset token `B367AD4F` is valid and leads to the password reset page.<br>
 
        <figure><img src="../.gitbook/assets/image (5) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -74,23 +69,19 @@ The vulnerability We found resides in the password reset mechanism. This flaw al
     https://brandcentral.target.com/mars/reset.hash_reset?p_hash=B367AD4F&p_sign=
     ```
 * This URL grants access to the password reset page without requiring further authentication.
-*   On the password reset page, set a new password for the victim's account.\
-
+*   On the password reset page, set a new password for the victim's account.<br>
 
     <figure><img src="../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-*   Use the newly set password to log in to the victim's account.\
-
+*   Use the newly set password to log in to the victim's account.<br>
 
     <figure><img src="../.gitbook/assets/image (7) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 *   If credentials true you will receive this response\
     &#x20;
 
     <figure><img src="../.gitbook/assets/image (8) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-*   If credentials is not true you will get this response \
-
+*   If credentials is not true you will get this response <br>
 
     <figure><img src="../.gitbook/assets/image (9) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-*   The Max. Severity for this domain was High So the Bug was reported with high severity\
-
+*   The Max. Severity for this domain was High So the Bug was reported with high severity<br>
 
     <figure><img src="../.gitbook/assets/image (10) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>

@@ -227,4 +227,4 @@ ws.onopen = function() {
 }
 ```
 
-4\. The crafted request is sent to the server, resulting in the Host being forcibly removed from the session.\
+4\. The crafted request is sent to the server, resulting in the Host being forcibly removed from the session.<br>

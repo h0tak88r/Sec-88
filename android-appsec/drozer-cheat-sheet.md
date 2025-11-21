@@ -17,8 +17,7 @@
 5.  Initialize drozer server and get the port&#x20;
 
     <figure><img src="../.gitbook/assets/image (66).png" alt=""><figcaption></figcaption></figure>
-6.  Now forward traffick to this port and connect drozer console \
-
+6.  Now forward traffick to this port and connect drozer console <br>
 
     <figure><img src="../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
 7. Now here is some usefull drozer commands

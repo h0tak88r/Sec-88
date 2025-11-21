@@ -183,15 +183,15 @@ This technique has been presented on [BSidesLisbon 2022](https://bsideslisbon.or
 
 **Slides**:
 
-* [nahamcon\_2022\_eu\_till\_recollapse.pdf](https://github.com/0xacb/recollapse/blob/main/slides/nahamcon\_2022\_eu\_till\_recollapse.pdf)
-* [bsideslisbon\_2022\_till\_recollapse.pdf](https://github.com/0xacb/recollapse/blob/main/slides/bsideslisbon\_2022\_till\_recollapse.pdf)
+* [nahamcon\_2022\_eu\_till\_recollapse.pdf](https://github.com/0xacb/recollapse/blob/main/slides/nahamcon_2022_eu_till_recollapse.pdf)
+* [bsideslisbon\_2022\_till\_recollapse.pdf](https://github.com/0xacb/recollapse/blob/main/slides/bsideslisbon_2022_till_recollapse.pdf)
 
 **Videos**:
 
 * [NahamCon 2022 EU](https://www.youtube.com/watch?v=1eLTMKWciic)
 * [BSidesLisbon 2022](https://www.youtube.com/watch?v=nb91qhj5cOE)
 
-**Normalization table**: [https://0xacb.com/normalization\_table](https://0xacb.com/normalization\_table)
+**Normalization table**: [https://0xacb.com/normalization\_table](https://0xacb.com/normalization_table)
 
 This script demonstrates a technique to bypass SSRF filters using an HTTP redirect. Here's a summary and explanation:
 
@@ -256,8 +256,7 @@ HTTPServer(("", int(sys.argv[1])), Redirect).serve_forever()
 
 {% embed url="https://claroty.com/team82/research/exploiting-url-parsing-confusion" %}
 
-\
-
+<br>
 
 <figure><img src="https://claroty.com/img/asset/YXNzZXRzL2ltcG9ydGVkLWltYWdlcy9mYzRlMjkyNWRhOWYwMzdlYjAyZDU5MzMxY2Y5Yzg2My1TdW1tYXJ5X1RhYmxlLmpwZw==/fc4e2925da9f037eb02d59331cf9c863-Summary_Table.jpg?fm=webp&#x26;fit=crop&#x26;s=e23763a3b4b199e811f057fa4365c8db" alt="URL Parser Summary Table" height="1614" width="1200"><figcaption></figcaption></figure>
 

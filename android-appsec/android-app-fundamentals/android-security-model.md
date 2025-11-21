@@ -44,4 +44,4 @@ Every permission has a protection level (`android:protectionlevel`), which is a 
   * Gallery, Contacts, Camera, GPS
 * [`signature`](https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/permission/Permissions.md#signature-permissions): The permission will be granted to apps being signed with the same certificate as the app defining the permission. If the permission is a platform permission, it means those apps need to be platform-signed.
 * `signatureORsystem` - > (deprecatedin API 23)
-* `internal`: This is a no-op protection so that it won't allow granting the permission by itself. However, it will be useful when defining permissions that should only be granted according to its protection flags, e.g. `internal|role` for a role-only permission.\
+* `internal`: This is a no-op protection so that it won't allow granting the permission by itself. However, it will be useful when defining permissions that should only be granted according to its protection flags, e.g. `internal|role` for a role-only permission.<br>

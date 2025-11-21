@@ -427,4 +427,4 @@ These access modifiers help in <mark style="color:blue;">**encapsulation**</mark
   * Used to check if an object is an instance of a specific class or interface.
   * Can be used in inheritance scenarios to check superclass or interface instances.
   * Returns `true` if the object is an instance; otherwise, returns `false`.
-  * All classes in Java are inherited from the `Object` class.\
+  * All classes in Java are inherited from the `Object` class.<br>

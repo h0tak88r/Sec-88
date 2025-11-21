@@ -13,8 +13,7 @@ You need to configure your iOS device to route its traffic through Burp Suite.\
 1\. On your iOS device, go to **Settings > Wi-Fi**.\
 2\. Tap the **i** icon next to your connected Wi-Fi network.\
 3\. Scroll down to **HTTP Proxy** and set it to **Manual**.\
-4\. Enter the following details:\
-
+4\. Enter the following details:<br>
 
 * **Server**: The IP address of your computer running Burp Suite (you can find it by running **ifconfig** or **ipconfig** on your computer).
 * **Port**: The port Burp Suite is listening on (default is **8080**).

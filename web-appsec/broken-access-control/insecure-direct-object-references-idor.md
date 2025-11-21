@@ -83,7 +83,7 @@ Tools for decoding and analyzing UUIDs
 
 The version and variant are encoding within UUIDs.
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image (11) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
@@ -159,11 +159,8 @@ Unpredictable IDs may seem secure, but there are various ways they can still be 
 
 *   [ ] &#x20;**Wayback Machine:** This archive service can store old URLs, which might contain unpredictable IDs. You can search it using:
 
-    {% code overflow="wrap" %}
-    ```
-    https://web.archive.org/cdx/search/cdx?url=*.test.com/*&output=text&fl=original&collapse=urlkey
-    ```
-    {% endcode %}
+    <pre data-overflow="wrap"><code>https://web.archive.org/cdx/search/cdx?url=*.test.com/*&#x26;output=text&#x26;fl=original&#x26;collapse=urlkey
+    </code></pre>
 *   [ ] **AlienVault OTX:** This threat intelligence platform inadvertently archives URLs, which might have unpredictable IDs in parameters or paths. Use the API:
 
     ```

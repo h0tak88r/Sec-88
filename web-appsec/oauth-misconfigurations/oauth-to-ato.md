@@ -343,8 +343,7 @@ HTTP 200 OK
 </form>
 ```
 
-1.  Attacker can steal the code and state parameter using this code \
-
+1.  Attacker can steal the code and state parameter using this code <br>
 
     <figure><img src="https://lh7-us.googleusercontent.com/slidesz/AGV_vUdicEhcU-xYnDfTydv3QLyzy9fD-9Gvh6htoLvN6gPWYBxkFeMr9GLBGF2_fioQQDt4l1FFbAiZBKSstMD9_yu02gs-e53ldL4QPty73FGtR8aZbU7p3T89dTPj85IHZPaY7DSA3Zt7TvbqL5fNMiHME9UoRCwN=s2048?key=wpvX88q0Z4uLzcitI4vWuQ" alt=""><figcaption></figcaption></figure>
 

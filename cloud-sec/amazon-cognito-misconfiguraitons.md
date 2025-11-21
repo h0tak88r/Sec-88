@@ -11,8 +11,7 @@ Amazon Cognito simplifies user management with its user pools (for sign-up and s
 * [ ] &#x20;**Detect Cognito UserPools usage**: Extract UserPoolID or ClientId from the JS/HTML or Signup/Login
 *   [ ] **Zero Click Account Takeover via Updating Email Before Verification:** Updating email attributes to already registere email addresses and before verification try to login with the new email address Leads to ATO \
     **Reference**: [Flickr Account Takeover Advisory](https://security.lauritz-holtmann.de/advisories/flickr-account-takeover/#assembling-the-puzzle-account-takeover) \
-    `aws cognito-idp admin-update-user-attributes --user-pool-id <your-user-pool-id> --username <username> --user-attributes Name="email",Value="Victim@gmail.com"` \
-
+    `aws cognito-idp admin-update-user-attributes --user-pool-id <your-user-pool-id> --username <username> --user-attributes Name="email",Value="Victim@gmail.com"` <br>
 
     <figure><img src="../.gitbook/assets/image (323).png" alt=""><figcaption></figcaption></figure>
 * [ ] **Privilege Escalation via Updating User Attributes:** Use AWS CLI to update custom attributes and check if it results in elevated privileges\
@@ -25,14 +24,12 @@ Amazon Cognito simplifies user management with its user pools (for sign-up and s
     \- Confirm the email address\
     `aws cognito-idp confirm-sign-up — client-id — username — confirmation-code — region`\
     **Reference**: [Amazon Cognito Misconfiguration](https://shellmates.medium.com/amazon-cognito-misconfiguration-35dfde9e2037)\
-    **Refrences:** [https://infosecwriteups.com/attacking-aws-common-cognito-misconfigurations-a898bf092218](https://infosecwriteups.com/attacking-aws-common-cognito-misconfigurations-a898bf092218)\
-
+    **Refrences:** [https://infosecwriteups.com/attacking-aws-common-cognito-misconfigurations-a898bf092218](https://infosecwriteups.com/attacking-aws-common-cognito-misconfigurations-a898bf092218)<br>
 
     <figure><img src="../.gitbook/assets/image (321).png" alt=""><figcaption><p>When creating a new user pool, self-registration may be enabled by default, allowing users to sign up for an account on their own.</p></figcaption></figure>
 * [ ] **Unverified Email/Phone Attributes:**&#x20;
 
--   If application doesn't require email verification this may lead to duplicate registerationa, Account Overwrite and ATO attacks\
-
+-   If application doesn't require email verification this may lead to duplicate registerationa, Account Overwrite and ATO attacks<br>
 
     <figure><img src="../.gitbook/assets/image (325).png" alt=""><figcaption></figcaption></figure>
 - If an email address is configured as an alias and a new user is created with a duplicate email, the alias can be transferred to the newer user, un-verifying the former user's email\

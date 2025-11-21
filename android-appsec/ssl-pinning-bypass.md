@@ -50,8 +50,7 @@ objection patchapk -s package.apk
 
 Else, you can follow the manual way of patching the apk [described in this guide](https://koz.io/using-frida-on-android-without-root/).&#x20;
 
-Once the APK is patched, install Frida tools on the attacker machine using `pip3 install frida-tools`. After installing, you will see programs like frida, frida-ps, frida-Is-devices on your system.\
-
+Once the APK is patched, install Frida tools on the attacker machine using `pip3 install frida-tools`. After installing, you will see programs like frida, frida-ps, frida-Is-devices on your system.<br>
 
 Install the patched APK on an Android device and open it. The app waits till Frida connects to the Frida gadget. The output of
 

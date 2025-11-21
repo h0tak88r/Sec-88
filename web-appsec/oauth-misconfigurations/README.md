@@ -7,13 +7,12 @@
 3. [https://www.oauth.com/](https://www.oauth.com/)
 4. [https://www.youtube.com/watch?v=996OiexHze0](https://www.youtube.com/watch?v=996OiexHze0)
 5. [https://www.amazon.com/OAuth-2-Action-Justin-Richer/dp/161729327X](https://www.amazon.com/OAuth-2-Action-Justin-Richer/dp/161729327X)
-6. OAuth2.0 Protocol Code Flow with PKCE Explained in Arabic: [https://www.youtube.com/watch?v=\_NNPKyAlaIw](https://www.youtube.com/watch?v=\_NNPKyAlaIw)&#x20;
+6. OAuth2.0 Protocol Code Flow with PKCE Explained in Arabic: [https://www.youtube.com/watch?v=\_NNPKyAlaIw](https://www.youtube.com/watch?v=_NNPKyAlaIw)&#x20;
 7. Modern Guide - What is OAuth 2.0 and How Does It Work: [https://fusionauth.io/articles/oauth/modern-guide-to-oauth](https://fusionauth.io/articles/oauth/modern-guide-to-oauth)&#x20;
 8. OAuth 2.0 explained with examples: [https://dev.to/hem/oauth-2-0-flows-explained-in-gifs-2o7a](https://dev.to/hem/oauth-2-0-flows-explained-in-gifs-2o7a)&#x20;
 9. OAuth 2.0 flows explained in GIFs: [https://www.youtube.com/watch?v=ZDuRmhLSLOY](https://www.youtube.com/watch?v=ZDuRmhLSLOY)&#x20;
 10. Official Docs: [https://oauth.net/2/](https://oauth.net/2/)
-11. [**YouTube**](https://www.youtube.com/watch?v=\_NNPKyAlaIw)**: OAuth2.0 Protocol Code Flow with PKCE Explained | oauth2.0 شرح**\
-
+11. [**YouTube**](https://www.youtube.com/watch?v=_NNPKyAlaIw)**: OAuth2.0 Protocol Code Flow with PKCE Explained | oauth2.0 شرح**<br>
 
 **Mind map**
 

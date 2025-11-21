@@ -32,17 +32,14 @@ dotdotpwn -m http-url -u "<https://attachrite.dell.com/en/images/TRAVERSAL>" -f 
     ```
 *   **Open Redirect** → **SSRF**
 
-    {% code overflow="wrap" %}
-    ```python
-    www.whitelisted.com
+    <pre class="language-python" data-overflow="wrap"><code class="lang-python">www.whitelisted.com
     www.whitelisted.com.evil.com
-    <https://google.com>
+    &#x3C;https://google.com>
     //google.com
     javascript:alert(1)
-    <https://evil.com>
-    <https://hackerone.com/reports/59372> -> Homograph Attack
-    ```
-    {% endcode %}
+    &#x3C;https://evil.com>
+    &#x3C;https://hackerone.com/reports/59372> -> Homograph Attack
+    </code></pre>
 
 \* \*\*CSTI\*\*
 

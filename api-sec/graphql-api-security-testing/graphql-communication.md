@@ -55,8 +55,7 @@ This enables querying `User` data alongside their `Location`. However, the rever
 
 <figure><img src="../../.gitbook/assets/f01003 (1).png" alt=""><figcaption></figcaption></figure>
 
-Two-way links (e.g., allowing both `User` and `Location` to reference each other) should be used cautiously as they can introduce vulnerabilities like denial-of-service (DoS) attacks.\
-
+Two-way links (e.g., allowing both `User` and `Location` to reference each other) should be used cautiously as they can introduce vulnerabilities like denial-of-service (DoS) attacks.<br>
 
 <figure><img src="../../.gitbook/assets/f01004 (1).png" alt=""><figcaption></figcaption></figure>
 
