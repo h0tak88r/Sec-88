@@ -100,12 +100,17 @@ and the URI will be resolved internally.&#x20;
 * Sign the **SAMLResponse** using `xmlsec --sign` and a private key
 * Re-encode the **SAMLResponse** and send it to the Service Provider
 
+{% embed url="https://www.aleksey.com/xmlsec/download.html" %}
+
 {% code overflow="wrap" %}
 ```bash
+curl https://www.aleksey.com/xmlsec/download/older-releases/xmlsec1-1.2.25.tar.gz -o xmlsec1-1.2.25.tar.gz
+tar -zxvf xmlsec1-1.2.25.tar.gz
+docker run -it -v "$(pwd):/code" alpine
 apk add libxslt libxslt-dev openssl vim make gcc g++ libxml2-dev bash openssl-dev libltdl
+cd code/xmlsec1-1.2.25/
 ./configure --enable-crypto-dl-no && make && make install
 openssl genrsa -out key.pem
-cat key.pem
 ------------------------------------------
 curl https://gist.github.com/gregvish/7362993/raw/6979439b13056d9622a404be40fd49d56381d7cb/xmlsign2.xml > test.xml
 openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 1000 -nodes
