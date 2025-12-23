@@ -123,6 +123,18 @@ xmlsec1 --verify --trusted-pem other-cert.pem signed.xml
 ```
 {% endcode %}
 
+## CVE-2021-21239 (PySAML2)
+
+{% code overflow="wrap" %}
+```ada
+Here the issue comes from the fact that xmlsec1 trusts an embedded key and doesn't check that it matches the certificate (or the fingerprint of the certificate) used to configure the Service Provider. More details on the issue can be found in the advisory on GitHub. The interesting part is the link to the email discussing the issue in the xmlsec1 mailing list.
+```
+{% endcode %}
+
+{% embed url="https://www.aleksey.com/pipermail/xmlsec/2013/009717.html" %}
+
+{% embed url="https://github.com/IdentityPython/pysaml2/security/advisories/GHSA-5p3x-r448-pc62" %}
+
 
 
 ## Authentication Bypass
