@@ -70,16 +70,9 @@ Your Account has been suspended you should change your password From Here <a/hre
 * [ ] Check rate limiting
 * [ ] Email bombing via notifications
 * [ ] Large payloads (DoS potential)
-* [ ] Send message without CSRF token
 * [ ] Build CSRF PoC (auto-send message)
-* [ ] Check SameSite cookie protection
 * [ ] Very long messages (10k+ chars)
 * [ ] Unicode / RTL text
 * [ ] Emojis
 * [ ] Null byte injection (%00)
 * [ ] Broken JSON / missing parameters
-* [ ] IDOR on messages/conversations
-* [ ] Stored XSS (UI + email)
-* [ ] Attachment access bypass
-* [ ] Email data leakage
-* [ ] Sender/recipient tampering
