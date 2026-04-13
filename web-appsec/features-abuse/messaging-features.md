@@ -20,7 +20,6 @@
 * [ ] Client accessing firm staff messages
 * [ ] Staff accessing unauthorized threads
 * [ ] Reuse old session token after logout
-* [ ] Use token from another account
 * [ ] Check for data leakage across accounts
 * [ ] Access APIs without authentication
 * [ ] Inject in message body
