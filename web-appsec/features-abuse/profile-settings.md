@@ -1,6 +1,6 @@
 # Profile - Settings
 
-## **Change Password Feature**
+**Change Password Feature**
 
 *   [ ] [Missing rate limit in current password](https://hackerone.com/reports/1170522)
 
@@ -71,64 +71,6 @@
     6. I tried to reset the password I was banned from entering my account permanently.
     --------------------------------------------------------------------------
     ```
-
-## **Change Email Feature**
-
-* [ ] [Unlocking Important Resources with Email Verification Bypass](https://twitter.com/Jayesh25_/status/1725429962931335599)
-
-```
-Identify critical features linked to a user's email domain. For instance, consider a target app that grants access to resources based on your email domain. Some apps let you join a team or workspace directly if your email matches the team's domain (e.g., join Victim SITE XYZ only with sample@victimsitexyz[.]com). Others restrict access to documents or videos based on email domain whitelisting. Numerous such opportunities exist where email plays a crucial role.
-
-1️. Log in to your attacker account and change your email address to an attacker-controlled email (e.g., attackeremail@attackerdomain.com). 
-
-2️. You'll likely receive an email confirmation link on your attacker-controlled email (Do not verify it yet). 
-
-3️. Now, change your email to the unregistered email or domain you wish to HIJACK (e.g., victimemail@victimdomain.com). 
-
-4️. This action will send an email verification link to victimemail@victimdomain.com, which you don't have access to. 
-
-5️. Try clicking on the "Email" verification link sent earlier to attackeremail@attackerdomain.com. If the system fails to revoke the previous email verification link, the link for attackeremail@attackerdomain.com could end up verifying the email for victimemail@victimdomain.com, allowing you to claim it as verified.
-
-Once you've claimed an email associated with another organization's domain, identify the associated functions to prove impact and report it to earn some generous bounties
-```
-
-* [ ] Binding an email using a confirmation link Try to follow a confirmation link for account `A` within the session of account `B` within an email confirmation flow. If an application is vulnerable, it will link the verified email to account `B`. In this case, the attack flow may look like:
-  1. An attacker links `attacker@website.com` to their account.
-  2. An attacker sends a confirmation link to a victim.
-  3. A victim follows the link from an email while logged into an application.
-  4. An application links `attacker@website.com` to a victim. References:
-  5. [Writeup: Watch out the links : Account takeover!](https://akashhamal0x01.medium.com/watch-out-the-links-account-takeover-32b9315390a7)
-* [ ] Lack of password confirmation when email change [No Password Verification on Changing Email Address Cause ATO](https://hackerone.com/reports/292673)
-*   [ ] [Insufficient Session Expiration - Previously issued email change tokens do not expire upon issuing a new email change token'](https://hackerone.com/reports/1006677)
-
-    * The email verification code was not expired when a new one was generated.
-    * So suppose we are [victim@gmail.com](mailto:victim@gmail.com) , now login into the website then
-    * go to account settings and change mail address to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com)
-    * a link will be sent to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com), now the user realizes that he have lost access to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com) due to some reasons
-    * so he will probably change mail to the another mail address for e.g [victim3@gmail.com](mailto:victim999@gmail.com) which he owns and has access to
-    * but it is found that even after verifying victim3@gmail.com, the old link which was sent to victim2@gmail.com is active, so user/attacker having access to that mail can verify it and Observe the OAuth misconfiguration that leads to account takeover
-
-    > [Full Account takeover due to OAuth misconfiguration | by Cysky0x1 | Sep, 2023 | Medium](https://medium.com/@cysky9/full-account-takeover-due-to-oauth-misconfiguration-50d8747b268e)
-* [ ] email confirmation misconfiguration
-  1. request to change the email to `test@x.y`
-  2. you will receive a confirmation link
-  3. don't confirm and go register account
-  4. then use email changing confirmation link
-* [ ] ATO by changing the email to existing account
-* [ ] Try \[\[XSS\_HTML Injection|XSS\_HTML Injection]] in email Section
-* [ ] Improper Session Management Leads to ATO
-  1. evil@a.com changes mail to 2@gmail.com (owned) -> gets email verification link
-  2. sends link to victim, victim opens and victims account email is updated
-  3. when someone says its phishing! u know u can convert it to csrf ;), auto submit GET request lol! that makes more sense!
-  4. [Watch out the links : Account takeover! | by Akash Hamal | Medium](https://akashhamal0x01.medium.com/watch-out-the-links-account-takeover-32b9315390a7)
-* [ ] **Confirmation link not expired + OAUTH misconfiguration = ATO**
-  1. go to account settings and change mail address to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com)
-  2. a link will be sent to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com), now the user realizes that he have lost access to [victim](mailto:victim@gmail.com)2[@gmail.com](mailto:victim111@gmail.com) due to some reasons
-  3. so he will probably change mail to the another mail address for e.g [victim3@gmail.com](mailto:victim999@gmail.com) which he owns and has access to
-  4. but it is found that even after verifying victim3@gmail.com, the old link which was sent to victim2@gmail.com is active, so user/attacker having access to that mail can verify it and Observe the OAuth misconfiguration that leads to account takeover
-* [ ] [Ability To Takeover any account by Emaill.](https://hackerone.com/reports/240821)
-* [ ] Bypassing **“email already exists” error** while updating my email, I bypassed it by NULL Byte Attack and Special Characters `%20` at the end (e.g., `your@email.com%20`
-* [ ] IDN Homograph Attack
 
 ## **Change Numbers Feature**
 

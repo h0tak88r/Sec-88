@@ -17,6 +17,7 @@
     * [Messaging Features](web-appsec/features-abuse/messaging-features.md)
     * [Money-Related Features](web-appsec/features-abuse/money-related-features.md)
     * [Newsletter](web-appsec/features-abuse/newsletter.md)
+    * [Email Change](web-appsec/features-abuse/email-change.md)
     * [Profile - Settings](web-appsec/features-abuse/profile-settings.md)
     * [Registration](web-appsec/features-abuse/registration.md)
     * [Reset Password](web-appsec/features-abuse/reset-password.md)
