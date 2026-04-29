@@ -82,7 +82,11 @@
 
 </details>
 
-*
-* [ ] Lack of password confirmation when email change [No Password Verification on Changing Email Address Cause ATO](https://hackerone.com/reports/292673)
-*
+<details>
+
+<summary><strong>Lack of password confirmation when email change</strong></summary>
+
+* [ ] &#x20;[No Password Verification on Changing Email Address Cause ATO](https://hackerone.com/reports/292673)
+
+</details>
 
