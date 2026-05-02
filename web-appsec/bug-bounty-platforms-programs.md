@@ -4,6 +4,8 @@
 
 {% embed url="https://disclose.io/programs/" %}
 
+{% embed url="https://bugbountydirectory.com/" %}
+
 {% embed url="https://bbradar.io/" %}
 
 {% embed url="https://bugbase.ai/programs" %}
