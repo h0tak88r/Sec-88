@@ -75,6 +75,9 @@ Install the patched APK on an Android device and open it. The app waits till Fri
 * reFlutter
 * Modify APK
 * [Diable TLS Verification](https://github.com/NVISOsecurity/disable-flutter-tls-verification) -> A Frida script that disables Flutter's TLS verification  -> [Read Here](https://wahaz.medium.com/finally-ssl-pinning-for-flutter-bypassed-after-frustration-4573e15ed18e)
+* [https://github.com/NVISOsecurity/disable-flutter-tls-verification](https://github.com/NVISOsecurity/disable-flutter-tls-verification) | `frida -U -f com.google.android.apps.adwords -l disable-flutter-tls.js`
+
+{% embed url="https://thecybersandeep.medium.com/intercepting-flutter-applications-traffic-on-burpsuite-using-tunproxy-and-frida-474d6241b137" %}
 
 ### Code to Add in “main.dart” <a href="#id-7c81" id="id-7c81"></a>
 
@@ -104,3 +107,4 @@ HttpOverrides.global = MyHttpOverrides();
 With this setup, I could run ProxyDroid and intercept the application’s traffic without needing an SSL pinning bypass.
 
 {% embed url="https://medium.com/@k3r0/how-i-discovered-a-0-click-account-takeover-ato-vulnerability-in-a-flutter-application-74c7a5c4dc70" %}
+
