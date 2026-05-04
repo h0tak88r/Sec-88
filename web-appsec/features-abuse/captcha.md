@@ -1,7 +1,6 @@
 # CAPTCHA
 
-[**Captcha Bypass via response manipulation**](https://bugcrowd.com/disclosures/55b40919-2c02-402c-a2cc-7184349926d7/login-capctha-bypass)
-
+* [ ] [**Captcha Bypass via response manipulation**](https://bugcrowd.com/disclosures/55b40919-2c02-402c-a2cc-7184349926d7/login-capctha-bypass)
 * [ ] **Do not send the parameter** related to the captcha.
   * Change from POST to GET or other HTTP Verbs
   * Change to JSON or from JSON
