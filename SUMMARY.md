@@ -140,6 +140,7 @@
   * [OWASP API TOP 10 MindMap](api-sec/owasp-api-top-10-mindmap.md)
   * [Scanning APIs with OWASP ZAP](api-sec/scanning-apis-with-owasp-zap.md)
 * [📱 Android-AppSec](android-appsec/README.md)
+  * [Briefing: Intercepting Android Traffic via Mobile Data and Ngrok](android-appsec/briefing-intercepting-android-traffic-via-mobile-data-and-ngrok.md)
   * [Android App Pentesting Checklist](android-appsec/apk-pentesting-checklist.md)
   * [Setup Android App Pentesting environment on Arch](android-appsec/setup-android-app-pentesting-environment-on-arch.md)
   * [Setup Android App Pentesting environment on Mac M4](android-appsec/setup-android-app-pentesting-environment-on-mac-m4.md)
