@@ -2,44 +2,6 @@
 
 **Change Password Feature**
 
-*   [ ] [Missing rate limit in current password](https://hackerone.com/reports/1170522)
-
-    ```python
-    Steps To Reproduce:
-    Login to <https://reddit.com/>
-    Navigate to user settings > Change password
-    Enter incorrect password in old password field and enter a new matching passwords in other two fields
-    Turn on your burpsuite proxy and click save
-    You'll notice the error as Incorrect password
-    send the request <https://www.reddit.com/change_password> to your burpsuite intruder to bruteforce
-    Add the payload to the current_password parameter
-    select list of passwords for like 100 lines and start attack
-    ```
-* [ ] [password change is confirmed when not matching](https://hackerone.com/reports/803028)
-* [ ] CSRF \[\[CSRF]]
-* [ ] [CSRF bug on password change](https://hackerone.com/reports/230436)
-*   [ ] Misconfiguration in Change-password Functionality
-
-    ```python
-    Attack Workflow:
-
-    1. Change the email to the victim email.
-
-    2. Remove [The Header (X_auth_credentials) and the Parameter (‘currentPassword ‘)].
-
-    3. Put any new password you want
-
-    4. Send the request and you got 200 OK as a response.
-
-    5. Login to the victim account with the new password and here we go you successfully accessed his account.
-
-    https://0x2m.medium.com/misconfiguration-in-change-password-functionality-leads-to-account-takeover-1314b5507abf
-    ```
-* [ ] [User Account Takeover](https://rohitcoder.medium.com/user-account-takeover-password-change-nice-catch-2293f4d272b2)
-* [ ] [Abused 2FA to maintain persistence after a password change](https://medium.com/@lukeberner/how-i-abused-2fa-to-maintain-persistence-after-a-password-change-google-microsoft-instagram-7e3f455b71a1)
-* [ ] [old session dose not expire after password change](https://hackerone.com/reports/1166076)
-* [ ] Response Manipulation
-
 > **Change Name Feature**
 
 * [ ] `test.com/user/tester` —> Try Path Overwrite -> `test.com/user/login.php`
