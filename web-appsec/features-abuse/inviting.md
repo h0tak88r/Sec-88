@@ -18,7 +18,15 @@
 
 <summary><strong>Methodology</strong></summary>
 
-&#x20;just pass the jwt and cookie of the low leverage user to auth analyzer and it will repeat all admin requests with the lower privilege user
+
+
+</details>
+
+<details>
+
+<summary><strong>Token Leaked In Response</strong></summary>
+
+* [ ] Token Leaked in the `Resend-Token` endpoint
 
 </details>
 
@@ -26,10 +34,11 @@
 
 <summary><strong>Failure to invalidate token</strong></summary>
 
-1. Generate an invitation link and send it to your secondary account to join the team.
-2. Accept the invitation.
-3. Remove the secondary user from the team.
-4. Try to rejoin the organization using the same invitation link, and prepare to be amazed!
+1. Invitation link doesn't expire
+2. Generate an invitation link and send it to your secondary account to join the team.
+3. Accept the invitation.
+4. Remove the secondary user from the team.
+5. Try to rejoin the organization using the same invitation link, and prepare to be amazed!
 
 </details>
 
@@ -45,7 +54,7 @@
 
 <details>
 
-<summary><strong>IDOR</strong> </summary>
+<summary><strong>IDOR in email parameter when sign up using invitation feature</strong></summary>
 
 1. Admin invite user with specific email
 2. User open message in email to complete registertion
@@ -90,8 +99,22 @@
 
 </details>
 
+<details>
+
+<summary><strong>Injection</strong></summary>
+
 * [ ] XSS in first-name through invitaiton link
-* [ ] Token Leaked in the `Resend-Token` endpoint
+
+</details>
+
+<details>
+
+<summary><strong>BAC</strong></summary>
+
+{% hint style="info" %}
+**Methodology:** just pass the jwt and cookie of the low leverage user to auth analyzer and it will repeat all admin requests with the lower privilege user
+{% endhint %}
+
 * [ ] Member invite admin
 * [ ] Viewer edit content
 * [ ] Member invite member
@@ -99,9 +122,24 @@
 * [ ] Member can remove members
 * [ ] Viewer can edit
 * [ ] Member edit permissions
-* [ ] Invitation link doesn't expire
-* [ ] IDOR in email parameter when sign up using invitation feature
-* [ ] Sign\_up without accepting the invitation the attacker join organization anonymously
-* [ ] ATO invite user, token leaked in response , Claim victim account
+
+
+
+</details>
+
+<details>
+
+<summary><strong>Sign_up without accepting the invitation the attacker join organization anonymously</strong></summary>
+
+
+
+</details>
+
+<details>
+
+<summary><strong>Race Condition</strong></summary>
+
 * [ ] Race Condition in invite user
 * [ ] Race Condition in accepting invitation
+
+</details>
