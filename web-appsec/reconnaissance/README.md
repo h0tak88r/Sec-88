@@ -2,7 +2,9 @@
 
 ## Subdomain Enumeration
 
-> **Tools**
+<details>
+
+<summary><strong>Tools</strong></summary>
 
 * https://github.com/h0tak88r/AutoSubRecon
 * [https://github.com/h0tak88r/reconraptor](https://github.com/h0tak88r/reconraptor)
@@ -11,28 +13,44 @@
 * https://github.com/bing0o/SubEnum
 * https://github.com/shmilylty/OneForAll
 
-> **Write ups**
+{% embed url="https://github.com/h0tak88r/AutoAR" %}
 
-* https://h0tak88r.medium.com/mastering-subdomain-enumeration-6c84571b07b
+</details>
+
+<details>
+
+<summary><strong>Write ups</strong></summary>
+
 * [#subdomain-enumeration](./#subdomain-enumeration "mention")
 
-## API Recon
+{% embed url="https://h0tak88r.medium.com/mastering-subdomain-enumeration-6c84571b07b" %}
 
-1. Check for documentation
-   * Swagger -> `/openapi.json`
-   * GraphQL -> https://graphql.org/learn/introspection/ -> https://github.com/prisma-labs/get-graphql-schema
-   * manual -> `site:target.tld intitle:api | developer`
-2. Search for APIs
-   * `site:target.tld inurl:api`
-   * `intitle:"index of" "api.yaml" site:target.tld`
-   * `intitle:"index of" intext:"apikey.txt" site:target.tld`
-   * `allintext:"API_SECRET*" ext:env | ext:yml site:target.tld`
-3. Enumerate endpoints / methods
+</details>
+
+<details>
+
+<summary><strong>API Recon</strong></summary>
+
+* Check for documentation
+  * Swagger -> `/openapi.json`
+  * GraphQL -> https://graphql.org/learn/introspection/ -> https://github.com/prisma-labs/get-graphql-schema
+  * manual -> `site:target.tld intitle:api | developer`
+* Search for APIs
+  * `site:target.tld inurl:api`
+  * `intitle:"index of" "api.yaml" site:target.tld`
+  * `intitle:"index of" intext:"apikey.txt" site:target.tld`
+  * `allintext:"API_SECRET*" ext:env | ext:yml site:target.tld`
+
+1. Enumerate endpoints / methods
    * https://wordlists-cdn.assetnote.io/data/automated/httparchive\_apiroutes\_2023\_08\_28.txt
    * swagger -> https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/swagger.txt
    * Tools -> [ffuf](https://github.com/ffuf/ffuf#post-data-fuzzing) -> [kiterunner](https://github.com/assetnote/kiterunner)
 
-## One-liners & Quick Wins
+</details>
+
+<details>
+
+<summary><strong>One-liners &#x26; Quick Wins</strong></summary>
 
 ```bash
 # Grep emails and other PII Data from URLs file
@@ -68,51 +86,75 @@ https?://(www.)?[-a-zA-Z0–9@:%.+~#=]{1,256}.[a-zA-Z0–9()]{1,6}\b([-a-zA-Z0�
 
 ```
 
-***
+
+
+</details>
 
 ## Fingerprinting
 
-*   Port Scanning [https://github.com/nullt3r/jfscan](https://github.com/nullt3r/jfscan)
+<details>
 
-    ```bash
-    # Before installation
-    sudo apt install libpcap-dev
-    sudo apt-get --assume-yes install git make gcc
-    #masscan
-    git clone <https://github.com/robertdavidgraham/masscan>
-    cd masscan
-    make
-    sudo make install
-    sudo setcap CAP_NET_RAW+ep /usr/bin/masscan
-    sudo apt install python3 python3-pip
-    # install jfscan
-    git clone <https://github.com/nullt3r/jfscan.git>
-    cd jfscan
-    cd jfscan
-    # incase of error running 
-    export PATH="$HOME/.local/bin:$PATH"
-    ```
-*   Waf Detect
+<summary><strong>Port Scanning</strong> </summary>
 
-    ```bash
-    nuclei -l urls.txt -t nuclei_templates/waf
-    sudo apt install wafw00f
-    wafw00f -l urls.txt
-    ```
-*   [**uncover**](https://github.com/projectdiscovery/uncover) >> discover exposed hosts on the internet. It is built with automation in mind, so you can query it and utilize the results with your current pipeline tools.
+{% embed url="https://github.com/nullt3r/jfscan" %}
 
-    ```python
-    # installation
-    go install -v github.com/projectdiscovery/uncover/cmd/uncover@latest
-    # configuration file 
-    $HOME/.config/uncover/provider-config.yaml
-    # usage
-    uncover -q "test.com" -e censys,fofa,shodan
-    ```
+{% embed url="https://github.com/projectdiscovery/naabu" %}
+
+```bash
+# Before installation
+sudo apt install libpcap-dev
+sudo apt-get --assume-yes install git make gcc
+#masscan
+git clone <https://github.com/robertdavidgraham/masscan>
+cd masscan
+make
+sudo make install
+sudo setcap CAP_NET_RAW+ep /usr/bin/masscan
+sudo apt install python3 python3-pip
+# install jfscan
+git clone <https://github.com/nullt3r/jfscan.git>
+cd jfscan
+cd jfscan
+# incase of error running 
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+</details>
+
+<details>
+
+<summary><strong>Waf Detect</strong></summary>
+
+```bash
+nuclei -l urls.txt -t nuclei_templates/waf
+sudo apt install wafw00f
+wafw00f -l urls.txt
+```
+
+</details>
+
+<details>
+
+<summary><a href="https://github.com/projectdiscovery/uncover"><strong>uncover</strong></a> </summary>
+
+discover exposed hosts on the internet. It is built with automation in mind, so you can query it and utilize the results with your current pipeline tools.
+
+```python
+# installation
+go install -v github.com/projectdiscovery/uncover/cmd/uncover@latest
+# configuration file 
+$HOME/.config/uncover/provider-config.yaml
+# usage
+uncover -q "test.com" -e censys,fofa,shodan
+```
+
+</details>
 
 ## JS Files
 
-> **Tools**
+<details>
+
+<summary><strong>Tools</strong></summary>
 
 * [Scripts/python scripts/JS\_Leaks\_spider.py](https://github.com/h0tak88r/Scripts/blob/main/python%20scripts/JS_Leaks_spider.py)
 * Use This Extension to analyse JS Files [FindSomething - Chrome Web Store (google.com)](https://chrome.google.com/webstore/detail/findsomething/kfhniponecokdefffkpagipffdefeldb/related)
@@ -150,17 +192,22 @@ grep -r -E "aws_access_key|aws_secret_key|api key|passwd|pwd|heroku|slack|fireba
 
 ```
 
+</details>
+
 ## Bypass WAF and Find Origin IPs
 
-### Using hakoriginfinder&#x20;
+<details>
 
-* References:
-* &#x20;[https://x.com/Jayesh25\_/status/1735240906750443851?s=35](https://x.com/Jayesh25_/status/1735240906750443851?s=35)
-* [https://github.com/hakluke/hakoriginfinder](https://github.com/hakluke/hakoriginfinder)
+<summary><strong>Using hakoriginfinder</strong> </summary>
 
-1. Discover your target's ASN and check [https://bgp.he.net/AS33848#\_prefixes…](https://t.co/0pQS70hOLL) &#x20;
-2. Make a note of the target's IP range.&#x20;
-3. Assuming you have a WAF-protected domain called example\[.]com. Use this command with the IP range Identified in step 1 and pass your target host against the -h parameter:
+{% embed url="https://x.com/Jayesh25_/status/1735240906750443851?s=35" %}
+
+{% embed url="https://github.com/hakluke/hakoriginfinder" %}
+
+* Discover your target's ASN and check [https://bgp.he.net/AS33848#\_prefixes…](https://t.co/0pQS70hOLL) &#x20;
+* Make a note of the target's IP range.&#x20;
+
+1. Assuming you have a WAF-protected domain called example\[.]com. Use this command with the IP range Identified in step 1 and pass your target host against the -h parameter:
 
 ```bash
 prips 93.184.216.0/24 | hakoriginfinder -h example.com
@@ -168,53 +215,84 @@ prips 93.184.216.0/24 | hakoriginfinder -h example.com
 
 If you receive a "MATCH" output, there's a strong likelihood that you've successfully identified the Origin IP. Now, you can send requests with the same Host header to bypass WAF
 
-### Using Netlas/Shodan&#x20;
+
+
+</details>
+
+<details>
+
+<summary><strong>Using Netlas/Shodan</strong> </summary>
 
 * [https://x.com/Jayesh25\_/status/1843646332239544341](https://x.com/Jayesh25_/status/1843646332239544341)
+* Go to [Netlas](https://app.netlas.io/registration/), [shodan](https://www.shodan.io/), SecurityTrails or other similar platforms&#x20;
+* &#x20;Make filters like `http.title:"My_target_title"`
 
-1. Go to [Netlas](https://app.netlas.io/registration/), [shodan](https://www.shodan.io/), SecurityTrails or other similar platforms&#x20;
-2. &#x20;Make filters like `http.title:"My_target_title"`
-3. Sometyimes There is Origin IPs exposed
+1. Sometyimes There is Origin IPs exposed
+
+</details>
 
 ## Fuzzing Tips
 
-````http
-Use Some Hash's And Encoding Algorithm's (MD5 , SHA-1 , SHA-256 , base32 , base64 , etc . . . )
+<details>
+
+<summary><strong>Use Some Hash's And Encoding Algorithm's (MD5 , SHA-1 , SHA-256 , base32 , base64 , etc . . . )</strong></summary>
+
 From Most Common WordList Content Discovery With Common Extensions , Say :
-https://example*com/<HashValue>.php
-https://example*com/Fuzz/<Encoding>.php
-https://example*com/Fuzz/<HashValue>.asp , . . .
---
-Use Random Bytes With base64 To Fuzz Sensitive Fails , With Extension Or Not , Say:
-https://example*com/path/<RandomBytes-Base64>.php 
-https://example*com/path/<RandomBytes-Base64>
---
-- Generate Wordlist Examples 
+
+{% code overflow="wrap" %}
 ```
+https://examplecom/.php
+https://examplecom/Fuzz/.php
+https://example*com/Fuzz/.asp , . . .
+```
+{% endcode %}
+
+**Generate Wordlist Examples**
+
+{% code overflow="wrap" %}
+```
+https://examplecom/path/.php
+https://examplecom/path/
+```
+{% endcode %}
+
+{% code overflow="wrap" %}
+```bash
 cat  common.txt | while read word; do echo -n "$word" | base64 | tee -a base64-wordlist.txt ; done
 cat wordlist.txt | while read word; do echo -n "$word" | md5sum | cut -d ' ' -f1 | tee -a MD5-Hashs.txt; done
 ```
-uploads => 5128f35c9b4be13788ba41bdb6d1fc1f
-cmd => dfff0a7fa1a55c8c1a4966c19f6da452
+{% endcode %}
+
+uploads => 5128f35c9b4be13788ba41bdb6d1fc1f\
+cmd => dfff0a7fa1a55c8c1a4966c19f6da452\
 index => aW5keAo=
-. . .
+
+{% code overflow="wrap" %}
+```
 https://examples*com/path/5128f35c9b4be13788ba41bdb6d1fc1f
 https://examples*com/path/dfff0a7fa1a55c8c1a4966c19f6da452.php
 https://examples*com/path/aW5keAo=.bak
-. . .
-- Say In Ffuf
-ffuf -w MD5-Hashs.txt:/W1 -w extensions.txt:/W2 -u "https://example*com/path/W1.W2" -mc 200
-ffuf -w base64-wordlist.txt:/W1 -w extensions.txt:/W2 -u "https://example*com/path/W1.W2" -mc 200
--- 
+```
+{% endcode %}
+
+* Say In Ffuf
+
+<pre data-overflow="wrap"><code>ffuf -w MD5-Hashs.txt:/W1 -w extensions.txt:/W2 -u "https://example*com/path/W1.W2" mc 200
+<strong>
+</strong><strong>ffuf -w base64-wordlist.txt:/W1 -w extensions.txt:/W2 -u "https://example*com/path/W1.W2" -mc 200
+</strong>-- 
 U Can After get 200 Status Code From Fails With Extension  , Discover Parameters Using (arjun, ParamSpider , etc . . . ) Tools
 https://examples*com/path/dfff0a7fa1a55c8c1a4966c19f6da452.php?cmd=
 etc . . .
---
-````
+</code></pre>
 
 {% embed url="https://www.facebook.com/100085121092587/posts/pfbid0du1bMhQZwbqfNNQy1u9NGqQHrQoiLJhLBMGLCAjmSdqApWDHPoTKzH3ZwKpaZXrVl/?app=fbl" %}
 
-### FFuf Tips
+</details>
+
+<details>
+
+<summary><strong>FFuf Tips</strong></summary>
 
 {% embed url="https://github.com/reewardius/bbFuzzing.txt/tree/main?tab=readme-ov-file" %}
 
@@ -299,3 +377,7 @@ Any special occasions (cookieless) - IIS + ASP
 > ffuf -u target.com/bin::$INDEX_ALLOCATION/FUZZ.dll
 > ffuf -u target.com/bin::$INDEX_ALLOCATION/FUZZ -e .asp,.aspx,.ashx,.ash,.dll
 ```
+
+
+
+</details>
