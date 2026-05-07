@@ -145,12 +145,90 @@ SLEEP(1)/*' or SLEEP(1) or '" or SLEEP(1) or "*/
 
 <summary><strong>Top Features Vulnerable to SQL Injection</strong></summary>
 
-* [ ] Forgotten Password form
-* [ ] Email Reset Link
-* [ ] Account Verification
-* [ ] Username Lookup
-* [ ] Password Reset Token
-* [ ] Email Change Request
+* [ ] ID-BASED PARAMETERS (MOST COMMON)
+* [ ] AUTHENTICATION / LOGIN
+
+{% code overflow="wrap" %}
+```
+Login form (username/email field)
+Login form (password field)
+Remember me cookie values
+Session tokens
+OAuth callback parameters
+2FA/MFA endpoints
+```
+{% endcode %}
+
+* [ ] SEARCH FUNCTIONS
+
+{% code overflow="wrap" %}
+```
+Main search input
+Search API endpoints
+Advanced search filters
+Autocomplete/typeahead
+Filter/sort parameters
+Product/item search
+```
+{% endcode %}
+
+* [ ] ACCOUNT RECOVERY
+
+{% code overflow="wrap" %}
+```
+Forgot password email input
+Email reset link
+Account verification
+Username lookup
+Password reset confirmation
+```
+{% endcode %}
+
+* [ ] ADMIN / CMS PANELS
+* [ ] E-COMMERCE FEATURES
+
+{% code overflow="wrap" %}
+```
+Shopping cart
+Checkout process
+Payment gateway callbacks
+Invoice generation
+Order status lookup
+```
+{% endcode %}
+
+* [ ] USER PROFILE / SETTINGS
+
+{% code overflow="wrap" %}
+```
+Edit profile endpoints
+User settings
+Profile view by ID
+Notification preferences
+```
+{% endcode %}
+
+* [ ] USER CONTENT
+
+{% code overflow="wrap" %}
+```
+Comments
+Reviews/ratings
+Contact forms
+Support tickets
+```
+{% endcode %}
+
+* [ ] LIST / FILTER CONTROLS
+
+{% code overflow="wrap" %}
+```
+Pagination (page=)
+Sorting (sort=)
+Category dropdowns
+Date range filters
+```
+{% endcode %}
 
 </details>
 
