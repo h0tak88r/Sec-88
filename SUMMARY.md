@@ -43,6 +43,7 @@
     * [Insecure Direct Object References (IDOR)](web-appsec/broken-access-control/insecure-direct-object-references-idor.md)
     * [403 Bypass](web-appsec/broken-access-control/403-bypass.md)
   * [Subdomain Enumeration](web-appsec/web-app-security.md)
+  * [WEB3 RoadMap By Co-Founder of SolidityScan](web-appsec/web3-roadmap-by-co-founder-of-solidityscan.md)
   * [Fingerprinting](web-appsec/fingerprinting.md)
   * [Dorking](web-appsec/information-disclosure.md)
   * [Auth0 Misconfigurations](web-appsec/auth0-misconfigurations.md)

