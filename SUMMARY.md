@@ -216,6 +216,7 @@
   * [Firebase](cloud-sec/firebase.md)
   * [S3 Buckets Misconfigurations](cloud-sec/s3-buckets-misconfigurations.md)
   * [Amazon Cognito Misconfiguraitons](cloud-sec/amazon-cognito-misconfiguraitons.md)
+  * [Firebase Test Cases](cloud-sec/firebase-test-cases.md)
 * [👨‍💻 Programming](programming/README.md)
   * [HTML](programming/html.md)
   * [JavaScript (JS)](programming/javascript-js/README.md)
