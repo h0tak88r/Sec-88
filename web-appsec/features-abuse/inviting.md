@@ -137,9 +137,73 @@
 
 <details>
 
-<summary><strong>Race Condition</strong></summary>
+<summary><strong>Race Conditions</strong></summary>
 
 * [ ] Race Condition in invite user
 * [ ] Race Condition in accepting invitation
+
+</details>
+
+<details>
+
+<summary><strong>Race Condition on Invitation Sending Request</strong></summary>
+
+{% embed url="https://medium.com/@amralaa66652/the-power-of-a-race-condition-d8f9be8ba71a" %}
+
+**Race Condition → Role Escalation (Viewer → Admin)**
+
+* [ ] Log in as an **Admin** account
+* [ ] Go to the invite user flow and capture the `POST /api/brands/users/invite/` request in Burp
+* [ ] Duplicate the request into **2 tabs** in Burp Repeater
+* [ ] Set `role: viewer` in Request A
+* [ ] Set `role: admin` in Request B
+* [ ] Select both tabs → send as **single-packet concurrent requests** (Burp's "Send group in parallel")
+* [ ] Check the **target email inbox** — confirm **2 separate invite links** arrived
+* [ ] Accept the **Viewer** invite → verify account is locked as Viewer
+* [ ] While still logged in, open the **Admin** invite link
+* [ ] Confirm the account is now **Admin** despite role immutability
+
+***
+
+**Bonus Variant — Ghost Admin (UI shows Viewer, backend is Admin)**
+
+* [ ] Repeat the race condition steps above to generate both invite links
+* [ ] Accept the **Admin** invite first
+* [ ] Then accept the **Viewer** invite
+* [ ] Check UI → account appears as **Viewer**
+* [ ] Perform an **Admin-only action** via API → confirm it succeeds
+* [ ] Document the mismatch: UI = Viewer, backend = Admin
+
+</details>
+
+<details>
+
+<summary><strong>U+3164 Hangul Filler</strong></summary>
+
+**Part 1 — Duplicate Invitation Bypass**
+
+* [ ] Log in as an **Admin**
+* [ ] Invite `victim@target.com` normally — confirm it works
+* [ ] Intercept the second invite request in Burp
+* [ ] In the `email` field, append the **Hangul Filler** character `U+3164` after the email → `"victim@target.com ㅤ"` (copy the char: `ㅤ`)
+* [ ] Send the request
+* [ ] Confirm the response is **`201 Created`** instead of a duplicate/already-invited error
+* [ ] Check that **two separate invite emails** arrived in the victim's inbox
+
+***
+
+**Part 2 — Permanent Account Lockout (DoS)**
+
+* [ ] As Admin, send a poisoned invite with `victim@target.comㅤ` (U+3164 appended)
+* [ ] From the victim's inbox, have the victim **click the poisoned invite link** and complete registration
+* [ ] Confirm the account was created successfully and visually looks normal
+* [ ] Now attempt to **log in as the victim** using `victim@target.com` (clean, no invisible char)
+* [ ] Confirm **authentication fails** — backend can't find the clean email
+* [ ] Check the **admin dashboard** — verify the malformed email looks identical to the real one (invisible char not visible)
+* [ ] Document: victim is permanently locked out with no obvious way to self-recover
+
+***
+
+**Quick tip for injecting U+3164 in Burp:** switch the request to **Hex view**, find the end of the email value, and insert bytes `E3 85 A4` (UTF-8 encoding of U+3164). Or just copy the character `ㅤ` directly into the raw request body.
 
 </details>
