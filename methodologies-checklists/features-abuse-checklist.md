@@ -1,4 +1,4 @@
-# Features Abuse
+# Features Abuse CheckList
 
 ### 2FA Setup
 
@@ -1855,7 +1855,7 @@ Then I noticed there was no OTP field, but there was a user id, which was encryp
 
 <summary>Injection Attacks in email section</summary>
 
-[#xss-html-injection](features-abuse.md#xss-html-injection "mention")
+[#xss-html-injection](features-abuse-checklist.md#xss-html-injection "mention")
 
 </details>
 
@@ -2784,7 +2784,7 @@ Toggle risk-assessment parameters directly inside the request payload—such as 
 
 </details>
 
-### Social Sharing Feature
+### Social Sharing&#x20;
 
 <details>
 
@@ -2847,3 +2847,204 @@ https://target.com/post#url=https://attacker.com
 
 </details>
 
+### &#x20;Addresses Management&#x20;
+
+<details>
+
+<summary>IDOR: Cross-user creation (user_id injection)</summary>
+
+* [ ] &#x20;When saving a new billing or shipping address (`POST /api/addresses`), check if the payload contains an explicit ownership parameter such as `"user_id": 102`, `"account_num": "X"`, or `"customer_uuid"`. Swap your ID with a victim's ID to see if the address gets forcefully attached to their profile.
+
+</details>
+
+<details>
+
+<summary>CSRF on address addition</summary>
+
+* [ ] Inspect whether the address submission form uses anti-CSRF tokens. If missing or poorly validated, build a proof-of-concept (PoC) form that automatically submits a pre-filled address. If a victim visits your page, your attacker address gets added to their checkout options.
+
+[#csrf](features-abuse-checklist.md#csrf "mention")
+
+</details>
+
+<details>
+
+<summary>IDOR in Editing &#x26; Deleting Addresses</summary>
+
+* [ ] **Identifier substitution on update:** When modifying an existing address (`PUT /api/addresses/4451`), change the address ID in the URI path or the JSON body to a target address ID belonging to another user. Check if the modifications save successfully.
+* [ ] **Identifier substitution on deletion:** Send a `DELETE` or `POST` request to the deletion endpoint (e.g., `/address/delete?id=4451`) using a victim's address ID. Look for a `200 OK` or `{"success": true}` response indicating the resource was deleted without verifying ownership.
+* [ ] **Numeric vs. Non-numeric ID types:** If the application uses secure hashes or UUIDs for addresses, hunt for public endpoints (like invoices, order histories, or public profile details) where those specific address identifiers might leak.
+
+</details>
+
+<details>
+
+<summary>Chained CSRF+IDOR to <strong>delete</strong> another user's address</summary>
+
+If an endpoint is vulnerable to IDOR (lacks server-side authorization checks) _and_ lacks anti-CSRF tokens, you can execute a zero-click attack:
+
+1. Craft an exploit payload containing a victim's specific address ID.
+2. Deliver the payload to the victim via a hidden HTML form or fetch script.
+3. When the victim browser renders the page, it silently triggers the IDOR deletion using _their_ active session state.
+
+</details>
+
+<details>
+
+<summary>Chained CSRF+IDOR to <strong>edit</strong> another user's address</summary>
+
+Identify an address edit endpoint missing both authorization tokens and state ownership validation. Deliver a CSRF script that updates a victim's billing address to an address controlled by the attacker.
+
+</details>
+
+<details>
+
+<summary>Poisoning active checkout sessions</summary>
+
+* [ ] If you successfully chain an IDOR/CSRF to edit a victim's billing address, check if the change dynamically updates an _already active_ or open shopping cart checkout session. This can lead to financial profile mixing or rerouted shipments.
+
+</details>
+
+<details>
+
+<summary>Response manipulation for default address selection</summary>
+
+* [ ] Test if altering the server response properties—such as changing `"is_default": false` to `true`—forces the application UI to set an unauthorized address as the primary target for future billing transactions.
+
+</details>
+
+### Integrations - Webhook
+
+<details>
+
+<summary>SSRF in webhook simulation/testing features</summary>
+
+* [ ] &#x20;Look for "Test Webhook" or "Ping" buttons where the server sends a mock payload to a user-supplied URL. Try entering internal IP addresses (e.g., `http://127.0.0.1:80`, `http://169.254.169.254/latest/meta-data/` for cloud metadata endpoints) or local hostnames to map out internal infrastructure.
+
+</details>
+
+<details>
+
+<summary>IDOR when editing webhook</summary>
+
+* [ ] Intercept the update request (`PUT /api/webhooks/7712`). Change the webhook identifier to a target ID belonging to another project or organization to see if you can modify their webhook endpoint URL or secret token.
+
+</details>
+
+<details>
+
+<summary>IDOR deleting webhook</summary>
+
+* [ ] Send a deletion request (`DELETE /api/webhooks/7712`) using a victim's webhook identifier to verify if the server checks organizational boundary permissions before tearing down the resource.
+
+</details>
+
+<details>
+
+<summary>CSRF in integration OAuth flows</summary>
+
+* [ ] Initiate a third-party application connection (e.g., "Connect to Slack" or "Connect to Jira"). Intercept the final authorization callback request (`GET /auth/callback?code=AUTH_CODE&state=...`). Drop the request in your browser and strip out or reuse the `state` parameter. If you can force a victim to visit that callback URL and it links _your_ third-party workspace to _their_ platform account, the flow is vulnerable to OAuth CSRF.
+
+</details>
+
+<details>
+
+<summary>Open Redirect via <code>redirect_uri</code> tampering</summary>
+
+* [ ] When hitting the initial login or integration authorization endpoint (e.g., linking Google Calendar), locate the `redirect_uri` parameter. Attempt to modify its value to an external domain:
+
+```http
+GET /oauth/authorize?client_id=123&redirect_uri=https://attacker.com
+```
+
+If the authorization server redirects the user (and potentially leaks an authorization code or access token via referrer headers or URL fragments) to the external site, it is a critical validation failure.
+
+</details>
+
+<details>
+
+<summary>Parameter pollution / Path traversal in OAuth routing</summary>
+
+* [ ] Test if you can bypass strict whitelist matching on the `redirect_uri` by appending path traversal sequences or using parameter pollution:
+
+```http
+redirect_uri=https://target.com/oauth/callback/../../attacker-domain
+```
+
+</details>
+
+<details>
+
+<summary>Cross-Site Request Forgery (CSRF) in Webhook Setup</summary>
+
+* [ ] **Unauthorized webhook insertion:** Check if the form used to register a new webhook destination (`POST /api/projects/15/webhooks`) lacks anti-CSRF token verification.
+* [ ] **Exploitation via cross-site forms:** Build a silent HTML form payload that automatically targets the project’s webhook endpoint with an attacker-controlled listener URL (e.g., an Interactsh or Webhook.site address). If a project administrator visits your page, your webhook is silently added to their project, allowing you to intercept all future internal event logs, system updates, or PII transmitted by that webhook.
+
+</details>
+
+<details>
+
+<summary>Webhook secret token exposure</summary>
+
+* [ ] Verify if editing or viewing an existing webhook exposes the full authentication secret token or signature key in plain text within the API response body. Secure applications should mask these values (e.g., `sha256...xxxx`) after the initial creation phase.
+* [ ] **Replay attack testing:** Capture a legitimate webhook event payload sent by the server. Attempt to replay it against the receiving endpoint multiple times without updating the timestamp or cryptographic signature headers to see if the implementation lacks replay protection metrics.
+
+</details>
+
+### API Key Management Feature
+
+<details>
+
+<summary>Authorization &#x26; IDOR Boundaries</summary>
+
+* [ ] **Workspace/Organization ID substitution:** When requesting a list of API keys (`GET /api/v1/workspaces/109/apikeys`), change the workspace identifier to an unauthorized ID to see if you can leak the API keys or tokens of another organization.
+* [ ] **Direct object reference on modification:** Intercept the request to update an API key's description or permissions (`PUT /api/v1/apikeys/7743`). Swap the key ID with one belonging to a different user or workspace.
+* [ ] **Direct object reference on deletion:** Try sending a `DELETE` request directly to the API key resource endpoint (`DELETE /api/v1/apikeys/7743`) belonging to a victim to see if ownership validation is missing.
+
+</details>
+
+<details>
+
+<summary>Cross-Site Request Forgery (CSRF)</summary>
+
+* [ ] **1-Click API key deletion:** Inspect the deletion routine. If it lacks anti-CSRF tokens or depends on weak cookie configurations, craft an exploit payload that executes a background `POST`/`DELETE` request to delete a victim's API keys when they visit your site.
+* [ ] **1-Click API key generation:** Test if an attacker can force a victim's browser to generate a new API key and look for ways the token might be exfiltrated (e.g., via a chained cross-origin tracking vulnerability or predictable creation sequences).
+
+</details>
+
+<details>
+
+<summary>Vertical Privilege Escalation (RBAC Flaws)</summary>
+
+* [ ] **Scoping restrictions:** Check if a lower-privileged user can generate an API key that inherits maximum administrative scopes (`Full Access` / `Root`) that their own user account does not possess.
+* [ ] **Low-privileged role boundary testing:** Authenticate as a low-privileged user (e.g., Guest, Viewer, Member) within an organization. Attempt to read, create, edit, or delete API keys that should be restricted strictly to Owners or Administrators.
+
+</details>
+
+<details>
+
+<summary>Key retention after role downgrade</summary>
+
+* [ ] Follow this logic flow to check for token persistence bugs:
+
+1. Create an API key while authenticated with an **Admin/Owner** account.
+2. Have a separate administrator downgrade your account to a standard **Member** or **Guest** role.
+3. Attempt to make administrative API calls using the old key you generated. If the key still executes administrative functions, the backend fails to dynamically sync key permissions with the creator's current role state.
+
+</details>
+
+<details>
+
+<summary>Key retention after member removal</summary>
+
+Generate an API key, then completely remove that user account from the workspace or organization. Test if the API key remains functional on the platform despite its creator no longer being a part of the workspace.
+
+</details>
+
+<details>
+
+<summary>Revocation propagation delay</summary>
+
+Delete an API key in the UI and immediately use it in an automated script. Check if there is a dangerous propagation delay or caching window where the deleted key remains active for minutes or hours.
+
+</details>
