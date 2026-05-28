@@ -19,13 +19,13 @@ description: 'CWE-384: Session Fixation'
     3. As the attacker, go to `https://wallet.sandbox.romit.io` (using the first browser / same cookies as in step 1).
     4. You are now logged in to the victims account.
 
-    #### Possible exploitation scenarios
+    **Possible exploitation scenarios**
 
     1. This can be exploited if there is another bug like HTTP Response Splitting on your website.
     2. But a far easier way is to exploit this on shared computers. For example in a library, as an attacker open https://wallet.sandbox.romit.io (but do not login!) and keep note of the cookies as above in step 1.
     3. Then simply go away and now when a victim will use the same computer and try to login, the attacker will have access to the victims account.
 
-    #### Mitigation
+    **Mitigation**
 
     1. If you assign a new session when someone logs in, this flaw should be fixed.
 
@@ -39,7 +39,7 @@ description: 'CWE-384: Session Fixation'
     6. now again go to [https://www.reddapi.com/](https://www.reddapi.com/) but dont login..just simply go to edit this cookie addon and click import a cookie and paste the code which we previously exported.
     7. after pasting just refresh the page and thats done you are now logged into your account without login details...
 
-    #### problems faced
+    **problems faced**
 
     the problems face if the vulnerability exits are
 
@@ -47,7 +47,7 @@ description: 'CWE-384: Session Fixation'
     2. cookie stealing is the best way the hacker can get into and account..it would not take more than 5min to steal someones cookie using php n all...
     3. even friends can fool the victim and get him hacked..
 
-    #### Solution
+    **Solution**
 
     Manage session properly.this problem is mainly faced because the session doesn't get expired or doesn't get closed when logout is pressed.each time the user logins the cookie must hold a unique different session id to proceed..
 

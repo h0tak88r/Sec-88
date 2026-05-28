@@ -15,7 +15,7 @@ For example, users will authenticate against `identity.pentesterlab.com`, once a
 5. The `SAMLResponse` is submitted by the `User-Agent` to the `SP`.
 6. The user is now logged in for the `Service Provider` and can access the resource.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Inspecting the HTTP traffic
 

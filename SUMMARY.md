@@ -1,6 +1,9 @@
 # Table of contents
 
 * [🧑 Whoami](README.md)
+* [AI Security](ai-security/README.md)
+  * [MCP Bug Hunting](ai-security/mcp-bug-hunting.md)
+  * [LLM Hacking Checklist](ai-security/llm-hacking-checklist.md)
 * [🕸️ Web-AppSec](web-appsec/README.md)
   * [Industry Based Checklist](web-appsec/industry-based-checklist/README.md)
     * [Testing Financially-Oriented WepApps](web-appsec/industry-based-checklist/testing-financially-oriented-wepapps.md)
@@ -90,7 +93,6 @@
   * [Hacking Web Sockets](web-appsec/hacking-web-sockets.md)
   * [IDN Homograph Attack](web-appsec/idn-homograph-attack.md)
   * [DNS Rebinding Attack](web-appsec/dns-rebinding-attack.md)
-  * [LLM Hacking Checklist](web-appsec/llm-hacking-checklist.md)
   * [Bypass URL Filtration](web-appsec/bypass-url-filtration.md)
   * [Cross-Site Path Traversal (CSPT)](web-appsec/cross-site-path-traversal-cspt.md)
   * [PostMessage Security](web-appsec/postmessage-security.md)
