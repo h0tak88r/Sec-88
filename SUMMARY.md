@@ -1,6 +1,8 @@
 # Table of contents
 
 * [🧑 Whoami](README.md)
+* [Methodologies and Checklists](methodologies-and-checklists/README.md)
+  * [LLM Hacking Checklist](methodologies-and-checklists/llm-hacking-checklist.md)
 * [AI Security](ai-security/README.md)
   * [MCP Bug Hunting](ai-security/mcp-bug-hunting.md)
   * [LLM Hacking Checklist](ai-security/llm-hacking-checklist.md)
