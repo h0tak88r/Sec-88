@@ -2,9 +2,10 @@
 description: >-
   If you enjoy what I do, please support me  Buy Me Ko-fi!
   https://ko-fi.com/h0tak88r
+icon: android
 ---
 
-# 📱 Android-AppSec
+# Android-AppSec
 
 {% embed url="https://github.com/Ralireza/Android-Security-Teryaagh/blob/main/00-Roadmap/Android-Security-Roadmap.pdf" %}
 

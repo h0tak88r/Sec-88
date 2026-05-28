@@ -1,2 +1,6 @@
-# ✍️ Write-Ups
+---
+icon: blog
+---
+
+# Write-Ups
 

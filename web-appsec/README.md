@@ -2,9 +2,10 @@
 description: >-
   If you enjoy what I do, please support me  Buy Me Ko-fi!
   https://ko-fi.com/h0tak88r
+icon: globe-pointer
 ---
 
-# 🕸️ Web-AppSec
+# Web-AppSec
 
 ## Bugs Advanced Exploitation
 

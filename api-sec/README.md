@@ -2,19 +2,20 @@
 description: >-
   If you enjoy what I do, please support me  Buy Me Ko-fi!
   https://ko-fi.com/h0tak88r
+icon: envelope-open-text
 ---
 
-# ✉️ API-Sec
+# API-Sec
 
 ## Resources:
 
-* Top 6 Api [https://www.youtube.com/watch?v=4vLxWqE94l4](https://www.youtube.com/watch?v=4vLxWqE94l4\*\*)
-* What Is REST API? [https://www.youtube.com/watch?v=-mN3VyJuCjM](https://www.youtube.com/watch?v=-mN3VyJuCjM\*\*)
+* Top 6 Api [https://www.youtube.com/watch?v=4vLxWqE94l4](https://www.youtube.com/watch?v=4vLxWqE94l4**)
+* What Is REST API? [https://www.youtube.com/watch?v=-mN3VyJuCjM](https://www.youtube.com/watch?v=-mN3VyJuCjM**)
 * **OWASP API Security** [https://owasp.org/www-project-api-security/](https://owasp.org/www-project-api-security/)
 * **API Security Fundamentals** [https://university.apisec.ai/products/api-security-fundamentals](https://university.apisec.ai/products/api-security-fundamentals)
-* What Is Single Sign-on (SSO)? [https://www.youtube.com/watch?v=O1cRJWYF-g4](https://www.youtube.com/watch?v=O1cRJWYF-g4\*\*)
-* [https://portswigger.net/web-security/api-testing](https://portswigger.net/web-security/api-testing\*\*)
-* [https://portswigger.net/web-security/graphql](https://portswigger.net/web-security/graphql\*\*)
+* What Is Single Sign-on (SSO)? [https://www.youtube.com/watch?v=O1cRJWYF-g4](https://www.youtube.com/watch?v=O1cRJWYF-g4**)
+* [https://portswigger.net/web-security/api-testing](https://portswigger.net/web-security/api-testing**)
+* [https://portswigger.net/web-security/graphql](https://portswigger.net/web-security/graphql**)
 * [https://danaepp.com/blog](https://danaepp.com/blog)
 * [https://apihacker.blog/](https://apihacker.blog/)
 * **OWASP API TOP 10** [https://xmind.works/gJnF6CP1](https://xmind.works/gJnF6CP1)
