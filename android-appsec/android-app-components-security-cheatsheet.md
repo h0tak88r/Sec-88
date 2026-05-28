@@ -1,6 +1,6 @@
 # Android App Components Security Cheatsheet
 
-## **`Activities`**
+## **Activities**
 
 #### **What is it?**
 
@@ -41,7 +41,7 @@ adb shell am start -n com.vulnapp/.LoginActivity -f 0x10000000
 
 ***
 
-## **`Intents`**
+## **Intents**
 
 #### **What is it?**
 
@@ -76,7 +76,7 @@ adb shell am broadcast -a com.vulnapp.EXPLOIT_ACTION --es "cmd" "reset_password"
 
 ***
 
-## **`Services`**
+## **Services**
 
 #### **What is it?**
 
@@ -110,7 +110,7 @@ adb shell am startservice -n com.vulnapp/.DataSyncService --es "sync" "malicious
 
 ***
 
-## **`Broadcast Receivers`**
+## **Broadcast Receivers**
 
 #### **What is it?**
 
@@ -138,7 +138,7 @@ adb shell dumpsys activity broadcasts | grep com.vulnapp
 
 ***
 
-## **`Content Providers`**
+## **Content Providers**
 
 #### **What is it?**
 
@@ -180,7 +180,7 @@ adb shell content read --uri content://com.vulnapp.provider/../../../../etc/host
 
 ***
 
-## `WebView`
+## WebView
 
 **What is it?**
 
@@ -222,7 +222,7 @@ WebView is an Android component that renders web content inside apps. Poor confi
 
 ***
 
-## `DeepLinks`
+## DeepLinks
 
 **What is it?**
 
