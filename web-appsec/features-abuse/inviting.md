@@ -16,14 +16,6 @@
 
 <details>
 
-<summary><strong>Methodology</strong></summary>
-
-
-
-</details>
-
-<details>
-
 <summary><strong>Token Leaked In Response</strong></summary>
 
 * [ ] Token Leaked in the `Resend-Token` endpoint

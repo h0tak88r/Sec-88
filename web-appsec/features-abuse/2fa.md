@@ -1,6 +1,6 @@
 # 2FA
 
-## 1. 2FA Setup
+## 2FA Setup
 
 <details>
 
@@ -77,7 +77,7 @@
 
 </details>
 
-## 2. 2FA Bypass
+## 2FA Bypass
 
 <details>
 
@@ -264,7 +264,7 @@ this may leads to bypass the 2FA process
 
 </details>
 
-## 3. Disable 2FA
+## Disable 2FA
 
 <details>
 

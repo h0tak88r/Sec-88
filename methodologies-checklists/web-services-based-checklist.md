@@ -1,4 +1,4 @@
-# Services Based Pentest Checklist
+# Web Services Based Checklist
 
 <details>
 
