@@ -2,9 +2,10 @@
 description: >-
   If you enjoy what I do, please support me Buy Me Ko-fi!
   https://ko-fi.com/h0tak88r
+icon: user-question
 ---
 
-# 🧑 Whoami
+# Whoami
 
 ### Mosaad Sallam (0x88) | Pentester | BugHunter | Coder
 

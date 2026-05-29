@@ -1,6 +1,6 @@
 # Table of contents
 
-* [🧑 Whoami](README.md)
+* [Whoami](README.md)
 * [Methodologies - Checklists](methodologies-checklists/README.md)
   * [LLM Hacking Checklist](methodologies-checklists/llm-hacking-checklist.md)
   * [Industry Based Web Checklist](methodologies-checklists/industry-based-web-checklist.md)
