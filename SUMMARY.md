@@ -280,6 +280,7 @@
   * [VPS](operating-systems/vps.md)
   * [Burp Suite](operating-systems/burp-suite.md)
 * [Write-Ups](write-ups/README.md)
+  * [How to Use Claude Code for Bug Hunting — For Free (A Beginner's Guide)](write-ups/how-to-use-claude-code-for-bug-hunting-for-free-a-beginners-guide.md)
   * [API BAC leads to PII Data Disclosure](write-ups/api-bac-leads-to-pii-data-disclosure.md)
   * [Misconfigured OATUH leads to Pre-Account Takeover](write-ups/misconfigured-oatuh-leads-to-pre-account-takeover.md)
   * [Automating Bug Bounty with GitHub Actions](write-ups/automating-bug-bounty-with-github-actions.md)
