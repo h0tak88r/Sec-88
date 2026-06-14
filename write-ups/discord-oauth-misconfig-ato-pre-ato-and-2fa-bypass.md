@@ -1,3 +1,7 @@
+---
+description: Collaboration with Amr A'laa https://www.linkedin.com/in/amr-alaa-a14b65216/
+---
+
 # Discord OAuth Misconfig → ATO, Pre-ATO & 2FA Bypass
 
 Some of the best bugs don't come from exotic payloads or clever encoding tricks. They come from noticing that the application _trusts something it shouldn't_. This is the story of one of those — a social-login misconfiguration on a private engagement that chained an unverified third-party account and a single disabled HTML attribute into account takeover, email-verification bypass, pre-ATO, and a two-factor authentication bypass on the account-linking flow.
@@ -55,7 +59,7 @@ When the email matched an existing user, the platform tried to **link my attacke
 
 **Case A — victim has no 2FA → straight account takeover.** The linking went through and the attacker's Discord was now attached to the victim's account. From there the attacker just clicks "Continue with Discord" and lands inside the victim's account. Clean ATO.
 
-**Case B — victim has 2FA enabled → 2FA bypass on the linking step.** Here's the interesting part. The platform let the attacker's Discord get **linked to the victim's account without ever asking for the 2FA code** — the linking action itself skipped the second factor. _But_ — and this is the important nuance — that link alone did **not** hand the attacker full access to the victim's internal account. 2FA still stood between the attacker and actually getting inside.
+**Case B — victim has 2FA enabled → 2FA bypass on the linking step.** Here's the interesting part. The platform let the attacker's Discord get **linked to the victim's account without entering 2FA code** — the linking action itself skipped the second factor. _But_ — and this is the important nuance — that link alone did **not** hand the attacker full access to the victim's internal account. 2FA still stood between the attacker and actually getting inside.
 
 So Case B is a **2FA bypass for account linking, not a full takeover.** The attacker defeated the second factor for the _act of linking_ an OAuth provider, but didn't thereby walk into the dashboard. That's a meaningful weakness — you've broken a control that's supposed to be unbreakable — but it stops short of "I'm now in your account."
 
