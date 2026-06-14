@@ -22,6 +22,8 @@ The intended flow looks like this:
 
 The entire security model rests on one quiet assumption: **the email handed over by the social provider is real and belongs to the person logging in.** Break that assumption and the whole thing unravels.
 
+<figure><img src="../.gitbook/assets/image (364).png" alt=""><figcaption></figcaption></figure>
+
 ***
 
 ### Crack #1: An Account With No Verified Email
