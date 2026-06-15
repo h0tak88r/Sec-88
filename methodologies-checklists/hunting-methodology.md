@@ -464,7 +464,7 @@ Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
 
 <details>
 
-<summary>Refund Feature Abuse</summary>
+<summary><strong>Refund Feature Abuse</strong></summary>
 
 * [ ] Purchase a product (usually some subscription) and ask for a refund to see if the feature is still accessible.
 * [ ] Try for currency arbitrage
@@ -476,7 +476,7 @@ Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
 
 <details>
 
-<summary>Cart/Wish list Abuse</summary>
+<summary><strong>Cart/Wish list Abuse</strong></summary>
 
 * [ ] Add a product in **negative quantity** with other products in positive quantity to balance the amount.
 * [ ] Add a product in more than the available quantity.
@@ -488,7 +488,7 @@ Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
 
 <details>
 
-<summary>Orders Page</summary>
+<summary><strong>Orders Page</strong></summary>
 
 * [ ] \[\[IDOR]]
 * [ ] Leaking Credit Card Details in Responses -> Exclusive data disclosure
@@ -500,7 +500,7 @@ Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
 
 <details>
 
-<summary>Transfer Money</summary>
+<summary><strong>Transfer Money</strong></summary>
 
 * [ ] Bypass Transfer Money Limit with negative numbers
 * [ ] Borrow Money Without Return by Change the loan return date to --> 31/February
@@ -511,7 +511,7 @@ Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
 
 <details>
 
-<summary>Gifts Feature</summary>
+<summary><strong>Gifts Feature</strong></summary>
 
 * [ ] [**Race Condition allows to redeem multiple times gift cards which leads to free "money"**](https://hackerone.com/reports/759247)
 * [ ] [**Race conditions can be used to bypass invitation limit**](https://hackerone.com/reports/115007)
@@ -522,7 +522,7 @@ Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
 
 <details>
 
-<summary>Discount Checkout</summary>
+<summary><strong>Discount Checkout</strong></summary>
 
 * [ ] Apply the **same code** more than once to see if the coupon code is reusable.
 * [ ] Input the gift code and intercept the request and remove it from the request
@@ -540,7 +540,7 @@ Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
 
 <details>
 
-<summary>Delivery Charges Abuse</summary>
+<summary><strong>Delivery Charges Abuse</strong></summary>
 
 * [ ] Try tampering with the delivery charge rates to -ve values to see if the final amount can be reduced.
 * [ ] Try checking for the free delivery by tampering with the params.

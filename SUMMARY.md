@@ -8,6 +8,7 @@
   * [Features Abuse CheckList](methodologies-checklists/features-abuse-checklist.md)
   * [Android App Pentesting Checklist](methodologies-checklists/android-app-pentesting-checklist.md)
   * [Hunting Methodology](methodologies-checklists/hunting-methodology.md)
+  * [Web Bug Based Checklist](methodologies-checklists/web-bug-based-checklist.md)
 * [Web-AppSec](web-appsec/README.md)
   * [Industry Based Checklist](web-appsec/industry-based-checklist/README.md)
     * [Testing Financially-Oriented WepApps](web-appsec/industry-based-checklist/testing-financially-oriented-wepapps.md)
