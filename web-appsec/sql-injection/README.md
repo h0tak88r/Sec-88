@@ -271,3 +271,10 @@ Date range filters
 
 </details>
 
+<details>
+
+<summary><strong>sqlmap</strong></summary>
+
+
+
+</details>
