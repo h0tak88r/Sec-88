@@ -1,5 +1,5 @@
 ---
-description: Enjoy it ?  Buy Me Ko-fi! https://ko-fi.com/h0tak88r
+description: Enjoy it? Buy Me Ko-fi! https://ko-fi.com/h0tak88r
 icon: user-question
 ---
 

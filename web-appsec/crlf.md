@@ -4,7 +4,7 @@ description: 'CWE-93: Improper Neutralization of CRLF Sequences (''CRLF Injectio
 
 # CRLF
 
-## **What is CRLF injection?**
+## #**What is CRLF injection?**
 
 _CRLF injection_ is a vulnerability that lets a malicious hacker inject carriage return (CR) and linefeed (LF) characters to change the way a web application works or to confuse its administrator. There are two main malicious uses for CRLF injections: _log poisoning_ (also called _log injection, log splitting,_ or _log forging)_ and _HTTP response splitting_.
 
@@ -133,6 +133,6 @@ In a log poisoning attack based on CRLF injection, a malicious hacker injects CR
 
 ### References
 
-* [https://salmonsec.com/cheatsheets/exploitation/crlf\_injection](https://salmonsec.com/cheatsheets/exploitation/crlf_injection)&#x20;
+* [https://salmonsec.com/cheatsheets/exploitation/crlf\_injection](https://salmonsec.com/cheatsheets/exploitation/crlf\_injection)&#x20;
 * https://www.owasp.org/index.php/CRLF\_Injection
 * https://vulners.com/hackerone/H1:192749

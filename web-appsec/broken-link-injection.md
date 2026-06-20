@@ -2,9 +2,9 @@
 
 Some websites that check broken links to find broken link-hijacking vulnerabilities
 
-1- [https://ahrefs.com/broken-link-checker](https://ahrefs.com/broken-link-checker)
+1- [https://ahrefs.com/broken-link-checker](https://ahrefs.com/broken-link-checker)&#x20;
 
-2- [deadlinkchecker.com](http://deadlinkchecker.com/)
+2- [deadlinkchecker.com](http://deadlinkchecker.com/)&#x20;
 
 3- [brokenlinkcheck.com](http://brokenlinkcheck.com/)
 
@@ -29,6 +29,7 @@ Some websites that check broken links to find broken link-hijacking vulnerabilit
 
 * [https://edoverflow.com/2017/broken-link-hijacking/](https://edoverflow.com/2017/broken-link-hijacking/)
 * [https://medium.com/@bathinivijaysimhareddy/how-i-takeover-the-companys-linkedin-page-790c9ed2b04d](https://medium.com/@bathinivijaysimhareddy/how-i-takeover-the-companys-linkedin-page-790c9ed2b04d)
+*
 
 **Impact**
 
