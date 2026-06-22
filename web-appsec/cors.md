@@ -8,7 +8,7 @@ description: 'CWE-346: Origin Validation Error'
 
 Cross-origin resource sharing (CORS) is a browser mechanism which enables controlled access to resources located outside of a given domain.
 
-## Misconfigured CORS
+### Misconfigured CORS
 
 * [ ] Use **`[CorsMe](<https://github.com/Shivangx01b/CorsMe>)`** to Check all urls `cat http_https.txt | ./CorsMe -t 70`
 * [ ] `Origin:null`
@@ -41,7 +41,7 @@ Step->4  If origin is reflected in response means the target is vuln to CORS
 
 ***
 
-* **Method 2 (Multiple)**
+**Method 2 (Multiple)**
 
 ```
 step 1-> find domains i.e subfinder -d target.com -o domains.txt
