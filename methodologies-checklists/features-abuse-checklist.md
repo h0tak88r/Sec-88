@@ -509,8 +509,8 @@ exiftool.exe -Comment="<?php echo 'START ' . 'Hacked By h0tak88r :)' . ' END'; ?
 3. Go to Upload option on the website\\
 4. Upload the image\\
 5. see the path of uploaded image ( Either by right click on image then copy image address OR right click, inspect the image, the URL will come in the inspect , edit it as html )
-6. open it (http://exif.regex.info/exif.cgi)
-7. See whether is that still showing exif data , if it is then Report it. **Reports (Hackerone)**
+6. Download the exact image served by the application, preserve the original, and inspect a working copy with [Metadata Viewer](https://metadataremover.ai/metadata-viewer) for EXIF, GPS, IPTC, and XMP fields.
+7. Confirm important findings with a second parser such as [ExifTool](https://exiftool.org/). If GPS or other sensitive data remains, include only the minimum evidence needed in the report and avoid exposing the location publicly. **Reports (Hackerone)**
 8. IDOR with Geolocation data not stripped from images
 
 {% embed url="https://hackerone.com/reports/906907" %}
