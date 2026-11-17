@@ -9,6 +9,7 @@
   * [Android App Pentesting Checklist](checklists/android-app-pentesting-checklist.md)
   * [Hunting Checklist](checklists/hunting-methodology.md)
   * [Web Bug Based Checklist](checklists/web-bug-based-checklist.md)
+  * [Thick Client Pentesting Checklist](checklists/thick-client-pentesting-checklist.md)
 * [Web-AppSec](web-appsec/README.md)
   * [Industry Based Checklist](web-appsec/industry-based-checklist/README.md)
     * [Testing Financially-Oriented WepApps](web-appsec/industry-based-checklist/testing-financially-oriented-wepapps.md)
