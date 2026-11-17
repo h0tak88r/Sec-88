@@ -138,8 +138,8 @@ X-Forwarded-Host
 Configure burpsuite to add custom columns using bambada code e.g.
 
 > _**Age**_\
-> &#xNAN;_**Cf-Cache-Status**_\
-> &#xNAN;_**X-Cache**_
+> _**Cf-Cache-Status**_\
+> _**X-Cache**_
 >
 > _**X-Cacheable**_
 

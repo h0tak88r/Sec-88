@@ -15,3 +15,5 @@ icon: desktop
 [Desktop Application Penetration Testing (1)](https://0x34ziz.github.io/DesktopPentest1.html)
 
 {% embed url="https://github.com/DEMON1A/Brocmon" %}
+
+{% embed url="https://youtu.be/Sn_2sBGC5rk?si=ayNoIPX3FhgW9RSB" %}
