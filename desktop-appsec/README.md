@@ -12,5 +12,6 @@ icon: desktop
 * [https://youtu.be/Sn\_2sBGC5rk?si=HXyOAiTj5OvhL6c4](https://youtu.be/Sn_2sBGC5rk?si=HXyOAiTj5OvhL6c4)
 * [https://github.com/DEMON1A/Brocmon](https://github.com/DEMON1A/Brocmon)
 * [https://www.infosecinstitute.com/authors/secvulture/](https://www.infosecinstitute.com/authors/secvulture/)
+* [https://www.netspi.com/blog/technical-blog/thick-application-pentesting/introduction-to-hacking-thick-clients-part-1-the-gui/](https://www.netspi.com/blog/technical-blog/thick-application-pentesting/introduction-to-hacking-thick-clients-part-1-the-gui/)
 *
 
