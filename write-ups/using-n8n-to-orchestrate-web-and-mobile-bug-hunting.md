@@ -45,7 +45,7 @@ Together, these components form a **scalable, modular, and intelligent framework
 * Structured findings are sent to an LLM via **OpenRouter**.
 * The model drafts a clean Markdown report, which is written back to Notion for analyst review and validation.
 
-<figure><img src="../.gitbook/assets/image (346).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (345).png" alt=""><figcaption></figcaption></figure>
 
 #### Workflow In Practice
 

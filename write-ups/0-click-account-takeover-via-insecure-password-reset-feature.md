@@ -20,7 +20,7 @@ The vulnerability We found resides in the password reset mechanism. This flaw al
 
     During this process, I found an employee portal at `https://brandcentral.target.com/`.
 
-    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (207).png" alt=""><figcaption></figcaption></figure>
 2.  **Exploring JavaScript Files**: I examined the JavaScript files for unauthenticated paths using this script:
 
     ```javascript
@@ -30,13 +30,13 @@ The vulnerability We found resides in the password reset mechanism. This flaw al
     Unfortunately, I didn’t find anything significant with this method.
 3.  **Discovering the Vulnerable Feature**: I then found an interesting feature called "request user," which allows the creation of a new user and sends an email with the credentials provided.<br>
 
-    <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (208).png" alt=""><figcaption></figcaption></figure>
 4.  Initially, I thought of testing HTML injection in the email and found it was vulnerable. The portal was sending credentials via email, so an attacker could potentially steal the user's credentials using HTML injection. For instance, the attacker could use payloads like those found in [HackTricks' guide on Dangling Markup](https://book.hacktricks.xyz/pentesting-web/dangling-markup-html-scriptless-injection). However, I didn’t fully explore this avenue because I received a quick response indicating the issue was a duplicate.<br>
 
-    <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (209).png" alt=""><figcaption></figcaption></figure>
 5.  I tried to log in with the credentials but couldn’t because my user was not activated and needed approval from someone on the portal.<br>
 
-    <figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (213).png" alt=""><figcaption></figcaption></figure>
 6. So, I turned my attention to the "Forgot Password" feature
 7. And whenever i see captcha i try captcha bypass techniques
    1. Intercept the password reset request using a web proxy tool (e.g., Burp Suite).
@@ -71,15 +71,14 @@ The vulnerability We found resides in the password reset mechanism. This flaw al
 * This URL grants access to the password reset page without requiring further authentication.
 *   On the password reset page, set a new password for the victim's account.<br>
 
-    <figure><img src="../.gitbook/assets/image (6) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (7) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 *   Use the newly set password to log in to the victim's account.<br>
 
     <figure><img src="../.gitbook/assets/image (7) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-*   If credentials true you will receive this response\
-    &#x20;
+*   If credentials true you will receive this response<br>
 
-    <figure><img src="../.gitbook/assets/image (8) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
-*   If credentials is not true you will get this response <br>
+    <figure><img src="../.gitbook/assets/image (213).png" alt=""><figcaption></figcaption></figure>
+*   If credentials is not true you will get this response<br>
 
     <figure><img src="../.gitbook/assets/image (9) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 *   The Max. Severity for this domain was High So the Bug was reported with high severity<br>

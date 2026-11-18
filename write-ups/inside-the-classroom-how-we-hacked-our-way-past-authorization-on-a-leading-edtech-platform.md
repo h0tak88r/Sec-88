@@ -7,7 +7,7 @@ coverY: 0
 
 Hello, fellow hackers! After some deep diving into a private bug bounty program on HackerOne, I uncovered an interesting vulnerability on a well-known learning platform. What started as a curiosity about how students and teachers interact on this platform quickly turned into a fascinating journey of brute force, code hunting, and a bit of creativity. Let me walk you through the process.
 
-### &#x20;The Entry Barrier: Authorization Codes
+### The Entry Barrier: Authorization Codes
 
 When you first land on the platform's homepage, you're immediately met with a barrier: there's no way in without an authorization code. These codes are distributed by teachers or administrators, and without one, you're stuck on the outside looking in. The code itself is a six-digit number—simple yet hard enough to guess by random chance.
 
@@ -29,7 +29,7 @@ Once inside, I was granted access to the student profile and dashboard. But that
 
 The real treasure on this platform is the classes themselves. However, just like the initial entry, access to a class requires a class code—another barrier set up by the teachers. My first instinct was to try the brute force approach again, but this time I hit a wall. The platform had implemented rate limiting on class code attempts, effectively blocking my attempts to guess the codes.
 
-<figure><img src="../.gitbook/assets/image (255).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (254).png" alt=""><figcaption></figcaption></figure>
 
 ### A New Approach: Hunting for Leaks
 

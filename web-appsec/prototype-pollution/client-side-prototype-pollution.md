@@ -115,11 +115,9 @@ Research has shown that certain HTML sanitizers like `sanitize-html` and `DOMPur
 
 {% embed url="https://research.securitum.com/wp-content/uploads/sites/2/2020/08/image-7.png" %}
 
-*   #### dompurify
+* #### dompurify
 
-
-
-<figure><img src="../../.gitbook/assets/image (282).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (281).png" alt=""><figcaption></figcaption></figure>
 
 ## Tools for Detecting Prototype Pollution
 
@@ -142,6 +140,5 @@ Research has shown that certain HTML sanitizers like `sanitize-html` and `DOMPur
 * [https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#prototype-pollution](https://portswigger.net/web-security/cross-site-scripting/cheat-sheet#prototype-pollution)
 * [https://github.com/BlackFan/client-side-prototype-pollution](https://github.com/BlackFan/client-side-prototype-pollution)
 * [https://research.securitum.com/prototype-pollution-and-bypassing-client-side-html-sanitizers/](https://research.securitum.com/prototype-pollution-and-bypassing-client-side-html-sanitizers/)
-* [https://github.com/HacKeD0x90/Prototype\_Pollution](https://github.com/HacKeD0x90/Prototype\_Pollution)
-* [https://github.com/BlackFan/client-side-prototype-pollution?tab=readme-ov-file\
-  ](https://github.com/BlackFan/client-side-prototype-pollution?tab=readme-ov-file)
+* [https://github.com/HacKeD0x90/Prototype\_Pollution](https://github.com/HacKeD0x90/Prototype_Pollution)
+* [https://github.com/BlackFan/client-side-prototype-pollution?tab=readme-ov-file<br>](https://github.com/BlackFan/client-side-prototype-pollution?tab=readme-ov-file)

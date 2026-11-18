@@ -14,9 +14,9 @@ CSPT vulnerabilities occur in scenarios where a web application uses client-side
 
 Some times there is shareable links you got the link and then the front end sends API request POST Based Ger's your data with authorization header
 
-<figure><img src="../.gitbook/assets/image (264).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (262).png" alt=""><figcaption></figcaption></figure>
 
-With CSPT we can perform XSRF to another endpoint&#x20;
+With CSPT we can perform XSRF to another endpoint
 
 <figure><img src="../.gitbook/assets/image (265).png" alt=""><figcaption></figcaption></figure>
 
@@ -24,25 +24,25 @@ With CSPT we can perform XSRF to another endpoint&#x20;
 
 **A Client-Side Path Traversal can be split into two parts**
 
-* The **source** is the **trigger of the CSPT**&#x20;
-  * Data controlled by a user (Dom, Reflected, Stored)&#x20;
-  * URL fragment&#x20;
-  * URL Query&#x20;
+* The **source** is the **trigger of the CSPT**
+  * Data controlled by a user (Dom, Reflected, Stored)
+  * URL fragment
+  * URL Query
   * Path parameters
-  * Data injected in the database&#x20;
+  * Data injected in the database
   * Can be triggered when the page is loaded or on user action
 * The **sinks** are the exploitable endpoints that **can be reached by this CSPT**
   * This source value must be reflected in the path of another request
-  * Re-route of a legit API request&#x20;
+  * Re-route of a legit API request
   * No control of the HTTP request other than the PATH
 
 <figure><img src="../.gitbook/assets/image (268).png" alt=""><figcaption></figcaption></figure>
 
-An **exploitable sink is a reachable endpoint that shares the same restrictions**&#x20;
+An **exploitable sink is a reachable endpoint that shares the same restrictions**
 
-* Host&#x20;
-* Headers&#x20;
-* Body&#x20;
+* Host
+* Headers
+* Body
 
 Restrictions are specific to the source.
 
@@ -73,26 +73,26 @@ const downloadApp = useEndpoint('POST', endpointAddress);
 
 **1-click CSPT2CSRF - Sink restrictions**
 
-* POST endpoint&#x20;
-* No mandatory BODY parameters other than url and `downloadOnly`&#x20;
-* Attacker can control the path parameters&#x20;
-* Attacker can pass additional GET parameters&#x20;
+* POST endpoint
+* No mandatory BODY parameters other than url and `downloadOnly`
+* Attacker can control the path parameters
+* Attacker can pass additional GET parameters
 * The back end is lax on accepting extra body parameters
 
 **Targetable sinks:**
 
-* `/api/v1/livechat/department/:id/unarchive`&#x20;
-* `/api/v1/livechat/department/:id/archive`&#x20;
-* `/api/v1/dns.resolve.txt?url=open.rocket.chat`&#x20;
-* `/api/v1/users.logoutOtherClients`&#x20;
+* `/api/v1/livechat/department/:id/unarchive`
+* `/api/v1/livechat/department/:id/archive`
+* `/api/v1/dns.resolve.txt?url=open.rocket.chat`
+* `/api/v1/users.logoutOtherClients`
 * `/api/v1/users.2fa.enableEmail`
 
 **Steps to reporduce**
 
-1.  Victim visits:&#x20;
+1.  Victim visits:
 
     **/marketplace/private/install?id=../../../api/v1/users.logoutOtherClients\&url=https://google.com**
-2. &#x20;Victim clicks on “Install”&#x20;
+2. Victim clicks on “Install”
 3. POST HTTP request is sent to `/api/v1/ users.logoutOtherClients`
 
 <figure><img src="../.gitbook/assets/image (271).png" alt=""><figcaption></figcaption></figure>
@@ -162,8 +162,6 @@ Connection: close
 [ ... Trimmed for brievety... ]
 ```
 
-
-
 **Bonus Discovery**
 
 Further exploration revealed a super-admin endpoint that accepted similar requests. If the attacker could trick a super-admin into clicking a malicious link, it could escalate privileges, granting super-admin access.
@@ -185,7 +183,7 @@ For example, if you go to:
 \
 You will notice the CSS is loaded from `https://mc-beta-cloud.acronis.com/PARAMETER.css`, confirming the **Client Side Path Traversal** issue.
 
-The Reasearcher compinesd it with  open redirect he discovered in state parameter&#x20;
+The Reasearcher compinesd it with open redirect he discovered in state parameter
 
 ```http
 GET /api/2/idp/authorize/?client_id={CLIENT-ID}&redirect_uri=%2Fhci%2Fcallback&response_type=code&scope=openid&state=http://localhost&nonce=bhgjuvrrvpwauibleqhvfqat HTTP/1.1
@@ -284,7 +282,7 @@ The primary consequence of this vulnerability is the potential for privilege esc
 
 <figure><img src="../.gitbook/assets/image (261).png" alt=""><figcaption></figcaption></figure>
 
-### CSPT + SSRF = Steal AUTH Token&#x20;
+### CSPT + SSRF = Steal AUTH Token
 
 {% embed url="https://x.com/samwcyo/status/1437030056627523590?lang=fr" %}
 
@@ -321,7 +319,7 @@ The blind SSRF vulnerability requires an authorization header to be sent to the 
 
 <figure><img src="../.gitbook/assets/image (274).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (273).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (272).png" alt=""><figcaption></figcaption></figure>
 
 **Results**
 
@@ -344,13 +342,13 @@ The blind SSRF vulnerability requires an authorization header to be sent to the 
 ### Automate CSPT2CSRF Using the Burp Extension
 
 1. Crawl the target to fill your proxy history
-2. Define scope&#x20;
+2. Define scope
 3. Click on “Scan”
 4. Click on “Export Sources With Canary”
 5. Open all these URLs in your browser
 6. Check if any issue has been created by the extension (Passive scanner)
 
-### CSPT Burp Extension Limitations&#x20;
+### CSPT Burp Extension Limitations
 
 While the CSPT (Client-Side Path Traversal) Burp Extension is a powerful tool for identifying vulnerabilities, it does have some limitations:
 
@@ -372,8 +370,6 @@ To overcome these limitations, consider the following approaches:
 > **SAST** stands for **Static Application Security Testing**. It refers to the process of analyzing source code or compiled versions of code for security vulnerabilities without actually executing the program. SAST tools scan the codebase to identify potential vulnerabilities early in the development cycle, allowing developers to fix them before the application is deployed.
 
 * Using SAST tools with custom rules (e.g., Semgrep) can help detect security issues in the codebase that might not be apparent through dynamic testing alone. SAST tools can analyze client-side routing and other code patterns that are not captured during the Burp Suite testing process.
-
-
 
 ## Sink Exploitation Takeaways
 

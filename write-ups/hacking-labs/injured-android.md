@@ -14,7 +14,7 @@ sallam@Mac-mini-Mosaad tools % ./apkx ../apps/InjuredAndroid.apk
 sallam@Mac-mini-Mosaad tools % ./j88nx -apk ../apps/InjuredAndroid.apk 
 ```
 
-<figure><img src="../../.gitbook/assets/image (309).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (308).png" alt=""><figcaption></figcaption></figure>
 
 * [ ] Use Drozer for Information Gathering and and Attack Surface Mapping
 
@@ -73,7 +73,7 @@ Attempting to run shell module
 
 <figure><img src="../../.gitbook/assets/image (319).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (317).png" alt=""><figcaption><p>Take this and decode it </p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (317).png" alt=""><figcaption><p>Take this and decode it</p></figcaption></figure>
 
 ```
 echo 'NF9vdmVyZG9uZV9vbWVsZXRz' | base64 -d
@@ -89,6 +89,5 @@ run app.broadcast.send --component b3nac.injuredandroid b3nac.injandroid.TestBro
 
 <figure><img src="../../.gitbook/assets/image (320).png" alt=""><figcaption></figcaption></figure>
 
-* [ ] **Challenge 6:**&#x20;
+* [ ] **Challenge 6:**
 *
-

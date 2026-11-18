@@ -43,23 +43,11 @@ The following day, I adopted a fresh perspective to manually test for classic bu
 
 It's worth mentioning that we found some stored XSSs and stored HTML Injections in the title of the website and description and collection descriptions. The WAF was blocking all tags, but a simple bypass with the TAG-in-TAG technique allowed us to trigger the alert with the payload `PAYLOAD:sallam"><<h1>img src=x onerror=confirm(88)>`.
 
-<div align="center" data-full-width="true">
+<div align="center" data-full-width="true"><figure><img src="../.gitbook/assets/image (187).png" alt=""><figcaption><p>Stored XSSs</p></figcaption></figure></div>
 
-<figure><img src="../.gitbook/assets/image (188).png" alt=""><figcaption><p>Stored XSSs</p></figcaption></figure>
+<div align="center"><figure><img src="../.gitbook/assets/image (193).png" alt=""><figcaption></figcaption></figure></div>
 
-</div>
-
-<div align="center">
-
-<figure><img src="../.gitbook/assets/image (193).png" alt=""><figcaption></figcaption></figure>
-
-</div>
-
-<div align="center">
-
-<figure><img src="../.gitbook/assets/image (96).png" alt=""><figcaption></figcaption></figure>
-
-</div>
+<div align="center"><figure><img src="../.gitbook/assets/image (95).png" alt=""><figcaption></figcaption></figure></div>
 
 Returning to the organizer tab, I explored more API calls, uncovering Blind Server-Side Request Forgery (SSRF) in the endpoint `PUT /subscriptions/{ID}` and other SSRFs with the same simplicity, as you found an API call that takes a URL as user input. Subsequently, I found other issues that didn't warrant reporting and continued experimenting with API calls.
 

@@ -32,7 +32,7 @@ With an understanding of the Same Origin Policy, it becomes clear why mechanisms
 
 The JavaScript `postMessage()` function enables secure cross-origin communication between windows, such as a parent window and an iframe or a popup. This is especially useful when a web application needs to embed an iframe or open a new window, like a third-party contact form, and the parent and child windows have different origins. The Same Origin Policy (SOP) restricts communication between these windows, but `postMessage()` allows them to exchange data securely without generating an HTTP request.
 
-### **Syntax of `postMessage()`  ->** Sending Windo&#x77;**:**
+### **Syntax of `postMessage()` ->** Sending Windo&#x77;**:**
 
 ```javascript
 postMessage(message, targetOrigin, transfer);
@@ -44,7 +44,7 @@ postMessage(message, targetOrigin, transfer);
 
 <figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-### **Syntax of `postMessage()`  ->** Recieving Windo&#x77;**:**
+### **Syntax of `postMessage()` ->** Recieving Windo&#x77;**:**
 
 ```javascript
 window.addEventListener("message", function(event) {
@@ -219,7 +219,7 @@ In this scenario, we'll explore how a vulnerability in the `postMessage()` imple
 
     * A secure implementation would involve verifying the origin of the sender by comparing it with an acceptable origin. This prevents unauthorized messages from being processed.
 
-    <figure><img src="../.gitbook/assets/image (9) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (8) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 3. **Exploit Development:**
    * **HTML Structure:**
      * Create an HTML page with a submit button.

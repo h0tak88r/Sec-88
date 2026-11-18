@@ -2,7 +2,7 @@
 
 ## Analyze traffic using burp
 
-1. Install Apk in the android emulator&#x20;
+1. Install Apk in the android emulator
 2.  Fire up burp suite and configure the proxy to listen to all interfaces on port 8081
 
     <figure><img src="../../.gitbook/assets/image (199).png" alt=""><figcaption></figcaption></figure>
@@ -59,20 +59,18 @@ I: Copying original files...
 base                      base-dex2jar.jar  sieve_patched_no_crypto.apk
 ```
 
-* Analyze the code and android manifest.xml `subl base/AndroidManifest.xml`&#x20;
+* Analyze the code and android manifest.xml `subl base/AndroidManifest.xml`
 *   Use [drozer](https://github.com/WithSecureLabs/drozer) to give you an overview about the application [how to do it](https://www.udemy.com/course/the-complete-guide-to-android-bug-bounty-penetration-tests/learn/lecture/23034166#overview)\
     `run app.package.info -a com.android.insecurebankv2`\
     `run app.package.attacksurface com.android.insecurebannkv2`
 
     <figure><img src="../../.gitbook/assets/image (80).png" alt=""><figcaption></figcaption></figure>
 
-
-
 ## Previlige Escalation
 
-* Fire up JADX and open up the `base.apk` file&#x20;
+* Fire up JADX and open up the `base.apk` file
 * Now you can see the source code and the apk data like the resources files
-*   After searching for keywords like "admin" in the LoginActivity if ound this <br>
+*   After searching for keywords like "admin" in the LoginActivity if ound this<br>
 
     <figure><img src="../../.gitbook/assets/image (68).png" alt=""><figcaption></figcaption></figure>
 * this guy using a boolean value from resources to hide some functionalities
@@ -82,13 +80,13 @@ base                      base-dex2jar.jar  sieve_patched_no_crypto.apk
 *   Now Using code editors like sublime change it to yes and save the project
 
     <figure><img src="../../.gitbook/assets/image (71).png" alt=""><figcaption></figcaption></figure>
-* Now Change the name of directory to&#x20;
-*   Use APKTOOL  to build our updated version and use sign tool to sign the application
+* Now Change the name of directory to
+*   Use APKTOOL to build our updated version and use sign tool to sign the application
 
     ![](<../../.gitbook/assets/image (73).png>)
 * And that's it you just remove the old version from phone and install your updated version instead
-* the signed apk will be `insecurebankv2.s.apk`&#x20;
-* Notice Now there is a functionality for registration added&#x20;
+* the signed apk will be `insecurebankv2.s.apk`
+* Notice Now there is a functionality for registration added
 
 <figure><img src="../../.gitbook/assets/image (74).png" alt=""><figcaption></figcaption></figure>
 
@@ -124,7 +122,7 @@ The "devadmin" part in the `postData` method handles a specific case where the u
 
 ## Analyze SqlLite Storage
 
-* It is as easy as just go to the database directory of the package in the data directory&#x20;
+* It is as easy as just go to the database directory of the package in the data directory
 * Then initialize sqlite and interact with it read tables and that stuff
 
 <figure><img src="../../.gitbook/assets/image (76).png" alt=""><figcaption></figcaption></figure>
@@ -146,16 +144,14 @@ sqlite>
 
 ```
 
-## Insecure Logging&#x20;
+## Insecure Logging
 
 * Android Logs Accessible by all applications so when app expose secrets or private information it is a bug !
 * I Entered command `adb logcat`
 * And tried to Login to Apllication and Voila!!
 * The app Exposes plaint-text of the users
 
-&#x20; &#x20;
-
-<figure><img src="../../.gitbook/assets/image (78).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (77).png" alt=""><figcaption></figcaption></figure>
 
 ## Exploit Broadcast Receivers
 
@@ -316,11 +312,11 @@ Using `SQLiteQueryBuilder` without proper input validation can lead to SQL injec
 
 ## IDOR to ATO
 
-*   While Proxifying the trafiic with burp suite i Looked up some functions like change-password feature&#x20;
+*   While Proxifying the trafiic with burp suite i Looked up some functions like change-password feature
 
     <figure><img src="../../.gitbook/assets/image (203).png" alt=""><figcaption></figcaption></figure>
-* I noticed the part that contains username but i cant edit the username on it&#x20;
-* After sending acorrect request and the password successufully changed&#x20;
+* I noticed the part that contains username but i cant edit the username on it
+* After sending acorrect request and the password successufully changed
 
 <figure><img src="../../.gitbook/assets/image (204).png" alt=""><figcaption></figcaption></figure>
 

@@ -6,6 +6,7 @@ layout:
   cover:
     visible: true
     size: hero
+    mask: none
   title:
     visible: true
   description:
@@ -21,6 +22,8 @@ layout:
   tags:
     visible: true
   actions:
+    visible: true
+  anchors:
     visible: true
 ---
 
@@ -38,7 +41,7 @@ layout:
 
 ### Types of Deep Links
 
-<figure><img src="../.gitbook/assets/image (55).png" alt="" width="275"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/deellinks.png" alt="" width="275"><figcaption></figcaption></figure>
 
 ### 1. Deep Links
 
