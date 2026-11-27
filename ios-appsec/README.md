@@ -24,6 +24,7 @@ Everything that can be useful in analyzing applications: various libraries, modu
 * [NetworkSniffer](https://github.com/evilpenguin/NetworkSniffer)
 * [Ghidra iOS kernelcache framework for reverse engineering](https://github.com/0x36/ghidra_kernelcache/)
 * [frida-ios-dump](https://github.com/AloneMonkey/frida-ios-dump)
+* [IPA-Decrypt - App Store/TestFlight IPA downloader and offline FairPlay decryptor; no jailbreak required on supported Apple Silicon Macs](https://github.com/Re13orn/IPA-Decrypt)
 * [dumpdecrypted](https://github.com/stefanesser/dumpdecrypted)
 * [Yet Yet Another Code Decrypter](https://github.com/DerekSelander/yacd)
 * [xpcpy - Bidirectional XPC message interception and more](https://github.com/hot3eed/xpcspy)
